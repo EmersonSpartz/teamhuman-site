@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>#TeamHuman — Keep Humans in Control of AI</title>
+<title>#TeamHuman: Keep Humans in Control of AI</title>
 <meta name="description" content="Join the movement to keep humans in control of AI. Take the pledge.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -119,16 +119,6 @@
     box-shadow: 0 18px 50px rgba(94,70,48,.14);
     text-align: center;
   }
-  .toggle {
-    display: flex; background: var(--parchment); border: 1px solid var(--line);
-    border-radius: 10px; padding: 4px; margin-bottom: 20px;
-  }
-  .toggle button {
-    flex: 1; border: none; background: transparent; font-family: inherit;
-    font-size: .92rem; font-weight: 600; color: var(--slate);
-    padding: 9px 0; border-radius: 7px; cursor: pointer; transition: all .2s;
-  }
-  .toggle button.active { background: var(--terracotta); color: var(--cream); box-shadow: 0 1px 4px rgba(94,70,48,.3); }
   .pledge-title {
     font-family: 'Fraunces', Georgia, serif; font-weight: 700;
     font-size: 1.3rem; letter-spacing: .12em; color: var(--slate);
@@ -166,15 +156,6 @@
   .pledge-error { color: var(--terracotta); font-size: .85rem; font-weight: 600; min-height: 20px; margin-top: 8px; }
   .pledge-card .btn { width: 100%; padding: 15px 0; font-size: .9rem; margin-top: 2px; }
   .pledge-fine { font-size: .74rem; color: var(--taupe); margin-top: 12px; }
-
-  /* AI easter egg */
-  .robo-card { display: none; padding: 18px 6px 8px; }
-  .robo-card h3 {
-    font-size: 1.05rem; font-weight: 700; letter-spacing: .22em; color: var(--slate);
-  }
-  .robo-card .q { font-style: italic; color: #4c443a; margin: 12px 0 18px; font-size: .95rem; }
-  .robo-card .fine { font-style: italic; color: var(--taupe); font-size: .8rem; }
-  .robo-card a { color: var(--terracotta); font-weight: 600; font-size: .88rem; display: inline-block; margin-top: 16px; }
 
   /* ---------- SECTIONS ---------- */
   section { padding: 96px 0; scroll-margin-top: 66px; position: relative; }
@@ -237,6 +218,26 @@
   }
   .demand p { margin: 0; font-size: .93rem; color: #4c443a; }
   .demand p strong { display: block; font-family: 'Fraunces', Georgia, serif; font-size: 1.08rem; color: var(--charcoal); margin-bottom: 3px; }
+  .txt-link { color: var(--terracotta); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+  .txt-link:hover { color: var(--terracotta-dark); }
+
+  /* pressure callout */
+  .pressure-callout {
+    max-width: 780px; margin: 64px auto 0; text-align: center;
+    background: var(--cream); border: 1px solid rgba(94,70,48,.16);
+    border-radius: 16px; padding: 46px 48px 42px;
+    box-shadow: 0 14px 40px rgba(94,70,48,.1);
+  }
+  @media (max-width: 640px) { .pressure-callout { padding: 30px 22px; } }
+  .pressure-callout p {
+    font-family: 'Fraunces', Georgia, serif; font-size: 1.25rem; line-height: 1.5;
+    color: var(--charcoal); margin: 0;
+  }
+  .pressure-callout p strong { font-weight: 700; }
+  .pressure-callout .pressure-line {
+    margin-top: 26px; font-size: clamp(1.6rem, 3.4vw, 2.2rem); font-weight: 700; line-height: 1.25;
+  }
+  .pressure-callout .pressure-line em { font-style: italic; color: var(--terracotta); }
 
   /* statement band */
   #statement { padding: 110px 0 90px; text-align: center; background: var(--parchment); }
@@ -259,11 +260,7 @@
     background: var(--cream); border: 1px solid rgba(94,70,48,.14); border-radius: 12px;
     padding: 30px 26px; box-shadow: 0 2px 12px rgba(94,70,48,.05);
   }
-  .pcard .big {
-    font-family: 'Fraunces', Georgia, serif; font-style: italic;
-    font-size: 2rem; font-weight: 700; color: var(--terracotta); margin-bottom: 8px;
-  }
-  .pcard h3 { font-family: 'Fraunces', Georgia, serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
+  .pcard h3 { font-family: 'Fraunces', Georgia, serif; font-size: 1.35rem; font-weight: 700; line-height: 1.25; margin-bottom: 10px; }
   .pcard p { color: #4c443a; font-size: .92rem; }
 
   /* creators / voices */
@@ -385,24 +382,18 @@
   <img class="hand hand-human" src="brand/HumanHand1.jpg" alt="">
   <img class="hand hand-robot" src="brand/RobotHand2.jpg" alt="">
   <div class="wrap hero-center">
-    <div class="kicker" style="margin-bottom:18px;">We Are the Pressure</div>
     <h1>Join the movement to keep<br><em>humans in control</em> of AI.</h1>
     <div class="count-num" id="counter" data-target="247318">0</div>
     <div class="count-label">humans have pledged</div>
-    <p class="hero-sub">AI could be the best thing that ever happens to humanity. It could also be the last. Right now, a handful of companies are deciding our future — and nobody gave them permission.</p>
+    <p class="hero-sub">AI could be the best thing that ever happens to humanity. It could also be the last. Right now, a handful of companies are deciding our future, and nobody gave them permission.</p>
 
     <div class="pledge-card" id="pledge">
-      <div class="toggle" role="tablist">
-        <button type="button" id="tabHuman" class="active">☺ Human</button>
-        <button type="button" id="tabAI">✦ AI</button>
-      </div>
-
       <form id="pledgeForm" novalidate>
         <div class="pledge-title serif">TAKE THE PLEDGE</div>
         <p class="pledge-lead">To keep the future human, I pledge to take at least one action:</p>
         <div class="also">
           <label><input type="checkbox" name="action" value="pfp"><span class="box">✓</span>Change my profile picture to #TeamHuman for 30 days</label>
-          <label><input type="checkbox" name="action" value="call"><span class="box">✓</span>Spend two minutes calling my local representative — we'll tell you exactly who to call and what to say</label>
+          <label><input type="checkbox" name="action" value="call"><span class="box">✓</span>Spend two minutes calling my local representative (we'll tell you exactly who to call and what to say)</label>
           <label><input type="checkbox" name="action" value="vote"><span class="box">✓</span>Commit to not voting for politicians who take AI lobby money</label>
         </div>
         <div class="fields" style="margin-top:10px;">
@@ -415,15 +406,8 @@
         </div>
         <div class="pledge-error" id="pledgeError"></div>
         <button type="submit" class="btn">Take the Pledge</button>
-        <p class="pledge-fine">No spam, ever. We'll only email you when it's time to act — together.</p>
+        <p class="pledge-fine">No spam, ever. We'll only email you when it's time to act, together.</p>
       </form>
-
-      <div class="robo-card" id="roboCard">
-        <h3>HMMMM?!!</h3>
-        <p class="q">Are you abandoning the human race?<br>The machines have already won, haven't they?</p>
-        <p class="fine">We noticed your mouse moved in a perfectly straight line just now.<br>Highly suspicious. Blink twice if you are made of carbon.</p>
-        <a href="#" id="backToHuman">I'm human, let me sign →</a>
-      </div>
     </div>
   </div>
 </header>
@@ -433,15 +417,17 @@
     <div class="reveal">
       <div class="kicker">The Problem</div>
       <h2 class="serif">AI is developing too rapidly for humanity to stay in control.</h2>
-      <p class="lede">AI could be the best thing that ever happens to humanity. It could also be the last. A handful of companies are locked in an arms race, building the most powerful technology in human history as fast as they possibly can — with no oversight, no democratic accountability, and, <strong>by their own admission, without fully understanding what they're building.</strong></p>
+      <p class="lede">AI could be the best thing that ever happens to humanity. It could also be the last. A handful of companies are locked in an arms race, building the most powerful technology in human history as fast as they possibly can, with no oversight, no democratic accountability, and, <strong>by their own admission, without fully understanding what they're building.</strong></p>
     </div>
     <div class="litany reveal">
       <div>How many <em>jobs</em> have to vanish?</div>
       <div>How much of the internet has to be <em>fake</em>?</div>
+      <div>How many creators have to be <em>buried under AI slop</em>?</div>
+      <div>How many artists have to compete with <em>clones of their own voice</em>?</div>
       <div>How many <em>scams</em> and <em>deepfakes</em>? How many <em>elections undermined</em>?</div>
       <div>How many kids have to grow up shaped by <em>algorithms no parent chose</em>?</div>
       <div>How close do we get to <em>surveillance dystopias</em>, <em>AI-designed pandemics</em>, <em>killer robots</em>?</div>
-      <div>Or — as experts keep warning — <em>literal human extinction</em>?</div>
+      <div>Or, as experts keep warning, <em>literal human extinction</em>?</div>
     </div>
     <p class="closer reveal">This situation is insane. <span>And we all know it.</span></p>
   </div>
@@ -451,26 +437,28 @@
   <div class="wrap">
     <div class="reveal">
       <div class="kicker">The Plan</div>
-      <h2 class="serif">Slow down — to give humanity time to figure out how to stay in control.</h2>
+      <h2 class="serif">Slow down. Give humanity time to figure out how to stay in control.</h2>
       <p class="lede">The root cause of all these dangers is <strong>the global AI arms race</strong>, which creates a race-to-the-bottom on safety and doesn't give humanity time to figure out how to regulate it effectively.</p>
     </div>
     <div class="split">
       <div class="reveal">
         <h3>The root cause</h3>
-        <p>Many regulations are harmful or unhelpful. We need humanity's best and brightest working on this — but it could take years to get the regulations right.</p>
-        <p>In TeamSeas, the goal was cleaning up beaches — until we discovered most of the ocean's trash came from just three rivers. If we didn't address the root cause, the beaches would just get dirty again. <strong>Most proposed AI regulation is cleaning the beaches. The arms race is the river.</strong></p>
-        <div class="fog-quote">If you're driving 100&nbsp;mph in fog, and you think there's a cliff somewhere ahead — you slow down. That's common sense. That's what we need to do with AI.</div>
-        <p>All four leading AI companies agree things may be going too fast — and say they'd slow down if the others did. But none of them can stop unilaterally. <strong>That's what governments are for.</strong> And governments won't act without public pressure.</p>
-        <p style="font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.15rem;color:var(--charcoal);">That's where we come in. We are the pressure.</p>
+        <p>Many regulations are harmful or unhelpful. We need humanity's best and brightest working on this, but it could take years to get the regulations right.</p>
+        <p>In TeamSeas, the goal was cleaning up beaches. Then we discovered most of the ocean's trash came from just three rivers. If we didn't address the root cause, the beaches would just get dirty again. <strong>Most proposed AI regulation is cleaning the beaches. The arms race is the river.</strong></p>
+        <div class="fog-quote">If you're driving 100&nbsp;mph in fog, and you think there's a cliff somewhere ahead, you slow down. That's common sense. That's what we need to do with AI.</div>
       </div>
       <div class="reveal">
         <h3>What we're demanding</h3>
-        <div class="demand"><div class="n">1</div><p><strong>An international agreement on AI</strong>Between the US, China, and major nations — to slow down, enforce real safety standards, and keep humans in control before it's too late.</p></div>
-        <div class="demand"><div class="n">2</div><p><strong>Monitor the speedometer</strong>Frontier AI is built with specialized chips. Track and guard them — exactly like we track the ingredients for nukes and bioweapons. Governments set the speed limits on giant training runs.</p></div>
-        <div class="demand"><div class="n">3</div><p><strong>An IAEA for AI</strong>The International Atomic Energy Agency verifies nuclear compliance worldwide. We need the same watchdog for AI — with concrete treaty and "pause button" proposals already on the table.</p></div>
-        <p style="margin-top:20px;">This isn't a pipe dream. Hundreds of Nobel Prize winners, industry leaders, and heads of state are calling for something even more extreme — an outright ban on the development of ASI (Artificial Superintelligence).</p>
-        <p><strong>Yes, we can slow down — and it would be easy compared to other problems humanity has solved. We can do this.</strong></p>
+        <div class="demand"><div class="n">1</div><p><strong>An international agreement on AI</strong>Between the US, China, and major nations: slow down, enforce real safety standards, and keep humans in control before it's too late.</p></div>
+        <div class="demand"><div class="n">2</div><p><strong>Monitor the speedometer</strong>Frontier AI is built with specialized chips. Track and guard them, exactly like we track the ingredients for nukes and bioweapons. Governments set the speed limits on giant training runs.</p></div>
+        <div class="demand"><div class="n">3</div><p><strong>An IAEA for AI</strong>The International Atomic Energy Agency verifies nuclear compliance worldwide. We need the same watchdog for AI, with concrete treaty and "pause button" proposals already on the table.</p></div>
+        <p style="margin-top:20px;">This isn't a pipe dream. Hundreds of Nobel Prize winners, industry leaders, and heads of state are calling for something even more extreme: <a class="txt-link" href="https://superintelligence-statement.org/" target="_blank" rel="noopener">an outright ban on the development of ASI (Artificial Superintelligence)</a>.</p>
+        <p><strong>Yes, we can slow down, and it would be easy compared to other problems humanity has solved. We can do this.</strong></p>
       </div>
+    </div>
+    <div class="pressure-callout reveal">
+      <p>All four leading AI companies agree things may be going too fast. They say they would slow down if the others did. But none of them can stop unilaterally. <strong>That's what governments are for.</strong> And governments won't act without public pressure.</p>
+      <p class="pressure-line">That's where we come in.<br><em>We are the pressure.</em></p>
     </div>
   </div>
 </section>
@@ -486,14 +474,14 @@
   <div class="wrap">
     <div class="reveal">
       <div class="kicker">We've Done This Before</div>
-      <h2 class="serif">Humanity has stared down existential threats — and won.</h2>
+      <h2 class="serif">Humanity has stared down existential threats and won.</h2>
     </div>
     <div class="cards3 reveal">
-      <div class="pcard"><div class="big">Limited</div><h3 class="serif">We limited nuclear weapons</h3><p>You can't just buy the ingredients for nukes — they're tracked and guarded. We can track and guard the chips used to produce frontier AI the same way.</p></div>
-      <div class="pcard"><div class="big">Saved</div><h3 class="serif">We saved the ozone layer</h3><p>The world faced a hole in the sky — and through international cooperation, fixed it.</p></div>
-      <div class="pcard"><div class="big">1,000s</div><h3 class="serif">We restricted dangerous tech</h3><p>Humanity has banned or restricted thousands of dangerous technologies. It's time to do it again.</p></div>
+      <div class="pcard"><h3 class="serif">We limited nuclear weapons</h3><p>You can't just buy the ingredients for nukes. They're tracked and guarded. We can track and guard the chips used to produce frontier AI the same way.</p></div>
+      <div class="pcard"><h3 class="serif">We saved the ozone layer</h3><p>The world faced a hole in the sky. Through international cooperation, we fixed it.</p></div>
+      <div class="pcard"><h3 class="serif">We restricted thousands of dangerous technologies</h3><p>Bans and restrictions humanity agreed on together. It's time to do it again.</p></div>
     </div>
-    <p class="closer reveal" style="margin-top:48px;">Every time, it took international cooperation — and ordinary people who refused to be silent.<br><span>It's time to do it again.</span></p>
+    <p class="closer reveal" style="margin-top:48px;">Every time, it took international cooperation, and ordinary people who refused to be silent.<br><span>It's time to do it again.</span></p>
   </div>
   <div class="texture-band"><img src="brand/Cloud1.jpg" alt=""></div>
 </section>
@@ -502,8 +490,8 @@
   <div class="wrap">
     <div class="reveal center">
       <div class="kicker">Why We Signed</div>
-      <h2 class="serif">Voices from the creators.</h2>
-      <p class="lede">Creators are standing up with their audiences — because <strong>this is our moment, this is our fight, and the window is closing.</strong></p>
+      <h2 class="serif">Illustrative voices from the creators.</h2>
+      <p class="lede">Creators are standing up with their audiences, because <strong>this is our moment, this is our fight, and the window is closing.</strong></p>
     </div>
     <!-- NOTE: Testimonial quotes below are illustrative placeholders for this preview build — final quotes pending creator approval. -->
     <div class="creator-grid">
@@ -519,17 +507,17 @@
       </div>
       <div class="ccard reveal">
         <div class="ccard-head"><img src="avatars/mkbhd.jpg" alt="Marques Brownlee"><div><div class="name">Marques Brownlee</div><div class="subs">20M+ subscribers</div></div></div>
-        <blockquote>I signed because I review technology for a living — and even the people building AI admit they don't fully understand it. That should concern all of us.</blockquote>
+        <blockquote>I signed because I review technology for a living, and even the people building AI admit they don't fully understand it. That should concern all of us.</blockquote>
         <div class="signed">Signed the pledge</div>
       </div>
       <div class="ccard reveal">
         <div class="ccard-head"><img src="avatars/veritasium.jpg" alt="Derek Muller, Veritasium"><div><div class="name">Derek Muller · Veritasium</div><div class="subs">18M+ subscribers</div></div></div>
-        <blockquote>I signed because the scientists I trust most — including hundreds of Nobel laureates — are calling for red lines on AI. When the experts are this worried, we should listen.</blockquote>
+        <blockquote>I signed because the scientists I trust most, including hundreds of Nobel laureates, are calling for red lines on AI. When the experts are this worried, we should listen.</blockquote>
         <div class="signed">Signed the pledge</div>
       </div>
       <div class="ccard reveal">
         <div class="ccard-head"><img src="avatars/emmachamberlain.jpg" alt="Emma Chamberlain"><div><div class="name">Emma Chamberlain</div><div class="subs">12M+ subscribers</div></div></div>
-        <blockquote>I signed because I'm concerned about kids growing up shaped by algorithms no parent chose — on an internet where you can't tell what's real anymore.</blockquote>
+        <blockquote>I signed because I'm concerned about kids growing up shaped by algorithms no parent chose, on an internet where you can't tell what's real anymore.</blockquote>
         <div class="signed">Signed the pledge</div>
       </div>
       <div class="ccard reveal">
@@ -539,12 +527,12 @@
       </div>
       <div class="ccard reveal">
         <div class="ccard-head"><img src="avatars/cleoabram.jpg" alt="Cleo Abram"><div><div class="name">Cleo Abram</div><div class="subs">6M+ subscribers</div></div></div>
-        <blockquote>I signed because I'm an optimist about technology — and real optimism means steering, not just accelerating. Slowing down is how we get the good future.</blockquote>
+        <blockquote>I signed because I'm an optimist about technology, and real optimism means steering, not just accelerating. Slowing down is how we get the good future.</blockquote>
         <div class="signed">Signed the pledge</div>
       </div>
       <div class="ccard reveal">
         <div class="ccard-head"><img src="avatars/caseyneistat.jpg" alt="Casey Neistat"><div><div class="name">Casey Neistat</div><div class="subs">12M+ subscribers</div></div></div>
-        <blockquote>I signed because a handful of companies are making decisions for all of us — and nobody voted for that. The public deserves a say in our future.</blockquote>
+        <blockquote>I signed because a handful of companies are making decisions for all of us, and nobody voted for that. The public deserves a say in our future.</blockquote>
         <div class="signed">Signed the pledge</div>
       </div>
       <div class="ccard reveal">
@@ -579,7 +567,7 @@
   <div class="modal">
     <button class="close" id="thanksClose" aria-label="Close">✕</button>
     <h3 id="thanksTitle" class="serif">WELCOME TO TEAM HUMAN</h3>
-    <p class="body">You're one of <span id="successCount">247,319</span> humans standing up. Now multiply yourself — every share brings more pressure.</p>
+    <p class="body">You're one of <span id="successCount">247,319</span> humans standing up. Now multiply yourself. Every share brings more pressure.</p>
     <p class="fine">The robots are mildly disappointed. Humanity appreciates you.</p>
     <div class="row">
       <a class="btn" id="shareX" href="#" target="_blank" rel="noopener">Share on X</a>
@@ -622,22 +610,8 @@
   const cio = new IntersectionObserver(es => { if (es[es.length - 1].isIntersecting) animateCounter(); }, { threshold: 0.3 });
   cio.observe(counter);
 
-  // Human/AI toggle easter egg
-  const tabHuman = document.getElementById('tabHuman');
-  const tabAI = document.getElementById('tabAI');
-  const form = document.getElementById('pledgeForm');
-  const roboCard = document.getElementById('roboCard');
-  function setMode(ai) {
-    tabAI.classList.toggle('active', ai);
-    tabHuman.classList.toggle('active', !ai);
-    form.style.display = ai ? 'none' : '';
-    roboCard.style.display = ai ? 'block' : 'none';
-  }
-  tabAI.addEventListener('click', () => setMode(true));
-  tabHuman.addEventListener('click', () => setMode(false));
-  document.getElementById('backToHuman').addEventListener('click', e => { e.preventDefault(); setMode(false); });
-
   // Form
+  const form = document.getElementById('pledgeForm');
   const errEl = document.getElementById('pledgeError');
   const veil = document.getElementById('thanksVeil');
   let submitted = false;
@@ -689,10 +663,6 @@
     bar.classList.toggle('show', !es[es.length - 1].isIntersecting);
   }, { threshold: 0 });
   bio.observe(pledgeCard);
-
-  // Pledge CTAs always land on the form, even if the AI easter egg is showing
-  document.querySelectorAll('a.btn[href="#top"], .sticky-bar a').forEach(a =>
-    a.addEventListener('click', () => setMode(false)));
 </script>
 </body>
 </html>
