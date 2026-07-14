@@ -86,6 +86,7 @@
     filter: sepia(.9) saturate(1.4) hue-rotate(170deg) brightness(1.09) contrast(1.02);
   }
   @media (max-width: 900px) { .hand { opacity: .28; } }
+  @media (max-width: 700px) { .hand { display: none; } }
   .hero-center { position: relative; z-index: 1; text-align: center; max-width: 820px; margin: 0 auto; }
   h1 {
     font-family: 'Fraunces', Georgia, serif;
@@ -191,8 +192,8 @@
   .center { text-align: center; }
   .center h2, .center .lede { margin-left: auto; margin-right: auto; }
 
-  .texture-band { position: absolute; left: 0; right: 0; bottom: 0; pointer-events: none; overflow: hidden; }
-  .texture-band img { width: 100%; display: block; mix-blend-mode: multiply; opacity: .5; }
+  .texture-band { position: absolute; left: 0; right: 0; bottom: 0; height: min(280px, 24vw); pointer-events: none; overflow: hidden; }
+  .texture-band img { width: 100%; height: 100%; object-fit: cover; object-position: bottom; display: block; mix-blend-mode: multiply; opacity: .45; }
 
   /* problem litany */
   #problem { background: var(--parchment); }
@@ -252,7 +253,7 @@
   #statement p em { font-style: italic; color: var(--terracotta); }
 
   /* precedent */
-  #precedent { background: var(--parchment); padding-bottom: 130px; }
+  #precedent { background: var(--parchment); padding-bottom: 290px; }
   .cards3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 50px; }
   .pcard {
     background: var(--cream); border: 1px solid rgba(94,70,48,.14); border-radius: 12px;
@@ -298,7 +299,7 @@
 
   /* footer */
   footer {
-    position: relative; background: var(--parchment); padding: 70px 0 100px;
+    position: relative; background: var(--parchment); padding: 70px 0 180px;
     overflow: hidden;
   }
   .foot-flex { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: flex-start; position: relative; z-index: 1; }
@@ -560,7 +561,7 @@
   <div class="wrap foot-flex">
     <div>
       <img class="lockup-img" src="brand/wordmark.png" alt="Team Human">
-      <p class="disclaimer">Preview build. Creator quotes are illustrative placeholders pending final approval. Creator photos via Wikimedia Commons.</p>
+      <p class="disclaimer">Preview build. Pledge counts are simulated and creator quotes are illustrative placeholders pending final approval. Creator photos via Wikimedia Commons.</p>
     </div>
     <div style="text-align:right;">
       <p>© 2026 TeamHuman. We are the pressure.</p>
@@ -618,7 +619,7 @@
     }
     requestAnimationFrame(tick);
   }
-  const cio = new IntersectionObserver(es => { if (es[0].isIntersecting) animateCounter(); }, { threshold: 0.3 });
+  const cio = new IntersectionObserver(es => { if (es[es.length - 1].isIntersecting) animateCounter(); }, { threshold: 0.3 });
   cio.observe(counter);
 
   // Human/AI toggle easter egg
@@ -639,8 +640,10 @@
   // Form
   const errEl = document.getElementById('pledgeError');
   const veil = document.getElementById('thanksVeil');
+  let submitted = false;
   form.addEventListener('submit', e => {
     e.preventDefault();
+    if (submitted) { veil.classList.add('open'); return; }
     const first = document.getElementById('firstName').value.trim();
     const email = document.getElementById('email').value.trim();
     const anyChecked = form.querySelectorAll('input[name="action"]:checked').length > 0;
@@ -649,15 +652,22 @@
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errEl.textContent = 'Please enter a valid email address.'; return; }
     if (!sel.value) { errEl.textContent = 'Please choose your country.'; return; }
     errEl.textContent = '';
-    // Preview build: no backend yet — swap this block for the real signup endpoint.
+    // Preview build: no backend yet — swap this block for the real signup endpoint
+    // (keep the `submitted` guard when wiring it up, re-enable only on error).
+    submitted = true;
     total += 1;
     counter.textContent = total.toLocaleString('en-US');
     stickyCount.textContent = total.toLocaleString('en-US');
     document.getElementById('successCount').textContent = total.toLocaleString('en-US');
     veil.classList.add('open');
+    document.getElementById('thanksClose').focus();
   });
   document.getElementById('thanksClose').addEventListener('click', () => veil.classList.remove('open'));
-  veil.addEventListener('click', e => { if (e.target === veil) veil.classList.remove('open'); });
+  // Only dismiss when the press STARTED on the veil — otherwise selecting text
+  // in the modal and releasing outside would fire a click on the veil and close it.
+  let pressedVeil = false;
+  veil.addEventListener('pointerdown', e => { pressedVeil = (e.target === veil); });
+  veil.addEventListener('click', e => { if (e.target === veil && pressedVeil) veil.classList.remove('open'); });
 
   // Share
   const shareText = encodeURIComponent('I just pledged to keep humans in control of AI. Join me. #TeamHuman');
@@ -676,9 +686,13 @@
   const bar = document.getElementById('stickyBar');
   const pledgeCard = document.getElementById('pledge');
   const bio = new IntersectionObserver(es => {
-    bar.classList.toggle('show', !es[0].isIntersecting);
+    bar.classList.toggle('show', !es[es.length - 1].isIntersecting);
   }, { threshold: 0 });
   bio.observe(pledgeCard);
+
+  // Pledge CTAs always land on the form, even if the AI easter egg is showing
+  document.querySelectorAll('a.btn[href="#top"], .sticky-bar a').forEach(a =>
+    a.addEventListener('click', () => setMode(false)));
 </script>
 </body>
 </html>
