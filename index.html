@@ -493,7 +493,7 @@
       <h2 class="serif">Illustrative voices from the creators.</h2>
       <p class="lede">Creators are standing up with their audiences, because <strong>this is our moment, this is our fight, and the window is closing.</strong></p>
     </div>
-    <!-- NOTE: Testimonial quotes below are illustrative placeholders for this preview build — final quotes pending creator approval. -->
+    <!-- NOTE: Testimonial quotes below are illustrative placeholders for this preview build; final quotes pending creator approval. -->
     <div class="creator-grid">
       <div class="ccard reveal">
         <div class="ccard-head"><img src="avatars/mrbeast.jpg" alt="MrBeast"><div><div class="name">MrBeast</div><div class="subs">400M+ subscribers</div></div></div>
@@ -621,12 +621,12 @@
     const first = document.getElementById('firstName').value.trim();
     const email = document.getElementById('email').value.trim();
     const anyChecked = form.querySelectorAll('input[name="action"]:checked').length > 0;
-    if (!anyChecked) { errEl.textContent = 'Pick at least one action — that’s the whole pledge.'; return; }
+    if (!anyChecked) { errEl.textContent = 'Pick at least one action. That’s the whole pledge.'; return; }
     if (!first) { errEl.textContent = 'Please enter your first name.'; return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errEl.textContent = 'Please enter a valid email address.'; return; }
     if (!sel.value) { errEl.textContent = 'Please choose your country.'; return; }
     errEl.textContent = '';
-    // Preview build: no backend yet — swap this block for the real signup endpoint
+    // Preview build: no backend yet. Swap this block for the real signup endpoint
     // (keep the `submitted` guard when wiring it up, re-enable only on error).
     submitted = true;
     total += 1;
@@ -637,7 +637,7 @@
     document.getElementById('thanksClose').focus();
   });
   document.getElementById('thanksClose').addEventListener('click', () => veil.classList.remove('open'));
-  // Only dismiss when the press STARTED on the veil — otherwise selecting text
+  // Only dismiss when the press STARTED on the veil; otherwise selecting text
   // in the modal and releasing outside would fire a click on the veil and close it.
   let pressedVeil = false;
   veil.addEventListener('pointerdown', e => { pressedVeil = (e.target === veil); });

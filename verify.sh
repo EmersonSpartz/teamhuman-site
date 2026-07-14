@@ -28,6 +28,7 @@ echo "$HTML" | grep -q "Join the movement to keep"    ; check "hero copy (doc VE
 echo "$HTML" | grep -q "To keep the future human, I pledge" ; check "pledge copy (doc)" $?
 echo "$HTML" | grep -q "AI Should Serve"              ; check "statement band present" $?
 if echo "$HTML" | grep -qi "corporate arms race"; then echo "  FAIL  stale Figma copy leaked"; FAIL=1; else echo "  PASS  no stale Figma copy"; fi
+if echo "$HTML" | grep -q "—"; then echo "  FAIL  em dash found (Emerson: AI slop coded)"; FAIL=1; else echo "  PASS  no em dashes"; fi
 
 # 2. All referenced images resolve (against live host when live)
 if [ "$SRC" != "local" ]; then
