@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Creators | #TeamHuman</title>
 <meta name="description" content="How creators can participate in the TeamHuman campaign.">
+<link rel="icon" type="image/png" href="brand/handprint.png">
+<meta property="og:title" content="For Creators | #TeamHuman">
+<meta property="og:description" content="How creators can participate in the TeamHuman campaign.">
+<meta property="og:image" content="https://emersonspartz.github.io/teamhuman-site/brand/og-card.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -29,6 +34,11 @@
     background: var(--parchment); color: var(--charcoal); line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     min-height: 100vh; display: flex; flex-direction: column;
+  }
+  body::after {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 300;
+    opacity: .045; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
   }
   .wrap { max-width: 1140px; margin: 0 auto; padding: 0 24px; width: 100%; }
   nav {

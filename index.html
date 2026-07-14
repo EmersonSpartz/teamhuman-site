@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>#TeamHuman: Keep Humans in Control of AI</title>
 <meta name="description" content="Join the movement to keep humans in control of AI. Take the pledge.">
+<link rel="icon" type="image/png" href="brand/handprint.png">
+<meta property="og:title" content="#TeamHuman: Keep Humans in Control of AI">
+<meta property="og:description" content="AI could be the best thing that ever happens to humanity. It could also be the last. Take the pledge.">
+<meta property="og:image" content="https://emersonspartz.github.io/teamhuman-site/brand/og-card.png">
+<meta property="og:url" content="https://emersonspartz.github.io/teamhuman-site/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" as="image" href="brand/HumanHand1.jpg">
+<link rel="preload" as="image" href="brand/RobotHand2.jpg">
+<link rel="preload" as="image" href="brand/wordmark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -35,6 +45,16 @@
     color: var(--charcoal);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+  }
+  /* paper grain over everything, like the brand book's printed-on-paper texture */
+  body::after {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 300;
+    opacity: .045; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .progress {
+    position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--terracotta); z-index: 120;
   }
   .wrap { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
   .serif { font-family: 'Fraunces', Georgia, serif; }
@@ -80,16 +100,21 @@
     padding: 150px 0 72px;
     background: var(--parchment);
   }
-  .hand { position: absolute; z-index: 0; pointer-events: none; mix-blend-mode: multiply; }
-  .hand-human {
-    top: 210px; right: -180px; width: min(44vw, 620px);
+  .hand { position: absolute; z-index: 0; pointer-events: none; will-change: transform; mix-blend-mode: multiply; }
+  .hand img { width: 100%; height: auto; display: block; }
+  .hand-human { top: 210px; right: -180px; width: min(44vw, 620px); }
+  .hand-human img {
     filter: sepia(.9) saturate(.9) hue-rotate(-10deg) brightness(1.09) contrast(1.02);
+    animation: floatH 9s ease-in-out infinite alternate;
   }
-  .hand-robot {
-    top: 430px; left: -170px; width: min(42vw, 590px);
-    transform: rotate(-8deg);
+  .hand-robot { top: 430px; left: -170px; width: min(42vw, 590px); }
+  .hand-robot img {
     filter: sepia(.9) saturate(1.4) hue-rotate(170deg) brightness(1.09) contrast(1.02);
+    animation: floatR 9s ease-in-out infinite alternate;
+    animation-delay: -4.5s;
   }
+  @keyframes floatH { from { transform: translateY(0); } to { transform: translateY(-9px); } }
+  @keyframes floatR { from { transform: rotate(-8deg) translateY(0); } to { transform: rotate(-8deg) translateY(-9px); } }
   @media (max-width: 900px) { .hand { opacity: .28; } }
   @media (max-width: 700px) { .hand { display: none; } }
   .hero-center { position: relative; z-index: 1; text-align: center; max-width: 820px; margin: 0 auto; }
@@ -106,6 +131,8 @@
     letter-spacing: -.01em; color: var(--charcoal);
     font-variant-numeric: lining-nums; margin-top: 26px;
   }
+  .count-num.tick { animation: tickPulse .45s ease; }
+  @keyframes tickPulse { 30% { transform: scale(1.02); } }
   .count-label {
     font-size: .82rem; font-weight: 600; letter-spacing: .28em; text-transform: uppercase;
     color: var(--taupe); margin-top: 10px;
@@ -172,7 +199,8 @@
     display: flex; align-items: center; justify-content: center;
     color: transparent; font-size: .68rem; font-weight: 800; transition: all .15s;
   }
-  .also input:checked + .box { background: var(--slate); border-color: var(--slate); color: var(--cream); }
+  .also input:checked + .box { background: var(--slate); border-color: var(--slate); color: var(--cream); animation: stampCheck .28s cubic-bezier(.34,1.56,.64,1); }
+  @keyframes stampCheck { 0% { transform: scale(.5) rotate(-10deg); } 100% { transform: scale(1) rotate(0); } }
   .also input:focus-visible + .box { outline: 2px solid var(--terracotta); outline-offset: 2px; }
   .pledge-error { color: var(--terracotta); font-size: .85rem; font-weight: 600; min-height: 20px; margin-top: 8px; }
   .pledge-card .btn { width: 100%; padding: 15px 0; font-size: .9rem; margin-top: 2px; }
@@ -367,9 +395,14 @@
   .modal-veil.open { display: flex; }
   .modal {
     background: var(--parchment); border-radius: 14px; max-width: 500px; width: 100%;
-    padding: 46px 40px; text-align: center; position: relative;
+    padding: 40px 40px 46px; text-align: center; position: relative;
     box-shadow: 0 30px 80px rgba(32,28,23,.4);
   }
+  .modal-veil.open .modal { animation: modalIn .35s cubic-bezier(.22,1,.36,1); }
+  @keyframes modalIn { from { transform: translateY(16px) scale(.96); opacity: 0; } }
+  .modal .stamp { width: 52px; height: auto; mix-blend-mode: multiply; opacity: .9; transform: rotate(-6deg); margin-bottom: 6px; }
+  .modal-veil.open .stamp { animation: stampDown .55s cubic-bezier(.2,1.4,.4,1); }
+  @keyframes stampDown { 0% { transform: scale(2.3) rotate(-20deg); opacity: 0; } 55% { opacity: .95; } 100% { transform: scale(1) rotate(-6deg); opacity: .9; } }
   .modal .close {
     position: absolute; top: 14px; right: 14px; width: 32px; height: 32px;
     border-radius: 50%; border: none; background: var(--sand); color: var(--walnut);
@@ -386,6 +419,29 @@
   /* reveal */
   body.js .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
   body.js .reveal.in { opacity: 1; transform: none; }
+  body.js .pressure-callout.reveal { transform: translateY(22px) scale(.98); }
+  body.js .pressure-callout.reveal.in { transform: none; }
+  /* staggered children */
+  body.js .litany.reveal > div { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s ease; }
+  body.js .litany.reveal.in > div { opacity: 1; transform: none; }
+  body.js .litany.reveal > div:nth-child(2) { transition-delay: .06s; }
+  body.js .litany.reveal > div:nth-child(3) { transition-delay: .12s; }
+  body.js .litany.reveal > div:nth-child(4) { transition-delay: .18s; }
+  body.js .litany.reveal > div:nth-child(5) { transition-delay: .24s; }
+  body.js .litany.reveal > div:nth-child(6) { transition-delay: .3s; }
+  body.js .litany.reveal > div:nth-child(7) { transition-delay: .36s; }
+  body.js .litany.reveal > div:nth-child(8) { transition-delay: .42s; }
+  body.js .creator-grid .ccard:nth-child(3n+2) { transition-delay: .08s; }
+  body.js .creator-grid .ccard:nth-child(3n) { transition-delay: .16s; }
+  .nav-links a:not(.btn).active { color: var(--terracotta); }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: .001s !important; animation-iteration-count: 1 !important;
+      transition-duration: .001s !important; transition-delay: 0s !important;
+    }
+  }
 
   @media (max-width: 700px) {
     .nav-links a:not(.btn) { display: none; }
@@ -396,6 +452,8 @@
 </style>
 </head>
 <body>
+
+<div class="progress" id="progressBar" aria-hidden="true"></div>
 
 <nav>
   <div class="wrap nav-inner">
@@ -410,8 +468,8 @@
 </nav>
 
 <header id="top">
-  <img class="hand hand-human" src="brand/HumanHand1.jpg" alt="">
-  <img class="hand hand-robot" src="brand/RobotHand2.jpg" alt="">
+  <div class="hand hand-human" aria-hidden="true"><img src="brand/HumanHand1.jpg" alt="" width="1600" height="1066"></div>
+  <div class="hand hand-robot" aria-hidden="true"><img src="brand/RobotHand2.jpg" alt="" width="1600" height="1066"></div>
   <div class="wrap hero-center">
     <h1>Join the movement to keep<br><em>humans in control</em> of AI.</h1>
     <div class="count-num" id="counter" data-target="247318">0</div>
@@ -504,7 +562,7 @@
 
 <section id="statement">
   <div class="wrap reveal">
-    <img src="brand/hands.jpg" alt="">
+    <img loading="lazy" width="1600" height="1066" src="brand/hands.jpg" alt="">
     <p>AI Should Serve <em>Humanity</em>,<br>Not Replace It.</p>
   </div>
 </section>
@@ -522,7 +580,7 @@
     </div>
     <p class="closer reveal" style="margin-top:48px;">Every time, it took international cooperation, and ordinary people who refused to be silent.<br><span>It's time to do it again.</span></p>
   </div>
-  <div class="texture-band"><img src="brand/cloud-corner.png" alt=""></div>
+  <div class="texture-band"><img loading="lazy" width="1200" height="800" src="brand/cloud-corner.png" alt=""></div>
 </section>
 
 <section id="voices">
@@ -536,47 +594,47 @@
     <!-- NOTE: Testimonial quotes below are illustrative placeholders for this preview build; final quotes pending creator approval. -->
     <div class="creator-grid">
       <div class="ccard reveal">
-        <div class="ccard-head"><img src="avatars/mrbeast.jpg" alt="MrBeast"><div><div class="name">MrBeast</div><div class="subs">400M+ subscribers</div></div></div>
+        <div class="ccard-head"><img loading="lazy" width="56" height="56" src="avatars/mrbeast.jpg" alt="MrBeast"><div><div class="name">MrBeast</div><div class="subs">400M+ subscribers</div></div></div>
         <blockquote>I signed because I'm concerned we're building the most powerful technology in history with nobody at the wheel. We slowed down for nukes. We can slow down for this.</blockquote>
         <div class="signed">Signed the pledge</div>
       </div>
       <div class="ccard reveal">
-        <div class="ccard-head"><img src="avatars/markrober.jpg" alt="Mark Rober"><div><div class="name">Mark Rober</div><div class="subs">70M+ subscribers</div></div></div>
+        <div class="ccard-head"><img loading="lazy" width="56" height="56" src="avatars/markrober.jpg" alt="Mark Rober"><div><div class="name">Mark Rober</div><div class="subs">70M+ subscribers</div></div></div>
         <blockquote>I signed because I'm an engineer, and no engineer would ship something this powerful without testing it. Right now, nobody's running the tests.</blockquote>
         <div class="signed">Signed the pledge</div>
       </div>
       <div class="ccard reveal">
-        <div class="ccard-head"><img src="avatars/mkbhd.jpg" alt="Marques Brownlee"><div><div class="name">Marques Brownlee</div><div class="subs">20M+ subscribers</div></div></div>
+        <div class="ccard-head"><img loading="lazy" width="56" height="56" src="avatars/mkbhd.jpg" alt="Marques Brownlee"><div><div class="name">Marques Brownlee</div><div class="subs">20M+ subscribers</div></div></div>
         <blockquote>I signed because I review technology for a living, and even the people building AI admit they don't fully understand it. That should concern all of us.</blockquote>
         <div class="signed">Signed the pledge</div>
       </div>
       <div class="ccard reveal">
-        <div class="ccard-head"><img src="avatars/veritasium.jpg" alt="Derek Muller, Veritasium"><div><div class="name">Derek Muller · Veritasium</div><div class="subs">18M+ subscribers</div></div></div>
+        <div class="ccard-head"><img loading="lazy" width="56" height="56" src="avatars/veritasium.jpg" alt="Derek Muller, Veritasium"><div><div class="name">Derek Muller · Veritasium</div><div class="subs">18M+ subscribers</div></div></div>
         <blockquote>I signed because the scientists I trust most, including hundreds of Nobel laureates, are calling for red lines on AI. When the experts are this worried, we should listen.</blockquote>
         <div class="signed">Signed the pledge</div>
       </div>
       <div class="ccard reveal">
-        <div class="ccard-head"><img src="avatars/emmachamberlain.jpg" alt="Emma Chamberlain"><div><div class="name">Emma Chamberlain</div><div class="subs">12M+ subscribers</div></div></div>
+        <div class="ccard-head"><img loading="lazy" width="56" height="56" src="avatars/emmachamberlain.jpg" alt="Emma Chamberlain"><div><div class="name">Emma Chamberlain</div><div class="subs">12M+ subscribers</div></div></div>
         <blockquote>I signed because I'm concerned about kids growing up shaped by algorithms no parent chose, on an internet where you can't tell what's real anymore.</blockquote>
         <div class="signed">Signed the pledge</div>
       </div>
       <div class="ccard reveal">
-        <div class="ccard-head"><img src="avatars/ryantrahan.jpg" alt="Ryan Trahan"><div><div class="name">Ryan Trahan</div><div class="subs">16M+ subscribers</div></div></div>
+        <div class="ccard-head"><img loading="lazy" width="56" height="56" src="avatars/ryantrahan.jpg" alt="Ryan Trahan"><div><div class="name">Ryan Trahan</div><div class="subs">16M+ subscribers</div></div></div>
         <blockquote>I signed because deepfakes and AI scams are already using creators' faces to steal from the people who trust us. And it's getting worse every month.</blockquote>
         <div class="signed">Signed the pledge</div>
       </div>
       <div class="ccard reveal">
-        <div class="ccard-head"><img src="avatars/cleoabram.jpg" alt="Cleo Abram"><div><div class="name">Cleo Abram</div><div class="subs">6M+ subscribers</div></div></div>
+        <div class="ccard-head"><img loading="lazy" width="56" height="56" src="avatars/cleoabram.jpg" alt="Cleo Abram"><div><div class="name">Cleo Abram</div><div class="subs">6M+ subscribers</div></div></div>
         <blockquote>I signed because I'm an optimist about technology, and real optimism means steering, not just accelerating. Slowing down is how we get the good future.</blockquote>
         <div class="signed">Signed the pledge</div>
       </div>
       <div class="ccard reveal">
-        <div class="ccard-head"><img src="avatars/caseyneistat.jpg" alt="Casey Neistat"><div><div class="name">Casey Neistat</div><div class="subs">12M+ subscribers</div></div></div>
+        <div class="ccard-head"><img loading="lazy" width="56" height="56" src="avatars/caseyneistat.jpg" alt="Casey Neistat"><div><div class="name">Casey Neistat</div><div class="subs">12M+ subscribers</div></div></div>
         <blockquote>I signed because a handful of companies are making decisions for all of us, and nobody voted for that. The public deserves a say in our future.</blockquote>
         <div class="signed">Signed the pledge</div>
       </div>
       <div class="ccard reveal">
-        <div class="ccard-head"><img src="avatars/hankgreen.jpg" alt="Hank Green"><div><div class="name">Hank Green</div><div class="subs">4M+ subscribers</div></div></div>
+        <div class="ccard-head"><img loading="lazy" width="56" height="56" src="avatars/hankgreen.jpg" alt="Hank Green"><div><div class="name">Hank Green</div><div class="subs">4M+ subscribers</div></div></div>
         <blockquote>I signed because the internet was built by humans, for humans. I want the next generation to grow up in a world where people are still the point.</blockquote>
         <div class="signed">Signed the pledge</div>
       </div>
@@ -595,7 +653,7 @@
       <p>© 2026 TeamHuman. We are the pressure.</p>
     </div>
   </div>
-  <div class="foot-cloud"><img src="brand/cloud-corner.png" alt=""></div>
+  <div class="foot-cloud"><img loading="lazy" width="1200" height="800" src="brand/cloud-corner.png" alt=""></div>
 </footer>
 
 <div class="sticky-bar" id="stickyBar">
@@ -606,6 +664,7 @@
 <div class="modal-veil" id="thanksVeil" role="dialog" aria-modal="true" aria-labelledby="thanksTitle">
   <div class="modal">
     <button class="close" id="thanksClose" aria-label="Close">✕</button>
+    <img class="stamp" src="brand/handprint.png" alt="" width="52" height="57">
     <h3 id="thanksTitle" class="serif">WELCOME TO TEAM HUMAN</h3>
     <p class="body" id="thanksBody">You're one of <span id="successCount">247,319</span> humans standing up. Now multiply yourself. Every share brings more pressure.</p>
     <p class="fine">The robots are mildly disappointed. Humanity appreciates you.</p>
@@ -618,10 +677,39 @@
 
 <script>
   document.body.classList.add('js');
+  const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Nav shadow once scrolled
+  // Scroll: nav shadow, progress bar, hero hands parallax (drift toward each other)
   const nav = document.querySelector('nav');
-  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 8), { passive: true });
+  const progressBar = document.getElementById('progressBar');
+  const handH = document.querySelector('.hand-human');
+  const handR = document.querySelector('.hand-robot');
+  let scrollTicking = false;
+  function onScrollFrame() {
+    scrollTicking = false;
+    const y = window.scrollY;
+    nav.classList.toggle('scrolled', y > 8);
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
+    if (motionOK && y < 1600) {
+      handH.style.transform = 'translate(' + (-y * 0.055) + 'px, ' + (y * 0.065) + 'px)';
+      handR.style.transform = 'translate(' + (y * 0.055) + 'px, ' + (-y * 0.045) + 'px)';
+    }
+  }
+  window.addEventListener('scroll', () => {
+    if (!scrollTicking) { scrollTicking = true; requestAnimationFrame(onScrollFrame); }
+  }, { passive: true });
+  onScrollFrame();
+
+  // Nav: highlight the section in view
+  const navLinks = [...document.querySelectorAll('.nav-links a[href^="#"]:not(.btn)')];
+  const secObserver = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id));
+    });
+  }, { rootMargin: '-35% 0px -55% 0px' });
+  ['problem', 'plan', 'voices'].forEach(id => secObserver.observe(document.getElementById(id)));
 
   // Countries
   const COUNTRIES = ["Afghanistan","Albania","Algeria","Andorra","Angola","Argentina","Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Central African Republic","Chad","Chile","China","Colombia","Comoros","Costa Rica","Croatia","Cuba","Cyprus","Czechia","DR Congo","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Eswatini","Ethiopia","Fiji","Finland","France","Gabon","Gambia","Georgia","Germany","Ghana","Greece","Grenada","Guatemala","Guinea","Guyana","Haiti","Honduras","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Israel","Italy","Ivory Coast","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal","Netherlands","New Zealand","Nicaragua","Niger","Nigeria","North Korea","North Macedonia","Norway","Oman","Pakistan","Palau","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Qatar","Romania","Russia","Rwanda","Saint Lucia","Samoa","San Marino","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","Sudan","Suriname","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor-Leste","Togo","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Yemen","Zambia","Zimbabwe"];
@@ -653,6 +741,23 @@
   }
   const cio = new IntersectionObserver(es => { if (es[es.length - 1].isIntersecting) animateCounter(); }, { threshold: 0.3 });
   cio.observe(counter);
+
+  // Heartbeat: the count keeps ticking up while you read (simulated, like the rest of the counter)
+  function renderTotal() {
+    counter.textContent = total.toLocaleString('en-US');
+    stickyCount.textContent = total.toLocaleString('en-US');
+  }
+  setTimeout(() => {
+    setInterval(() => {
+      total += 1;
+      renderTotal();
+      if (motionOK) {
+        counter.classList.remove('tick');
+        void counter.offsetWidth;
+        counter.classList.add('tick');
+      }
+    }, 8000 + Math.floor(performance.now() % 4000));
+  }, 4500);
 
   const form = document.getElementById('pledgeForm');
 
