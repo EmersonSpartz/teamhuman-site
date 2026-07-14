@@ -77,7 +77,7 @@
   /* ---------- HERO ---------- */
   header {
     position: relative; overflow: hidden;
-    padding: 150px 0 90px;
+    padding: 150px 0 72px;
     background: var(--parchment);
   }
   .hand { position: absolute; z-index: 0; pointer-events: none; mix-blend-mode: multiply; }
@@ -246,6 +246,10 @@
   .txt-link { color: var(--terracotta); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
   .txt-link:hover { color: var(--terracotta-dark); }
 
+  .plan-close { max-width: 680px; margin: 56px auto 0; text-align: center; }
+  .plan-close p { color: #4c443a; font-size: .98rem; margin-bottom: 14px; }
+  .plan-close p strong { color: var(--charcoal); }
+
   /* pressure callout */
   .pressure-callout {
     max-width: 780px; margin: 64px auto 0; text-align: center;
@@ -265,7 +269,7 @@
   .pressure-callout .pressure-line em { font-style: italic; color: var(--terracotta); }
 
   /* statement band */
-  #statement { padding: 110px 0 90px; text-align: center; background: var(--parchment); }
+  #statement { padding: 76px 0 72px; text-align: center; background: var(--parchment); }
   #statement img {
     width: min(420px, 70vw); mix-blend-mode: multiply; opacity: .9;
     filter: sepia(.9) saturate(.9) hue-rotate(-10deg) brightness(1.09) contrast(1.02);
@@ -468,7 +472,6 @@
 
 <section id="plan">
   <div class="wrap">
-    <div class="ornament reveal"><img src="brand/handprint.png" alt=""></div>
     <div class="reveal">
       <div class="kicker">The Plan</div>
       <h2 class="serif">Slow down. Give humanity time to figure out how to stay in control.</h2>
@@ -486,9 +489,11 @@
         <div class="demand"><div class="n">1</div><p><strong>An international agreement on AI</strong>Between the US, China, and major nations: slow down, enforce real safety standards, and keep humans in control before it's too late.</p></div>
         <div class="demand"><div class="n">2</div><p><strong>Monitor the speedometer</strong>Frontier AI is built with specialized chips. Track and guard them, exactly like we track the ingredients for nukes and bioweapons. Governments set the speed limits on giant training runs.</p></div>
         <div class="demand"><div class="n">3</div><p><strong>An IAEA for AI</strong>The International Atomic Energy Agency verifies nuclear compliance worldwide. We need the same watchdog for AI, with concrete treaty and "pause button" proposals already on the table.</p></div>
-        <p style="margin-top:20px;">This isn't a pipe dream. Hundreds of Nobel Prize winners, industry leaders, and heads of state are calling for something even more extreme: <a class="txt-link" href="https://superintelligence-statement.org/" target="_blank" rel="noopener">an outright ban on the development of ASI (Artificial Superintelligence)</a>.</p>
-        <p><strong>Yes, we can slow down, and it would be easy compared to other problems humanity has solved. We can do this.</strong></p>
       </div>
+    </div>
+    <div class="plan-close reveal">
+      <p>This isn't a pipe dream. Hundreds of Nobel Prize winners, industry leaders, and heads of state are calling for something even more extreme: <a class="txt-link" href="https://superintelligence-statement.org/" target="_blank" rel="noopener">an outright ban on the development of ASI (Artificial Superintelligence)</a>.</p>
+      <p><strong>Yes, we can slow down, and it would be easy compared to other problems humanity has solved. We can do this.</strong></p>
     </div>
     <div class="pressure-callout reveal">
       <p>All four leading AI companies agree things may be going too fast. They say they would slow down if the others did. But none of them can stop unilaterally. <strong>That's what governments are for.</strong> And governments won't act without public pressure.</p>
@@ -512,8 +517,8 @@
     </div>
     <div class="cards3 reveal">
       <div class="pcard"><h3 class="serif">We limited nuclear weapons</h3><p>You can't just buy the ingredients for nukes. They're tracked and guarded. We can track and guard the chips used to produce frontier AI the same way.</p></div>
-      <div class="pcard"><h3 class="serif">We saved the ozone layer</h3><p>The world faced a hole in the sky. Through international cooperation, we fixed it.</p></div>
-      <div class="pcard"><h3 class="serif">We restricted thousands of dangerous technologies</h3><p>Bans and restrictions humanity agreed on together. It's time to do it again.</p></div>
+      <div class="pcard"><h3 class="serif">We saved the ozone layer</h3><p>The world faced a hole in the sky. Countries coordinated, industry adapted, and the ozone layer is healing today.</p></div>
+      <div class="pcard"><h3 class="serif">We restricted thousands of dangerous technologies</h3><p>Bioweapons, chemical weapons, human cloning: humanity has agreed on bans and restrictions together, thousands of times.</p></div>
     </div>
     <p class="closer reveal" style="margin-top:48px;">Every time, it took international cooperation, and ordinary people who refused to be silent.<br><span>It's time to do it again.</span></p>
   </div>
