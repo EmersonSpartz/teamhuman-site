@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Team Human — AI Should Serve Humanity, Not Replace It</title>
-<meta name="description" content="Join the movement to stop the corporate arms race and put humans back in control of AI. Take the pledge.">
+<title>#TeamHuman — Keep Humans in Control of AI</title>
+<meta name="description" content="Join the movement to keep humans in control of AI. Take the pledge.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -370,10 +370,11 @@
   <img class="hand hand-human" src="brand/HumanHand1.jpg" alt="">
   <img class="hand hand-robot" src="brand/RobotHand2.jpg" alt="">
   <div class="wrap hero-center">
-    <h1>AI Should Serve<br><em>Humanity</em> Not Replace It.</h1>
+    <div class="kicker" style="margin-bottom:18px;">We Are the Pressure</div>
+    <h1>Join the movement to keep<br><em>humans in control</em> of AI.</h1>
     <div class="count-num" id="counter" data-target="247318">0</div>
-    <div class="count-label">Pledges Collected Worldwide</div>
-    <p class="hero-sub">Join the movement to stop the corporate arms race and put humans back in control of AI.</p>
+    <div class="count-label">humans have pledged</div>
+    <p class="hero-sub">AI could be the best thing that ever happens to humanity. It could also be the last. Right now, a handful of companies are deciding our future — and nobody gave them permission.</p>
 
     <div class="pledge-card" id="pledge">
       <div class="toggle" role="tablist">
@@ -383,20 +384,19 @@
 
       <form id="pledgeForm" novalidate>
         <div class="pledge-title serif">TAKE THE PLEDGE</div>
-        <p class="pledge-lead">I support a future where AI serves humanity, not replaces it.</p>
-        <div class="fields">
+        <p class="pledge-lead">To keep the future human, I pledge to take at least one action:</p>
+        <div class="also">
+          <label><input type="checkbox" name="action" value="pfp"><span class="box">✓</span>Change my profile picture to #TeamHuman for 30 days</label>
+          <label><input type="checkbox" name="action" value="call"><span class="box">✓</span>Spend two minutes calling my local representative — we'll tell you exactly who to call and what to say</label>
+          <label><input type="checkbox" name="action" value="vote"><span class="box">✓</span>Commit to not voting for politicians who take AI lobby money</label>
+        </div>
+        <div class="fields" style="margin-top:10px;">
           <input type="text" id="firstName" placeholder="First Name" autocomplete="given-name">
           <input type="text" id="lastName" placeholder="Last Name" autocomplete="family-name">
           <input type="email" id="email" class="full" placeholder="Email Address" autocomplete="email">
           <select id="country" class="full" required>
             <option value="" selected disabled>Country</option>
           </select>
-        </div>
-        <div class="also">
-          <div class="also-label">I WILL ALSO:</div>
-          <label><input type="checkbox" name="action" value="pfp"><span class="box">✓</span>Change my profile picture to #TeamHuman for 30 days</label>
-          <label><input type="checkbox" name="action" value="call"><span class="box">✓</span>Spend two minutes calling my local representative</label>
-          <label><input type="checkbox" name="action" value="vote"><span class="box">✓</span>Commit to not voting for politicians who take AI lobby money</label>
         </div>
         <div class="pledge-error" id="pledgeError"></div>
         <button type="submit" class="btn">Take the Pledge</button>
@@ -549,18 +549,18 @@
 </footer>
 
 <div class="sticky-bar" id="stickyBar">
-  <div class="sticky-count"><strong id="stickyCount">247,318</strong> &nbsp;have taken the pledge</div>
+  <div class="sticky-count"><strong id="stickyCount">247,318</strong> &nbsp;humans have pledged</div>
   <a href="#top">↑ &nbsp;Take the Pledge</a>
 </div>
 
 <div class="modal-veil" id="thanksVeil" role="dialog" aria-modal="true" aria-labelledby="thanksTitle">
   <div class="modal">
     <button class="close" id="thanksClose" aria-label="Close">✕</button>
-    <h3 id="thanksTitle" class="serif">THANK YOU</h3>
-    <p class="body">You're now one of thousands of people helping shape a future where AI serves humanity instead of replacing it.</p>
+    <h3 id="thanksTitle" class="serif">WELCOME TO TEAM HUMAN</h3>
+    <p class="body">You're one of <span id="successCount">247,319</span> humans standing up. Now multiply yourself — every share brings more pressure.</p>
     <p class="fine">The robots are mildly disappointed. Humanity appreciates you.</p>
     <div class="row">
-      <a class="btn" id="shareX" href="#" target="_blank" rel="noopener">Share the Movement</a>
+      <a class="btn" id="shareX" href="#" target="_blank" rel="noopener">Share on X</a>
       <button class="btn btn-ghost" id="copyLink" type="button">Copy Link</button>
     </div>
   </div>
@@ -622,6 +622,8 @@
     e.preventDefault();
     const first = document.getElementById('firstName').value.trim();
     const email = document.getElementById('email').value.trim();
+    const anyChecked = form.querySelectorAll('input[name="action"]:checked').length > 0;
+    if (!anyChecked) { errEl.textContent = 'Pick at least one action — that’s the whole pledge.'; return; }
     if (!first) { errEl.textContent = 'Please enter your first name.'; return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errEl.textContent = 'Please enter a valid email address.'; return; }
     if (!sel.value) { errEl.textContent = 'Please choose your country.'; return; }
@@ -630,6 +632,7 @@
     total += 1;
     counter.textContent = total.toLocaleString('en-US');
     stickyCount.textContent = total.toLocaleString('en-US');
+    document.getElementById('successCount').textContent = total.toLocaleString('en-US');
     veil.classList.add('open');
   });
   document.getElementById('thanksClose').addEventListener('click', () => veil.classList.remove('open'));
