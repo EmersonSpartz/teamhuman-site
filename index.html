@@ -730,12 +730,14 @@
   function animateCounter() {
     if (counterStarted) return;
     counterStarted = true;
-    const dur = 1800, t0 = performance.now();
+    const dur = 1800;
+    let t0 = null;
     function tick(t) {
-      const p = Math.min((t - t0) / dur, 1);
+      if (t0 === null) t0 = t;
+      const p = Math.min(Math.max((t - t0) / dur, 0), 1);
       const eased = 1 - Math.pow(1 - p, 3);
       counter.textContent = Math.round(total * eased).toLocaleString('en-US');
-      if (p < 1) requestAnimationFrame(tick);
+      if (p < 1) requestAnimationFrame(tick); else renderTotal();
     }
     requestAnimationFrame(tick);
   }
