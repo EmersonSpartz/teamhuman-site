@@ -1,0 +1,19 @@
+{
+  "type": "static-site",
+  "verify_command": "./verify.sh",
+  "test_after_edit": "",
+  "critical_files": [],
+  "review_checklist": [
+    "Run the main user flow end-to-end \u2014 does it complete without errors?",
+    "Read the actual output \u2014 would Emerson immediately see something wrong?",
+    "Trace one data path end-to-end: input \u2192 processing \u2192 output",
+    "Test at realistic scale (not toy inputs)",
+    "Verify output actually exists (files on disk, DB records written)"
+  ],
+  "notes": [
+    "Deploy: git push to main auto-deploys GitHub Pages (~40s).",
+    "Public copy ONLY from the campaign doc VERSION FOR CLAUDE section; Figma copy is stale/aesthetics-only.",
+    "Old pre-rebrand version preserved at /old/ for comparison."
+  ],
+  "deploy_url": "https://emersonspartz.github.io/teamhuman-site/"
+}
