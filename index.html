@@ -27,6 +27,8 @@
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
+  ::selection { background: var(--terracotta); color: var(--cream); }
+  :focus-visible { outline: 2px solid var(--terracotta); outline-offset: 2px; }
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--parchment);
@@ -43,7 +45,9 @@
     background: rgba(246,239,227,.92);
     backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--line);
+    transition: box-shadow .3s;
   }
+  nav.scrolled { box-shadow: 0 8px 28px rgba(94,70,48,.1); }
   .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 66px; }
   .lockup { display: flex; align-items: center; text-decoration: none; }
   .lockup img { height: 34px; width: auto; display: block; }
@@ -58,10 +62,11 @@
     font-weight: 600; text-decoration: none; border: none; cursor: pointer;
     padding: 12px 26px; border-radius: 8px; font-size: .85rem; font-family: inherit;
     letter-spacing: .12em; text-transform: uppercase;
-    box-shadow: 0 2px 6px rgba(94,70,48,.25);
-    transition: background .2s, transform .15s;
+    box-shadow: 0 1px 2px rgba(32,28,23,.14), 0 4px 14px rgba(94,70,48,.22);
+    transition: background .2s, transform .15s, box-shadow .2s;
   }
-  .btn:hover { background: var(--terracotta-dark); transform: translateY(-1px); }
+  .btn:hover { background: var(--terracotta-dark); transform: translateY(-1px); box-shadow: 0 2px 4px rgba(32,28,23,.16), 0 8px 22px rgba(94,70,48,.28); }
+  .btn:active { transform: translateY(0); box-shadow: 0 1px 2px rgba(32,28,23,.18); }
   .btn-nav { padding: 9px 18px; font-size: .78rem; }
   .btn-ghost {
     background: var(--cream); color: var(--walnut); border: 1px solid var(--sand);
@@ -81,8 +86,8 @@
     filter: sepia(.9) saturate(.9) hue-rotate(-10deg) brightness(1.09) contrast(1.02);
   }
   .hand-robot {
-    bottom: -40px; left: -200px; width: min(46vw, 640px);
-    transform: rotate(-6deg);
+    top: 430px; left: -170px; width: min(42vw, 590px);
+    transform: rotate(-8deg);
     filter: sepia(.9) saturate(1.4) hue-rotate(170deg) brightness(1.09) contrast(1.02);
   }
   @media (max-width: 900px) { .hand { opacity: .28; } }
@@ -103,7 +108,11 @@
   }
   .count-label {
     font-size: .82rem; font-weight: 600; letter-spacing: .28em; text-transform: uppercase;
-    color: var(--taupe); margin-top: 6px;
+    color: var(--taupe); margin-top: 10px;
+    display: flex; align-items: center; justify-content: center; gap: 18px;
+  }
+  .count-label::before, .count-label::after {
+    content: ""; width: 54px; height: 1px; background: var(--taupe); opacity: .6;
   }
   .hero-sub {
     font-size: 1.18rem; color: #4c443a; max-width: 560px; margin: 34px auto 0;
@@ -129,12 +138,13 @@
   .fields input, .fields select {
     width: 100%; background: var(--parchment); border: 1px solid rgba(94,70,48,.22);
     border-radius: 8px; padding: 13px 14px; font-size: .92rem; font-family: inherit;
-    color: var(--charcoal); transition: border-color .2s; appearance: none; -webkit-appearance: none;
+    color: var(--charcoal); transition: border-color .2s, box-shadow .2s; appearance: none; -webkit-appearance: none;
   }
+  .fields input:hover, .fields select:hover { border-color: rgba(94,70,48,.42); }
   .fields select { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8'><path d='M1 1l5 5 5-5' stroke='%235e4630' stroke-width='1.6' fill='none' stroke-linecap='round'/></svg>"); background-repeat: no-repeat; background-position: right 14px center; }
   .fields select:invalid { color: #8d8272; }
   .fields input::placeholder { color: #8d8272; }
-  .fields input:focus, .fields select:focus { outline: none; border-color: var(--terracotta); }
+  .fields input:focus, .fields select:focus { outline: none; border-color: var(--terracotta); box-shadow: 0 0 0 3px rgba(186,89,49,.14); }
   .also {
     background: rgba(203,185,157,.22); border: 1px solid rgba(94,70,48,.12);
     border-radius: 10px; padding: 14px 16px; margin-top: 10px; text-align: left;
@@ -159,6 +169,8 @@
 
   /* ---------- SECTIONS ---------- */
   section { padding: 96px 0; scroll-margin-top: 66px; position: relative; }
+  .ornament { text-align: center; margin-bottom: 34px; }
+  .ornament img { width: 30px; opacity: .4; mix-blend-mode: multiply; }
   .kicker {
     font-size: .78rem; font-weight: 700; letter-spacing: .26em; text-transform: uppercase;
     color: var(--terracotta); margin-bottom: 14px;
@@ -180,11 +192,13 @@
   #problem { background: var(--parchment); }
   .litany { margin-top: 48px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
   .litany div {
-    background: var(--cream); border: 1px solid rgba(94,70,48,.14); border-radius: 10px;
+    background: var(--cream); border: 1px solid rgba(94,70,48,.14); border-radius: 12px;
     padding: 22px 24px; font-family: 'Fraunces', Georgia, serif;
     font-weight: 600; font-size: 1.08rem; line-height: 1.4; color: var(--charcoal);
     box-shadow: 0 2px 10px rgba(94,70,48,.05);
+    transition: transform .2s, box-shadow .2s;
   }
+  .litany div:hover { transform: translateY(-3px); box-shadow: 0 10px 26px rgba(94,70,48,.12); }
   .litany div em { font-style: italic; color: var(--terracotta); }
   .closer {
     margin-top: 46px; font-family: 'Fraunces', Georgia, serif;
@@ -259,7 +273,9 @@
   .pcard {
     background: var(--cream); border: 1px solid rgba(94,70,48,.14); border-radius: 12px;
     padding: 30px 26px; box-shadow: 0 2px 12px rgba(94,70,48,.05);
+    transition: transform .2s, box-shadow .2s;
   }
+  .pcard:hover { transform: translateY(-3px); box-shadow: 0 10px 26px rgba(94,70,48,.12); }
   .pcard h3 { font-family: 'Fraunces', Georgia, serif; font-size: 1.35rem; font-weight: 700; line-height: 1.25; margin-bottom: 10px; }
   .pcard p { color: #4c443a; font-size: .92rem; }
 
@@ -299,7 +315,7 @@
     position: relative; background: var(--parchment); padding: 70px 0 180px;
     overflow: hidden;
   }
-  .foot-flex { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: flex-start; position: relative; z-index: 1; }
+  .foot-flex { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: center; position: relative; z-index: 1; }
   footer img.lockup-img { height: 40px; }
   footer p { font-size: .85rem; color: var(--walnut); }
   footer .disclaimer { max-width: 460px; font-size: .74rem; color: var(--taupe); margin-top: 10px; }
@@ -391,18 +407,18 @@
       <form id="pledgeForm" novalidate>
         <div class="pledge-title serif">TAKE THE PLEDGE</div>
         <p class="pledge-lead">To keep the future human, I pledge to take at least one action:</p>
-        <div class="also">
-          <label><input type="checkbox" name="action" value="pfp"><span class="box">✓</span>Change my profile picture to #TeamHuman for 30 days</label>
-          <label><input type="checkbox" name="action" value="call"><span class="box">✓</span>Spend two minutes calling my local representative (we'll tell you exactly who to call and what to say)</label>
-          <label><input type="checkbox" name="action" value="vote"><span class="box">✓</span>Commit to not voting for politicians who take AI lobby money</label>
-        </div>
-        <div class="fields" style="margin-top:10px;">
+        <div class="fields">
           <input type="text" id="firstName" placeholder="First Name" autocomplete="given-name">
           <input type="text" id="lastName" placeholder="Last Name" autocomplete="family-name">
           <input type="email" id="email" class="full" placeholder="Email Address" autocomplete="email">
           <select id="country" class="full" required>
             <option value="" selected disabled>Country</option>
           </select>
+        </div>
+        <div class="also" style="margin-top:10px;">
+          <label><input type="checkbox" name="action" value="pfp"><span class="box">✓</span>Change my profile picture to #TeamHuman for 30 days</label>
+          <label><input type="checkbox" name="action" value="call"><span class="box">✓</span>Spend two minutes calling my local representative (we'll tell you exactly who to call and what to say)</label>
+          <label><input type="checkbox" name="action" value="vote"><span class="box">✓</span>Commit to not voting for politicians who take AI lobby money</label>
         </div>
         <div class="pledge-error" id="pledgeError"></div>
         <button type="submit" class="btn">Take the Pledge</button>
@@ -435,6 +451,7 @@
 
 <section id="plan">
   <div class="wrap">
+    <div class="ornament reveal"><img src="brand/handprint.png" alt=""></div>
     <div class="reveal">
       <div class="kicker">The Plan</div>
       <h2 class="serif">Slow down. Give humanity time to figure out how to stay in control.</h2>
@@ -488,6 +505,7 @@
 
 <section id="voices">
   <div class="wrap">
+    <div class="ornament reveal"><img src="brand/handprint.png" alt=""></div>
     <div class="reveal center">
       <div class="kicker">Why We Signed</div>
       <h2 class="serif">Illustrative voices from the creators.</h2>
@@ -578,6 +596,10 @@
 
 <script>
   document.body.classList.add('js');
+
+  // Nav shadow once scrolled
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 8), { passive: true });
 
   // Countries
   const COUNTRIES = ["Afghanistan","Albania","Algeria","Andorra","Angola","Argentina","Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Central African Republic","Chad","Chile","China","Colombia","Comoros","Costa Rica","Croatia","Cuba","Cyprus","Czechia","DR Congo","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Eswatini","Ethiopia","Fiji","Finland","France","Gabon","Gambia","Georgia","Germany","Ghana","Greece","Grenada","Guatemala","Guinea","Guyana","Haiti","Honduras","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Israel","Italy","Ivory Coast","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal","Netherlands","New Zealand","Nicaragua","Niger","Nigeria","North Korea","North Macedonia","Norway","Oman","Pakistan","Palau","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Qatar","Romania","Russia","Rwanda","Saint Lucia","Samoa","San Marino","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","Sudan","Suriname","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor-Leste","Togo","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Yemen","Zambia","Zimbabwe"];
