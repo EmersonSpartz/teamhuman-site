@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Creators | #TeamHuman</title>
+<meta name="description" content="How creators can participate in the TeamHuman campaign.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f6efe3;
+    --cream: #fbf6ec;
+    --sand: #d9cbb5;
+    --taupe: #baaf9e;
+    --charcoal: #201c17;
+    --terracotta: #ba5931;
+    --terracotta-dark: #a34b27;
+    --walnut: #5e4630;
+    --slate: #5b7d8f;
+    --line: rgba(94,70,48,.18);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  ::selection { background: var(--terracotta); color: var(--cream); }
+  :focus-visible { outline: 2px solid var(--terracotta); outline-offset: 2px; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--parchment); color: var(--charcoal); line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh; display: flex; flex-direction: column;
+  }
+  .wrap { max-width: 1140px; margin: 0 auto; padding: 0 24px; width: 100%; }
+  nav {
+    background: rgba(246,239,227,.92); border-bottom: 1px solid var(--line);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 66px; }
+  .lockup img { height: 34px; width: auto; display: block; }
+  nav a.back { color: var(--charcoal); text-decoration: none; font-size: .92rem; font-weight: 500; }
+  nav a.back:hover { color: var(--terracotta); }
+  main {
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    text-align: center; position: relative; overflow: hidden; padding: 80px 24px;
+  }
+  .ornament img { width: 34px; opacity: .4; mix-blend-mode: multiply; margin-bottom: 26px; }
+  h1 {
+    font-family: 'Fraunces', Georgia, serif; font-weight: 600;
+    font-size: clamp(2.4rem, 5.4vw, 3.6rem); letter-spacing: -.01em; line-height: 1.12;
+  }
+  h1 em { font-style: italic; color: var(--terracotta); }
+  .lede { font-size: 1.12rem; color: #4c443a; max-width: 540px; margin: 20px auto 34px; }
+  .btn {
+    display: inline-block; background: var(--terracotta); color: var(--cream);
+    font-weight: 600; text-decoration: none; cursor: pointer;
+    padding: 15px 34px; border-radius: 8px; font-size: .9rem;
+    letter-spacing: .12em; text-transform: uppercase;
+    box-shadow: 0 1px 2px rgba(32,28,23,.14), 0 4px 14px rgba(94,70,48,.22);
+    transition: background .2s, transform .15s, box-shadow .2s;
+  }
+  .btn:hover { background: var(--terracotta-dark); transform: translateY(-1px); }
+  .cloud { position: fixed; bottom: 0; left: 0; right: 0; pointer-events: none; z-index: -1; }
+  .cloud img { width: 100%; display: block; mix-blend-mode: multiply; opacity: .5; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap nav-inner">
+    <a class="lockup" href="index.html" aria-label="Team Human home"><img src="brand/wordmark.png" alt="Team Human"></a>
+    <a class="back" href="index.html">← Back to the pledge</a>
+  </div>
+</nav>
+<main>
+  <div>
+    <div class="ornament"><img src="brand/handprint.png" alt=""></div>
+    <h1>For <em>creators</em>.</h1>
+    <p class="lede">Everything you need to participate in the TeamHuman campaign is coming soon. Check back shortly, or take the pledge with your audience in the meantime.</p>
+    <a class="btn" href="index.html#pledge">Take the Pledge</a>
+  </div>
+</main>
+<div class="cloud"><img src="brand/cloud-corner.png" alt=""></div>
+</body>
+</html>

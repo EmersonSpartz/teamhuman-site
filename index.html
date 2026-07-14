@@ -132,12 +132,13 @@
     display: flex; background: var(--parchment); border: 1px solid var(--line);
     border-radius: 10px; padding: 4px; margin-bottom: 20px;
   }
-  .toggle button {
+  .toggle button, .toggle a {
     flex: 1; border: none; background: transparent; font-family: inherit;
-    font-size: .92rem; font-weight: 600; color: var(--slate);
-    padding: 9px 0; border-radius: 7px; cursor: pointer; transition: all .2s;
+    font-size: .92rem; font-weight: 600; color: var(--slate); text-decoration: none;
+    text-align: center; padding: 9px 0; border-radius: 7px; cursor: pointer; transition: all .2s;
   }
-  .toggle button.active { background: var(--terracotta); color: var(--cream); box-shadow: 0 1px 4px rgba(94,70,48,.3); }
+  .toggle a:hover { background: rgba(91,125,143,.12); }
+  .toggle .active { background: var(--terracotta); color: var(--cream); box-shadow: 0 1px 4px rgba(94,70,48,.3); }
   .pledge-title {
     font-family: 'Fraunces', Georgia, serif; font-weight: 700;
     font-size: 1.3rem; letter-spacing: .12em; color: var(--slate);
@@ -414,9 +415,9 @@
     <p class="hero-sub">AI could be the best thing that ever happens to humanity. It could also be the last. Right now, a handful of companies are deciding our future, and nobody gave them permission.</p>
 
     <div class="pledge-card" id="pledge">
-      <div class="toggle" role="tablist">
-        <button type="button" id="tabHuman" class="active">☺ Human</button>
-        <button type="button" id="tabCreator">▶ Creator</button>
+      <div class="toggle">
+        <button type="button" class="active">☺ Human</button>
+        <a href="creators.html">▶ Creator</a>
       </div>
 
       <form id="pledgeForm" novalidate>
@@ -440,19 +441,6 @@
         <p class="pledge-fine">No spam, ever. We'll only email you when it's time to act, together.</p>
       </form>
 
-      <form id="creatorForm" novalidate style="display:none;">
-        <div class="pledge-title serif">JOIN AS A CREATOR</div>
-        <p class="pledge-lead">Creators of every size are joining the campaign. Leave your details and we'll send you everything you need to participate.</p>
-        <div class="fields">
-          <input type="text" id="cFirstName" placeholder="First Name" autocomplete="given-name">
-          <input type="text" id="cLastName" placeholder="Last Name" autocomplete="family-name">
-          <input type="email" id="cEmail" class="full" placeholder="Email Address" autocomplete="email">
-          <input type="text" id="cChannel" class="full" placeholder="Channel link or handle (optional)">
-        </div>
-        <div class="pledge-error" id="creatorError"></div>
-        <button type="submit" class="btn">I'm In</button>
-        <p class="pledge-fine">We'll only use this to send you campaign details.</p>
-      </form>
     </div>
   </div>
 </header>
@@ -661,24 +649,9 @@
   const cio = new IntersectionObserver(es => { if (es[es.length - 1].isIntersecting) animateCounter(); }, { threshold: 0.3 });
   cio.observe(counter);
 
-  // Human / Creator toggle
   const form = document.getElementById('pledgeForm');
-  const creatorForm = document.getElementById('creatorForm');
-  const tabHuman = document.getElementById('tabHuman');
-  const tabCreator = document.getElementById('tabCreator');
-  function setMode(creator) {
-    tabCreator.classList.toggle('active', creator);
-    tabHuman.classList.toggle('active', !creator);
-    form.style.display = creator ? 'none' : '';
-    creatorForm.style.display = creator ? '' : 'none';
-  }
-  tabHuman.addEventListener('click', () => setMode(false));
-  tabCreator.addEventListener('click', () => setMode(true));
-  // Pledge CTAs always land on the human pledge form
-  document.querySelectorAll('a.btn[href="#top"], .sticky-bar a').forEach(a =>
-    a.addEventListener('click', () => setMode(false)));
 
-  // Thank-you modal (shared by both forms)
+  // Thank-you modal
   const veil = document.getElementById('thanksVeil');
   const thanksTitle = document.getElementById('thanksTitle');
   const thanksBody = document.getElementById('thanksBody');
@@ -712,24 +685,6 @@
     counter.textContent = total.toLocaleString('en-US');
     stickyCount.textContent = total.toLocaleString('en-US');
     pledgeThanks();
-  });
-
-  // Creator form
-  const cErr = document.getElementById('creatorError');
-  let creatorSubmitted = false;
-  const creatorThanks = () => openThanks('WELCOME TO THE TEAM',
-    "You're in. We'll send you everything you need to participate. In the meantime, spread the word.");
-  creatorForm.addEventListener('submit', e => {
-    e.preventDefault();
-    if (creatorSubmitted) { creatorThanks(); return; }
-    const first = document.getElementById('cFirstName').value.trim();
-    const email = document.getElementById('cEmail').value.trim();
-    if (!first) { cErr.textContent = 'Please enter your first name.'; return; }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { cErr.textContent = 'Please enter a valid email address.'; return; }
-    cErr.textContent = '';
-    // Preview build: no backend yet. Swap this block for the real creator opt-in endpoint.
-    creatorSubmitted = true;
-    creatorThanks();
   });
   document.getElementById('thanksClose').addEventListener('click', () => veil.classList.remove('open'));
   // Only dismiss when the press STARTED on the veil; otherwise selecting text
