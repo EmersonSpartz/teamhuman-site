@@ -124,6 +124,13 @@
     font-weight: 560; letter-spacing: -.015em; line-height: 1.12;
     color: var(--charcoal);
   }
+  h1, h2, .closer, #statement p { text-wrap: balance; }
+  .skip-link {
+    position: absolute; left: -9999px; top: 0; z-index: 200;
+    background: var(--charcoal); color: var(--cream); padding: 10px 18px;
+    border-radius: 0 0 8px 0; text-decoration: none; font-weight: 600;
+  }
+  .skip-link:focus { left: 0; }
   h1 em { font-style: italic; color: var(--terracotta); font-weight: 600; }
   .count-num {
     font-family: 'Fraunces', Georgia, serif; font-weight: 900;
@@ -231,18 +238,24 @@
     mask-image: linear-gradient(to bottom, #000 78%, rgba(0,0,0,.4) 93%, transparent 100%);
   }
 
-  /* problem litany */
+  /* problem litany: broadsheet ruled list, not cards */
   #problem { background: var(--parchment); }
-  .litany { margin-top: 48px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
+  .litany { margin-top: 52px; display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
   .litany div {
-    background: var(--cream); border: 1px solid rgba(94,70,48,.14); border-radius: 12px;
-    padding: 22px 24px; font-family: 'Fraunces', Georgia, serif;
-    font-weight: 600; font-size: 1.08rem; line-height: 1.4; color: var(--charcoal);
-    box-shadow: 0 2px 10px rgba(94,70,48,.05);
-    transition: transform .2s, box-shadow .2s;
+    padding: 26px 30px; font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600; font-size: 1.22rem; line-height: 1.45; color: var(--charcoal);
+    border-bottom: 1px solid var(--line);
   }
-  .litany div:hover { transform: translateY(-3px); box-shadow: 0 10px 26px rgba(94,70,48,.12); }
+  .litany > div:nth-child(-n+6):nth-child(odd) { border-right: 1px solid var(--line); }
+  .litany > div:nth-child(n+7) { grid-column: 1 / -1; text-align: center; }
+  .litany > div:last-child { font-size: 1.5rem; padding: 34px 30px; }
   .litany div em { font-style: italic; color: var(--terracotta); }
+  @media (max-width: 700px) {
+    .litany { grid-template-columns: 1fr; }
+    .litany > div:nth-child(-n+6):nth-child(odd) { border-right: none; }
+    .litany > div:nth-child(n+7) { text-align: left; }
+    .litany div { padding: 20px 6px; }
+  }
   .closer {
     margin: 72px auto 0; max-width: 880px; text-align: center;
     font-family: 'Fraunces', Georgia, serif;
@@ -267,12 +280,12 @@
     font-size: 1.12rem; font-weight: 500; line-height: 1.5; color: var(--charcoal);
     box-shadow: 0 2px 10px rgba(94,70,48,.06);
   }
-  .demand { display: flex; gap: 16px; align-items: flex-start; background: var(--cream); border: 1px solid rgba(94,70,48,.14); padding: 18px 20px; border-radius: 10px; margin-bottom: 12px; box-shadow: 0 2px 10px rgba(94,70,48,.05); }
+  .demand { display: flex; gap: 22px; align-items: flex-start; padding: 22px 0; border-bottom: 1px solid var(--line); }
+  .demand:first-of-type { border-top: 1px solid var(--line); }
   .demand .n {
-    flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%;
-    background: var(--terracotta); color: var(--cream);
-    font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-size: 1.05rem;
-    display: flex; align-items: center; justify-content: center; margin-top: 2px;
+    flex-shrink: 0; min-width: 34px;
+    font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 700;
+    font-size: 2.1rem; line-height: 1; color: var(--terracotta); margin-top: 2px;
   }
   .demand p { margin: 0; font-size: .93rem; color: #4c443a; }
   .demand p strong { display: block; font-family: 'Fraunces', Georgia, serif; font-size: 1.08rem; color: var(--charcoal); margin-bottom: 3px; }
@@ -359,6 +372,13 @@
     color: var(--cream); font-size: .6rem;
   }
   .more-creators { text-align: center; margin-top: 40px; color: var(--walnut); font-weight: 500; font-style: italic; font-family: 'Fraunces', Georgia, serif; }
+  .more-voices { display: none; margin: 26px auto 0; }
+  @media (max-width: 700px) {
+    .creator-grid:not(.expanded) .ccard:nth-child(n+4) { display: none; }
+    .creator-grid:not(.expanded) ~ .more-creators { display: none; }
+    .more-voices { display: block; }
+    .creator-grid.expanded ~ .more-voices, .more-voices.hidden { display: none; }
+  }
 
   /* footer */
   footer {
@@ -368,6 +388,8 @@
   .foot-flex { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: center; position: relative; z-index: 1; }
   footer img.lockup-img { height: 40px; }
   footer p { font-size: .85rem; color: var(--walnut); }
+  footer a { color: var(--walnut); text-decoration: none; font-weight: 500; }
+  footer a:hover { color: var(--terracotta); }
   footer .disclaimer { max-width: 460px; font-size: .8rem; color: var(--walnut); margin-top: 10px; }
   .foot-cloud { position: absolute; bottom: -8px; left: 0; right: 0; pointer-events: none; }
   .foot-cloud img {
@@ -464,6 +486,7 @@
 </head>
 <body>
 
+<a class="skip-link" href="#pledge">Skip to the pledge</a>
 <div class="progress" id="progressBar" aria-hidden="true"></div>
 
 <nav>
@@ -557,7 +580,7 @@
         <h3>What we’re demanding</h3>
         <div class="demand"><div class="n">1</div><p><strong>An international agreement on AI</strong>Between the US, China, and major nations: slow down, enforce real safety standards, and keep humans in control before it’s too late.</p></div>
         <div class="demand"><div class="n">2</div><p><strong>Monitor the speedometer</strong>Frontier AI is built with specialized chips. Track and guard them, exactly like we track the ingredients for nukes and bioweapons. Governments set the speed limits on giant training runs.</p></div>
-        <div class="demand"><div class="n">3</div><p><strong>An IAEA for AI</strong>The International Atomic Energy Agency verifies nuclear compliance worldwide. We need the same watchdog for AI, with concrete treaty and "pause button" proposals already on the table.</p></div>
+        <div class="demand"><div class="n">3</div><p><strong>An IAEA for AI</strong>The International Atomic Energy Agency verifies nuclear compliance worldwide. We need the same watchdog for AI, with concrete treaty and “pause button” proposals already on the table.</p></div>
       </div>
     </div>
     <div class="plan-close reveal">
@@ -651,6 +674,7 @@
       </div>
     </div>
     <p class="more-creators reveal">+ more creators signing every day.</p>
+    <button type="button" class="btn btn-ghost more-voices" id="moreVoices">More voices</button>
   </div>
 </section>
 
@@ -661,6 +685,7 @@
       <p class="disclaimer">Preview build. Pledge counts are simulated and creator quotes are illustrative placeholders pending final approval. Creator photos via Wikimedia Commons.</p>
     </div>
     <div style="text-align:right;">
+      <p style="margin-bottom:8px;"><a href="#problem">The Problem</a> &nbsp;·&nbsp; <a href="#plan">The Plan</a> &nbsp;·&nbsp; <a href="#voices">Why We Signed</a> &nbsp;·&nbsp; <a href="creators.html">For Creators</a></p>
       <p>© 2026 TeamHuman. We are the pressure.</p>
     </div>
   </div>
@@ -827,6 +852,13 @@
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(window.location.href).then(() => done(true), () => done(false));
     } else { done(false); }
+  });
+
+  // Mobile: expand the creator wall
+  const moreVoices = document.getElementById('moreVoices');
+  moreVoices.addEventListener('click', () => {
+    document.querySelector('.creator-grid').classList.add('expanded');
+    moreVoices.classList.add('hidden');
   });
 
   // Sticky bar: show once the hero pledge card scrolls out of view
