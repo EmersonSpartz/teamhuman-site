@@ -46,7 +46,7 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
-  /* paper grain over everything, like the brand book's printed-on-paper texture */
+  /* paper grain over everything, like the brand book’s printed-on-paper texture */
   body::after {
     content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 300;
     opacity: .045; mix-blend-mode: multiply;
@@ -135,7 +135,7 @@
   @keyframes tickPulse { 30% { transform: scale(1.02); } }
   .count-label {
     font-size: .82rem; font-weight: 600; letter-spacing: .28em; text-transform: uppercase;
-    color: var(--taupe); margin-top: 10px;
+    color: #8a7c66; margin-top: 10px;
     display: flex; align-items: center; justify-content: center; gap: 18px;
   }
   .count-label::before, .count-label::after {
@@ -189,7 +189,7 @@
   }
   .also-label { font-size: .74rem; font-weight: 700; letter-spacing: .18em; color: var(--walnut); margin-bottom: 8px; }
   .also label {
-    display: flex; align-items: flex-start; gap: 10px; padding: 5px 0;
+    display: flex; align-items: flex-start; gap: 10px; padding: 8px 0;
     font-size: .88rem; color: #4c443a; cursor: pointer;
   }
   .also input { position: absolute; opacity: 0; pointer-events: none; }
@@ -204,7 +204,7 @@
   .also input:focus-visible + .box { outline: 2px solid var(--terracotta); outline-offset: 2px; }
   .pledge-error { color: var(--terracotta); font-size: .85rem; font-weight: 600; min-height: 20px; margin-top: 8px; }
   .pledge-card .btn { width: 100%; padding: 15px 0; font-size: .9rem; margin-top: 2px; }
-  .pledge-fine { font-size: .74rem; color: var(--taupe); margin-top: 12px; }
+  .pledge-fine { font-size: .74rem; color: #8a7c66; margin-top: 12px; }
 
   /* ---------- SECTIONS ---------- */
   section { padding: 96px 0; scroll-margin-top: 66px; position: relative; }
@@ -225,7 +225,11 @@
   .center h2, .center .lede { margin-left: auto; margin-right: auto; }
 
   .texture-band { position: absolute; left: 0; right: 0; bottom: -2px; pointer-events: none; }
-  .texture-band img { width: 100%; height: auto; display: block; mix-blend-mode: multiply; opacity: .55; }
+  .texture-band img {
+    width: 100%; height: auto; display: block; mix-blend-mode: multiply; opacity: .55;
+    -webkit-mask-image: linear-gradient(to bottom, #000 78%, rgba(0,0,0,.4) 93%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 78%, rgba(0,0,0,.4) 93%, transparent 100%);
+  }
 
   /* problem litany */
   #problem { background: var(--parchment); }
@@ -240,8 +244,9 @@
   .litany div:hover { transform: translateY(-3px); box-shadow: 0 10px 26px rgba(94,70,48,.12); }
   .litany div em { font-style: italic; color: var(--terracotta); }
   .closer {
-    margin-top: 46px; font-family: 'Fraunces', Georgia, serif;
-    font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 600; line-height: 1.3;
+    margin: 72px auto 0; max-width: 880px; text-align: center;
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(1.7rem, 3.4vw, 2.5rem); font-weight: 600; line-height: 1.3;
   }
   .closer span { color: var(--terracotta); font-style: italic; }
 
@@ -297,11 +302,13 @@
   .pressure-callout .pressure-line em { font-style: italic; color: var(--terracotta); }
 
   /* statement band */
-  #statement { padding: 76px 0 72px; text-align: center; background: var(--parchment); }
+  #statement { padding: 48px 0 64px; text-align: center; background: var(--parchment); }
   #statement img {
     width: min(420px, 70vw); mix-blend-mode: multiply; opacity: .9;
     filter: sepia(.9) saturate(.9) hue-rotate(-10deg) brightness(1.09) contrast(1.02);
-    display: block; margin: 0 auto 8px;
+    display: block; margin: 0 auto 8px; height: auto;
+    -webkit-mask-image: radial-gradient(ellipse 72% 64% at 50% 50%, #000 52%, transparent 80%);
+    mask-image: radial-gradient(ellipse 72% 64% at 50% 50%, #000 52%, transparent 80%);
   }
   #statement p {
     font-family: 'Fraunces', Georgia, serif;
@@ -335,7 +342,7 @@
   .ccard img {
     width: 56px; height: 56px; border-radius: 50%; object-fit: cover;
     border: 2px solid var(--cream); box-shadow: 0 0 0 1.5px var(--walnut);
-    filter: saturate(.85) sepia(.12);
+    filter: grayscale(.85) sepia(.32) contrast(1.04) brightness(1.02);
   }
   .ccard .name { font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-size: 1.1rem; }
   .ccard .subs { font-size: .78rem; color: var(--walnut); font-weight: 500; letter-spacing: .04em; }
@@ -361,9 +368,13 @@
   .foot-flex { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: center; position: relative; z-index: 1; }
   footer img.lockup-img { height: 40px; }
   footer p { font-size: .85rem; color: var(--walnut); }
-  footer .disclaimer { max-width: 460px; font-size: .74rem; color: var(--taupe); margin-top: 10px; }
+  footer .disclaimer { max-width: 460px; font-size: .8rem; color: var(--walnut); margin-top: 10px; }
   .foot-cloud { position: absolute; bottom: -8px; left: 0; right: 0; pointer-events: none; }
-  .foot-cloud img { width: 100%; display: block; mix-blend-mode: multiply; opacity: .55; }
+  .foot-cloud img {
+    width: 100%; display: block; mix-blend-mode: multiply; opacity: .55;
+    -webkit-mask-image: linear-gradient(to bottom, #000 80%, rgba(0,0,0,.45) 94%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 80%, rgba(0,0,0,.45) 94%, transparent 100%);
+  }
 
   /* sticky pledge bar */
   .sticky-bar {
@@ -495,12 +506,12 @@
         </div>
         <div class="also" style="margin-top:10px;">
           <label><input type="checkbox" name="action" value="pfp"><span class="box">✓</span>Change my profile picture to #TeamHuman for 30 days</label>
-          <label><input type="checkbox" name="action" value="call"><span class="box">✓</span>Spend two minutes calling my local representative (we'll tell you exactly who to call and what to say)</label>
+          <label><input type="checkbox" name="action" value="call"><span class="box">✓</span>Spend two minutes calling my local representative (we’ll tell you exactly who to call and what to say)</label>
           <label><input type="checkbox" name="action" value="vote"><span class="box">✓</span>Commit to not voting for politicians who take AI lobby money</label>
         </div>
         <div class="pledge-error" id="pledgeError"></div>
-        <button type="submit" class="btn">Take the Pledge</button>
-        <p class="pledge-fine">No spam, ever. We'll only email you when it's time to act, together.</p>
+        <button type="submit" class="btn">Count Me In</button>
+        <p class="pledge-fine">No spam, ever. We’ll only email you when it’s time to act, together.</p>
       </form>
 
     </div>
@@ -512,7 +523,7 @@
     <div class="reveal">
       <div class="kicker">The Problem</div>
       <h2 class="serif">AI is developing too rapidly for humanity to stay in control.</h2>
-      <p class="lede">AI could be the best thing that ever happens to humanity. It could also be the last. A handful of companies are locked in an arms race, building the most powerful technology in human history as fast as they possibly can, with no oversight, no democratic accountability, and, <strong>by their own admission, without fully understanding what they're building.</strong></p>
+      <p class="lede">AI could be the best thing that ever happens to humanity. It could also be the last. A handful of companies are locked in an arms race, building the most powerful technology in human history as fast as they possibly can, with no oversight, no democratic accountability, and, <strong>by their own admission, without fully understanding what they’re building.</strong></p>
     </div>
     <div class="litany reveal">
       <div>How many <em>jobs</em> have to vanish?</div>
@@ -533,29 +544,29 @@
     <div class="reveal">
       <div class="kicker">The Plan</div>
       <h2 class="serif">Slow down. Give humanity time to figure out how to stay in control.</h2>
-      <p class="lede">The root cause of all these dangers is <strong>the global AI arms race</strong>, which creates a race-to-the-bottom on safety and doesn't give humanity time to figure out how to regulate it effectively.</p>
+      <p class="lede">The root cause of all these dangers is <strong>the global AI arms race</strong>, which creates a race-to-the-bottom on safety and doesn’t give humanity time to figure out how to regulate it effectively.</p>
     </div>
     <div class="split">
       <div class="reveal">
         <h3>The root cause</h3>
-        <p>Many regulations are harmful or unhelpful. We need humanity's best and brightest working on this, but it could take years to get the regulations right.</p>
-        <p>In TeamSeas, the goal was cleaning up beaches. Then we discovered most of the ocean's trash came from just three rivers. If we didn't address the root cause, the beaches would just get dirty again. <strong>Most proposed AI regulation is cleaning the beaches. The arms race is the river.</strong></p>
-        <div class="fog-quote">If you're driving 100&nbsp;mph in fog, and you think there's a cliff somewhere ahead, you slow down. That's common sense. That's what we need to do with AI.</div>
+        <p>Many regulations are harmful or unhelpful. We need humanity’s best and brightest working on this, but it could take years to get the regulations right.</p>
+        <p>In TeamSeas, the goal was cleaning up beaches. Then we discovered most of the ocean’s trash came from just three rivers. If we didn’t address the root cause, the beaches would just get dirty again. <strong>Most proposed AI regulation is cleaning the beaches. The arms race is the river.</strong></p>
+        <div class="fog-quote">If you’re driving 100&nbsp;mph in fog, and you think there’s a cliff somewhere ahead, you slow down. That’s common sense. That’s what we need to do with AI.</div>
       </div>
       <div class="reveal">
-        <h3>What we're demanding</h3>
-        <div class="demand"><div class="n">1</div><p><strong>An international agreement on AI</strong>Between the US, China, and major nations: slow down, enforce real safety standards, and keep humans in control before it's too late.</p></div>
+        <h3>What we’re demanding</h3>
+        <div class="demand"><div class="n">1</div><p><strong>An international agreement on AI</strong>Between the US, China, and major nations: slow down, enforce real safety standards, and keep humans in control before it’s too late.</p></div>
         <div class="demand"><div class="n">2</div><p><strong>Monitor the speedometer</strong>Frontier AI is built with specialized chips. Track and guard them, exactly like we track the ingredients for nukes and bioweapons. Governments set the speed limits on giant training runs.</p></div>
         <div class="demand"><div class="n">3</div><p><strong>An IAEA for AI</strong>The International Atomic Energy Agency verifies nuclear compliance worldwide. We need the same watchdog for AI, with concrete treaty and "pause button" proposals already on the table.</p></div>
       </div>
     </div>
     <div class="plan-close reveal">
-      <p>This isn't a pipe dream. Hundreds of Nobel Prize winners, industry leaders, and heads of state are calling for something even more extreme: <a class="txt-link" href="https://superintelligence-statement.org/" target="_blank" rel="noopener">an outright ban on the development of ASI (Artificial Superintelligence)</a>.</p>
+      <p>This isn’t a pipe dream. Hundreds of Nobel Prize winners, industry leaders, and heads of state are calling for something even more extreme: <a class="txt-link" href="https://superintelligence-statement.org/" target="_blank" rel="noopener">an outright ban on the development of ASI (Artificial Superintelligence)</a>.</p>
       <p><strong>Yes, we can slow down, and it would be easy compared to other problems humanity has solved. We can do this.</strong></p>
     </div>
     <div class="pressure-callout reveal">
-      <p>All four leading AI companies agree things may be going too fast. They say they would slow down if the others did. But none of them can stop unilaterally. <strong>That's what governments are for.</strong> And governments won't act without public pressure.</p>
-      <p class="pressure-line">That's where we come in.<br><em>We are the pressure.</em></p>
+      <p>All four leading AI companies agree things may be going too fast. They say they would slow down if the others did. But none of them can stop unilaterally. <strong>That’s what governments are for.</strong> And governments won’t act without public pressure.</p>
+      <p class="pressure-line">That’s where we come in.<br><em>We are the pressure.</em></p>
     </div>
   </div>
 </section>
@@ -563,22 +574,22 @@
 <section id="statement">
   <div class="wrap reveal">
     <img loading="lazy" width="1600" height="1066" src="brand/hands.jpg" alt="">
-    <p>AI Should Serve <em>Humanity</em>,<br>Not Replace It.</p>
+    <p>AI should serve <em>humanity</em>,<br>not replace it.</p>
   </div>
 </section>
 
 <section id="precedent">
   <div class="wrap">
     <div class="reveal">
-      <div class="kicker">We've Done This Before</div>
+      <div class="kicker">We’ve Done This Before</div>
       <h2 class="serif">Humanity has stared down existential threats and won.</h2>
     </div>
     <div class="cards3 reveal">
-      <div class="pcard"><h3 class="serif">We limited nuclear weapons</h3><p>You can't just buy the ingredients for nukes. They're tracked and guarded. We can track and guard the chips used to produce frontier AI the same way.</p></div>
+      <div class="pcard"><h3 class="serif">We limited nuclear weapons</h3><p>You can’t just buy the ingredients for nukes. They’re tracked and guarded. We can track and guard the chips used to produce frontier AI the same way.</p></div>
       <div class="pcard"><h3 class="serif">We saved the ozone layer</h3><p>The world faced a hole in the sky. Countries coordinated, industry adapted, and the ozone layer is healing today.</p></div>
       <div class="pcard"><h3 class="serif">We restricted thousands of dangerous technologies</h3><p>Bioweapons, chemical weapons, human cloning: humanity has agreed on bans and restrictions together, thousands of times.</p></div>
     </div>
-    <p class="closer reveal" style="margin-top:48px;">Every time, it took international cooperation, and ordinary people who refused to be silent.<br><span>It's time to do it again.</span></p>
+    <p class="closer reveal" style="margin-top:48px;">Every time, it took international cooperation, and ordinary people who refused to be silent.<br><span>It’s time to do it again.</span></p>
   </div>
   <div class="texture-band"><img loading="lazy" width="1200" height="800" src="brand/cloud-corner.png" alt=""></div>
 </section>
@@ -588,24 +599,24 @@
     <div class="ornament reveal"><img src="brand/handprint.png" alt=""></div>
     <div class="reveal center">
       <div class="kicker">Why We Signed</div>
-      <h2 class="serif">Illustrative voices from the creators.</h2>
+      <h2 class="serif">Illustrative voices<br>from the creators.</h2>
       <p class="lede">Creators are standing up with their audiences, because <strong>this is our moment, this is our fight, and the window is closing.</strong></p>
     </div>
     <!-- NOTE: Testimonial quotes below are illustrative placeholders for this preview build; final quotes pending creator approval. -->
     <div class="creator-grid">
       <div class="ccard reveal">
         <div class="ccard-head"><img loading="lazy" width="56" height="56" src="avatars/mrbeast.jpg" alt="MrBeast"><div><div class="name">MrBeast</div><div class="subs">400M+ subscribers</div></div></div>
-        <blockquote>I signed because I'm concerned we're building the most powerful technology in history with nobody at the wheel. We slowed down for nukes. We can slow down for this.</blockquote>
+        <blockquote>I signed because I’m concerned we’re building the most powerful technology in history with nobody at the wheel. We slowed down for nukes. We can slow down for this.</blockquote>
         <div class="signed">Signed the pledge</div>
       </div>
       <div class="ccard reveal">
         <div class="ccard-head"><img loading="lazy" width="56" height="56" src="avatars/markrober.jpg" alt="Mark Rober"><div><div class="name">Mark Rober</div><div class="subs">70M+ subscribers</div></div></div>
-        <blockquote>I signed because I'm an engineer, and no engineer would ship something this powerful without testing it. Right now, nobody's running the tests.</blockquote>
+        <blockquote>I signed because I’m an engineer, and no engineer would ship something this powerful without testing it. Right now, nobody’s running the tests.</blockquote>
         <div class="signed">Signed the pledge</div>
       </div>
       <div class="ccard reveal">
         <div class="ccard-head"><img loading="lazy" width="56" height="56" src="avatars/mkbhd.jpg" alt="Marques Brownlee"><div><div class="name">Marques Brownlee</div><div class="subs">20M+ subscribers</div></div></div>
-        <blockquote>I signed because I review technology for a living, and even the people building AI admit they don't fully understand it. That should concern all of us.</blockquote>
+        <blockquote>I signed because I review technology for a living, and even the people building AI admit they don’t fully understand it. That should concern all of us.</blockquote>
         <div class="signed">Signed the pledge</div>
       </div>
       <div class="ccard reveal">
@@ -615,17 +626,17 @@
       </div>
       <div class="ccard reveal">
         <div class="ccard-head"><img loading="lazy" width="56" height="56" src="avatars/emmachamberlain.jpg" alt="Emma Chamberlain"><div><div class="name">Emma Chamberlain</div><div class="subs">12M+ subscribers</div></div></div>
-        <blockquote>I signed because I'm concerned about kids growing up shaped by algorithms no parent chose, on an internet where you can't tell what's real anymore.</blockquote>
+        <blockquote>I signed because I’m concerned about kids growing up shaped by algorithms no parent chose, on an internet where you can’t tell what’s real anymore.</blockquote>
         <div class="signed">Signed the pledge</div>
       </div>
       <div class="ccard reveal">
         <div class="ccard-head"><img loading="lazy" width="56" height="56" src="avatars/ryantrahan.jpg" alt="Ryan Trahan"><div><div class="name">Ryan Trahan</div><div class="subs">16M+ subscribers</div></div></div>
-        <blockquote>I signed because deepfakes and AI scams are already using creators' faces to steal from the people who trust us. And it's getting worse every month.</blockquote>
+        <blockquote>I signed because deepfakes and AI scams are already using creators' faces to steal from the people who trust us. And it’s getting worse every month.</blockquote>
         <div class="signed">Signed the pledge</div>
       </div>
       <div class="ccard reveal">
         <div class="ccard-head"><img loading="lazy" width="56" height="56" src="avatars/cleoabram.jpg" alt="Cleo Abram"><div><div class="name">Cleo Abram</div><div class="subs">6M+ subscribers</div></div></div>
-        <blockquote>I signed because I'm an optimist about technology, and real optimism means steering, not just accelerating. Slowing down is how we get the good future.</blockquote>
+        <blockquote>I signed because I’m an optimist about technology, and real optimism means steering, not just accelerating. Slowing down is how we get the good future.</blockquote>
         <div class="signed">Signed the pledge</div>
       </div>
       <div class="ccard reveal">
@@ -666,7 +677,7 @@
     <button class="close" id="thanksClose" aria-label="Close">✕</button>
     <img class="stamp" src="brand/handprint.png" alt="" width="52" height="57">
     <h3 id="thanksTitle" class="serif">WELCOME TO TEAM HUMAN</h3>
-    <p class="body" id="thanksBody">You're one of <span id="successCount">247,319</span> humans standing up. Now multiply yourself. Every share brings more pressure.</p>
+    <p class="body" id="thanksBody">You’re one of <span id="successCount">247,319</span> humans standing up. Now multiply yourself. Every share brings more pressure.</p>
     <p class="fine">The robots are mildly disappointed. Humanity appreciates you.</p>
     <div class="row">
       <a class="btn" id="shareX" href="#" target="_blank" rel="noopener">Share on X</a>
@@ -778,7 +789,7 @@
   const errEl = document.getElementById('pledgeError');
   let submitted = false;
   const pledgeThanks = () => openThanks('WELCOME TO TEAM HUMAN',
-    "You're one of <span id=\"successCount\">" + total.toLocaleString('en-US') + "</span> humans standing up. Now multiply yourself. Every share brings more pressure.");
+    "You’re one of <span id=\"successCount\">" + total.toLocaleString('en-US') + "</span> humans standing up. Now multiply yourself. Every share brings more pressure.");
   form.addEventListener('submit', e => {
     e.preventDefault();
     if (submitted) { pledgeThanks(); return; }
