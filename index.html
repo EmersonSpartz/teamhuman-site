@@ -280,15 +280,15 @@
     font-size: 1.12rem; font-weight: 500; line-height: 1.5; color: var(--charcoal);
     box-shadow: 0 2px 10px rgba(94,70,48,.06);
   }
-  .demand { display: flex; gap: 22px; align-items: flex-start; padding: 22px 0; border-bottom: 1px solid var(--line); }
-  .demand:first-of-type { border-top: 1px solid var(--line); }
-  .demand .n {
-    flex-shrink: 0; min-width: 34px;
-    font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 700;
-    font-size: 2.1rem; line-height: 1; color: var(--terracotta); margin-top: 2px;
+  .demand-lead {
+    font-size: 1.85rem; font-weight: 700; line-height: 1.25; color: var(--charcoal);
+    margin-bottom: 6px;
   }
-  .demand p { margin: 0; font-size: .93rem; color: #4c443a; }
-  .demand p strong { display: block; font-family: 'Fraunces', Georgia, serif; font-size: 1.08rem; color: var(--charcoal); margin-bottom: 3px; }
+  .demand-lead em { font-style: italic; color: var(--terracotta); }
+  .demand-sub { font-style: italic; font-size: 1.12rem; color: var(--walnut); margin-bottom: 18px; }
+  .plank { padding: 16px 0; border-top: 1px solid var(--line); font-size: .95rem; color: #4c443a; }
+  .plank:last-of-type { border-bottom: 1px solid var(--line); }
+  .plank strong { font-family: 'Fraunces', Georgia, serif; font-size: 1.06rem; color: var(--charcoal); }
   .txt-link { color: var(--terracotta); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
   .txt-link:hover { color: var(--terracotta-dark); }
 
@@ -577,14 +577,16 @@
         <div class="fog-quote">If you’re driving 100&nbsp;mph in fog, and you think there’s a cliff somewhere ahead, you slow down. That’s common sense. That’s what we need to do with AI.</div>
       </div>
       <div class="reveal">
-        <h3>What we’re demanding</h3>
-        <div class="demand"><div class="n">1</div><p><strong>An international agreement on AI</strong>Between the US, China, and major nations: slow down, enforce real safety standards, and keep humans in control before it’s too late.</p></div>
-        <div class="demand"><div class="n">2</div><p><strong>Slow down frontier AI</strong>Frontier AI is built with specialized chips. Track and guard them, exactly like we track the ingredients for nukes and bioweapons. Governments set the speed limits on giant training runs.</p></div>
-        <div class="demand"><div class="n">3</div><p><strong>An IAEA for AI</strong>The International Atomic Energy Agency verifies nuclear compliance worldwide. We need the same watchdog for AI, with concrete treaty and “pause button” proposals already on the table.</p></div>
+        <h3>The demand</h3>
+        <p class="demand-lead serif">We demand one thing: <em>slow down frontier AI.</em></p>
+        <p class="demand-sub serif">Not forever. Until it’s safe.</p>
+        <p>We join the hundreds of Nobel Prize winners, AI experts, and heads of state who signed the <a class="txt-link" href="https://superintelligence-statement.org/" target="_blank" rel="noopener">Superintelligence Statement</a>, calling for a prohibition on developing ASI (Artificial Superintelligence) until there is 1) broad scientific consensus that it can be done safely and controllably, and 2) strong public buy-in.</p>
+        <p><strong>The experts agree. Here is how it gets done:</strong></p>
+        <div class="plank"><strong>Build the brakes.</strong> AI is built with specialized chips: track and guard them, exactly like we track the ingredients for nukes and bioweapons. Governments set the speed limits on giant training runs.</div>
+        <div class="plank"><strong>Make it binding.</strong> An international agreement between the US, China, and major nations: slow down together and enforce real safety standards. The International Atomic Energy Agency verifies nuclear compliance worldwide. We need the same watchdog for AI.</div>
       </div>
     </div>
     <div class="plan-close reveal">
-      <p>This isn’t a pipe dream. Hundreds of Nobel Prize winners, industry leaders, and heads of state are calling for something even stricter: <a class="txt-link" href="https://superintelligence-statement.org/" target="_blank" rel="noopener">an outright ban on the development of ASI (Artificial Superintelligence)</a>.</p>
       <p><strong>Yes, we can slow down, and it would be easy compared to other problems humanity has solved. We can do this.</strong></p>
     </div>
     <div class="pressure-callout reveal">
