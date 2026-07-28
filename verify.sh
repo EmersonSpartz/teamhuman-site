@@ -13,7 +13,7 @@ check() { # check <label> <condition-exit-code>
 echo "== TeamHuman verify =="
 
 # 1. Live page reachable and serving current copy
-HTML=$(curl -sf --max-time 20 "$LIVE" 2>/dev/null)
+HTML=$(curl -sfL --max-time 20 "$LIVE" 2>/dev/null)
 if [ -n "$HTML" ]; then
   SRC="live ($LIVE)"
 else
@@ -25,7 +25,7 @@ echo "  source: $SRC"
 
 echo "$HTML" | grep -q "Keep Humans in Control of AI" ; check "title copy present" $?
 echo "$HTML" | grep -q "Join the movement to keep"    ; check "hero copy (doc VERSION FOR CLAUDE)" $?
-echo "$HTML" | grep -q "To keep the future human, I pledge" ; check "pledge copy (doc)" $?
+echo "$HTML" | grep -q "Add your name to keep the future human" ; check "pledge copy" $?
 echo "$HTML" | grep -q "AI should serve"              ; check "statement band present" $?
 if echo "$HTML" | grep -qi "corporate arms race"; then echo "  FAIL  stale Figma copy leaked"; FAIL=1; else echo "  PASS  no stale Figma copy"; fi
 if echo "$HTML" | grep -q "—"; then echo "  FAIL  em dash found (Emerson: AI slop coded)"; FAIL=1; else echo "  PASS  no em dashes"; fi
