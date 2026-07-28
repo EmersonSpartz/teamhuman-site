@@ -227,6 +227,41 @@
     color: transparent; font-size: .68rem; font-weight: 800; transition: all .15s;
   }
   .also input:checked + .box { background: var(--slate); border-color: var(--slate); color: var(--cream); animation: stampCheck .28s cubic-bezier(.34,1.56,.64,1); }
+  .also-txt { display: inline; }
+  .tip {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 16px; height: 16px; margin-left: 6px; vertical-align: 1px;
+    border-radius: 50%; border: 1px solid var(--taupe); background: var(--cream);
+    color: var(--walnut); font-size: .62rem; font-weight: 700;
+    font-family: Georgia, serif; font-style: italic; line-height: 1;
+    cursor: help; position: relative;
+  }
+  .tip:hover, .tip:focus-visible, .tip.open { border-color: var(--terracotta); color: var(--terracotta); }
+  .tip::after {
+    content: attr(data-tip);
+    position: absolute; bottom: calc(100% + 10px); left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    width: 250px; padding: 10px 13px; border-radius: 8px;
+    background: var(--charcoal); color: var(--cream);
+    font-family: 'Inter', sans-serif; font-size: .78rem; font-weight: 400;
+    font-style: normal; line-height: 1.5; text-align: left;
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transition: opacity .2s, transform .2s; z-index: 60;
+    box-shadow: 0 8px 24px rgba(32,28,23,.25);
+  }
+  .tip::before {
+    content: ""; position: absolute; bottom: calc(100% + 4px); left: 50%;
+    transform: translateX(-50%); border: 6px solid transparent;
+    border-top-color: var(--charcoal);
+    opacity: 0; visibility: hidden; transition: opacity .2s; z-index: 60;
+  }
+  .tip:hover::after, .tip:focus-visible::after, .tip.open::after { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+  .tip:hover::before, .tip:focus-visible::before, .tip.open::before { opacity: 1; visibility: visible; }
+  @media (max-width: 700px) {
+    .tip::after { left: auto; right: -12px; transform: translateY(4px); }
+    .tip:hover::after, .tip:focus-visible::after, .tip.open::after { transform: translateY(0); }
+    .tip::before { left: auto; right: -8px; transform: none; }
+  }
   @keyframes stampCheck { 0% { transform: scale(.5) rotate(-10deg); } 100% { transform: scale(1) rotate(0); } }
   .also input:focus-visible + .box { outline: 2px solid var(--terracotta); outline-offset: 2px; }
   .pledge-error { color: var(--terracotta); font-size: .85rem; font-weight: 600; min-height: 20px; margin-top: 8px; }
@@ -555,9 +590,9 @@
         </div>
         <div class="also" style="margin-top:10px;">
           <div class="also-label">Bonus: I’ll also…</div>
-          <label><input type="checkbox" name="action" value="pfp"><span class="box">✓</span>Change my profile picture to #TeamHuman for 30 days</label>
-          <label><input type="checkbox" name="action" value="call"><span class="box">✓</span>Spend two minutes calling my local representative (we’ll tell you exactly who to call and what to say)</label>
-          <label><input type="checkbox" name="action" value="vote"><span class="box">✓</span>Commit to not voting for politicians who take AI lobby money</label>
+          <label><input type="checkbox" name="action" value="pfp"><span class="box">✓</span><span class="also-txt">Change my profile picture to #TeamHuman for 30 days<button type="button" class="tip" aria-label="What this involves" data-tip="After you sign, we’ll send you ready-to-use #TeamHuman profile images for any platform. Swap yours for 30 days so the movement is visible everywhere.">i</button></span></label>
+          <label><input type="checkbox" name="action" value="call"><span class="box">✓</span><span class="also-txt">Spend two minutes calling my local representative<button type="button" class="tip" aria-label="What this involves" data-tip="We’ll send you the phone number for your representative and a short script. The call takes about two minutes: you say you’re a constituent and you want humans kept in control of AI.">i</button></span></label>
+          <label><input type="checkbox" name="action" value="vote"><span class="box">✓</span><span class="also-txt">Commit to not voting for politicians who take AI lobby money<button type="button" class="tip" aria-label="What this involves" data-tip="AI companies spend heavily on lobbying. This pledge means checking whether a candidate takes that money, and letting it weigh on your vote. We’ll publish a simple lookup.">i</button></span></label>
         </div>
         <div class="pledge-error" id="pledgeError"></div>
         <button type="submit" class="btn">Count Me In</button>
@@ -879,6 +914,19 @@
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(window.location.href).then(() => done(true), () => done(false));
     } else { done(false); }
+  });
+
+  // Bonus-action tooltips: tap toggles (button sits inside the label, so
+  // preventDefault keeps the tap from also toggling the checkbox)
+  document.querySelectorAll('.tip').forEach(tip => {
+    tip.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      document.querySelectorAll('.tip.open').forEach(t => { if (t !== tip) t.classList.remove('open'); });
+      tip.classList.toggle('open');
+    });
+  });
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.tip')) document.querySelectorAll('.tip.open').forEach(t => t.classList.remove('open'));
   });
 
   // Mobile: expand the creator wall
