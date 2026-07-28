@@ -214,6 +214,8 @@
     background: rgba(203,185,157,.22); border: 1px solid rgba(94,70,48,.12);
     border-radius: 10px; padding: 14px 16px; margin-top: 10px; text-align: left;
   }
+  #bonusPanel:not([hidden]) { animation: popIn .5s cubic-bezier(.34,1.56,.64,1); }
+  @keyframes popIn { 0% { transform: scale(.92); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
   .also-label { font-size: .74rem; font-weight: 700; letter-spacing: .18em; color: var(--walnut); margin-bottom: 8px; }
   .also label {
     display: flex; align-items: flex-start; gap: 10px; padding: 8px 0;
@@ -588,16 +590,22 @@
             <option value="" selected disabled>Country</option>
           </select>
         </div>
+        <div class="pledge-error" id="pledgeError"></div>
+        <button type="submit" class="btn">Count Me In</button>
+        <p class="pledge-fine">No spam, ever. We’ll only email you when it’s time to act, together.</p>
+      </form>
+
+      <div id="bonusPanel" hidden>
+        <div class="pledge-title serif">YOU’RE IN ✓</div>
+        <p class="pledge-lead">Bonus round: want to do more?</p>
         <div class="also" style="margin-top:10px;">
           <div class="also-label">Bonus: I’ll also…</div>
           <label><input type="checkbox" name="action" value="pfp"><span class="box">✓</span><span class="also-txt">Change my profile picture to #TeamHuman for 30 days<button type="button" class="tip" aria-label="What this involves" data-tip="After you sign, we’ll send you ready-to-use #TeamHuman profile images for any platform. Swap yours for 30 days so the movement is visible everywhere.">i</button></span></label>
           <label><input type="checkbox" name="action" value="call"><span class="box">✓</span><span class="also-txt">Spend two minutes calling my local representative<button type="button" class="tip" aria-label="What this involves" data-tip="We’ll send you the phone number for your representative and a short script. The call takes about two minutes: you say you’re a constituent and you want humans kept in control of AI.">i</button></span></label>
           <label><input type="checkbox" name="action" value="vote"><span class="box">✓</span><span class="also-txt">Commit to not voting for politicians who take AI lobby money<button type="button" class="tip" aria-label="What this involves" data-tip="AI companies spend heavily on lobbying. This pledge means checking whether a candidate takes that money, and letting it weigh on your vote. We’ll publish a simple lookup.">i</button></span></label>
         </div>
-        <div class="pledge-error" id="pledgeError"></div>
-        <button type="submit" class="btn">Count Me In</button>
-        <p class="pledge-fine">No spam, ever. We’ll only email you when it’s time to act, together.</p>
-      </form>
+        <p class="pledge-fine">Check anything you’ll commit to. We’ll email you what you need.</p>
+      </div>
 
     </div>
   </div>
@@ -665,7 +673,7 @@
   <div class="wrap">
     <div class="reveal">
       <div class="kicker">We’ve Done This Before</div>
-      <h2 class="serif">Humanity has stared down existential threats and won.</h2>
+      <h2 class="serif">Humanity has come together many times.</h2>
       <p class="lede">Yes, we can slow down, and it would be easy compared to other problems humanity has solved. <strong>We can do this.</strong></p>
     </div>
     <div class="cards3 reveal">
@@ -891,6 +899,8 @@
     // Preview build: no backend yet. Swap this block for the real signup endpoint
     // (keep the `submitted` guard when wiring it up, re-enable only on error).
     submitted = true;
+    form.style.display = 'none';
+    document.getElementById('bonusPanel').hidden = false;
     total += 1;
     counter.textContent = total.toLocaleString('en-US');
     stickyCount.textContent = total.toLocaleString('en-US');
