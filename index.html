@@ -437,6 +437,46 @@
   .pcard h3 { font-family: 'Fraunces', Georgia, serif; font-size: 1.35rem; font-weight: 700; line-height: 1.25; margin-bottom: 10px; }
   .pcard p { color: #4c443a; font-size: .92rem; }
 
+  /* mission: finish-line track */
+  #mission { background: var(--parchment); }
+  .finish-track { position: relative; max-width: 860px; margin: 64px auto 52px; height: 108px; }
+  .ft-line {
+    position: absolute; left: 0; right: 0; bottom: 18px; height: 3px;
+    background-image: repeating-linear-gradient(90deg, var(--taupe) 0 7px, transparent 7px 16px);
+    opacity: .75;
+  }
+  .ft-dot {
+    position: absolute; bottom: 15px; width: 9px; height: 9px; border-radius: 50%;
+    background: var(--terracotta); transform: translateX(-50%);
+  }
+  .ft-goal {
+    position: absolute; left: 90%; bottom: 11px; width: 17px; height: 17px;
+    border: 3px solid var(--terracotta); border-radius: 50%;
+    background: var(--parchment); transform: translateX(-50%);
+  }
+  .ft-pct {
+    position: absolute; bottom: calc(100% + 9px); left: 50%; transform: translateX(-50%);
+    font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-size: 1.5rem;
+    color: var(--walnut); font-variant-numeric: lining-nums;
+  }
+  .ft-flag { position: absolute; right: 0; bottom: 14px; width: 58px; height: auto; transform: translateX(30%); }
+  .ft-walker {
+    position: absolute; bottom: 24px; left: 86%; width: 40px; height: auto;
+    transform: translateX(-50%);
+    transition: left 2.6s cubic-bezier(.45,.6,.3,1);
+  }
+  body.js .finish-track .ft-walker { left: 2%; }
+  body.js .finish-track.in .ft-walker { left: 86%; animation: ftStep .37s ease-in-out 7; }
+  @keyframes ftStep { 0%, 100% { margin-bottom: 0; } 50% { margin-bottom: 4px; } }
+  @media (prefers-reduced-motion: reduce) {
+    .ft-walker { transition: none; }
+    body.js .finish-track .ft-walker { left: 86%; animation: none; }
+  }
+  #mission .lede { max-width: 640px; }
+  #mission .lede + .lede { margin-top: 18px; }
+  .so-close { color: var(--terracotta); font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-style: normal; letter-spacing: .02em; }
+  @media (max-width: 640px) { .finish-track { height: 88px; } .ft-walker { width: 32px; } .ft-flag { width: 46px; } .ft-pct { font-size: 1.2rem; } }
+
   /* creators / voices */
   #voices { background: var(--cream); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .creator-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 18px; margin-top: 52px; }
@@ -444,7 +484,21 @@
     background: var(--parchment); border: 1px solid rgba(94,70,48,.15); border-radius: 12px;
     padding: 24px; display: flex; flex-direction: column; gap: 14px;
     box-shadow: 0 2px 10px rgba(94,70,48,.05); transition: transform .2s, box-shadow .2s;
+    position: relative;
   }
+  .ccard::after {
+    content: "EXAMPLE"; position: absolute; top: 14px; right: -8px;
+    background: var(--slate); color: var(--cream);
+    font-size: .6rem; font-weight: 700; letter-spacing: .18em;
+    padding: 4px 10px; border-radius: 4px 0 0 4px;
+    transform: rotate(2deg); box-shadow: 0 2px 6px rgba(32,28,23,.18);
+  }
+  .ph-note {
+    max-width: 620px; margin: 26px auto 0; padding: 13px 20px;
+    background: rgba(91,125,143,.1); border: 1.5px dashed var(--slate); border-radius: 10px;
+    font-size: .88rem; color: #3f5561; text-align: center;
+  }
+  .ph-note strong { letter-spacing: .08em; }
   .ccard:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(94,70,48,.13); }
   .ccard-head { display: flex; align-items: center; gap: 14px; }
   .ccard img {
@@ -748,6 +802,43 @@
   <div class="texture-band"><img loading="lazy" width="1200" height="800" src="brand/cloud-corner.png" alt=""></div>
 </section>
 
+<section id="mission">
+  <div class="wrap">
+    <div class="reveal center">
+      <div class="kicker">The Mission</div>
+      <h2 class="serif">We’re <em>this close</em><br>to the finish line.</h2>
+    </div>
+    <div class="finish-track reveal" aria-hidden="true">
+      <div class="ft-line"></div>
+      <span class="ft-dot" style="left:1%"></span>
+      <span class="ft-dot" style="left:24%"></span>
+      <span class="ft-dot" style="left:47%"></span>
+      <span class="ft-dot" style="left:70%"></span>
+      <span class="ft-goal"><span class="ft-pct">90%</span></span>
+      <svg class="ft-flag" viewBox="0 0 20 34" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="5" cy="2.2" r="2" fill="#d69e45"/>
+        <rect x="4" y="3.4" width="2" height="26" fill="#5e4630"/>
+        <polygon points="6,4.5 19,8.5 6,12.5" fill="#ba5931"/>
+        <rect x="0" y="29" width="4.5" height="4.5" fill="#ba5931"/><rect x="4.5" y="29" width="4.5" height="4.5" fill="#f6efe3"/><rect x="9" y="29" width="4.5" height="4.5" fill="#ba5931"/>
+        <rect x="0" y="24.5" width="4.5" height="4.5" fill="#f6efe3"/><rect x="4.5" y="24.5" width="4.5" height="4.5" fill="#ba5931"/><rect x="9" y="24.5" width="4.5" height="4.5" fill="#f6efe3"/>
+      </svg>
+      <svg class="ft-walker" viewBox="0 0 8 10" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="0" width="4" height="1" fill="#ba5931"/>
+        <rect x="1" y="1" width="6" height="1" fill="#ba5931"/>
+        <rect x="2" y="2" width="4" height="2" fill="#d9b98c"/>
+        <rect x="1.5" y="4" width="5" height="3" fill="#394334"/>
+        <rect x="0.8" y="4.5" width="0.9" height="1.8" fill="#5e4630"/>
+        <rect x="2.3" y="7" width="1.1" height="2.4" fill="#5e4630"/>
+        <rect x="4.6" y="7" width="1.1" height="2.4" fill="#5e4630"/>
+      </svg>
+    </div>
+    <div class="reveal center">
+      <p class="lede"><span class="so-close">We’re SO CLOSE</span> to AI rules that keep humans in control. AI lab CEOs, their own employees, and the world’s top safety experts all agree.</p>
+      <p class="lede">What’s missing? Governments won’t move unless the public shows they care. That’s why we’re coming together, creators and our communities, to get the world across the finish line.</p>
+    </div>
+  </div>
+</section>
+
 <section id="voices">
   <div class="wrap">
     <div class="ornament reveal"><img src="brand/handprint.png" alt=""></div>
@@ -755,6 +846,7 @@
       <div class="kicker">Why We Signed</div>
       <h2 class="serif">Illustrative voices<br>from the creators.</h2>
       <p class="lede">Creators are standing up with their audiences, because <strong>this is our moment, this is our fight, and the window is closing.</strong></p>
+      <div class="ph-note"><strong>PLACEHOLDER:</strong> our team wrote these example quotes to show what this section will look like. They are not real statements from these creators. Real quotes will replace them.</div>
     </div>
     <!-- NOTE: Testimonial quotes below are illustrative placeholders for this preview build; final quotes pending creator approval. -->
     <div class="creator-grid">
