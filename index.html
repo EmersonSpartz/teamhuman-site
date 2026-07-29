@@ -134,10 +134,12 @@
   .skip-link:focus { left: 0; }
   h1 em { font-style: italic; color: var(--terracotta); font-weight: 600; }
   .count-num {
-    font-family: 'Fraunces', Georgia, serif; font-weight: 900;
-    font-size: clamp(3.4rem, 10vw, 7rem); line-height: 1.05;
-    letter-spacing: -.01em; color: var(--charcoal);
-    font-variant-numeric: lining-nums; margin-top: 26px;
+    /* Lower optical size + weight: Fraunces' display-size digits read as ornament, not number */
+    font-family: 'Fraunces', Georgia, serif; font-weight: 600;
+    font-variation-settings: "opsz" 30;
+    font-size: clamp(3.2rem, 9vw, 6.2rem); line-height: 1.05;
+    letter-spacing: .005em; color: var(--charcoal);
+    font-variant-numeric: lining-nums tabular-nums; margin-top: 26px;
   }
   .count-num.tick { animation: tickPulse .45s ease; }
   @keyframes tickPulse { 30% { transform: scale(1.02); } }
@@ -215,8 +217,43 @@
     background: rgba(203,185,157,.22); border: 1px solid rgba(94,70,48,.12);
     border-radius: 10px; padding: 14px 16px; margin-top: 10px; text-align: left;
   }
-  #bonusPanel:not([hidden]) { animation: popIn .5s cubic-bezier(.34,1.56,.64,1); }
+  #signedState:not([hidden]), #creatorPanel:not([hidden]) { animation: popIn .5s cubic-bezier(.34,1.56,.64,1); }
   @keyframes popIn { 0% { transform: scale(.92); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+  /* creator step-by-step (inside pledge card) */
+  .steps { list-style: none; counter-reset: step; text-align: left; margin: 4px 0 6px; }
+  .steps li {
+    counter-increment: step; position: relative;
+    padding: 12px 0 12px 44px; font-size: .92rem; color: #4c443a;
+    border-bottom: 1px solid rgba(94,70,48,.1);
+  }
+  .steps li:last-child { border-bottom: none; }
+  .steps li::before {
+    content: counter(step); position: absolute; left: 0; top: 12px;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--terracotta); color: var(--cream);
+    font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-size: .95rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .steps li strong { color: var(--charcoal); }
+  .txt-btn {
+    background: none; border: none; padding: 0; font: inherit; font-weight: 600;
+    color: var(--terracotta); cursor: pointer; text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .txt-btn:hover { color: var(--terracotta-dark); }
+
+  /* learn-more scroll cue under the pledge card */
+  .learn-more {
+    display: inline-flex; flex-direction: column; align-items: center; gap: 2px;
+    margin-top: 30px; text-decoration: none;
+    font-size: .78rem; font-weight: 700; letter-spacing: .26em; text-transform: uppercase;
+    color: var(--walnut); opacity: .75; transition: color .2s, opacity .2s;
+  }
+  .learn-more:hover { color: var(--terracotta); opacity: 1; }
+  .lm-arrow { font-size: 1.05rem; letter-spacing: 0; animation: lmBob 2.2s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) { .lm-arrow { animation: none; } }
+  @keyframes lmBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
   .also-label { font-size: .74rem; font-weight: 700; letter-spacing: .18em; color: var(--walnut); margin-bottom: 8px; }
   .also label {
     display: flex; align-items: flex-start; gap: 10px; padding: 8px 0;
@@ -488,7 +525,9 @@
     background: var(--parchment); border-radius: 14px; max-width: 500px; width: 100%;
     padding: 40px 40px 46px; text-align: center; position: relative;
     box-shadow: 0 30px 80px rgba(32,28,23,.4);
+    max-height: calc(100vh - 40px); overflow-y: auto;
   }
+  @media (max-width: 640px) { .modal { padding: 32px 22px 34px; } }
   .modal-veil.open .modal { animation: modalIn .35s cubic-bezier(.22,1,.36,1); }
   @keyframes modalIn { from { transform: translateY(16px) scale(.96); opacity: 0; } }
   .modal .stamp { width: 52px; height: auto; mix-blend-mode: multiply; opacity: .9; transform: rotate(-6deg); margin-bottom: 6px; }
@@ -504,8 +543,10 @@
     font-size: 1.6rem; color: var(--slate);
   }
   .modal .body { font-style: italic; color: #4c443a; margin: 16px 0 6px; font-size: .98rem; }
-  .modal .fine { font-style: italic; color: var(--taupe); font-size: .84rem; margin-bottom: 24px; }
+  .modal .fine { font-style: italic; color: var(--taupe); font-size: .84rem; margin: 8px 0 22px; }
   .modal .row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .modal .row .btn { padding: 12px 18px; font-size: .78rem; }
+  .modal-also { margin-top: 18px; }
 
   /* reveal */
   body.js .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
@@ -569,18 +610,18 @@
     <h1>Join the movement to keep<br><em>humans in control</em> of AI.</h1>
     <div class="count-num" id="counter" data-target="247318">0</div>
     <div class="count-label">humans have pledged</div>
+    <p class="hero-sub">AI could be the best thing that ever happens to humanity. It could also be the last. Right now, a handful of companies are deciding our future, and nobody gave them permission.</p>
     <a class="facepile" href="#voices" aria-label="See why creators are signing">
       <span class="faces">
         <img src="avatars/mrbeast.jpg" alt="" width="44" height="44"><img src="avatars/markrober.jpg" alt="" width="44" height="44"><img src="avatars/mkbhd.jpg" alt="" width="44" height="44"><img src="avatars/veritasium.jpg" alt="" width="44" height="44"><img src="avatars/emmachamberlain.jpg" alt="" width="44" height="44"><img src="avatars/ryantrahan.jpg" alt="" width="44" height="44"><img src="avatars/cleoabram.jpg" alt="" width="44" height="44"><img src="avatars/caseyneistat.jpg" alt="" width="44" height="44"><img src="avatars/hankgreen.jpg" alt="" width="44" height="44"><span class="face-more">+</span>
       </span>
       <span class="face-label">See why creators are signing →</span>
     </a>
-    <p class="hero-sub">AI could be the best thing that ever happens to humanity. It could also be the last. Right now, a handful of companies are deciding our future, and nobody gave them permission.</p>
 
     <div class="pledge-card" id="pledge">
       <div class="toggle">
-        <button type="button" class="active">☺ Human</button>
-        <a href="creators.html">▶ Creator</a>
+        <button type="button" class="active" id="tabHuman">☺ Human</button>
+        <button type="button" id="tabCreator">▶ Creator</button>
       </div>
 
       <form id="pledgeForm" novalidate>
@@ -599,19 +640,25 @@
         <p class="pledge-fine">No spam, ever. We’ll only email you when it’s time to act, together.</p>
       </form>
 
-      <div id="bonusPanel" hidden>
+      <div id="signedState" hidden>
         <div class="pledge-title serif">YOU’RE IN ✓</div>
-        <p class="pledge-lead">Bonus round: want to do more?</p>
-        <div class="also" style="margin-top:10px;">
-          <div class="also-label">Bonus: I’ll also…</div>
-          <label><input type="checkbox" name="action" value="pfp"><span class="box">✓</span><span class="also-txt">Change my profile picture to #TeamHuman for 30 days<button type="button" class="tip" aria-label="What this involves" data-tip="After you sign, we’ll send you ready-to-use #TeamHuman profile images for any platform. Swap yours for 30 days so the movement is visible everywhere.">i</button></span></label>
-          <label><input type="checkbox" name="action" value="call"><span class="box">✓</span><span class="also-txt">Spend two minutes calling my local representative<button type="button" class="tip" aria-label="What this involves" data-tip="We’ll send you the phone number for your representative and a short script. The call takes about two minutes: you say you’re a constituent and you want humans kept in control of AI.">i</button></span></label>
-          <label><input type="checkbox" name="action" value="vote"><span class="box">✓</span><span class="also-txt">Commit to not voting for politicians who take AI lobby money<button type="button" class="tip" aria-label="What this involves" data-tip="AI companies spend heavily on lobbying. This pledge means checking whether a candidate takes that money, and letting it weigh on your vote. We’ll publish a simple lookup.">i</button></span></label>
-        </div>
-        <p class="pledge-fine">Check anything you’ll commit to. We’ll email you what you need.</p>
+        <p class="pledge-lead">Welcome to Team Human.</p>
+        <button type="button" class="btn" id="reopenThanks">Do more →</button>
+      </div>
+
+      <!-- NOTE: Creator-guide copy below is placeholder pending team approval. -->
+      <div id="creatorPanel" hidden>
+        <div class="pledge-title serif">CREATORS: HERE’S THE PLAY</div>
+        <ol class="steps">
+          <li><strong>Take the pledge.</strong> Add your name like everyone else. <button type="button" class="txt-btn" id="stepToPledge">Sign here →</button></li>
+          <li><strong>Tell your audience.</strong> A video, a short, a post: say why you signed, in your own words. Your voice reaches further than any ad.</li>
+          <li><strong>Recruit three creators.</strong> Send this page to three friends with an audience. That’s how a pledge becomes a movement.</li>
+        </ol>
+        <p class="pledge-fine">Creator toolkit (assets, talking points, #TeamHuman profile images) coming soon.</p>
       </div>
 
     </div>
+    <a class="learn-more" href="#problem">Learn more<span class="lm-arrow">↓</span></a>
   </div>
 </header>
 
@@ -779,9 +826,17 @@
     <img class="stamp" src="brand/handprint.png" alt="" width="52" height="57">
     <h3 id="thanksTitle" class="serif">WELCOME TO TEAM HUMAN</h3>
     <p class="body" id="thanksBody">You’re one of <span id="successCount">247,319</span> humans standing up. Now multiply yourself. Every share brings more pressure.</p>
-    <p class="fine">The robots are mildly disappointed. Humanity appreciates you.</p>
+    <div class="also modal-also">
+      <div class="also-label">Optional pledges: I’ll also…</div>
+      <label><input type="checkbox" name="action" value="pfp"><span class="box">✓</span><span class="also-txt">Change my profile picture to #TeamHuman for 30 days<button type="button" class="tip" aria-label="What this involves" data-tip="After you sign, we’ll send you ready-to-use #TeamHuman profile images for any platform. Swap yours for 30 days so the movement is visible everywhere.">i</button></span></label>
+      <label><input type="checkbox" name="action" value="call"><span class="box">✓</span><span class="also-txt">Spend two minutes calling my local representative<button type="button" class="tip" aria-label="What this involves" data-tip="We’ll send you the phone number for your representative and a short script. The call takes about two minutes: you say you’re a constituent and you want humans kept in control of AI.">i</button></span></label>
+      <label><input type="checkbox" name="action" value="vote"><span class="box">✓</span><span class="also-txt">Commit to not voting for politicians who take AI lobby money<button type="button" class="tip" aria-label="What this involves" data-tip="AI companies spend heavily on lobbying. This pledge means checking whether a candidate takes that money, and letting it weigh on your vote. We’ll publish a simple lookup.">i</button></span></label>
+    </div>
+    <p class="fine">Check anything you’ll commit to. We’ll email you what you need.</p>
     <div class="row">
       <a class="btn" id="shareX" href="#" target="_blank" rel="noopener">Share on X</a>
+      <a class="btn btn-ghost" id="shareLI" href="#" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-ghost" id="shareFB" href="#" target="_blank" rel="noopener">Facebook</a>
       <button class="btn btn-ghost" id="copyLink" type="button">Copy Link</button>
     </div>
   </div>
@@ -904,11 +959,36 @@
     // (keep the `submitted` guard when wiring it up, re-enable only on error).
     submitted = true;
     form.style.display = 'none';
-    document.getElementById('bonusPanel').hidden = false;
+    document.getElementById('signedState').hidden = false;
     total += 1;
     counter.textContent = total.toLocaleString('en-US');
     stickyCount.textContent = total.toLocaleString('en-US');
     pledgeThanks();
+  });
+  document.getElementById('reopenThanks').addEventListener('click', pledgeThanks);
+
+  // Human / Creator tabs: swap the pledge card's contents in place
+  const tabHuman = document.getElementById('tabHuman');
+  const tabCreator = document.getElementById('tabCreator');
+  const creatorPanel = document.getElementById('creatorPanel');
+  const signedState = document.getElementById('signedState');
+  function showTab(creator) {
+    tabHuman.classList.toggle('active', !creator);
+    tabCreator.classList.toggle('active', creator);
+    creatorPanel.hidden = !creator;
+    if (creator) {
+      form.style.display = 'none';
+      signedState.hidden = true;
+    } else {
+      form.style.display = submitted ? 'none' : '';
+      signedState.hidden = !submitted;
+    }
+  }
+  tabHuman.addEventListener('click', () => showTab(false));
+  tabCreator.addEventListener('click', () => showTab(true));
+  document.getElementById('stepToPledge').addEventListener('click', () => {
+    showTab(false);
+    if (!submitted) document.getElementById('firstName').focus();
   });
   document.getElementById('thanksClose').addEventListener('click', () => veil.classList.remove('open'));
   // Only dismiss when the press STARTED on the veil; otherwise selecting text
@@ -918,8 +998,11 @@
   veil.addEventListener('click', e => { if (e.target === veil && pressedVeil) veil.classList.remove('open'); });
 
   // Share
+  const shareURL = encodeURIComponent('https://teamhuman.org/');
   const shareText = encodeURIComponent('I just pledged to keep humans in control of AI. Join me. #TeamHuman');
-  document.getElementById('shareX').href = 'https://twitter.com/intent/tweet?text=' + shareText;
+  document.getElementById('shareX').href = 'https://twitter.com/intent/tweet?text=' + shareText + '&url=' + shareURL;
+  document.getElementById('shareLI').href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + shareURL;
+  document.getElementById('shareFB').href = 'https://www.facebook.com/sharer/sharer.php?u=' + shareURL;
   document.getElementById('copyLink').addEventListener('click', function () {
     const done = ok => {
       this.textContent = ok ? 'Copied!' : 'Copy failed';
