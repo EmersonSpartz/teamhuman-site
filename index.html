@@ -437,9 +437,9 @@
   .pcard h3 { font-family: 'Fraunces', Georgia, serif; font-size: 1.35rem; font-weight: 700; line-height: 1.25; margin-bottom: 10px; }
   .pcard p { color: #4c443a; font-size: .92rem; }
 
-  /* mission: finish-line track */
-  #mission { background: var(--parchment); }
+  /* finish-line track (inside the pressure callout) */
   .finish-track { position: relative; max-width: 860px; margin: 64px auto 52px; height: 108px; }
+  .pressure-callout .finish-track { max-width: 600px; margin: 38px auto 10px; height: 100px; }
   .ft-line {
     position: absolute; left: 0; right: 0; bottom: 18px; height: 3px;
     background-image: repeating-linear-gradient(90deg, var(--taupe) 0 7px, transparent 7px 16px);
@@ -472,10 +472,7 @@
     .ft-walker { transition: none; }
     body.js .finish-track .ft-walker { left: 86%; animation: none; }
   }
-  #mission .lede { max-width: 640px; }
-  #mission .lede + .lede { margin-top: 18px; }
-  .so-close { color: var(--terracotta); font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-style: normal; letter-spacing: .02em; }
-  @media (max-width: 640px) { .finish-track { height: 88px; } .ft-walker { width: 32px; } .ft-flag { width: 46px; } .ft-pct { font-size: 1.2rem; } }
+  @media (max-width: 640px) { .finish-track, .pressure-callout .finish-track { height: 88px; } .ft-walker { width: 32px; } .ft-flag { width: 46px; } .ft-pct { font-size: 1.2rem; } }
 
   /* creators / voices */
   #voices { background: var(--cream); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -770,6 +767,30 @@
     </div>
     <div class="pressure-callout reveal">
       <p>All four leading AI companies agree things may be going too fast. They say they would slow down if the others did. Recently, more than 1,000 of their own employees <a class="txt-link" href="https://www.cnn.com/2026/07/28/tech/ai-development-tech-employees-open-letter" target="_blank" rel="noopener">signed an open letter</a> calling on the government to help make a slowdown possible. But none of them can stop unilaterally. <strong>That’s what governments are for.</strong> And governments won’t act without public pressure.</p>
+      <div class="finish-track reveal" aria-hidden="true">
+        <div class="ft-line"></div>
+        <span class="ft-dot" style="left:1%"></span>
+        <span class="ft-dot" style="left:24%"></span>
+        <span class="ft-dot" style="left:47%"></span>
+        <span class="ft-dot" style="left:70%"></span>
+        <span class="ft-goal"><span class="ft-pct">90%</span></span>
+        <svg class="ft-flag" viewBox="0 0 20 34" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="5" cy="2.2" r="2" fill="#d69e45"/>
+          <rect x="4" y="3.4" width="2" height="26" fill="#5e4630"/>
+          <polygon points="6,4.5 19,8.5 6,12.5" fill="#ba5931"/>
+          <rect x="0" y="29" width="4.5" height="4.5" fill="#ba5931"/><rect x="4.5" y="29" width="4.5" height="4.5" fill="#f6efe3"/><rect x="9" y="29" width="4.5" height="4.5" fill="#ba5931"/>
+          <rect x="0" y="24.5" width="4.5" height="4.5" fill="#f6efe3"/><rect x="4.5" y="24.5" width="4.5" height="4.5" fill="#ba5931"/><rect x="9" y="24.5" width="4.5" height="4.5" fill="#f6efe3"/>
+        </svg>
+        <svg class="ft-walker" viewBox="0 0 8 10" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="0" width="4" height="1" fill="#ba5931"/>
+          <rect x="1" y="1" width="6" height="1" fill="#ba5931"/>
+          <rect x="2" y="2" width="4" height="2" fill="#d9b98c"/>
+          <rect x="1.5" y="4" width="5" height="3" fill="#394334"/>
+          <rect x="0.8" y="4.5" width="0.9" height="1.8" fill="#5e4630"/>
+          <rect x="2.3" y="7" width="1.1" height="2.4" fill="#5e4630"/>
+          <rect x="4.6" y="7" width="1.1" height="2.4" fill="#5e4630"/>
+        </svg>
+      </div>
       <p class="pressure-line">That’s where we come in.<br><em>We are the pressure.</em></p>
     </div>
   </div>
@@ -800,43 +821,6 @@
     <p class="closer reveal" style="margin-top:48px;">Every time, it took international cooperation, and ordinary people who refused to be silent.<br><span>It’s time to do it again.</span></p>
   </div>
   <div class="texture-band"><img loading="lazy" width="1200" height="800" src="brand/cloud-corner.png" alt=""></div>
-</section>
-
-<section id="mission">
-  <div class="wrap">
-    <div class="reveal center">
-      <div class="kicker">The Mission</div>
-      <h2 class="serif">We’re <em>this close</em><br>to the finish line.</h2>
-    </div>
-    <div class="finish-track reveal" aria-hidden="true">
-      <div class="ft-line"></div>
-      <span class="ft-dot" style="left:1%"></span>
-      <span class="ft-dot" style="left:24%"></span>
-      <span class="ft-dot" style="left:47%"></span>
-      <span class="ft-dot" style="left:70%"></span>
-      <span class="ft-goal"><span class="ft-pct">90%</span></span>
-      <svg class="ft-flag" viewBox="0 0 20 34" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="5" cy="2.2" r="2" fill="#d69e45"/>
-        <rect x="4" y="3.4" width="2" height="26" fill="#5e4630"/>
-        <polygon points="6,4.5 19,8.5 6,12.5" fill="#ba5931"/>
-        <rect x="0" y="29" width="4.5" height="4.5" fill="#ba5931"/><rect x="4.5" y="29" width="4.5" height="4.5" fill="#f6efe3"/><rect x="9" y="29" width="4.5" height="4.5" fill="#ba5931"/>
-        <rect x="0" y="24.5" width="4.5" height="4.5" fill="#f6efe3"/><rect x="4.5" y="24.5" width="4.5" height="4.5" fill="#ba5931"/><rect x="9" y="24.5" width="4.5" height="4.5" fill="#f6efe3"/>
-      </svg>
-      <svg class="ft-walker" viewBox="0 0 8 10" xmlns="http://www.w3.org/2000/svg">
-        <rect x="2" y="0" width="4" height="1" fill="#ba5931"/>
-        <rect x="1" y="1" width="6" height="1" fill="#ba5931"/>
-        <rect x="2" y="2" width="4" height="2" fill="#d9b98c"/>
-        <rect x="1.5" y="4" width="5" height="3" fill="#394334"/>
-        <rect x="0.8" y="4.5" width="0.9" height="1.8" fill="#5e4630"/>
-        <rect x="2.3" y="7" width="1.1" height="2.4" fill="#5e4630"/>
-        <rect x="4.6" y="7" width="1.1" height="2.4" fill="#5e4630"/>
-      </svg>
-    </div>
-    <div class="reveal center">
-      <p class="lede"><span class="so-close">We’re SO CLOSE</span> to AI rules that keep humans in control. AI lab CEOs, their own employees, and the world’s top safety experts all agree.</p>
-      <p class="lede">What’s missing? Governments won’t move unless the public shows they care. That’s why we’re coming together, creators and our communities, to get the world across the finish line.</p>
-    </div>
-  </div>
 </section>
 
 <section id="voices">
