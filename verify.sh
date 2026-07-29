@@ -2,7 +2,7 @@
 # verify.sh — TeamHuman campaign site
 # Checks the LIVE deployed site (falls back to local file if offline).
 set -u
-LIVE="https://emersonspartz.github.io/teamhuman-site/"
+LIVE="https://teamhuman.org/"
 DIR="$(cd "$(dirname "$0")" && pwd)"
 FAIL=0
 
