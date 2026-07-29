@@ -5,7 +5,7 @@
   var KEY = 'th_gate';
   // Portal: a Google Sheet published as CSV (columns: password, name).
   // Mario/Sam add rows there; paste the published-CSV URL below.
-  var SHEET_CSV_URL = '';
+  var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS5FqCkF8JXnqU0qgb1sEhmHpr9mUtAgCSVI1wymzKEBAwkea7333AZm4iCdGzx9PCwqaM_JR9SVsZn/pub?output=csv';
   var BUILTINS = {
     'dGVhbWh1bWFu': 'ZnJpZW5kIG9mIFRlYW0gSHVtYW4=',
     'bWFyaW8=': 'TWFyaW8=',
