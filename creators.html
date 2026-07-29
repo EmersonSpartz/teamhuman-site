@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Creators | #TeamHuman</title>
 <meta name="description" content="How creators can participate in the TeamHuman campaign.">
+<meta name="robots" content="noindex">
 <link rel="icon" type="image/png" href="brand/handprint.png">
 <meta property="og:title" content="For Creators | #TeamHuman">
 <meta property="og:description" content="How creators can participate in the TeamHuman campaign.">
@@ -71,6 +72,9 @@
   .cloud { position: fixed; bottom: 0; left: 0; right: 0; pointer-events: none; z-index: -1; }
   .cloud img { width: 100%; display: block; mix-blend-mode: multiply; opacity: .5; }
 </style>
+<script>if(!localStorage.getItem('th_gate'))document.documentElement.classList.add('locked')</script>
+<style>html.locked{overflow:hidden}html.locked body>*{visibility:hidden}</style>
+<script defer src="gate.js"></script>
 </head>
 <body>
 <nav>

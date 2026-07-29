@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>#TeamHuman: Keep Humans in Control of AI</title>
 <meta name="description" content="Join the movement to keep humans in control of AI. Take the pledge.">
+<meta name="robots" content="noindex">
 <link rel="icon" type="image/png" href="brand/handprint.png">
 <meta property="og:title" content="#TeamHuman: Keep Humans in Control of AI">
 <meta property="og:description" content="AI could be the best thing that ever happens to humanity. It could also be the last. Take the pledge.">
@@ -540,6 +541,9 @@
     .fields { grid-template-columns: 1fr; }
   }
 </style>
+<script>if(!localStorage.getItem('th_gate'))document.documentElement.classList.add('locked')</script>
+<style>html.locked{overflow:hidden}html.locked body>*{visibility:hidden}</style>
+<script defer src="gate.js"></script>
 </head>
 <body>
 
