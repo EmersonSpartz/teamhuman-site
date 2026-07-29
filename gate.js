@@ -57,6 +57,21 @@
       } catch (e) { return null; }
     }
 
+    // Portal passwords: "<name-slug>-<3-char checksum>", minted at /portal.html.
+    // Self-verifying, so no storage needed. Must match portal.html's hash3().
+    function hash3(s) {
+      var x = 5381;
+      for (var i = 0; i < s.length; i++) { x = ((x * 33) ^ s.charCodeAt(i)) >>> 0; }
+      return ('00' + (x % 46656).toString(36)).slice(-3);
+    }
+    function lookupDerived(pw) {
+      var m = pw.match(/^([a-z0-9][a-z0-9-]*)-([a-z0-9]{3})$/);
+      if (!m || hash3(m[1]) !== m[2]) return null;
+      return m[1].split('-').map(function (w) {
+        return w.charAt(0).toUpperCase() + w.slice(1);
+      }).join(' ');
+    }
+
     function lookupSheet(pw) {
       if (!SHEET_CSV_URL) return Promise.resolve(null);
       return fetch(SHEET_CSV_URL, { cache: 'no-store' })
@@ -78,7 +93,7 @@
       e.preventDefault();
       var pw = document.getElementById('gatePw').value.trim().toLowerCase();
       if (!pw) return;
-      var name = lookupBuiltin(pw);
+      var name = lookupBuiltin(pw) || lookupDerived(pw);
       (name ? Promise.resolve(name) : lookupSheet(pw)).then(function (finalName) {
         if (!finalName) {
           document.getElementById('gateErr').textContent = 'That password isn\u2019t on the list. Ask the team for yours.';

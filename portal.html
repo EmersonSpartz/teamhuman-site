@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creator Passwords | #TeamHuman</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="brand/handprint.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f6efe3;
+    --cream: #fbf6ec;
+    --charcoal: #201c17;
+    --terracotta: #ba5931;
+    --terracotta-dark: #a34b27;
+    --walnut: #5e4630;
+    --line: rgba(94,70,48,.18);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  ::selection { background: var(--terracotta); color: var(--cream); }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--parchment); color: var(--charcoal); line-height: 1.6;
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 24px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .inner { max-width: 420px; width: 100%; }
+  .inner > img { width: 52px; mix-blend-mode: multiply; opacity: .9; margin-bottom: 22px; }
+  h1 { font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 1.7rem; margin-bottom: 6px; }
+  .hint { font-size: .88rem; color: #8a7c66; margin-bottom: 24px; }
+  input {
+    width: 100%; background: var(--cream); border: 1px solid rgba(94,70,48,.25);
+    border-radius: 8px; padding: 14px; font-size: 1rem; font-family: inherit;
+    text-align: center; color: var(--charcoal);
+  }
+  input:focus { outline: none; border-color: var(--terracotta); }
+  .out {
+    margin-top: 18px; background: var(--cream); border: 1px solid var(--line);
+    border-radius: 10px; padding: 20px; display: none;
+  }
+  .out.show { display: block; }
+  .out .pw {
+    font-family: 'Fraunces', Georgia, serif; font-size: 1.35rem; font-weight: 600;
+    color: var(--walnut); word-break: break-all;
+  }
+  .out button {
+    margin-top: 14px; background: var(--terracotta); color: var(--cream);
+    border: none; border-radius: 8px; padding: 11px 26px; font-weight: 600;
+    font-size: .82rem; letter-spacing: .12em; text-transform: uppercase;
+    cursor: pointer; font-family: inherit;
+  }
+  .out button:hover { background: var(--terracotta-dark); }
+  .fine { font-size: .78rem; color: #8a7c66; margin-top: 12px; }
+</style>
+<script>if(!localStorage.getItem('th_gate'))document.documentElement.classList.add('locked')</script>
+<style>html.locked{overflow:hidden}html.locked body>*{visibility:hidden}</style>
+<script defer src="gate.js"></script>
+</head>
+<body>
+<div class="inner">
+  <img src="brand/handprint.png" alt="">
+  <h1>Creator passwords.</h1>
+  <p class="hint">Type a creator&rsquo;s name. Send them the password: it unlocks teamhuman.org.</p>
+  <input type="text" id="nameIn" placeholder="Creator name" autocomplete="off" autofocus>
+  <div class="out" id="out">
+    <div class="pw" id="pwOut"></div>
+    <button id="copyBtn" type="button">Copy password</button>
+    <div class="fine" id="copied">&nbsp;</div>
+  </div>
+</div>
+<script>
+  function hash3(s) {
+    var x = 5381;
+    for (var i = 0; i < s.length; i++) { x = ((x * 33) ^ s.charCodeAt(i)) >>> 0; }
+    return ('00' + (x % 46656).toString(36)).slice(-3);
+  }
+  var nameIn = document.getElementById('nameIn');
+  var out = document.getElementById('out');
+  var pwOut = document.getElementById('pwOut');
+  var copied = document.getElementById('copied');
+  var current = '';
+  nameIn.addEventListener('input', function () {
+    var slug = nameIn.value.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    copied.innerHTML = '&nbsp;';
+    if (!slug) { out.classList.remove('show'); current = ''; return; }
+    current = slug + '-' + hash3(slug);
+    pwOut.textContent = current;
+    out.classList.add('show');
+  });
+  document.getElementById('copyBtn').addEventListener('click', function () {
+    if (!current) return;
+    navigator.clipboard.writeText(current).then(function () {
+      copied.textContent = 'Copied.';
+    });
+  });
+</script>
+</body>
+</html>
