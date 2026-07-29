@@ -42,7 +42,12 @@ if [ "$SRC" != "local" ]; then
 fi
 
 # 3. Inline JS is syntactically valid
-echo "$HTML" | sed -n '/<script>/,/<\/script>/p' | sed '1d;$d' > /tmp/th-inline.js
+# Multi-line blocks: lines between a bare <script> line and its </script>.
+# Single-line blocks (<script>...</script> on one line): extracted separately.
+{
+  echo "$HTML" | awk '/^[[:space:]]*<script>[[:space:]]*$/{f=1;next} /^[[:space:]]*<\/script>/{f=0} f'
+  echo "$HTML" | grep -oE '<script>[^<]+</script>' | sed 's/<script>//;s|</script>||'
+} > /tmp/th-inline.js
 node --check /tmp/th-inline.js 2>/dev/null ; check "inline JS syntax (node --check)" $?
 
 # 4. No duplicate element IDs
