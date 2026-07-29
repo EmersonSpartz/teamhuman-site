@@ -3,9 +3,6 @@
 // pre-release vibe, not for security.
 (function () {
   var KEY = 'th_gate';
-  // Portal: a Google Sheet published as CSV (columns: password, name).
-  // Mario/Sam add rows there; paste the published-CSV URL below.
-  var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS5FqCkF8JXnqU0qgb1sEhmHpr9mUtAgCSVI1wymzKEBAwkea7333AZm4iCdGzx9PCwqaM_JR9SVsZn/pub?output=csv';
   var BUILTINS = {
     'dGVhbWh1bWFu': 'ZnJpZW5kIG9mIFRlYW0gSHVtYW4=',
     'bWFyaW8=': 'TWFyaW8=',
@@ -57,58 +54,28 @@
       } catch (e) { return null; }
     }
 
-    // Portal passwords: "<name-slug>-<3-char checksum>", minted at /portal.html.
-    // Self-verifying, so no storage needed. Must match portal.html's hash3().
-    function hash3(s) {
-      var x = 5381;
-      for (var i = 0; i < s.length; i++) { x = ((x * 33) ^ s.charCodeAt(i)) >>> 0; }
-      return ('00' + (x % 46656).toString(36)).slice(-3);
-    }
-    function lookupDerived(pw) {
-      var m = pw.match(/^([a-z0-9][a-z0-9-]*)-([a-z0-9]{3})$/);
-      if (!m || hash3(m[1]) !== m[2]) return null;
-      return m[1].split('-').map(function (w) {
-        return w.charAt(0).toUpperCase() + w.slice(1);
-      }).join(' ');
-    }
-
-    function lookupSheet(pw) {
-      if (!SHEET_CSV_URL) return Promise.resolve(null);
-      return fetch(SHEET_CSV_URL, { cache: 'no-store' })
-        .then(function (r) { return r.text(); })
-        .then(function (text) {
-          var lines = text.split(/\r?\n/);
-          for (var i = 0; i < lines.length; i++) {
-            var parts = lines[i].split(',');
-            if (parts[0] && parts[0].trim().toLowerCase() === pw) {
-              return (parts[1] || 'friend of Team Human').trim();
-            }
-          }
-          return null;
-        })
-        .catch(function () { return null; });
+    // The password IS the creator's name, exactly as the team sent it
+    // (minted at /portal.html). If they typed it in all lowercase, dress it
+    // up with title case for the greeting; otherwise respect their caps.
+    function displayName(raw) {
+      if (raw !== raw.toLowerCase()) return raw;
+      return raw.replace(/\b[a-z]/g, function (c) { return c.toUpperCase(); });
     }
 
     document.getElementById('gateForm').addEventListener('submit', function (e) {
       e.preventDefault();
-      var pw = document.getElementById('gatePw').value.trim().toLowerCase();
-      if (!pw) return;
-      var name = lookupBuiltin(pw) || lookupDerived(pw);
-      (name ? Promise.resolve(name) : lookupSheet(pw)).then(function (finalName) {
-        if (!finalName) {
-          document.getElementById('gateErr').textContent = 'That password isn\u2019t on the list. Ask the team for yours.';
-          return;
-        }
-        localStorage.setItem(KEY, finalName);
-        document.documentElement.classList.remove('locked');
-        gate.remove();
-        var plaque = document.createElement('div');
-        plaque.id = 'welcomePlaque';
-        plaque.textContent = 'Welcome, ' + finalName + '.';
-        document.body.appendChild(plaque);
-        setTimeout(function () { plaque.style.opacity = '0'; }, 4200);
-        setTimeout(function () { plaque.remove(); }, 5000);
-      });
+      var raw = document.getElementById('gatePw').value.trim();
+      if (!raw) return;
+      var finalName = lookupBuiltin(raw.toLowerCase()) || displayName(raw);
+      localStorage.setItem(KEY, finalName);
+      document.documentElement.classList.remove('locked');
+      gate.remove();
+      var plaque = document.createElement('div');
+      plaque.id = 'welcomePlaque';
+      plaque.textContent = 'Welcome, ' + finalName + '.';
+      document.body.appendChild(plaque);
+      setTimeout(function () { plaque.style.opacity = '0'; }, 4200);
+      setTimeout(function () { plaque.remove(); }, 5000);
     });
   });
 })();

@@ -73,21 +73,16 @@
   </div>
 </div>
 <script>
-  function hash3(s) {
-    var x = 5381;
-    for (var i = 0; i < s.length; i++) { x = ((x * 33) ^ s.charCodeAt(i)) >>> 0; }
-    return ('00' + (x % 46656).toString(36)).slice(-3);
-  }
+  // The password is the creator's name, exactly as typed.
   var nameIn = document.getElementById('nameIn');
   var out = document.getElementById('out');
   var pwOut = document.getElementById('pwOut');
   var copied = document.getElementById('copied');
   var current = '';
   nameIn.addEventListener('input', function () {
-    var slug = nameIn.value.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    current = nameIn.value.trim();
     copied.innerHTML = '&nbsp;';
-    if (!slug) { out.classList.remove('show'); current = ''; return; }
-    current = slug + '-' + hash3(slug);
+    if (!current) { out.classList.remove('show'); return; }
     pwOut.textContent = current;
     out.classList.add('show');
   });
