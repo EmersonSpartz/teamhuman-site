@@ -48,7 +48,7 @@ fi
   echo "$HTML" | awk '/^[[:space:]]*<script>[[:space:]]*$/{f=1;next} /^[[:space:]]*<\/script>/{f=0} f'
   echo "$HTML" | grep -oE '<script>[^<]+</script>' | sed 's/<script>//;s|</script>||'
 } > /tmp/th-inline.js
-node --check /tmp/th-inline.js 2>/dev/null ; check "inline JS syntax (node --check)" $?
+[ -s /tmp/th-inline.js ] && node --check /tmp/th-inline.js 2>/dev/null ; check "inline JS syntax (node --check, non-empty)" $?
 
 # 4. No duplicate element IDs
 DUPES=$(echo "$HTML" | grep -oE 'id="[^"]+"' | sort | uniq -d | wc -l | tr -d ' ')
