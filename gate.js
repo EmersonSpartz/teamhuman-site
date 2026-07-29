@@ -19,7 +19,7 @@
 
   var css = '#gate{position:fixed;inset:0;z-index:400;background:#f6efe3;display:flex;align-items:center;justify-content:center;visibility:visible;text-align:center;padding:24px}' +
     '#gate .inner{max-width:400px;width:100%}' +
-    '#gate img{width:46px;mix-blend-mode:multiply;opacity:.9;margin-bottom:14px}' +
+    '#gate img{width:52px;mix-blend-mode:multiply;opacity:.9;margin-bottom:26px}' +
     '#gate .k{font-size:.74rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:#ba5931;margin-bottom:12px}' +
     '#gate h2{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:1.7rem;line-height:1.25;color:#201c17;margin-bottom:22px}' +
     '#gate input{width:100%;background:#fbf6ec;border:1px solid rgba(94,70,48,.25);border-radius:8px;padding:14px;font-size:1rem;font-family:inherit;text-align:center;color:#201c17}' +
@@ -44,12 +44,9 @@
     gate.id = 'gate';
     gate.innerHTML = '<div class="inner">' +
       '<img src="brand/handprint.png" alt="">' +
-      '<div class="k">Private Preview</div>' +
-      '<h2>You\u2019ve been invited behind the curtain.</h2>' +
-      '<form id="gateForm"><input type="password" id="gatePw" placeholder="Your password" autocomplete="off" autofocus>' +
+      '<form id="gateForm"><input type="password" id="gatePw" placeholder="Password" autocomplete="off" autofocus>' +
       '<div class="err" id="gateErr"></div>' +
       '<button type="submit">Enter</button></form>' +
-      '<p class="fine">Your password is a personal invitation from the Team Human crew.</p>' +
       '</div>';
     document.body.appendChild(gate);
 
@@ -92,7 +89,7 @@
         gate.remove();
         var plaque = document.createElement('div');
         plaque.id = 'welcomePlaque';
-        plaque.textContent = 'Welcome behind the curtain, ' + finalName + '.';
+        plaque.textContent = 'Welcome, ' + finalName + '.';
         document.body.appendChild(plaque);
         setTimeout(function () { plaque.style.opacity = '0'; }, 4200);
         setTimeout(function () { plaque.remove(); }, 5000);
