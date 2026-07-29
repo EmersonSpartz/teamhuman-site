@@ -525,9 +525,17 @@
     background: var(--parchment); border-radius: 14px; max-width: 500px; width: 100%;
     padding: 40px 40px 46px; text-align: center; position: relative;
     box-shadow: 0 30px 80px rgba(32,28,23,.4);
-    max-height: calc(100vh - 40px); overflow-y: auto;
+    max-height: calc(100vh - 40px); overflow-y: auto; overflow-x: hidden;
   }
   @media (max-width: 640px) { .modal { padding: 32px 22px 34px; } }
+  /* Inside the modal (a scroll container), the 250px tooltip gets clipped and
+     forces a horizontal scrollbar. Anchor it to the full label row instead. */
+  .modal .also label { position: relative; }
+  .modal .tip { position: static; }
+  .modal .tip::after {
+    left: 0; right: 0; width: auto; bottom: calc(100% + 2px); transform: none;
+  }
+  .modal .tip::before { display: none; }
   .modal-veil.open .modal { animation: modalIn .35s cubic-bezier(.22,1,.36,1); }
   @keyframes modalIn { from { transform: translateY(16px) scale(.96); opacity: 0; } }
   .modal .stamp { width: 52px; height: auto; mix-blend-mode: multiply; opacity: .9; transform: rotate(-6deg); margin-bottom: 6px; }
@@ -620,8 +628,8 @@
 
     <div class="pledge-card" id="pledge">
       <div class="toggle">
-        <button type="button" class="active" id="tabHuman">☺ Human</button>
-        <button type="button" id="tabCreator">▶ Creator</button>
+        <button type="button" class="active" id="tabHuman" aria-pressed="true">☺ Human</button>
+        <button type="button" id="tabCreator" aria-pressed="false">▶ Creator</button>
       </div>
 
       <form id="pledgeForm" novalidate>
@@ -649,7 +657,7 @@
       <!-- NOTE: Creator-guide copy below is placeholder pending team approval. -->
       <div id="creatorPanel" hidden>
         <div class="pledge-title serif">CREATORS: HERE’S THE PLAY</div>
-        <ol class="steps">
+        <ol class="steps" role="list">
           <li><strong>Take the pledge.</strong> Add your name like everyone else. <button type="button" class="txt-btn" id="stepToPledge">Sign here →</button></li>
           <li><strong>Tell your audience.</strong> A video, a short, a post: say why you signed, in your own words. Your voice reaches further than any ad.</li>
           <li><strong>Recruit three creators.</strong> Send this page to three friends with an audience. That’s how a pledge becomes a movement.</li>
@@ -934,11 +942,17 @@
   const veil = document.getElementById('thanksVeil');
   const thanksTitle = document.getElementById('thanksTitle');
   const thanksBody = document.getElementById('thanksBody');
+  let thanksOpener = null;
   function openThanks(title, bodyHTML) {
+    thanksOpener = document.activeElement;
     thanksTitle.textContent = title;
     thanksBody.innerHTML = bodyHTML;
     veil.classList.add('open');
     document.getElementById('thanksClose').focus();
+  }
+  function closeThanks() {
+    veil.classList.remove('open');
+    if (thanksOpener && thanksOpener.focus && document.contains(thanksOpener)) thanksOpener.focus();
   }
 
   // Human pledge form
@@ -975,6 +989,8 @@
   function showTab(creator) {
     tabHuman.classList.toggle('active', !creator);
     tabCreator.classList.toggle('active', creator);
+    tabHuman.setAttribute('aria-pressed', String(!creator));
+    tabCreator.setAttribute('aria-pressed', String(creator));
     creatorPanel.hidden = !creator;
     if (creator) {
       form.style.display = 'none';
@@ -990,12 +1006,12 @@
     showTab(false);
     if (!submitted) document.getElementById('firstName').focus();
   });
-  document.getElementById('thanksClose').addEventListener('click', () => veil.classList.remove('open'));
+  document.getElementById('thanksClose').addEventListener('click', closeThanks);
   // Only dismiss when the press STARTED on the veil; otherwise selecting text
   // in the modal and releasing outside would fire a click on the veil and close it.
   let pressedVeil = false;
   veil.addEventListener('pointerdown', e => { pressedVeil = (e.target === veil); });
-  veil.addEventListener('click', e => { if (e.target === veil && pressedVeil) veil.classList.remove('open'); });
+  veil.addEventListener('click', e => { if (e.target === veil && pressedVeil) closeThanks(); });
 
   // Share
   const shareURL = encodeURIComponent('https://teamhuman.org/');
