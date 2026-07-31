@@ -304,6 +304,14 @@
   @keyframes stampCheck { 0% { transform: scale(.5) rotate(-10deg); } 100% { transform: scale(1) rotate(0); } }
   .also input:focus-visible + .box { outline: 2px solid var(--terracotta); outline-offset: 2px; }
   .pledge-error { color: var(--terracotta); font-size: .85rem; font-weight: 600; min-height: 20px; margin-top: 8px; }
+  .delivery-note {
+    margin-top: 16px; padding-top: 14px; border-top: 1px dashed rgba(94,70,48,.28);
+    font-size: .84rem; line-height: 1.55; color: var(--walnut); text-align: center;
+  }
+  .dn-label {
+    display: block; font-size: .66rem; font-weight: 700; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--terracotta); margin-bottom: 5px;
+  }
   .pledge-card .btn { width: 100%; padding: 15px 0; font-size: .9rem; margin-top: 2px; }
   .pledge-fine { font-size: .74rem; color: #8a7c66; margin-top: 12px; }
 
@@ -701,7 +709,11 @@
         </div>
         <div class="pledge-error" id="pledgeError"></div>
         <button type="submit" class="btn">Count Me In</button>
-        <p class="pledge-fine">No spam, ever. We’ll only email you when it’s time to act, together.<button type="button" class="tip" aria-label="Where does my signature go?" data-tip="Signatures are delivered to policymakers by a leading AI safety organization, as proof of how many people want humans kept in control of AI.">i</button></p>
+        <p class="pledge-fine">No spam, ever. We’ll only email you when it’s time to act, together.</p>
+        <div class="delivery-note">
+          <span class="dn-label">What happens with your signature</span>
+          This November, AI safety organizations will hand-deliver it to hundreds of lawmakers in Washington and Brussels.
+        </div>
       </form>
 
       <div id="signedState" hidden>
@@ -718,7 +730,7 @@
           <li><strong>Tell your audience.</strong> A video, a short, a post: say why you signed, in your own words. Your voice reaches further than any ad.</li>
           <li><strong>Recruit three creators.</strong> Send this page to three friends with an audience. That’s how this becomes a movement.</li>
         </ol>
-        <p class="pledge-fine">Signatures are delivered to policymakers by a leading AI safety organization. Creator toolkit (assets, talking points, #TeamHuman profile images) coming soon.</p>
+        <p class="pledge-fine">This November, AI safety organizations will hand-deliver every signature to hundreds of lawmakers in Washington and Brussels. Creator toolkit (assets, talking points, #TeamHuman profile images) coming soon.</p>
       </div>
 
     </div>
