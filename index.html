@@ -307,7 +307,8 @@
   @keyframes stampCheck { 0% { transform: scale(.5) rotate(-10deg); } 100% { transform: scale(1) rotate(0); } }
   .also input:focus-visible + .box { outline: 2px solid var(--terracotta); outline-offset: 2px; }
   .pledge-error { color: var(--terracotta); font-size: .85rem; font-weight: 600; min-height: 20px; margin-top: 8px; }
-  .pledge-lead-solo { font-size: 1.08rem; font-weight: 600; color: var(--charcoal); margin: 4px 0 20px; }
+  .pledge-lead-solo { font-size: 1.02rem; font-weight: 400; color: #4c443a; margin: 4px 0 20px; line-height: 1.55; }
+  .pledge-lead-solo strong { font-weight: 700; color: var(--charcoal); }
   .pledge-card .btn { width: 100%; padding: 15px 0; font-size: .9rem; margin-top: 2px; }
   .pledge-fine { font-size: .74rem; color: #8a7c66; margin-top: 12px; }
 
@@ -684,7 +685,6 @@
       <span class="face-label">See why creators with 650M+ subscribers are signing →</span>
     </a>
     <p class="joined-line">and <strong id="counter" data-target="247318">0</strong> humans who have joined them.</p>
-    <p class="hero-sub">AI has enormous potential, but it’s moving faster than our ability to control it. We join the chorus of experts<sup class="cite"><a href="https://superintelligence-statement.org/" target="_blank" rel="noopener">1</a>,<a href="https://www.pacingthefrontier.com/" target="_blank" rel="noopener">2</a></sup> calling for a global slowdown until meaningful regulation is in place.</p>
 
     <div class="pledge-card" id="pledge">
       <div class="toggle">
@@ -693,7 +693,7 @@
       </div>
 
       <form id="pledgeForm" novalidate>
-        <p class="pledge-lead pledge-lead-solo">Add your name to keep the future human.</p>
+        <p class="pledge-lead pledge-lead-solo">AI has enormous potential, but it’s moving faster than our ability to control it. <strong>Add your name to the chorus of experts<sup class="cite"><a href="https://superintelligence-statement.org/" target="_blank" rel="noopener">1</a>,<a href="https://www.pacingthefrontier.com/" target="_blank" rel="noopener">2</a></sup> calling for a global slowdown until meaningful regulation is in place.</strong></p>
         <div class="fields">
           <input type="text" id="firstName" placeholder="First Name" autocomplete="given-name">
           <input type="text" id="lastName" placeholder="Last Name" autocomplete="family-name">
