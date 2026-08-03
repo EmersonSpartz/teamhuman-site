@@ -141,13 +141,15 @@
   .hero-kicker::before, .hero-kicker::after {
     content: ""; width: 54px; height: 1px; background: var(--taupe); opacity: .6;
   }
-  .joined-line { margin-top: 18px; font-size: 1.15rem; color: #4c443a; }
-  .joined-line strong {
-    font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-size: 1.35rem;
-    color: var(--terracotta); font-variant-numeric: lining-nums tabular-nums;
-    display: inline-block;
+  .joined-caption {
+    margin-top: 14px; font-family: 'Fraunces', Georgia, serif; font-style: italic;
+    font-size: 1.18rem; color: var(--walnut);
   }
-  .joined-line strong.tick { animation: tickPulse .45s ease; }
+  .joined-caption strong {
+    font-weight: 700; color: var(--terracotta);
+    font-variant-numeric: lining-nums tabular-nums; display: inline-block;
+  }
+  .joined-caption strong.tick { animation: tickPulse .45s ease; }
   @keyframes tickPulse { 30% { transform: scale(1.06); } }
   .hero-sub {
     font-size: 1.18rem; color: #4c443a; max-width: 560px; margin: 24px auto 0;
@@ -155,6 +157,11 @@
   .cite { font-size: .62em; line-height: 0; }
   .cite a { color: var(--terracotta); text-decoration: none; font-weight: 700; }
   .cite a:hover { text-decoration: underline; }
+  .solo-label {
+    display: inline-block; margin-top: 10px; font-size: .86rem; font-weight: 500;
+    color: var(--walnut); text-decoration: none; transition: color .2s;
+  }
+  .solo-label:hover { color: var(--terracotta); }
   .facepile {
     margin-top: 18px; display: flex; flex-direction: column; align-items: center;
     gap: 12px; text-decoration: none;
@@ -681,9 +688,9 @@
       <span class="faces">
         <img src="avatars/mrbeast.jpg" alt="" width="56" height="56"><img src="avatars/markrober.jpg" alt="" width="56" height="56"><img src="avatars/mkbhd.jpg" alt="" width="56" height="56"><img src="avatars/emmachamberlain.jpg" alt="" width="56" height="56"><img src="avatars/ryantrahan.jpg" alt="" width="56" height="56"><img src="avatars/cleoabram.jpg" alt="" width="56" height="56"><img src="avatars/caseyneistat.jpg" alt="" width="56" height="56"><img src="avatars/hankgreen.jpg" alt="" width="56" height="56"><span class="face-more">+</span>
       </span>
-      <span class="face-label">See why creators with 650M+ subscribers are signing →</span>
     </a>
-    <p class="joined-line">and <strong id="counter" data-target="247318">0</strong> humans who have joined them.</p>
+    <p class="joined-caption">…and <strong id="counter" data-target="247318">0</strong> humans, so far.</p>
+    <a class="solo-label" href="#voices">See why they’re signing →</a>
 
     <div class="pledge-card" id="pledge">
       <div class="toggle">
@@ -769,7 +776,7 @@
         <p>We join the hundreds of Nobel Prize winners, AI experts, and heads of state who signed the <a class="txt-link" href="https://superintelligence-statement.org/" target="_blank" rel="noopener">Superintelligence Statement</a>, calling for a prohibition on developing smarter-than-human AI until there is 1) broad scientific consensus that it can be done safely and controllably, and 2) strong public buy-in.</p>
         <p><strong>The experts agree. Here is how it gets done:</strong></p>
         <div class="plank"><strong>Build the brakes.</strong> Frontier AI is built with specialized chips: track and guard them, exactly like we track the ingredients for nukes and bioweapons. Governments set the speed limits on giant training runs.</div>
-        <div class="plank"><strong>Enforce the speed limit.</strong> An international agreement between the US, China, and major nations: slow down together and enforce real safety standards. The International Atomic Energy Agency verifies nuclear compliance worldwide. We need the same watchdog for AI.</div>
+        <div class="plank"><strong>Enforce the speed limit.</strong> An <a class="txt-link" href="https://red-lines.ai/" target="_blank" rel="noopener">international agreement</a> between the US, China, and major nations: slow down together and enforce real safety standards. The International Atomic Energy Agency verifies nuclear compliance worldwide. We need the same watchdog for AI.</div>
       </div>
     </div>
     <div class="pressure-callout reveal">
