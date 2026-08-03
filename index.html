@@ -194,6 +194,12 @@
     box-shadow: 0 18px 50px rgba(94,70,48,.14);
     text-align: center;
   }
+  .creator-link {
+    background: none; border: none; padding: 0; margin-top: 14px;
+    font: inherit; font-size: .84rem; font-weight: 600; color: var(--walnut);
+    cursor: pointer; transition: color .2s;
+  }
+  .creator-link:hover { color: var(--terracotta); }
   .toggle {
     display: flex; background: var(--parchment); border: 1px solid var(--line);
     border-radius: 10px; padding: 4px; margin-bottom: 20px;
@@ -692,11 +698,6 @@
     <p class="joined-caption">…and <strong id="counter" data-target="247318">0</strong> humans, so far.</p>
 
     <div class="pledge-card" id="pledge">
-      <div class="toggle">
-        <button type="button" class="active" id="tabHuman" aria-pressed="true">☺ Human</button>
-        <button type="button" id="tabCreator" aria-pressed="false">▶ Creator</button>
-      </div>
-
       <form id="pledgeForm" novalidate>
         <p class="pledge-lead pledge-lead-solo">AI is progressing faster than our ability to control it. Add your name to the chorus of experts<sup class="cite"><a href="https://superintelligence-statement.org/" target="_blank" rel="noopener">1</a>,<a href="https://www.pacingthefrontier.com/" target="_blank" rel="noopener">2</a></sup> calling for a global slowdown until meaningful regulation is in place.</p>
         <div class="fields">
@@ -710,6 +711,7 @@
         <div class="pledge-error" id="pledgeError"></div>
         <button type="submit" class="btn">Count Me In</button>
         <p class="pledge-fine">No spam, ever. We’ll only email you when it’s time to act, together.<button type="button" class="tip" aria-label="What happens with your signature" data-tip="This November, AI safety organizations will hand-deliver every signature to hundreds of lawmakers in Washington and Brussels.">i</button></p>
+        <button type="button" class="creator-link" id="tabCreator">Are you a creator? →</button>
       </form>
 
       <div id="signedState" hidden>
@@ -727,6 +729,7 @@
           <li><strong>Recruit three creators.</strong> Send this page to three friends with an audience. That’s how this becomes a movement.</li>
         </ol>
         <p class="pledge-fine">This November, AI safety organizations will hand-deliver every signature to hundreds of lawmakers in Washington and Brussels. Creator toolkit (assets, talking points, #TeamHuman profile images) coming soon.</p>
+        <button type="button" class="creator-link" id="tabHuman">← Back</button>
       </div>
 
     </div>
@@ -1085,10 +1088,6 @@
   const creatorPanel = document.getElementById('creatorPanel');
   const signedState = document.getElementById('signedState');
   function showTab(creator) {
-    tabHuman.classList.toggle('active', !creator);
-    tabCreator.classList.toggle('active', creator);
-    tabHuman.setAttribute('aria-pressed', String(!creator));
-    tabCreator.setAttribute('aria-pressed', String(creator));
     creatorPanel.hidden = !creator;
     if (creator) {
       form.style.display = 'none';
