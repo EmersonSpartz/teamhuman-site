@@ -25,7 +25,7 @@ echo "  source: $SRC"
 
 echo "$HTML" | grep -q "Keep Humans in Control of AI" ; check "title copy present" $?
 echo "$HTML" | grep -q "Join the movement to keep"    ; check "hero copy (doc VERSION FOR CLAUDE)" $?
-echo "$HTML" | grep -q "Add your name to keep the future human" ; check "pledge copy" $?
+echo "$HTML" | grep -q "Add your name to the chorus" ; check "pledge copy" $?
 echo "$HTML" | grep -q "AI should serve"              ; check "statement band present" $?
 if echo "$HTML" | grep -qi "corporate arms race"; then echo "  FAIL  stale Figma copy leaked"; FAIL=1; else echo "  PASS  no stale Figma copy"; fi
 if echo "$HTML" | grep -q "—"; then echo "  FAIL  em dash found (Emerson: AI slop coded)"; FAIL=1; else echo "  PASS  no em dashes"; fi
