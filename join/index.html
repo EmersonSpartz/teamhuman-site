@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join the Campaign | #TeamHuman</title>
+<meta name="description" content="Creators: tell us about your channel and the TeamHuman team will be in touch.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="../brand/handprint.png">
+<meta property="og:title" content="Join the Campaign | #TeamHuman">
+<meta property="og:description" content="Creators: tell us about your channel and the TeamHuman team will be in touch.">
+<meta property="og:image" content="https://teamhuman.org/brand/og-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f6efe3;
+    --cream: #fbf6ec;
+    --sand: #d9cbb5;
+    --taupe: #baaf9e;
+    --charcoal: #201c17;
+    --terracotta: #ba5931;
+    --terracotta-dark: #a34b27;
+    --walnut: #5e4630;
+    --slate: #5b7d8f;
+    --line: rgba(94,70,48,.18);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  ::selection { background: var(--terracotta); color: var(--cream); }
+  :focus-visible { outline: 2px solid var(--terracotta); outline-offset: 2px; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--parchment); color: var(--charcoal); line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh; display: flex; flex-direction: column;
+  }
+  body::after {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 300;
+    opacity: .045; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 24px; width: 100%; }
+  nav { background: rgba(246,239,227,.92); border-bottom: 1px solid var(--line); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 66px; max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+  .lockup img { height: 34px; width: auto; display: block; }
+  nav a.back { color: var(--charcoal); text-decoration: none; font-size: .92rem; font-weight: 500; }
+  nav a.back:hover { color: var(--terracotta); }
+
+  main { flex: 1; padding: 56px 0 90px; position: relative; }
+  .head { text-align: center; margin-bottom: 34px; }
+  .head img.ornament { width: 40px; opacity: .45; mix-blend-mode: multiply; margin-bottom: 20px; }
+  .kicker {
+    font-size: .78rem; font-weight: 700; letter-spacing: .26em; text-transform: uppercase;
+    color: var(--terracotta); margin-bottom: 14px;
+  }
+  h1 {
+    font-family: 'Fraunces', Georgia, serif; font-weight: 600;
+    font-size: clamp(2.1rem, 4.6vw, 3rem); letter-spacing: -.01em; line-height: 1.15;
+  }
+  h1 em { font-style: italic; color: var(--terracotta); }
+  .lede { font-size: 1.08rem; color: #4c443a; max-width: 540px; margin: 16px auto 0; }
+
+  .form-card {
+    background: var(--cream); border: 1px solid var(--line); border-radius: 16px;
+    box-shadow: 0 14px 40px rgba(94,70,48,.1);
+    padding: 12px 12px 6px; overflow: hidden;
+  }
+  .form-card iframe { width: 100%; height: 1480px; border: 0; display: block; border-radius: 10px; background: var(--cream); }
+  @media (max-width: 640px) {
+    .form-card { padding: 6px 6px 2px; }
+    .form-card iframe { height: 1760px; }
+  }
+  .fallback { text-align: center; font-size: .88rem; color: var(--walnut); margin-top: 18px; }
+  .fallback a { color: var(--terracotta); font-weight: 600; }
+
+  footer { border-top: 1px solid var(--line); padding: 26px 0; }
+  .foot-inner {
+    max-width: 1140px; margin: 0 auto; padding: 0 24px;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+    font-size: .84rem; color: var(--walnut);
+  }
+  .foot-inner a { color: var(--walnut); text-decoration: none; }
+  .foot-inner a:hover { color: var(--terracotta); }
+  .cloud { position: fixed; bottom: 0; left: 0; right: 0; pointer-events: none; z-index: -1; }
+  .cloud img { width: 100%; display: block; mix-blend-mode: multiply; opacity: .45; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a class="lockup" href="../index.html" aria-label="Team Human home"><img src="../brand/wordmark.png" alt="Team Human"></a>
+    <a class="back" href="../index.html">← Back to the campaign</a>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+    <div class="head">
+      <img class="ornament" src="../brand/handprint.png" alt="">
+      <div class="kicker">For creators</div>
+      <h1>Bring your audience to <em>Team Human</em>.</h1>
+      <p class="lede">Tell us about your channel and the team will be in touch with everything you need: talking points, assets, and how to take part.</p>
+    </div>
+
+    <div class="form-card">
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLSf8v6IPHIWhSRO0f4PcMbDQsnLn5kzHZ45Smq3y4sdFcDd_iQ/viewform?embedded=true"
+        title="TeamHuman creator contact form"
+        loading="lazy">Loading the form…</iframe>
+    </div>
+    <p class="fallback">Form not loading? <a href="https://forms.gle/QECAmZPVj73jaDSh7" target="_blank" rel="noopener">Open it in a new tab →</a></p>
+  </div>
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <span>© 2026 TeamHuman. We are the pressure.</span>
+    <a href="../index.html">teamhuman.org</a>
+  </div>
+</footer>
+<div class="cloud"><img src="../brand/cloud-corner.png" alt=""></div>
+</body>
+</html>
