@@ -59,7 +59,7 @@ if [ "$SRC" != "local" ]; then
   JOIN=$(curl -sfL --max-time 20 "${LIVE}join/" 2>/dev/null)
   [ -n "$JOIN" ] ; check "/join reachable" $?
   echo "$JOIN" | grep -q "docs.google.com/forms" ; check "/join embeds the creator form" $?
-  echo "$JOIN" | grep -q "Bring your audience" ; check "/join copy present" $?
+  echo "$JOIN" | grep -q "over the finish line" ; check "/join copy present" $?
   # The form link must be reachable for invited creators: this page is intentionally ungated.
   if echo "$JOIN" | grep -q "gate.js"; then echo "  FAIL  /join is gated (creators with the link would be locked out)"; FAIL=1; else echo "  PASS  /join ungated (by design)"; fi
   if echo "$JOIN" | grep -q "—"; then echo "  FAIL  em dash on /join"; FAIL=1; else echo "  PASS  no em dashes on /join"; fi
