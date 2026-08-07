@@ -54,5 +54,22 @@ fi
 DUPES=$(echo "$HTML" | grep -oE 'id="[^"]+"' | sort | uniq -d | wc -l | tr -d ' ')
 [ "$DUPES" = "0" ] ; check "no duplicate element IDs" $?
 
+# 5. Subpages: /join (creator contact form) must load, embed the form, stay ungated, and be brand-clean
+if [ "$SRC" != "local" ]; then
+  JOIN=$(curl -sfL --max-time 20 "${LIVE}join/" 2>/dev/null)
+  [ -n "$JOIN" ] ; check "/join reachable" $?
+  echo "$JOIN" | grep -q "docs.google.com/forms" ; check "/join embeds the creator form" $?
+  echo "$JOIN" | grep -q "Bring your audience" ; check "/join copy present" $?
+  # The form link must be reachable for invited creators: this page is intentionally ungated.
+  if echo "$JOIN" | grep -q "gate.js"; then echo "  FAIL  /join is gated (creators with the link would be locked out)"; FAIL=1; else echo "  PASS  /join ungated (by design)"; fi
+  if echo "$JOIN" | grep -q "—"; then echo "  FAIL  em dash on /join"; FAIL=1; else echo "  PASS  no em dashes on /join"; fi
+  JBAD=0
+  for img in $(echo "$JOIN" | grep -oE 'src="\.\./[^"]+\.(jpg|png)"' | sed 's/src="\.\.\///;s/"//' | sort -u); do
+    code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 "${LIVE}${img}")
+    [ "$code" != "200" ] && JBAD=1 && echo "         missing on /join: $img ($code)"
+  done
+  check "/join assets resolve" $JBAD
+fi
+
 echo "======================"
 if [ $FAIL -eq 0 ]; then echo "VERIFY: PASS"; else echo "VERIFY: FAIL"; exit 1; fi
