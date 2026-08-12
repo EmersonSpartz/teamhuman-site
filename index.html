@@ -121,8 +121,7 @@
   }
   .partner-logo { height: 34px; width: auto; display: block; }
   .plan-partner {
-    max-width: 760px; margin: 34px auto 0; padding-top: 22px;
-    border-top: 1px solid var(--line);
+    max-width: 760px; margin: 30px auto 0;
     display: flex; align-items: center; justify-content: center; gap: 14px;
   }
   .plan-partner .partner-label { margin-bottom: 0; }
@@ -439,14 +438,7 @@
   .pressure-callout .pressure-line em { font-style: italic; color: var(--terracotta); }
 
   /* statement band */
-  #statement { padding: 48px 0 64px; text-align: center; background: var(--parchment); }
-  #statement img {
-    width: min(420px, 70vw); mix-blend-mode: multiply; opacity: .9;
-    filter: sepia(.9) saturate(.9) hue-rotate(-10deg) brightness(1.09) contrast(1.02);
-    display: block; margin: 0 auto 8px; height: auto;
-    -webkit-mask-image: radial-gradient(ellipse 72% 64% at 50% 50%, #000 52%, transparent 80%);
-    mask-image: radial-gradient(ellipse 72% 64% at 50% 50%, #000 52%, transparent 80%);
-  }
+  #statement { padding: 64px 0 72px; text-align: center; background: var(--parchment); }
   #statement p {
     font-family: 'Fraunces', Georgia, serif;
     font-size: clamp(2rem, 4.8vw, 3.4rem); font-weight: 600;
@@ -456,6 +448,12 @@
 
   /* precedent */
   #precedent { background: var(--parchment); padding-bottom: 300px; overflow: hidden; }
+  @media (max-width: 700px) {
+    /* the cloud band is ~260px tall at phone width, which is what the desktop
+       padding was reserving; cap it and the dead space collapses with it */
+    #precedent { padding-bottom: 130px; }
+    .texture-band img { max-height: 150px; object-fit: cover; object-position: center top; }
+  }
   .cards3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 50px; }
   .pcard {
     background: var(--cream); border: 1px solid rgba(94,70,48,.14); border-radius: 12px;
@@ -506,7 +504,14 @@
     font-size: clamp(1.6rem, 3.4vw, 2.2rem); font-weight: 700; line-height: 1.25;
   }
   .track-headline em { font-style: italic; color: var(--terracotta); }
-  @media (max-width: 640px) { .finish-track, .pressure-callout .finish-track { height: 104px; } .ft-walker { width: 32px; } .ft-flag { width: 46px; } .ft-pct { font-size: 1.2rem; bottom: 68px; } }
+  @media (max-width: 640px) {
+    .finish-track, .pressure-callout .finish-track { height: 120px; }
+    .ft-walker { width: 26px; bottom: 22px; }
+    body.js .finish-track.walk .ft-walker { left: 80%; }
+    .ft-flag { width: 34px; bottom: 12px; }
+    /* keep the count clear of the flag: park it above, right-aligned */
+    .ft-pct { font-size: 1.05rem; bottom: 92px; left: auto; right: 0; transform: none; }
+  }
 
   /* creators / voices */
   #voices { background: var(--cream); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -831,7 +836,6 @@
 
 <section id="statement">
   <div class="wrap reveal">
-    <img loading="lazy" width="1600" height="1066" src="brand/hands.jpg" alt="">
     <p>AI should serve <em>humanity</em>,<br>not replace it.</p>
   </div>
 </section>
