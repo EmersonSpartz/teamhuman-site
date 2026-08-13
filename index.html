@@ -104,14 +104,6 @@
   @media (max-width: 700px) { .hero-cloud img { opacity: .3; } }
 
   /* partner credit: black CAIS logomark inline with the name */
-  .hero-partner {
-    margin-top: 22px; display: flex; align-items: center; justify-content: center;
-    gap: 13px; opacity: .85; transition: opacity .2s;
-  }
-  .hero-partner:hover { opacity: 1; }
-  .hero-partner .partner-label { margin-bottom: 0; }
-  .hero-partner .partner-logo { height: 27px; }
-  @media (max-width: 560px) { .hero-partner { flex-direction: column; gap: 7px; } }
   .lit-link { color: inherit; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
   .lit-link:hover { color: var(--terracotta-dark); }
   .partner { margin: 20px 0 18px; }
@@ -712,10 +704,6 @@
     </a>
     <p class="joined-caption">…and <strong id="counter" data-target="247318">0</strong> humans, so far.</p>
 
-    <div class="hero-partner">
-      <span class="partner-label">In partnership with</span>
-      <a href="https://safe.ai/" target="_blank" rel="noopener" aria-label="Center for AI Safety"><img class="partner-logo" src="cais-logotype-black.svg" alt="Center for AI Safety" width="218" height="70"></a>
-    </div>
     <div class="pledge-card" id="pledge">
       <form id="pledgeForm" novalidate>
         <p class="pledge-lead pledge-lead-solo">AI is progressing faster than our ability to control it.<sup class="cite"><a href="https://aistatement.com/work/statement-on-ai-extinction-risk" target="_blank" rel="noopener">1</a></sup> Add your name to the chorus of experts<sup class="cite"><a href="https://superintelligence-statement.org/" target="_blank" rel="noopener">2</a>,<a href="https://www.pacingthefrontier.com/" target="_blank" rel="noopener">3</a></sup> calling for a global slowdown through meaningful regulation.</p>
