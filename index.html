@@ -297,6 +297,16 @@
     cursor: help; position: relative;
   }
   .tip:hover, .tip:focus-visible, .tip.open { border-color: var(--terracotta); color: var(--terracotta); }
+  .tip-star {
+    width: auto; height: auto; margin-left: 2px; border: none; background: none;
+    font-family: 'Inter', sans-serif; font-style: normal; font-size: .95em;
+    font-weight: 700; color: var(--terracotta); vertical-align: super; line-height: 1;
+  }
+  .tip-star:hover, .tip-star:focus-visible, .tip-star.open { border: none; color: var(--terracotta-dark); }
+  .star-mark {
+    color: var(--terracotta); font-weight: 700; font-size: .95em;
+    vertical-align: super; line-height: 1; margin-left: 2px; cursor: help;
+  }
   .tip::after {
     content: attr(data-tip);
     position: absolute; bottom: calc(100% + 10px); left: 50%;
@@ -318,9 +328,13 @@
   .tip:hover::after, .tip:focus-visible::after, .tip.open::after { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
   .tip:hover::before, .tip:focus-visible::before, .tip.open::before { opacity: 1; visibility: visible; }
   @media (max-width: 700px) {
-    .tip::after { left: auto; right: -12px; transform: translateY(4px); }
-    .tip:hover::after, .tip:focus-visible::after, .tip.open::after { transform: translateY(0); }
-    .tip::before { left: auto; right: -8px; transform: none; }
+    .tip:not(.tip-star)::after { left: auto; right: -12px; transform: translateY(4px); }
+    /* star tips sit near the middle of a centred line, so keep them centred and
+       narrow enough to stay on a phone screen */
+    .tip-star::after { width: min(250px, 78vw); }
+    .tip:not(.tip-star):hover::after, .tip:not(.tip-star):focus-visible::after, .tip:not(.tip-star).open::after { transform: translateY(0); }
+    .tip-star:hover::after, .tip-star:focus-visible::after, .tip-star.open::after { transform: translateX(-50%) translateY(0); }
+    .tip:not(.tip-star)::before { left: auto; right: -8px; transform: none; }
   }
   @keyframes stampCheck { 0% { transform: scale(.5) rotate(-10deg); } 100% { transform: scale(1) rotate(0); } }
   .also input:focus-visible + .box { outline: 2px solid var(--terracotta); outline-offset: 2px; }
@@ -648,7 +662,7 @@
         <img src="avatars/mrbeast.jpg" alt="" width="56" height="56"><img src="avatars/markrober.jpg" alt="" width="56" height="56"><img src="avatars/mkbhd.jpg" alt="" width="56" height="56"><img src="avatars/emmachamberlain.jpg" alt="" width="56" height="56"><img src="avatars/ryantrahan.jpg" alt="" width="56" height="56"><img src="avatars/cleoabram.jpg" alt="" width="56" height="56"><img src="avatars/caseyneistat.jpg" alt="" width="56" height="56"><span class="face-more">+</span>
       </span>
     </div>
-    <p class="joined-caption">…and <strong id="counter" data-target="247318">0</strong> humans, so far.</p>
+    <p class="joined-caption">…and <strong id="counter" data-target="247318">0</strong><button type="button" class="tip tip-star" aria-label="About this number" data-tip="Illustrative for now: the campaign has not launched yet, so this count is simulated.">*</button> humans, so far.</p>
 
     <div class="pledge-card" id="pledge">
       <form id="pledgeForm" novalidate>
@@ -813,7 +827,7 @@
 </footer>
 
 <div class="sticky-bar" id="stickyBar">
-  <div class="sticky-count"><strong id="stickyCount">247,318</strong> &nbsp;humans have joined</div>
+  <div class="sticky-count"><strong id="stickyCount">247,318</strong><span class="star-mark" title="Illustrative for now: the campaign has not launched yet, so this count is simulated.">*</span> &nbsp;humans have joined</div>
   <a href="#top">↑ &nbsp;Add Your Name</a>
 </div>
 
