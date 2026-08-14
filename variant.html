@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>#TeamHuman: Keep Humans in Control of AI</title>
+<meta name="description" content="Join the movement to keep humans in control of AI. Add your name.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="brand/handprint.png">
+<meta property="og:title" content="#TeamHuman: Keep Humans in Control of AI">
+<meta property="og:description" content="AI could be the best thing that ever happens to humanity. It could also be the last. Add your name.">
+<meta property="og:image" content="https://teamhuman.org/brand/og-card.png">
+<meta property="og:url" content="https://teamhuman.org/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" as="image" href="brand/wordmark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f6efe3;
+    --cream: #fbf6ec;
+    --sand: #d9cbb5;
+    --taupe: #baaf9e;
+    --clay: #cbb99d;
+    --charcoal: #201c17;
+    /* primary pair: saffron + walnut, carried on cream/parchment */
+    --saffron: #d69e45;
+    --saffron-deep: #c1892f;          /* hover / pressed state for saffron fills */
+    --saffron-wash: rgba(214,158,69,.40); /* highlighter behind display italics */
+    --walnut: #5e4630;
+    --walnut-deep: #3d2c1c;           /* text sitting on saffron fills */
+    /* secondary pair: terracotta owns the problem band, forest carries links + the
+       pressure callout. They sit next to each other as blocks, never one on the other. */
+    --terracotta: #ba5931;
+    --terracotta-dark: #a34b27;
+    --terracotta-deep: #9e4724;       /* the problem band's ground: 5.6:1 under cream */
+    --saffron-light: #ecc47f;         /* saffron accent for the forest block: 6.3:1 */
+    --saffron-pale: #f4dbaa;          /* saffron accent for the terracotta band: 4.6:1 */
+    --forest: #394334;
+    --moss: #768563;
+    --slate: #5b7d8f;
+    --line: rgba(94,70,48,.18);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  ::selection { background: var(--saffron); color: var(--walnut-deep); }
+  :focus-visible { outline: 2px solid var(--walnut); outline-offset: 2px; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--parchment);
+    color: var(--charcoal);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* paper grain over everything, like the brand book’s printed-on-paper texture */
+  body::after {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 300;
+    opacity: .045; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .progress {
+    position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--saffron); z-index: 120;
+  }
+  .wrap { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+  .serif { font-family: 'Fraunces', Georgia, serif; }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 90;
+    background: rgba(246,239,227,.92);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+    transition: box-shadow .3s;
+  }
+  nav.scrolled { box-shadow: 0 8px 28px rgba(94,70,48,.1); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 66px; }
+  .lockup { display: flex; align-items: center; text-decoration: none; }
+  .lockup img { height: 34px; width: auto; display: block; }
+  .nav-links { display: flex; align-items: center; gap: 30px; }
+  .nav-links a:not(.btn) {
+    color: var(--charcoal); text-decoration: none; font-size: .92rem; font-weight: 500;
+    transition: color .2s;
+  }
+  .nav-links a:not(.btn):hover { color: var(--forest); }
+  .btn {
+    display: inline-block; background: var(--saffron); color: var(--walnut-deep);
+    font-weight: 600; text-decoration: none; border: none; cursor: pointer;
+    padding: 12px 26px; border-radius: 8px; font-size: .85rem; font-family: inherit;
+    letter-spacing: .12em; text-transform: uppercase;
+    box-shadow: 0 1px 2px rgba(32,28,23,.14), 0 4px 14px rgba(94,70,48,.22);
+    transition: background .2s, transform .15s, box-shadow .2s;
+  }
+  .btn:hover { background: var(--saffron-deep); transform: translateY(-1px); box-shadow: 0 2px 4px rgba(32,28,23,.16), 0 8px 22px rgba(94,70,48,.28); }
+  .btn:active { transform: translateY(0); box-shadow: 0 1px 2px rgba(32,28,23,.18); }
+  .btn-nav { padding: 9px 18px; font-size: .78rem; }
+  .btn-ghost {
+    background: var(--cream); color: var(--walnut); border: 1px solid var(--sand);
+    box-shadow: none;
+  }
+  .btn-ghost:hover { background: var(--parchment); }
+
+  /* ---------- HERO ---------- */
+  header {
+    position: relative; overflow: hidden;
+    padding: 150px 0 72px;
+    background: var(--parchment);
+  }
+  .hero-cloud { position: absolute; left: 0; right: 0; bottom: -2px; pointer-events: none; z-index: 0; mix-blend-mode: multiply; }
+  .hero-cloud img { width: 100%; height: auto; display: block; opacity: .42; }
+  @media (max-width: 700px) { .hero-cloud img { opacity: .3; } }
+
+  /* partner credit: black CAIS logomark inline with the name */
+  .hero-partner {
+    margin-top: 22px; display: flex; align-items: center; justify-content: center;
+    gap: 13px; opacity: .85; transition: opacity .2s;
+  }
+  .hero-partner:hover { opacity: 1; }
+  .hero-partner .partner-label { margin-bottom: 0; }
+  .hero-partner .partner-logo { height: 27px; }
+  @media (max-width: 560px) { .hero-partner { flex-direction: column; gap: 7px; } }
+  .lit-link { color: inherit; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+  .lit-link:hover { color: var(--forest); }
+  .partner { margin: 20px 0 18px; }
+  .partner-label {
+    font-size: .68rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--taupe); margin-bottom: 9px;
+  }
+  .partner-logo { height: 34px; width: auto; display: block; }
+  .plan-partner {
+    max-width: 760px; margin: 34px auto 0; padding-top: 22px;
+    border-top: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: center; gap: 14px;
+  }
+  .plan-partner .partner-label { margin-bottom: 0; }
+  .plan-partner .partner-logo { height: 30px; }
+  @media (max-width: 560px) { .plan-partner { flex-direction: column; gap: 8px; } }
+  .hero-center { position: relative; z-index: 1; text-align: center; max-width: 820px; margin: 0 auto; }
+  h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(2.4rem, 5.4vw, 3.9rem);
+    font-weight: 560; letter-spacing: -.015em; line-height: 1.12;
+    color: var(--charcoal);
+  }
+  h1, h2, .closer, #statement p { text-wrap: balance; }
+  .skip-link {
+    position: absolute; left: -9999px; top: 0; z-index: 200;
+    background: var(--charcoal); color: var(--cream); padding: 10px 18px;
+    border-radius: 0 0 8px 0; text-decoration: none; font-weight: 600;
+  }
+  .skip-link:focus { left: 0; }
+  /* Display italics carry saffron as a highlighter behind walnut type — saffron
+     is too light against cream to be legible as a text colour on its own. */
+  h1 em, #statement p em {
+    font-style: italic; color: var(--walnut-deep); font-weight: 600;
+    background-image: linear-gradient(transparent 56%, var(--saffron-wash) 56%, var(--saffron-wash) 93%, transparent 93%);
+  }
+  .hero-kicker {
+    margin-top: 30px; font-size: .8rem; font-weight: 700; letter-spacing: .28em;
+    text-transform: uppercase; color: var(--walnut);
+    display: flex; align-items: center; justify-content: center; gap: 18px;
+  }
+  .hero-kicker::before, .hero-kicker::after {
+    content: ""; width: 54px; height: 1px; background: var(--saffron); opacity: .9;
+  }
+  .joined-caption {
+    margin-top: 14px; font-family: 'Fraunces', Georgia, serif; font-style: italic;
+    font-size: 1.18rem; color: var(--walnut);
+  }
+  .joined-caption strong {
+    font-weight: 700; color: var(--walnut-deep);
+    border-bottom: 2px solid var(--saffron);
+    font-variant-numeric: lining-nums tabular-nums; display: inline-block;
+  }
+  .joined-caption strong.tick { animation: tickPulse .45s ease; }
+  @keyframes tickPulse { 30% { transform: scale(1.06); } }
+  .hero-sub {
+    font-size: 1.18rem; color: #4c443a; max-width: 560px; margin: 24px auto 0;
+  }
+  .cite { font-size: .62em; line-height: 0; }
+  .cite a { color: var(--forest); text-decoration: none; font-weight: 700; }
+  .cite a:hover { text-decoration: underline; }
+  .solo-label {
+    display: inline-block; margin-top: 10px; font-size: .86rem; font-weight: 500;
+    color: var(--walnut); text-decoration: none; transition: color .2s;
+  }
+  .solo-label:hover { color: var(--forest); }
+  .facepile {
+    margin-top: 18px; display: flex; flex-direction: column; align-items: center;
+    gap: 12px; text-decoration: none;
+  }
+  .faces { display: flex; }
+  .faces img, .face-more {
+    width: 56px; height: 56px; border-radius: 50%; object-fit: cover;
+    border: 2px solid var(--parchment); box-shadow: 0 0 0 1px var(--walnut);
+    margin-left: -14px;
+    filter: grayscale(.85) sepia(.32) contrast(1.04) brightness(1.02);
+  }
+  .faces img:first-child { margin-left: 0; }
+  @media (max-width: 640px) { .faces img, .face-more { width: 42px; height: 42px; margin-left: -11px; } }
+  .face-more {
+    display: flex; align-items: center; justify-content: center;
+    background: var(--cream); color: var(--walnut);
+    font-weight: 700; font-size: 1.15rem; filter: none;
+  }
+  .face-label { font-size: .86rem; font-weight: 500; color: var(--walnut); transition: color .2s; }
+  .facepile:hover .face-label { color: var(--forest); }
+  @media (max-width: 480px) { .faces img:nth-child(n+7) { display: none; } }
+
+  /* pledge card */
+  .pledge-card {
+    position: relative; z-index: 2;
+    max-width: 480px; margin: 46px auto 0;
+    background: var(--cream);
+    border: 1px solid rgba(94,70,48,.14);
+    border-radius: 14px; padding: 26px 26px 28px;
+    box-shadow: 0 18px 50px rgba(94,70,48,.14);
+    text-align: center;
+  }
+  .pledge-fine-tight { margin-top: 4px; }
+  .pledge-fine a, .disclaimer a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+  .pledge-fine a:hover, .disclaimer a:hover { color: var(--forest); }
+  .disclaimer + .disclaimer { margin-top: 8px; }
+  .creator-link {
+    background: none; border: none; padding: 0; margin-top: 14px;
+    font: inherit; font-size: .84rem; font-weight: 600; color: var(--walnut);
+    cursor: pointer; transition: color .2s;
+  }
+  .creator-link:hover { color: var(--forest); }
+  .toggle {
+    display: flex; background: var(--parchment); border: 1px solid var(--line);
+    border-radius: 10px; padding: 4px; margin-bottom: 20px;
+  }
+  .toggle button, .toggle a {
+    flex: 1; border: none; background: transparent; font-family: inherit;
+    font-size: .92rem; font-weight: 600; color: var(--slate); text-decoration: none;
+    text-align: center; padding: 9px 0; border-radius: 7px; cursor: pointer; transition: all .2s;
+  }
+  .toggle a:hover { background: rgba(91,125,143,.12); }
+  .toggle .active { background: var(--saffron); color: var(--walnut-deep); box-shadow: 0 1px 4px rgba(94,70,48,.3); }
+  .pledge-title {
+    font-family: 'Fraunces', Georgia, serif; font-weight: 700;
+    font-size: 1.3rem; letter-spacing: .12em; color: var(--walnut);
+  }
+  .pledge-lead { font-size: .95rem; color: #4c443a; margin: 6px 0 18px; }
+  .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; text-align: left; }
+  .fields .full { grid-column: 1 / -1; }
+  .fields input, .fields select {
+    width: 100%; background: var(--parchment); border: 1px solid rgba(94,70,48,.22);
+    border-radius: 8px; padding: 13px 14px; font-size: .92rem; font-family: inherit;
+    color: var(--charcoal); transition: border-color .2s, box-shadow .2s; appearance: none; -webkit-appearance: none;
+  }
+  .fields input:hover, .fields select:hover { border-color: rgba(94,70,48,.42); }
+  .fields select { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8'><path d='M1 1l5 5 5-5' stroke='%235e4630' stroke-width='1.6' fill='none' stroke-linecap='round'/></svg>"); background-repeat: no-repeat; background-position: right 14px center; }
+  .fields select:invalid { color: #8d8272; }
+  .fields input::placeholder { color: #8d8272; }
+  .fields input:focus, .fields select:focus { outline: none; border-color: var(--saffron-deep); box-shadow: 0 0 0 3px rgba(214,158,69,.24); }
+  .also {
+    background: rgba(203,185,157,.22); border: 1px solid rgba(94,70,48,.12);
+    border-radius: 10px; padding: 14px 16px; margin-top: 10px; text-align: left;
+  }
+  #signedState:not([hidden]), #creatorPanel:not([hidden]) { animation: popIn .5s cubic-bezier(.34,1.56,.64,1); }
+  @keyframes popIn { 0% { transform: scale(.92); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+  /* creator step-by-step (inside pledge card) */
+  .steps { list-style: none; counter-reset: step; text-align: left; margin: 4px 0 6px; }
+  .steps li {
+    counter-increment: step; position: relative;
+    padding: 12px 0 12px 44px; font-size: .92rem; color: #4c443a;
+    border-bottom: 1px solid rgba(94,70,48,.1);
+  }
+  .steps li:last-child { border-bottom: none; }
+  .steps li::before {
+    content: counter(step); position: absolute; left: 0; top: 12px;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--saffron); color: var(--walnut-deep);
+    font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-size: .95rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .steps li strong { color: var(--charcoal); }
+  .txt-btn {
+    background: none; border: none; padding: 0; font: inherit; font-weight: 600;
+    color: var(--forest); cursor: pointer; text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .txt-btn:hover { color: var(--walnut); }
+
+  /* learn-more scroll cue under the pledge card */
+  .learn-more {
+    display: inline-flex; flex-direction: column; align-items: center; gap: 2px;
+    margin-top: 30px; text-decoration: none;
+    font-size: .78rem; font-weight: 700; letter-spacing: .26em; text-transform: uppercase;
+    color: var(--walnut); opacity: .75; transition: color .2s, opacity .2s;
+  }
+  .learn-more:hover { color: var(--forest); opacity: 1; }
+  .lm-arrow { font-size: 1.05rem; letter-spacing: 0; animation: lmBob 2.2s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) { .lm-arrow { animation: none; } }
+  @keyframes lmBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+  .also-label { font-size: .74rem; font-weight: 700; letter-spacing: .18em; color: var(--walnut); margin-bottom: 8px; }
+  .also label {
+    display: flex; align-items: flex-start; gap: 10px; padding: 8px 0;
+    font-size: .88rem; color: #4c443a; cursor: pointer;
+  }
+  .also input { position: absolute; opacity: 0; pointer-events: none; }
+  .box {
+    flex-shrink: 0; width: 17px; height: 17px; border-radius: 4px; margin-top: 2px;
+    border: 1.5px solid var(--taupe); background: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    color: transparent; font-size: .68rem; font-weight: 800; transition: all .15s;
+  }
+  .also input:checked + .box { background: var(--forest); border-color: var(--forest); color: var(--cream); animation: stampCheck .28s cubic-bezier(.34,1.56,.64,1); }
+  .also-txt { display: inline; }
+  .tip {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 16px; height: 16px; margin-left: 6px; vertical-align: 1px;
+    border-radius: 50%; border: 1px solid var(--taupe); background: var(--cream);
+    color: var(--walnut); font-size: .62rem; font-weight: 700;
+    font-family: Georgia, serif; font-style: italic; line-height: 1;
+    cursor: help; position: relative;
+  }
+  .tip:hover, .tip:focus-visible, .tip.open { border-color: var(--forest); color: var(--forest); }
+  .tip::after {
+    content: attr(data-tip);
+    position: absolute; bottom: calc(100% + 10px); left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    width: 250px; padding: 10px 13px; border-radius: 8px;
+    background: var(--charcoal); color: var(--cream);
+    font-family: 'Inter', sans-serif; font-size: .78rem; font-weight: 400;
+    font-style: normal; line-height: 1.5; text-align: left;
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transition: opacity .2s, transform .2s; z-index: 60;
+    box-shadow: 0 8px 24px rgba(32,28,23,.25);
+  }
+  .tip::before {
+    content: ""; position: absolute; bottom: calc(100% + 4px); left: 50%;
+    transform: translateX(-50%); border: 6px solid transparent;
+    border-top-color: var(--charcoal);
+    opacity: 0; visibility: hidden; transition: opacity .2s; z-index: 60;
+  }
+  .tip:hover::after, .tip:focus-visible::after, .tip.open::after { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+  .tip:hover::before, .tip:focus-visible::before, .tip.open::before { opacity: 1; visibility: visible; }
+  @media (max-width: 700px) {
+    .tip::after { left: auto; right: -12px; transform: translateY(4px); }
+    .tip:hover::after, .tip:focus-visible::after, .tip.open::after { transform: translateY(0); }
+    .tip::before { left: auto; right: -8px; transform: none; }
+  }
+  @keyframes stampCheck { 0% { transform: scale(.5) rotate(-10deg); } 100% { transform: scale(1) rotate(0); } }
+  .also input:focus-visible + .box { outline: 2px solid var(--walnut); outline-offset: 2px; }
+  .pledge-error { color: var(--terracotta); font-size: .85rem; font-weight: 600; min-height: 20px; margin-top: 8px; }
+  .pledge-lead-solo { font-size: 1.02rem; font-weight: 600; color: var(--charcoal); margin: 4px 0 20px; line-height: 1.55; }
+  .pledge-card .btn { width: 100%; padding: 15px 0; font-size: .9rem; margin-top: 2px; }
+  .pledge-fine { font-size: .74rem; color: #8a7c66; margin-top: 12px; }
+
+  /* ---------- SECTIONS ---------- */
+  section { padding: 96px 0; scroll-margin-top: 66px; position: relative; }
+  .ornament { text-align: center; margin-bottom: 34px; }
+  .ornament img { width: 30px; opacity: .4; mix-blend-mode: multiply; }
+  .kicker {
+    font-size: .78rem; font-weight: 700; letter-spacing: .26em; text-transform: uppercase;
+    color: var(--walnut); margin-bottom: 14px;
+  }
+  #plan .kicker { color: var(--forest); }
+  h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(2rem, 4.4vw, 3rem); font-weight: 600;
+    letter-spacing: -.01em; line-height: 1.12; margin-bottom: 20px; max-width: 760px;
+  }
+  .lede { font-size: 1.12rem; color: #4c443a; max-width: 680px; }
+  .lede strong { color: var(--charcoal); }
+  .center { text-align: center; }
+  .center h2, .center .lede { margin-left: auto; margin-right: auto; }
+
+  .texture-band { position: absolute; left: 0; right: 0; bottom: -2px; pointer-events: none; }
+  .texture-band img {
+    width: 100%; height: auto; display: block; mix-blend-mode: multiply; opacity: .55;
+    -webkit-mask-image: linear-gradient(to bottom, #000 78%, rgba(0,0,0,.4) 93%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 78%, rgba(0,0,0,.4) 93%, transparent 100%);
+  }
+
+  /* problem litany: broadsheet ruled list, not cards */
+  /* ---- the terracotta band: the one section terracotta owns outright ---- */
+  #problem { background: var(--terracotta-deep); color: var(--parchment); }
+  #problem h2, #problem .lede strong, #problem .litany div, #problem .closer { color: var(--parchment); }
+  #problem .lede { color: rgba(246,239,227,.88); }
+  /* saffron itself is only 2.6:1 on terracotta; the paled tint clears 4.5:1 at
+     the litany's 1.22rem/600, which is under the large-text threshold. */
+  #problem .kicker,
+  #problem .litany div em, #problem .closer span, #problem .lit-link { color: var(--saffron-pale); }
+  #problem .lit-link:hover { color: var(--cream); }
+  #problem .litany { border-top-color: rgba(246,239,227,.3); }
+  #problem .litany div { border-bottom-color: rgba(246,239,227,.3); }
+  #problem .litany > div:nth-child(-n+6):nth-child(odd) { border-right-color: rgba(246,239,227,.3); }
+  #problem ::selection { background: var(--saffron-pale); color: var(--walnut-deep); }
+  .litany { margin-top: 52px; display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
+  .litany div {
+    padding: 26px 30px; font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600; font-size: 1.22rem; line-height: 1.45; color: var(--charcoal);
+    border-bottom: 1px solid var(--line);
+  }
+  .litany > div:nth-child(-n+6):nth-child(odd) { border-right: 1px solid var(--line); }
+  .litany > div:nth-child(n+7) { grid-column: 1 / -1; text-align: center; }
+  .litany > div:last-child { font-size: 1.5rem; padding: 34px 30px; }
+  .litany div em { font-style: italic; color: var(--terracotta); }
+  @media (max-width: 700px) {
+    .litany { grid-template-columns: 1fr; }
+    .litany > div:nth-child(-n+6):nth-child(odd) { border-right: none; }
+    .litany > div:nth-child(n+7) { text-align: left; }
+    .litany div { padding: 20px 6px; }
+  }
+  .closer {
+    margin: 72px auto 0; max-width: 880px; text-align: center;
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(1.7rem, 3.4vw, 2.5rem); font-weight: 600; line-height: 1.3;
+  }
+  .closer span { color: var(--terracotta); font-style: italic; }
+
+  /* plan */
+  #plan { background: linear-gradient(180deg, var(--parchment) 0%, rgba(57,67,52,.11) 72%, var(--parchment) 100%); }
+  .demand-card { text-align: center; margin-top: 56px; }
+  .solution-body { max-width: 760px; margin: 30px auto 0; }
+  .solution-body > p { color: #4c443a; margin-bottom: 15px; font-size: 1rem; text-align: center; }
+  .solution-body > p strong { color: var(--charcoal); }
+  .planks { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; text-align: left; }
+  @media (max-width: 760px) { .planks { grid-template-columns: 1fr; } }
+  .split h3 {
+    font-family: 'Fraunces', Georgia, serif; font-size: 1.4rem; font-weight: 700;
+    margin-bottom: 14px; color: var(--forest);
+  }
+  .split p { color: #4c443a; margin-bottom: 15px; font-size: .98rem; }
+  .split p strong { color: var(--charcoal); }
+  #demand { scroll-margin-top: 90px; }
+  .demand-lead {
+    font-size: clamp(2rem, 4.8vw, 3.4rem); font-weight: 600; line-height: 1.15;
+    letter-spacing: -.01em; color: var(--charcoal); max-width: 800px;
+    margin: 0 auto 6px;
+  }
+  .demand-lead em { font-style: italic; color: var(--forest); }
+  .demand-sub { font-style: italic; font-size: 1.12rem; color: var(--walnut); margin-bottom: 18px; }
+  .plank { padding: 16px 0; border-top: 1px solid var(--line); font-size: .95rem; color: #4c443a; }
+  .plank:last-of-type { border-bottom: 1px solid var(--line); }
+  .plank strong { font-family: 'Fraunces', Georgia, serif; font-size: 1.06rem; color: var(--charcoal); }
+  .txt-link { color: var(--forest); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+  .txt-link:hover { color: var(--walnut); }
+
+  .plan-close { max-width: 680px; margin: 56px auto 0; text-align: center; }
+  .plan-close p { color: #4c443a; font-size: .98rem; margin-bottom: 14px; }
+  .plan-close p strong { color: var(--charcoal); }
+
+  /* pressure callout */
+  /* ---- the forest block: dark green ground, saffron accents ---- */
+  .pressure-callout {
+    max-width: 780px; margin: 64px auto 0; text-align: center;
+    background: var(--forest); border: 1px solid rgba(246,239,227,.14);
+    border-radius: 16px; padding: 46px 48px 42px;
+    box-shadow: 0 18px 46px rgba(57,67,52,.28);
+  }
+  @media (max-width: 640px) { .pressure-callout { padding: 30px 22px; } }
+  .pressure-callout p {
+    font-family: 'Fraunces', Georgia, serif; font-size: 1.25rem; line-height: 1.5;
+    color: var(--parchment); margin: 0;
+  }
+  .pressure-callout p strong, .pressure-callout .track-headline { color: var(--cream); }
+  .pressure-callout .txt-link { color: var(--saffron-light); }
+  .pressure-callout .txt-link:hover { color: var(--cream); }
+  .pressure-callout .ft-pct { color: var(--saffron); }
+  .pressure-callout .ft-line { background-image: repeating-linear-gradient(90deg, rgba(246,239,227,.55) 0 7px, transparent 7px 16px); opacity: .9; }
+  .pressure-callout .ft-goal { background: var(--forest); }
+  .pressure-callout ::selection { background: var(--saffron); color: var(--walnut-deep); }
+  .pressure-callout p strong { font-weight: 700; }
+  .pressure-callout .pressure-line {
+    margin-top: 26px; font-size: clamp(1.3rem, 2.2vw, 1.55rem); font-weight: 700; line-height: 1.3;
+  }
+  .pressure-callout .pressure-line em { font-style: italic; color: var(--saffron); }
+
+  /* statement band */
+  #statement { padding: 48px 0 64px; text-align: center; background: var(--parchment); }
+  #statement img {
+    width: min(420px, 70vw); mix-blend-mode: multiply; opacity: .9;
+    filter: sepia(.9) saturate(.9) hue-rotate(-10deg) brightness(1.09) contrast(1.02);
+    display: block; margin: 0 auto 8px; height: auto;
+    -webkit-mask-image: radial-gradient(ellipse 72% 64% at 50% 50%, #000 52%, transparent 80%);
+    mask-image: radial-gradient(ellipse 72% 64% at 50% 50%, #000 52%, transparent 80%);
+  }
+  #statement p {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(2rem, 4.8vw, 3.4rem); font-weight: 600;
+    letter-spacing: -.01em; line-height: 1.15; max-width: 800px; margin: 0 auto;
+  }
+  /* #statement p em is styled with h1 em above (walnut on a saffron highlight) */
+
+  /* precedent */
+  #precedent { background: var(--parchment); padding-bottom: 300px; overflow: hidden; }
+  .cards3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 50px; }
+  .pcard {
+    background: var(--cream); border: 1px solid rgba(94,70,48,.14); border-radius: 12px;
+    padding: 30px 26px; box-shadow: 0 2px 12px rgba(94,70,48,.05);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .pcard:hover { transform: translateY(-3px); box-shadow: 0 10px 26px rgba(94,70,48,.12); }
+  .pcard h3 { font-family: 'Fraunces', Georgia, serif; font-size: 1.35rem; font-weight: 700; line-height: 1.25; margin-bottom: 10px; }
+  .pcard p { color: #4c443a; font-size: .92rem; }
+
+  /* finish-line track (inside the pressure callout) */
+  .finish-track { position: relative; max-width: 860px; margin: 64px auto 52px; height: 108px; }
+  .pressure-callout .finish-track { max-width: 600px; margin: 10px auto 6px; height: 128px; }
+  .pressure-callout .finish-track + p { margin-top: 30px; }
+  .ft-line {
+    position: absolute; left: 0; right: 0; bottom: 18px; height: 3px;
+    background-image: repeating-linear-gradient(90deg, var(--taupe) 0 7px, transparent 7px 16px);
+    opacity: .75;
+  }
+  .ft-dot {
+    position: absolute; bottom: 15px; width: 9px; height: 9px; border-radius: 50%;
+    background: var(--saffron); transform: translateX(-50%);
+  }
+  .ft-goal {
+    position: absolute; left: 90%; bottom: 11px; width: 17px; height: 17px;
+    border: 3px solid var(--saffron); border-radius: 50%;
+    background: var(--parchment); transform: translateX(-50%);
+  }
+  .ft-pct {
+    position: absolute; bottom: 80px; left: 90%; transform: translateX(-50%);
+    font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-size: 1.5rem;
+    color: var(--walnut); font-variant-numeric: lining-nums;
+  }
+  .ft-flag { position: absolute; right: 0; bottom: 14px; width: 58px; height: auto; transform: translateX(30%); }
+  .ft-walker {
+    position: absolute; bottom: 24px; left: 88%; width: 40px; height: auto;
+    transform: translateX(-50%);
+    transition: left 2.6s cubic-bezier(.45,.6,.3,1);
+  }
+  body.js .finish-track .ft-walker { left: 2%; }
+  body.js .finish-track.walk .ft-walker { left: 88%; animation: ftStep .37s ease-in-out 7; }
+  @keyframes ftStep { 0%, 100% { margin-bottom: 0; } 50% { margin-bottom: 4px; } }
+  @media (prefers-reduced-motion: reduce) {
+    .ft-walker { transition: none; }
+    body.js .finish-track .ft-walker { left: 88%; animation: none; }
+  }
+  .pressure-callout .track-headline {
+    font-size: clamp(1.6rem, 3.4vw, 2.2rem); font-weight: 700; line-height: 1.25;
+  }
+  .track-headline em { font-style: italic; color: var(--saffron); }
+  @media (max-width: 640px) { .finish-track, .pressure-callout .finish-track { height: 104px; } .ft-walker { width: 32px; } .ft-flag { width: 46px; } .ft-pct { font-size: 1.2rem; bottom: 68px; } }
+
+  /* creators / voices */
+  #voices { background: var(--cream); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .creator-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 18px; margin-top: 52px; }
+  .ccard {
+    background: var(--parchment); border: 1px solid rgba(94,70,48,.15); border-radius: 12px;
+    padding: 24px; display: flex; flex-direction: column; gap: 14px;
+    box-shadow: 0 2px 10px rgba(94,70,48,.05); transition: transform .2s, box-shadow .2s;
+    position: relative;
+  }
+  .ccard::after {
+    content: "EXAMPLE"; position: absolute; top: 14px; right: -8px;
+    background: var(--slate); color: var(--cream);
+    font-size: .6rem; font-weight: 700; letter-spacing: .18em;
+    padding: 4px 10px; border-radius: 4px 0 0 4px;
+    transform: rotate(2deg); box-shadow: 0 2px 6px rgba(32,28,23,.18);
+  }
+  .ph-note {
+    max-width: 620px; margin: 26px auto 0; padding: 13px 20px;
+    background: rgba(91,125,143,.1); border: 1.5px dashed var(--slate); border-radius: 10px;
+    font-size: .88rem; color: #3f5561; text-align: center;
+  }
+  .ph-note strong { letter-spacing: .08em; }
+  .ccard:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(94,70,48,.13); }
+  .ccard-head { display: flex; align-items: center; gap: 14px; }
+  .ccard img {
+    width: 56px; height: 56px; border-radius: 50%; object-fit: cover;
+    border: 2px solid var(--cream); box-shadow: 0 0 0 1.5px var(--walnut);
+    filter: grayscale(.85) sepia(.32) contrast(1.04) brightness(1.02);
+  }
+  .ccard .name { font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-size: 1.1rem; }
+  .ccard .subs { font-size: .78rem; color: var(--walnut); font-weight: 500; letter-spacing: .04em; }
+  .ccard blockquote { font-size: .93rem; line-height: 1.55; color: #4c443a; }
+  /* forest, not saffron: at this size saffron all but disappears on parchment */
+  .ccard blockquote::before { content: "“"; font-family: 'Fraunces', serif; color: var(--forest); font-weight: 700; }
+  .ccard blockquote::after { content: "”"; font-family: 'Fraunces', serif; color: var(--forest); font-weight: 700; }
+  .ccard .signed {
+    margin-top: auto; font-size: .7rem; font-weight: 700; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--walnut); display: flex; align-items: center; gap: 7px;
+  }
+  .ccard .signed::before {
+    content: "✓"; display: flex; align-items: center; justify-content: center;
+    width: 16px; height: 16px; border-radius: 50%; background: var(--saffron);
+    color: var(--walnut-deep); font-size: .6rem;
+  }
+  .more-creators { text-align: center; margin-top: 40px; color: var(--walnut); font-weight: 500; font-style: italic; font-family: 'Fraunces', Georgia, serif; }
+  .more-voices { display: none; margin: 26px auto 0; }
+  @media (max-width: 700px) {
+    .creator-grid:not(.expanded) .ccard:nth-child(n+4) { display: none; }
+    .creator-grid:not(.expanded) ~ .more-creators { display: none; }
+    .more-voices { display: block; }
+    .creator-grid.expanded ~ .more-voices, .more-voices.hidden { display: none; }
+  }
+
+  /* footer */
+  footer {
+    position: relative; background: var(--parchment); padding: 70px 0 180px;
+    overflow: hidden;
+  }
+  .foot-flex { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: center; position: relative; z-index: 1; }
+  footer img.lockup-img { height: 40px; }
+  footer p { font-size: .85rem; color: var(--walnut); }
+  footer a { color: var(--walnut); text-decoration: none; font-weight: 500; }
+  footer a:hover { color: var(--forest); }
+  footer .disclaimer { max-width: 460px; font-size: .8rem; color: var(--walnut); margin-top: 10px; }
+  .foot-cloud { position: absolute; bottom: -8px; left: 0; right: 0; pointer-events: none; }
+  .foot-cloud img {
+    width: 100%; display: block; mix-blend-mode: multiply; opacity: .55;
+    -webkit-mask-image: linear-gradient(to bottom, #000 80%, rgba(0,0,0,.45) 94%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 80%, rgba(0,0,0,.45) 94%, transparent 100%);
+  }
+
+  /* sticky pledge bar */
+  .sticky-bar {
+    position: fixed; left: 50%; transform: translateX(-50%) translateY(140%);
+    bottom: 18px; z-index: 80; width: min(520px, calc(100vw - 32px));
+    border-radius: 12px; overflow: hidden;
+    box-shadow: 0 14px 44px rgba(32,28,23,.28);
+    transition: transform .4s cubic-bezier(.22,1,.36,1);
+  }
+  .sticky-bar.show { transform: translateX(-50%) translateY(0); }
+  .sticky-count {
+    background: var(--cream); text-align: center; padding: 11px 16px;
+    font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--walnut);
+    border: 1px solid var(--line); border-bottom: none; border-radius: 12px 12px 0 0;
+  }
+  .sticky-count strong { font-family: 'Fraunces', Georgia, serif; font-size: 1rem; color: var(--charcoal); letter-spacing: .02em; }
+  .sticky-bar a {
+    display: block; background: var(--saffron); color: var(--walnut-deep); text-decoration: none;
+    text-align: center; padding: 14px; font-weight: 600; font-size: .88rem;
+    letter-spacing: .16em; text-transform: uppercase;
+  }
+  .sticky-bar a:hover { background: var(--saffron-deep); }
+
+  /* thank you modal */
+  .modal-veil {
+    position: fixed; inset: 0; background: rgba(32,28,23,.55); z-index: 200;
+    display: none; align-items: center; justify-content: center; padding: 20px;
+  }
+  .modal-veil.open { display: flex; }
+  .modal {
+    background: var(--parchment); border-radius: 14px; max-width: 500px; width: 100%;
+    padding: 40px 40px 46px; text-align: center; position: relative;
+    box-shadow: 0 30px 80px rgba(32,28,23,.4);
+    max-height: calc(100vh - 40px); overflow-y: auto; overflow-x: hidden;
+  }
+  @media (max-width: 640px) { .modal { padding: 32px 22px 34px; } }
+  /* Inside the modal (a scroll container), the 250px tooltip gets clipped and
+     forces a horizontal scrollbar. Anchor it to the full label row instead. */
+  .modal .also label { position: relative; }
+  .modal .tip { position: static; }
+  .modal .tip::after {
+    left: 0; right: 0; width: auto; bottom: calc(100% + 2px); transform: none;
+  }
+  .modal .tip::before { display: none; }
+  .modal-veil.open .modal { animation: modalIn .35s cubic-bezier(.22,1,.36,1); }
+  @keyframes modalIn { from { transform: translateY(16px) scale(.96); opacity: 0; } }
+  .modal .stamp { width: 52px; height: auto; mix-blend-mode: multiply; opacity: .9; transform: rotate(-6deg); margin-bottom: 6px; }
+  .modal-veil.open .stamp { animation: stampDown .55s cubic-bezier(.2,1.4,.4,1); }
+  @keyframes stampDown { 0% { transform: scale(2.3) rotate(-20deg); opacity: 0; } 55% { opacity: .95; } 100% { transform: scale(1) rotate(-6deg); opacity: .9; } }
+  .modal .close {
+    position: absolute; top: 14px; right: 14px; width: 32px; height: 32px;
+    border-radius: 50%; border: none; background: var(--sand); color: var(--walnut);
+    font-size: 1rem; cursor: pointer;
+  }
+  .modal h3 {
+    font-family: 'Fraunces', Georgia, serif; font-weight: 700; letter-spacing: .14em;
+    font-size: 1.6rem; color: var(--walnut);
+  }
+  .modal .body { font-style: italic; color: #4c443a; margin: 16px 0 6px; font-size: .98rem; }
+  .modal .fine { font-style: italic; color: var(--taupe); font-size: .84rem; margin: 8px 0 22px; }
+  .modal .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 360px; margin: 0 auto; }
+  .modal .row .btn { padding: 12px 14px; font-size: .78rem; text-align: center; }
+  .modal-also { margin-top: 18px; }
+
+  /* reveal */
+  body.js .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+  body.js .reveal.in { opacity: 1; transform: none; }
+  body.js .pressure-callout.reveal { transform: translateY(22px) scale(.98); }
+  body.js .pressure-callout.reveal.in { transform: none; }
+  /* staggered children */
+  body.js .litany.reveal > div { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s ease; }
+  body.js .litany.reveal.in > div { opacity: 1; transform: none; }
+  body.js .litany.reveal > div:nth-child(2) { transition-delay: .06s; }
+  body.js .litany.reveal > div:nth-child(3) { transition-delay: .12s; }
+  body.js .litany.reveal > div:nth-child(4) { transition-delay: .18s; }
+  body.js .litany.reveal > div:nth-child(5) { transition-delay: .24s; }
+  body.js .litany.reveal > div:nth-child(6) { transition-delay: .3s; }
+  body.js .litany.reveal > div:nth-child(7) { transition-delay: .36s; }
+  body.js .litany.reveal > div:nth-child(8) { transition-delay: .42s; }
+  body.js .creator-grid .ccard:nth-child(3n+2) { transition-delay: .08s; }
+  body.js .creator-grid .ccard:nth-child(3n) { transition-delay: .16s; }
+  .nav-links a:not(.btn).active { color: var(--forest); }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: .001s !important; animation-iteration-count: 1 !important;
+      transition-duration: .001s !important; transition-delay: 0s !important;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .nav-links a:not(.btn) { display: none; }
+    section { padding: 64px 0; }
+    header { padding-top: 120px; }
+    .fields { grid-template-columns: 1fr; }
+  }
+</style>
+<script>if(!localStorage.getItem('th_gate'))document.documentElement.classList.add('locked')</script>
+<style>html.locked{overflow:hidden}html.locked body>*{visibility:hidden}</style>
+<script defer src="gate.js"></script>
+</head>
+<body>
+
+<a class="skip-link" href="#pledge">Skip to the pledge</a>
+<div class="progress" id="progressBar" aria-hidden="true"></div>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a class="lockup" href="#top" aria-label="Team Human home"><img src="brand/wordmark.png" alt="Team Human"></a>
+    <div class="nav-links">
+      <a href="#problem">The Problem</a>
+      <a href="#plan">The Plan</a>
+      <a href="#voices">Why We Signed</a>
+      <a href="#top" class="btn btn-nav">Add Your Name</a>
+    </div>
+  </div>
+</nav>
+
+<header id="top">
+  <div class="wrap hero-center">
+    <h1>Join the movement to keep<br><em>humans in control</em> of AI.</h1>
+    <div class="hero-kicker">Led by your favorite creators</div>
+    <a class="facepile" href="#voices" aria-label="See why creators are signing">
+      <span class="faces">
+        <img src="avatars/matthewbeem.jpg" alt="" width="56" height="56"><img src="avatars/jennyhoyos.jpg" alt="" width="56" height="56"><img src="avatars/infographicsshow.jpg" alt="" width="56" height="56"><img src="avatars/rebeccazamolo.jpg" alt="" width="56" height="56"><img src="avatars/lindsaynikole.jpg" alt="" width="56" height="56"><img src="avatars/afterskool.jpg" alt="" width="56" height="56"><img src="avatars/haydenhilliersmith.jpg" alt="" width="56" height="56"><span class="face-more">+</span>
+      </span>
+    </a>
+    <p class="joined-caption">…and <strong id="counter" data-target="247318">0</strong> humans, so far.</p>
+
+    <div class="hero-partner">
+      <span class="partner-label">In partnership with</span>
+      <a href="https://safe.ai/" target="_blank" rel="noopener" aria-label="Center for AI Safety"><img class="partner-logo" src="cais-logotype-black.svg" alt="Center for AI Safety" width="218" height="70"></a>
+    </div>
+    <div class="pledge-card" id="pledge">
+      <form id="pledgeForm" novalidate>
+        <p class="pledge-lead pledge-lead-solo">AI is progressing faster than our ability to control it.<sup class="cite"><a href="https://aistatement.com/work/statement-on-ai-extinction-risk" target="_blank" rel="noopener">1</a></sup> Add your name to the chorus of experts<sup class="cite"><a href="https://superintelligence-statement.org/" target="_blank" rel="noopener">2</a>,<a href="https://www.pacingthefrontier.com/" target="_blank" rel="noopener">3</a></sup> calling for a global slowdown.</p>
+        <div class="fields">
+          <input type="text" id="firstName" placeholder="First Name" autocomplete="given-name">
+          <input type="text" id="lastName" placeholder="Last Name" autocomplete="family-name">
+          <input type="email" id="email" class="full" placeholder="Email Address" autocomplete="email">
+          <select id="country" class="full" required>
+            <option value="" selected disabled>Country</option>
+          </select>
+        </div>
+        <div class="pledge-error" id="pledgeError"></div>
+        <button type="submit" class="btn">Count Me In</button>
+        <p class="pledge-fine">This November, the <a href="https://safe.ai/" target="_blank" rel="noopener">Center for AI Safety</a> will hand-deliver every signature to hundreds of lawmakers in Washington and Brussels.</p>
+        <p class="pledge-fine pledge-fine-tight">No spam, ever. We’ll only email you when it’s time to act, together.</p>
+        <button type="button" class="creator-link" id="tabCreator">Are you a creator? →</button>
+      </form>
+
+      <div id="signedState" hidden>
+        <div class="pledge-title serif">YOU’RE IN ✓</div>
+        <p class="pledge-lead">Welcome to Team Human.</p>
+        <button type="button" class="btn" id="reopenThanks">Do more →</button>
+      </div>
+
+      <!-- NOTE: Creator-guide copy below is placeholder pending team approval. -->
+      <div id="creatorPanel" hidden>
+        <div class="pledge-title serif">CREATORS: HERE’S THE PLAY</div>
+        <ol class="steps" role="list">
+          <li><strong>Join first.</strong> Add your name like everyone else. <button type="button" class="txt-btn" id="stepToPledge">Sign here →</button></li>
+          <li><strong>Tell your audience.</strong> A video, a short, a post: say why you signed, in your own words. Your voice reaches further than any ad.</li>
+          <li><strong>Recruit three creators.</strong> Send this page to three friends with an audience. That’s how this becomes a movement.</li>
+        </ol>
+        <p class="pledge-fine">This November, the <a href="https://safe.ai/" target="_blank" rel="noopener">Center for AI Safety</a> will hand-deliver every signature to hundreds of lawmakers in Washington and Brussels. Creator toolkit (assets, talking points, #TeamHuman profile images) coming soon.</p>
+        <button type="button" class="creator-link" id="tabHuman">← Back</button>
+      </div>
+
+    </div>
+    <a class="learn-more" href="#problem">Learn more<span class="lm-arrow">↓</span></a>
+  </div>
+  <div class="hero-cloud" aria-hidden="true"><img src="brand/cloud-corner.png" alt="" width="1200" height="800"></div>
+</header>
+
+<section id="problem">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="kicker">The Problem</div>
+      <h2 class="serif">AI is developing too rapidly for humanity to stay in control.</h2>
+      <p class="lede">AI could be the best thing that ever happens to humanity. It could also be the last. A handful of companies are locked in an arms race, building the most powerful technology in human history as fast as they possibly can, with no oversight, no democratic accountability, and, <strong>by their own admission, without fully understanding what they’re building.</strong></p>
+    </div>
+    <div class="litany reveal">
+      <div>How many <em>jobs</em> have to vanish?</div>
+      <div>How much of the internet has to be <em>fake</em>?</div>
+      <div>How many creators have to be <em>buried under AI slop</em>?</div>
+      <div>How many artists have to compete with <em>copies of themselves</em>?</div>
+      <div>How many <em>scams</em> and <em>deepfakes</em>? How many <em>elections undermined</em>?</div>
+      <div>How many kids have to grow up shaped by <em>algorithms no parent chose</em>?</div>
+      <div>How close do we get to <em>surveillance dystopias</em>, <em>AI-designed pandemics</em>, <em>killer robots</em>?</div>
+      <div>Or, as experts keep warning, <em><a class="lit-link" href="https://aistatement.com/work/statement-on-ai-extinction-risk" target="_blank" rel="noopener">literal human extinction</a></em>?</div>
+    </div>
+    <p class="closer reveal">This situation is insane. <span>And we all know it.</span></p>
+  </div>
+</section>
+
+<section id="plan">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="kicker">The Plan</div>
+      <h2 class="serif">Slow down. Give humanity time to figure out how to stay in control.</h2>
+      <p class="lede">The root cause of all these dangers is <strong>the global AI arms race</strong>, which creates a race-to-the-bottom on safety and doesn’t give humanity time to figure out how to regulate it effectively.</p>
+    </div>
+    <div class="demand-card reveal">
+      <div class="kicker">The Solution</div>
+      <p class="demand-lead serif" id="demand">We demand one thing:<br><em>slow down AI.</em></p>
+    </div>
+    <div class="solution-body reveal">
+      <p>We join the hundreds of Nobel Prize winners, AI experts, and heads of state who signed the <a class="txt-link" href="https://superintelligence-statement.org/" target="_blank" rel="noopener">Superintelligence Statement</a>, calling for a prohibition on developing smarter-than-human AI until there is 1) broad scientific consensus that it can be done safely and controllably, and 2) strong public buy-in.</p>
+      <p><strong>The experts agree. Here is how it gets done:</strong></p>
+      <div class="planks">
+        <div class="plank"><strong>Build the brakes.</strong> Frontier AI is built with specialized chips: track and guard them, exactly like we track the ingredients for nukes and bioweapons. Governments set the speed limits on giant training runs.</div>
+        <div class="plank"><strong>Enforce the speed limit.</strong> An international agreement between the US, China, and major nations: slow down together and enforce real safety standards. The International Atomic Energy Agency verifies nuclear compliance worldwide. We need the same watchdog for AI.</div>
+      </div>
+      <div class="plan-partner">
+        <span class="partner-label">Campaign partner</span>
+        <a href="https://safe.ai/" target="_blank" rel="noopener" aria-label="Center for AI Safety"><img class="partner-logo" src="cais-logotype-black.svg" alt="Center for AI Safety" width="218" height="70"></a>
+      </div>
+    </div>
+    <div class="pressure-callout reveal">
+      <p class="track-headline serif">We’re <em>this close</em> to the finish line.</p>
+      <div class="finish-track reveal" aria-hidden="true">
+        <div class="ft-line"></div>
+        <span class="ft-dot" style="left:1%"></span>
+        <span class="ft-dot" style="left:24%"></span>
+        <span class="ft-dot" style="left:47%"></span>
+        <span class="ft-dot" style="left:70%"></span>
+        <span class="ft-goal"></span><span class="ft-pct">90%</span>
+        <!-- fills repointed for the forest ground: walnut/forest pixels would vanish on it -->
+        <svg class="ft-flag" viewBox="0 0 20 34" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="5" cy="2.2" r="2" fill="#d69e45"/>
+          <rect x="4" y="3.4" width="2" height="26" fill="#d9cbb5"/>
+          <polygon points="6,4.5 19,8.5 6,12.5" fill="#ba5931"/>
+          <rect x="0" y="29" width="4.5" height="4.5" fill="#ba5931"/><rect x="4.5" y="29" width="4.5" height="4.5" fill="#f6efe3"/><rect x="9" y="29" width="4.5" height="4.5" fill="#ba5931"/>
+          <rect x="0" y="24.5" width="4.5" height="4.5" fill="#f6efe3"/><rect x="4.5" y="24.5" width="4.5" height="4.5" fill="#ba5931"/><rect x="9" y="24.5" width="4.5" height="4.5" fill="#f6efe3"/>
+        </svg>
+        <svg class="ft-walker" viewBox="0 0 8 10" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="0" width="4" height="1" fill="#d69e45"/>
+          <rect x="1" y="1" width="6" height="1" fill="#d69e45"/>
+          <rect x="2" y="2" width="4" height="2" fill="#d9b98c"/>
+          <rect x="1.5" y="4" width="5" height="3" fill="#ba5931"/>
+          <rect x="0.8" y="4.5" width="0.9" height="1.8" fill="#d9cbb5"/>
+          <rect x="2.3" y="7" width="1.1" height="2.4" fill="#d9cbb5"/>
+          <rect x="4.6" y="7" width="1.1" height="2.4" fill="#d9cbb5"/>
+        </svg>
+      </div>
+      <p>All four leading AI companies agree things may be going too fast. They say they would slow down if the others did. Recently, more than 1,000 of their own employees <a class="txt-link" href="https://www.pacingthefrontier.com/" target="_blank" rel="noopener">signed an open letter</a> calling on the government to help make a slowdown possible. But none of them can stop unilaterally. <strong>That’s what governments are for.</strong> And governments won’t act without public pressure.</p>
+      <p class="pressure-line">That’s where we come in.<br><em>We are the pressure.</em></p>
+    </div>
+  </div>
+</section>
+
+<section id="statement">
+  <div class="wrap reveal">
+    <img loading="lazy" width="1600" height="1066" src="brand/hands.jpg" alt="">
+    <p>AI should serve <em>humanity</em>,<br>not replace it.</p>
+  </div>
+</section>
+
+<section id="precedent">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="kicker">We’ve Done This Before</div>
+      <h2 class="serif">Humanity has come together many times.</h2>
+      <p class="lede">Yes, we can slow down, and it would be easy compared to other problems humanity has solved. <strong>We can do this.</strong></p>
+    </div>
+    <div class="cards3 reveal">
+      <div class="pcard"><h3 class="serif">We limited nuclear weapons</h3><p>You can’t just buy the ingredients for nukes. They’re tracked and guarded. We can track and guard the chips used to produce frontier AI the same way.</p></div>
+      <div class="pcard"><h3 class="serif">We saved the ozone layer</h3><p>The world faced a hole in the sky. Countries coordinated, industry adapted, and the ozone layer is healing today.</p></div>
+      <div class="pcard"><h3 class="serif">We eradicated smallpox</h3><p>A disease that killed hundreds of millions, wiped off the planet by countries vaccinating together. The World Health Organization declared it gone in 1980.</p></div>
+      <div class="pcard"><h3 class="serif">We agreed on rules for war</h3><p>Even sworn enemies signed the Geneva Conventions. If humanity can agree on limits in wartime, it can agree on limits for AI.</p></div>
+      <div class="pcard"><h3 class="serif">We saved an entire continent</h3><p>Since 1959, the Antarctic Treaty has kept an entire continent unclaimed, unarmed, and reserved for science.</p></div>
+      <div class="pcard"><h3 class="serif">We restricted thousands of dangerous technologies</h3><p>Bioweapons, chemical weapons, human cloning: humanity has agreed on bans and restrictions together, thousands of times.</p></div>
+    </div>
+    <p class="closer reveal" style="margin-top:48px;">Every time, it took international cooperation, and ordinary people who refused to be silent.<br><span>It’s time to do it again.</span></p>
+  </div>
+  <div class="texture-band"><img loading="lazy" width="1200" height="800" src="brand/cloud-corner.png" alt=""></div>
+</section>
+
+<section id="voices">
+  <div class="wrap">
+    <div class="ornament reveal"><img src="brand/handprint.png" alt=""></div>
+    <div class="reveal center">
+      <div class="kicker">Why We Signed</div>
+      <h2 class="serif">Illustrative voices<br>from the creators.</h2>
+      <p class="lede">Creators are standing up with their audiences, because <strong>this is our moment, this is our fight, and the window is closing.</strong></p>
+      <div class="ph-note"><strong>PLACEHOLDER:</strong> these cards are examples our team made to show what this section will look like. None of these creators have joined or endorsed this campaign yet. Real quotes from real signers will replace them.</div>
+    </div>
+    <!-- NOTE: Testimonial quotes below are illustrative placeholders for this preview build; final quotes pending creator approval. -->
+    <div class="creator-grid">
+      <div class="ccard reveal">
+        <div class="ccard-head"><img loading="lazy" width="56" height="56" src="avatars/matthewbeem.jpg" alt="MrBeast"><div><div class="name">MrBeast</div><div class="subs">500M+ subscribers</div></div></div>
+        <blockquote>I signed because I’m concerned we’re building the most powerful technology in history with nobody at the wheel. We slowed down for nukes. We can slow down for this.</blockquote>
+      </div>
+      <div class="ccard reveal">
+        <div class="ccard-head"><img loading="lazy" width="56" height="56" src="avatars/jennyhoyos.jpg" alt="Mark Rober"><div><div class="name">Mark Rober</div><div class="subs">74M+ subscribers</div></div></div>
+        <blockquote>I signed because I’m an engineer, and no engineer would ship something this powerful without testing it. Right now, nobody’s running the tests.</blockquote>
+      </div>
+      <div class="ccard reveal">
+        <div class="ccard-head"><img loading="lazy" width="56" height="56" src="avatars/infographicsshow.jpg" alt="Marques Brownlee"><div><div class="name">Marques Brownlee</div><div class="subs">21M+ subscribers</div></div></div>
+        <blockquote>I signed because I review technology for a living, and even the people building AI admit they don’t fully understand it. That should concern all of us.</blockquote>
+      </div>
+      <div class="ccard reveal">
+        <div class="ccard-head"><img loading="lazy" width="56" height="56" src="avatars/rebeccazamolo.jpg" alt="Emma Chamberlain"><div><div class="name">Emma Chamberlain</div><div class="subs">12M+ subscribers</div></div></div>
+        <blockquote>I signed because I’m concerned about kids growing up shaped by algorithms no parent chose, on an internet where you can’t tell what’s real anymore.</blockquote>
+      </div>
+      <div class="ccard reveal">
+        <div class="ccard-head"><img loading="lazy" width="56" height="56" src="avatars/lindsaynikole.jpg" alt="Ryan Trahan"><div><div class="name">Ryan Trahan</div><div class="subs">23M+ subscribers</div></div></div>
+        <blockquote>I signed because deepfakes and AI scams are already using creators' faces to steal from the people who trust us. And it’s getting worse every month.</blockquote>
+      </div>
+      <div class="ccard reveal">
+        <div class="ccard-head"><img loading="lazy" width="56" height="56" src="avatars/afterskool.jpg" alt="Cleo Abram"><div><div class="name">Cleo Abram</div><div class="subs">8M+ subscribers</div></div></div>
+        <blockquote>I signed because I’m an optimist about technology, and real optimism means steering, not just accelerating. Slowing down is how we get the good future.</blockquote>
+      </div>
+      <div class="ccard reveal">
+        <div class="ccard-head"><img loading="lazy" width="56" height="56" src="avatars/haydenhilliersmith.jpg" alt="Casey Neistat"><div><div class="name">Casey Neistat</div><div class="subs">12M+ subscribers</div></div></div>
+        <blockquote>I signed because a handful of companies are making decisions for all of us, and nobody voted for that. The public deserves a say in our future.</blockquote>
+      </div>
+    </div>
+    <p class="more-creators reveal">+ real creator cards will appear here as they join.</p>
+    <button type="button" class="btn btn-ghost more-voices" id="moreVoices">More voices</button>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-flex">
+    <div>
+      <img class="lockup-img" src="brand/wordmark.png" alt="Team Human">
+      <div class="partner">
+        <div class="partner-label">In partnership with</div>
+        <a href="https://safe.ai/" target="_blank" rel="noopener" aria-label="Center for AI Safety"><img class="partner-logo" src="cais-logotype-black.svg" alt="Center for AI Safety" width="218" height="70"></a>
+      </div>
+      <p class="disclaimer">Preview build. Counts are simulated and creator quotes are illustrative placeholders pending final approval. Creator photos via Wikimedia Commons.</p>
+    </div>
+    <div style="text-align:right;">
+      <p style="margin-bottom:8px;"><a href="#problem">The Problem</a> &nbsp;·&nbsp; <a href="#plan">The Plan</a> &nbsp;·&nbsp; <a href="#voices">Why We Signed</a> &nbsp;·&nbsp; <a href="creators.html">For Creators</a></p>
+      <p>© 2026 TeamHuman. We are the pressure.</p>
+    </div>
+  </div>
+  <div class="foot-cloud"><img loading="lazy" width="1200" height="800" src="brand/cloud-corner.png" alt=""></div>
+</footer>
+
+<div class="sticky-bar" id="stickyBar">
+  <div class="sticky-count"><strong id="stickyCount">247,318</strong> &nbsp;humans have joined</div>
+  <a href="#top">↑ &nbsp;Add Your Name</a>
+</div>
+
+<div class="modal-veil" id="thanksVeil" role="dialog" aria-modal="true" aria-labelledby="thanksTitle">
+  <div class="modal">
+    <button class="close" id="thanksClose" aria-label="Close">✕</button>
+    <img class="stamp" src="brand/handprint.png" alt="" width="52" height="57">
+    <h3 id="thanksTitle" class="serif">WELCOME TO TEAM HUMAN</h3>
+    <p class="body" id="thanksBody">You’re one of <span id="successCount">247,319</span> humans standing up. Now multiply yourself. Every share brings more pressure.</p>
+    <div class="also modal-also">
+      <div class="also-label">Optional pledges: I’ll also…</div>
+      <label><input type="checkbox" name="action" value="pfp"><span class="box">✓</span><span class="also-txt">Change my profile picture to #TeamHuman for 30 days<button type="button" class="tip" aria-label="What this involves" data-tip="After you sign, we’ll send you ready-to-use #TeamHuman profile images for any platform. Swap yours for 30 days so the movement is visible everywhere.">i</button></span></label>
+      <label><input type="checkbox" name="action" value="call"><span class="box">✓</span><span class="also-txt">Spend two minutes calling my local representative<button type="button" class="tip" aria-label="What this involves" data-tip="We’ll send you the phone number for your representative and a short script. The call takes about two minutes: you say you’re a constituent and you want humans kept in control of AI.">i</button></span></label>
+      <label><input type="checkbox" name="action" value="vote"><span class="box">✓</span><span class="also-txt">Commit to not voting for politicians who take AI lobby money<button type="button" class="tip" aria-label="What this involves" data-tip="AI companies spend heavily on lobbying. This pledge means checking whether a candidate takes that money, and letting it weigh on your vote. We’ll publish a simple lookup.">i</button></span></label>
+    </div>
+    <p class="fine">Check anything you’ll commit to. We’ll email you what you need.</p>
+    <div class="row">
+      <a class="btn" id="shareX" href="#" target="_blank" rel="noopener">Share on X</a>
+      <a class="btn btn-ghost" id="shareLI" href="#" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-ghost" id="shareFB" href="#" target="_blank" rel="noopener">Facebook</a>
+      <button class="btn btn-ghost" id="copyLink" type="button">Copy Link</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.body.classList.add('js');
+  const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Scroll: nav shadow, progress bar, hero hands parallax (drift toward each other)
+  const nav = document.querySelector('nav');
+  const progressBar = document.getElementById('progressBar');
+  const handH = document.querySelector('.hand-human');   // absent since the type-only hero
+  const handR = document.querySelector('.hand-robot');
+  let scrollTicking = false;
+  function onScrollFrame() {
+    scrollTicking = false;
+    const y = window.scrollY;
+    nav.classList.toggle('scrolled', y > 8);
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
+    if (motionOK && y < 1600 && handH && handR) {
+      handH.style.transform = 'translate(' + (-y * 0.055) + 'px, ' + (y * 0.065) + 'px)';
+      handR.style.transform = 'translate(' + (y * 0.055) + 'px, ' + (-y * 0.045) + 'px)';
+    }
+  }
+  window.addEventListener('scroll', () => {
+    if (!scrollTicking) { scrollTicking = true; requestAnimationFrame(onScrollFrame); }
+  }, { passive: true });
+  onScrollFrame();
+
+  // Nav: highlight the section in view
+  const navLinks = [...document.querySelectorAll('.nav-links a[href^="#"]:not(.btn)')];
+  const secObserver = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id));
+    });
+  }, { rootMargin: '-35% 0px -55% 0px' });
+  ['problem', 'plan', 'voices'].forEach(id => secObserver.observe(document.getElementById(id)));
+
+  // Countries
+  const COUNTRIES = ["Afghanistan","Albania","Algeria","Andorra","Angola","Argentina","Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Central African Republic","Chad","Chile","China","Colombia","Comoros","Costa Rica","Croatia","Cuba","Cyprus","Czechia","DR Congo","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Eswatini","Ethiopia","Fiji","Finland","France","Gabon","Gambia","Georgia","Germany","Ghana","Greece","Grenada","Guatemala","Guinea","Guyana","Haiti","Honduras","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Israel","Italy","Ivory Coast","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal","Netherlands","New Zealand","Nicaragua","Niger","Nigeria","North Korea","North Macedonia","Norway","Oman","Pakistan","Palau","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Qatar","Romania","Russia","Rwanda","Saint Lucia","Samoa","San Marino","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","Sudan","Suriname","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor-Leste","Togo","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Yemen","Zambia","Zimbabwe"];
+  const sel = document.getElementById('country');
+  COUNTRIES.forEach(c => { const o = document.createElement('option'); o.value = c; o.textContent = c; sel.appendChild(o); });
+
+  // Reveal
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Finish-line walker: start the walk only when the track is really visible,
+  // and re-arm it whenever it fully leaves the viewport so it replays.
+  const track = document.querySelector('.finish-track');
+  if (track) {
+    const walkIO = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.intersectionRatio >= 0.6) track.classList.add('walk');
+        else if (e.intersectionRatio === 0) track.classList.remove('walk');
+      });
+    }, { threshold: [0, 0.6] });
+    walkIO.observe(track);
+  }
+
+  // Counter
+  const counter = document.getElementById('counter');
+  const stickyCount = document.getElementById('stickyCount');
+  let total = parseInt(counter.dataset.target, 10);
+  let counterStarted = false;
+  function animateCounter() {
+    if (counterStarted) return;
+    counterStarted = true;
+    const dur = 1800;
+    let t0 = null;
+    function tick(t) {
+      if (t0 === null) t0 = t;
+      const p = Math.min(Math.max((t - t0) / dur, 0), 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      counter.textContent = Math.round(total * eased).toLocaleString('en-US');
+      if (p < 1) requestAnimationFrame(tick); else renderTotal();
+    }
+    requestAnimationFrame(tick);
+  }
+  const cio = new IntersectionObserver(es => { if (es[es.length - 1].isIntersecting) animateCounter(); }, { threshold: 0.3 });
+  cio.observe(counter);
+
+  // Heartbeat: the count keeps ticking up while you read (simulated, like the rest of the counter)
+  function renderTotal() {
+    counter.textContent = total.toLocaleString('en-US');
+    stickyCount.textContent = total.toLocaleString('en-US');
+  }
+  setTimeout(() => {
+    setInterval(() => {
+      total += 1;
+      renderTotal();
+      if (motionOK) {
+        counter.classList.remove('tick');
+        void counter.offsetWidth;
+        counter.classList.add('tick');
+      }
+    }, 8000 + Math.floor(performance.now() % 4000));
+  }, 4500);
+
+  const form = document.getElementById('pledgeForm');
+
+  // Thank-you modal
+  const veil = document.getElementById('thanksVeil');
+  const thanksTitle = document.getElementById('thanksTitle');
+  const thanksBody = document.getElementById('thanksBody');
+  let thanksOpener = null;
+  function openThanks(title, bodyHTML) {
+    thanksOpener = document.activeElement;
+    thanksTitle.textContent = title;
+    thanksBody.innerHTML = bodyHTML;
+    veil.classList.add('open');
+    document.getElementById('thanksClose').focus();
+  }
+  function closeThanks() {
+    veil.classList.remove('open');
+    if (thanksOpener && thanksOpener.focus && document.contains(thanksOpener)) thanksOpener.focus();
+  }
+
+  // Human pledge form
+  const errEl = document.getElementById('pledgeError');
+  let submitted = false;
+  const pledgeThanks = () => openThanks('WELCOME TO TEAM HUMAN',
+    "You’re one of <span id=\"successCount\">" + total.toLocaleString('en-US') + "</span> humans standing up. Now multiply yourself. Every share brings more pressure.");
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (submitted) { pledgeThanks(); return; }
+    const first = document.getElementById('firstName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    if (!first) { errEl.textContent = 'Please enter your first name.'; return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errEl.textContent = 'Please enter a valid email address.'; return; }
+    if (!sel.value) { errEl.textContent = 'Please choose your country.'; return; }
+    errEl.textContent = '';
+    // Preview build: no backend yet. Swap this block for the real signup endpoint
+    // (keep the `submitted` guard when wiring it up, re-enable only on error).
+    submitted = true;
+    form.style.display = 'none';
+    document.getElementById('signedState').hidden = false;
+    total += 1;
+    counter.textContent = total.toLocaleString('en-US');
+    stickyCount.textContent = total.toLocaleString('en-US');
+    pledgeThanks();
+  });
+  document.getElementById('reopenThanks').addEventListener('click', pledgeThanks);
+
+  // Human / Creator tabs: swap the pledge card's contents in place
+  const tabHuman = document.getElementById('tabHuman');
+  const tabCreator = document.getElementById('tabCreator');
+  const creatorPanel = document.getElementById('creatorPanel');
+  const signedState = document.getElementById('signedState');
+  function showTab(creator) {
+    creatorPanel.hidden = !creator;
+    if (creator) {
+      form.style.display = 'none';
+      signedState.hidden = true;
+    } else {
+      form.style.display = submitted ? 'none' : '';
+      signedState.hidden = !submitted;
+    }
+  }
+  tabHuman.addEventListener('click', () => showTab(false));
+  tabCreator.addEventListener('click', () => showTab(true));
+  document.getElementById('stepToPledge').addEventListener('click', () => {
+    showTab(false);
+    if (!submitted) document.getElementById('firstName').focus();
+  });
+  document.getElementById('thanksClose').addEventListener('click', closeThanks);
+  // Only dismiss when the press STARTED on the veil; otherwise selecting text
+  // in the modal and releasing outside would fire a click on the veil and close it.
+  let pressedVeil = false;
+  veil.addEventListener('pointerdown', e => { pressedVeil = (e.target === veil); });
+  veil.addEventListener('click', e => { if (e.target === veil && pressedVeil) closeThanks(); });
+
+  // Share
+  const shareURL = encodeURIComponent('https://teamhuman.org/');
+  const shareText = encodeURIComponent('I just pledged to keep humans in control of AI. Join me. #TeamHuman');
+  document.getElementById('shareX').href = 'https://twitter.com/intent/tweet?text=' + shareText + '&url=' + shareURL;
+  document.getElementById('shareLI').href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + shareURL;
+  document.getElementById('shareFB').href = 'https://www.facebook.com/sharer/sharer.php?u=' + shareURL;
+  document.getElementById('copyLink').addEventListener('click', function () {
+    const done = ok => {
+      this.textContent = ok ? 'Copied!' : 'Copy failed';
+      setTimeout(() => { this.textContent = 'Copy Link'; }, 2000);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(window.location.href).then(() => done(true), () => done(false));
+    } else { done(false); }
+  });
+
+  // Bonus-action tooltips: tap toggles (button sits inside the label, so
+  // preventDefault keeps the tap from also toggling the checkbox)
+  document.querySelectorAll('.tip').forEach(tip => {
+    tip.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      document.querySelectorAll('.tip.open').forEach(t => { if (t !== tip) t.classList.remove('open'); });
+      tip.classList.toggle('open');
+    });
+  });
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.tip')) document.querySelectorAll('.tip.open').forEach(t => t.classList.remove('open'));
+  });
+
+  // Mobile: expand the creator wall
+  const moreVoices = document.getElementById('moreVoices');
+  moreVoices.addEventListener('click', () => {
+    document.querySelector('.creator-grid').classList.add('expanded');
+    moreVoices.classList.add('hidden');
+  });
+
+  // Sticky bar: show once the hero pledge card scrolls out of view
+  const bar = document.getElementById('stickyBar');
+  const pledgeCard = document.getElementById('pledge');
+  const bio = new IntersectionObserver(es => {
+    bar.classList.toggle('show', !es[es.length - 1].isIntersecting);
+  }, { threshold: 0 });
+  bio.observe(pledgeCard);
+</script>
+</body>
+</html>
