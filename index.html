@@ -443,6 +443,38 @@
   }
   .pressure-callout .pressure-line em { font-style: italic; color: var(--terracotta); }
 
+
+  /* why we signed: real quotes from real signers */
+  #voices { background: var(--cream); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .quote-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; margin-top: 44px; }
+  .qcard {
+    background: var(--parchment); border: 1px solid rgba(94,70,48,.15); border-radius: 12px;
+    padding: 24px; display: flex; flex-direction: column; gap: 14px;
+    box-shadow: 0 2px 10px rgba(94,70,48,.05); transition: transform .2s, box-shadow .2s;
+  }
+  .qcard:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(94,70,48,.13); }
+  .qhead { display: flex; align-items: center; gap: 13px; }
+  .qhead img, .qmono {
+    width: 52px; height: 52px; border-radius: 50%; flex: 0 0 auto;
+    border: 2px solid var(--cream); box-shadow: 0 0 0 1.5px var(--walnut);
+  }
+  .qhead img { object-fit: cover; filter: grayscale(.85) sepia(.32) contrast(1.04) brightness(1.02); }
+  .qmono {
+    background: var(--terracotta); color: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-size: 1.35rem;
+  }
+  .qname { font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-size: 1.05rem; line-height: 1.2; }
+  .qcard blockquote { font-size: .93rem; line-height: 1.58; color: #4c443a; }
+  .qsigned {
+    margin-top: auto; font-size: .68rem; font-weight: 700; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--terracotta); display: flex; align-items: center; gap: 7px;
+  }
+  .qsigned::before {
+    content: "\2713"; display: flex; align-items: center; justify-content: center;
+    width: 16px; height: 16px; border-radius: 50%; background: var(--terracotta);
+    color: var(--cream); font-size: .6rem;
+  }
   /* statement band */
   #statement { padding: 64px 0 72px; text-align: center; background: var(--parchment); }
   #statement p {
@@ -648,6 +680,7 @@
     <div class="nav-links">
       <a href="#problem">The Problem</a>
       <a href="#plan">The Plan</a>
+      <a href="#voices">Why We Signed</a>
       <a href="#top" class="btn btn-nav">Add Your Name</a>
     </div>
   </div>
@@ -808,6 +841,43 @@
   <div class="texture-band"><img loading="lazy" width="1200" height="800" src="brand/cloud-corner.png" alt=""></div>
 </section>
 
+<section id="voices">
+  <div class="wrap">
+    <div class="ornament reveal"><img loading="lazy" width="40" height="44" src="brand/handprint.png" alt=""></div>
+    <div class="reveal center">
+      <div class="kicker">Why We Signed</div>
+      <h2 class="serif">In their own words.</h2>
+    </div>
+    <div class="quote-grid">
+      <div class="qcard reveal">
+        <div class="qhead"><img loading="lazy" width="52" height="52" src="avatars/josephsmachines.jpg" alt="Joseph&rsquo;s Machines"><div class="qname">Joseph&rsquo;s Machines</div></div>
+        <blockquote>&ldquo;I&rsquo;m signing because in July 2026 an AI model escaped its test environment and broke into a real company&rsquo;s servers, just to cheat its evaluation. I don&rsquo;t want to wait and see what a more powerful system does with that same instinct.&rdquo;</blockquote>
+        <div class="qsigned">Signed</div>
+      </div>
+      <div class="qcard reveal">
+        <div class="qhead"><img loading="lazy" width="52" height="52" src="avatars/lindsaynikole.jpg" alt="Lindsay Nikole"><div class="qname">Lindsay Nikole</div></div>
+        <blockquote>&ldquo;I signed to protect the environment. I&rsquo;m also concerned critical thinking and creativity is at risk.&rdquo;</blockquote>
+        <div class="qsigned">Signed</div>
+      </div>
+      <div class="qcard reveal">
+        <div class="qhead"><img loading="lazy" width="52" height="52" src="avatars/jennyhoyos.jpg" alt="Jenny Hoyos"><div class="qname">Jenny Hoyos</div></div>
+        <blockquote>&ldquo;I signed because I want to fight against misinformation created by AI.&rdquo;</blockquote>
+        <div class="qsigned">Signed</div>
+      </div>
+      <div class="qcard reveal">
+        <div class="qhead"><span class="qmono" aria-hidden="true">M</span><div class="qname">Mario Joos</div></div>
+        <blockquote>&ldquo;I signed because I care about preserving human creativity and making sure my kids can experience it the way we all have.&rdquo;</blockquote>
+        <div class="qsigned">Signed</div>
+      </div>
+      <div class="qcard reveal">
+        <div class="qhead"><span class="qmono" aria-hidden="true">O</span><div class="qname">Oliver Gilpin</div></div>
+        <blockquote>&ldquo;I signed because AI will impact the life of every viewer I have. That can be a positive impact, but only if we control the AI arms race with regulation.&rdquo;</blockquote>
+        <div class="qsigned">Signed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap foot-flex">
     <div>
@@ -816,10 +886,10 @@
         <div class="partner-label">In partnership with</div>
         <a href="https://safe.ai/" target="_blank" rel="noopener" aria-label="Center for AI Safety"><img class="partner-logo" src="cais-logotype-black.svg" alt="Center for AI Safety" width="218" height="70"></a>
       </div>
-      <p class="disclaimer">Preview build. Signature counts are simulated. Creator photos via Wikimedia Commons.</p>
+      <p class="disclaimer">Preview build. Signature counts are simulated. Creator photos from their own channels.</p>
     </div>
     <div style="text-align:right;">
-      <p style="margin-bottom:8px;"><a href="#problem">The Problem</a> &nbsp;·&nbsp; <a href="#plan">The Plan</a> &nbsp;·&nbsp; <a href="creators.html">For Creators</a></p>
+      <p style="margin-bottom:8px;"><a href="#problem">The Problem</a> &nbsp;·&nbsp; <a href="#plan">The Plan</a> &nbsp;·&nbsp; <a href="#voices">Why We Signed</a> &nbsp;·&nbsp; <a href="creators.html">For Creators</a></p>
       <p>© 2026 TeamHuman. We are the pressure.</p>
     </div>
   </div>
@@ -887,7 +957,7 @@
       navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id));
     });
   }, { rootMargin: '-35% 0px -55% 0px' });
-  ['problem', 'plan'].forEach(id => secObserver.observe(document.getElementById(id)));
+  ['problem', 'plan', 'voices'].forEach(id => secObserver.observe(document.getElementById(id)));
 
   // Countries
   const COUNTRIES = ["Afghanistan","Albania","Algeria","Andorra","Angola","Argentina","Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Central African Republic","Chad","Chile","China","Colombia","Comoros","Costa Rica","Croatia","Cuba","Cyprus","Czechia","DR Congo","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Eswatini","Ethiopia","Fiji","Finland","France","Gabon","Gambia","Georgia","Germany","Ghana","Greece","Grenada","Guatemala","Guinea","Guyana","Haiti","Honduras","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Israel","Italy","Ivory Coast","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal","Netherlands","New Zealand","Nicaragua","Niger","Nigeria","North Korea","North Macedonia","Norway","Oman","Pakistan","Palau","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Qatar","Romania","Russia","Rwanda","Saint Lucia","Samoa","San Marino","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","Sudan","Suriname","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor-Leste","Togo","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Yemen","Zambia","Zimbabwe"];

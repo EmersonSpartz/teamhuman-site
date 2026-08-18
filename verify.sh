@@ -26,6 +26,10 @@ echo "  source: $SRC"
 echo "$HTML" | grep -q "Keep Humans in Control of AI" ; check "title copy present" $?
 echo "$HTML" | grep -q "Join the movement to keep"    ; check "hero copy (doc VERSION FOR CLAUDE)" $?
 echo "$HTML" | grep -q "Add your name to the chorus" ; check "pledge copy" $?
+echo "$HTML" | grep -q "In their own words" ; check "quotes section present" $?
+QC=$(echo "$HTML" | grep -c 'class="qcard reveal"')
+[ "$QC" = "5" ] ; check "all 5 signer quotes present (found $QC)" $?
+if echo "$HTML" | grep -qE 'EXAMPLE|PLACEHOLDER'; then echo "  FAIL  placeholder markers back on the page"; FAIL=1; else echo "  PASS  no placeholder markers"; fi
 echo "$HTML" | grep -q "AI should serve"              ; check "statement band present" $?
 if echo "$HTML" | grep -qi "corporate arms race"; then echo "  FAIL  stale Figma copy leaked"; FAIL=1; else echo "  PASS  no stale Figma copy"; fi
 if echo "$HTML" | grep -q "—"; then echo "  FAIL  em dash found (Emerson: AI slop coded)"; FAIL=1; else echo "  PASS  no em dashes"; fi
