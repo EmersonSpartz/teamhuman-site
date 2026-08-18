@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accent colour options | #TeamHuman internal</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="brand/handprint.png">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--parchment:#f6efe3;--cream:#fbf6ec;--charcoal:#201c17;--walnut:#5e4630;--taupe:#baaf9e;--line:rgba(94,70,48,.18)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:#e6ddcd;color:var(--charcoal);line-height:1.6;padding:26px 18px 70px}
+  h2.top{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:1.5rem;max-width:1180px;margin:0 auto 6px}
+  p.sub{max-width:1180px;margin:0 auto 22px;font-size:.92rem;color:#4c443a}
+  .row{max-width:1180px;margin:0 auto 22px;display:grid;grid-template-columns:250px 1fr;gap:20px;align-items:start}
+  .meta{display:flex;gap:12px;padding-top:16px}
+  .swatch{width:38px;height:38px;border-radius:8px;flex:0 0 auto;box-shadow:0 0 0 1px rgba(0,0,0,.12)}
+  .name{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.05rem}
+  .hex{font-family:ui-monospace,Menlo,monospace;font-size:.76rem;color:var(--walnut)}
+  .note{font-size:.82rem;color:#4c443a;margin-top:5px}
+  .stage{background:var(--parchment);border:1px solid var(--line);border-radius:14px;padding:34px 24px 26px;text-align:center}
+  h1{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:1.75rem;line-height:1.14;letter-spacing:-.01em}
+  h1 em{font-style:italic;color:var(--acc)}
+  .kicker{margin-top:16px;font-size:.68rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--acc);display:flex;align-items:center;justify-content:center;gap:14px}
+  .kicker::before,.kicker::after{content:"";width:40px;height:1px;background:var(--taupe);opacity:.6}
+  .faces{display:flex;justify-content:center;margin-top:12px}
+  .faces img{width:40px;height:40px;border-radius:50%;object-fit:cover;margin-left:-10px;border:2px solid var(--parchment);box-shadow:0 0 0 1px var(--walnut);filter:grayscale(.85) sepia(.32) contrast(1.04) brightness(1.02)}
+  .faces img:first-child{margin-left:0}
+  .cap{margin-top:10px;font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:1rem;color:var(--walnut)}
+  .cap b{color:var(--acc);font-style:normal}
+  .star{color:var(--acc);font-weight:700;vertical-align:super;font-size:.8em}
+  .card{margin:16px auto 0;max-width:360px;background:var(--cream);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:0 8px 24px rgba(94,70,48,.09)}
+  .lead{font-size:.86rem;font-weight:600;margin-bottom:12px}
+  .lead sup{color:var(--acc);font-weight:700}
+  .f{height:30px;background:var(--parchment);border:1px solid rgba(94,70,48,.22);border-radius:7px;margin-bottom:6px}
+  .btn{height:38px;background:var(--acc);border-radius:7px;color:var(--cream);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;letter-spacing:.14em;margin-top:8px}
+  .lit{margin-top:18px;font-family:'Fraunces',Georgia,serif;font-size:1.05rem}
+  .lit em{font-style:italic;color:var(--acc)}
+  .p-current{--acc:#ba5931;--acc-dark:#9c4a29;}
+  .p-rust{--acc:#a8432a;--acc-dark:#8d3823;}
+  .p-brick{--acc:#9c3a26;--acc-dark:#83301f;}
+  .p-oxblood{--acc:#8a2f36;--acc-dark:#73272d;}
+  .p-poster{--acc:#c0392b;--acc-dark:#a12f24;}
+  .p-teal{--acc:#16635e;--acc-dark:#12534e;}
+  .p-forest{--acc:#2f5137;--acc-dark:#27442e;}
+  .p-ink{--acc:#2b3a67;--acc-dark:#243056;}
+  @media (max-width:820px){ .row{grid-template-columns:1fr} }
+</style>
+<script>if(!localStorage.getItem('th_gate'))document.documentElement.classList.add('locked')</script>
+<style>html.locked{overflow:hidden}html.locked body>*{visibility:hidden}</style>
+<script defer src="gate.js"></script>
+</head><body>
+<h2 class="top">Accent colour options</h2>
+<p class="sub">Same hero, same type, one variable changed. Every option below except the current one passes WCAG AA for both cream-on-accent (buttons) and accent-on-parchment (kickers and italics); the current terracotta sits at 4.0 and technically fails.</p>
+
+<div class="row">
+  <div class="meta"><div class="swatch" style="background:#ba5931"></div>
+    <div><div class="name">Current terracotta</div><div class="hex">#ba5931</div><div class="note">The one that reads as Anthropic-adjacent. Fails WCAG AA (4.0).</div></div></div>
+  <div class="stage p-current">
+    <h1>Join the movement to keep<br><em>humans in control</em> of AI.</h1>
+    <div class="kicker">Led by your favorite creators</div>
+    <div class="faces"><img src="avatars/matthewbeem.jpg" alt=""><img src="avatars/jennyhoyos.jpg" alt=""><img src="avatars/infographicsshow.jpg" alt=""><img src="avatars/rebeccazamolo.jpg" alt=""><img src="avatars/lindsaynikole.jpg" alt=""><img src="avatars/afterskool.jpg" alt=""><img src="avatars/haydenhilliersmith.jpg" alt=""></div>
+    <p class="cap">&hellip;and <b>247,318</b><span class="star">*</span> humans, so far.</p>
+    <div class="card">
+      <p class="lead">AI is progressing faster than our ability to control it.<sup>1</sup> Add your name to the chorus of experts<sup>2,3</sup> calling for a global slowdown.</p>
+      <div class="f"></div><div class="f"></div>
+      <div class="btn">COUNT ME IN</div>
+    </div>
+    <p class="lit">How many creators have to be <em>buried under AI slop</em>?</p>
+  </div>
+</div>
+<div class="row">
+  <div class="meta"><div class="swatch" style="background:#a8432a"></div>
+    <div><div class="name">Rust</div><div class="hex">#a8432a</div><div class="note">Smallest possible move: same family, deeper and less coral. Passes AA.</div></div></div>
+  <div class="stage p-rust">
+    <h1>Join the movement to keep<br><em>humans in control</em> of AI.</h1>
+    <div class="kicker">Led by your favorite creators</div>
+    <div class="faces"><img src="avatars/matthewbeem.jpg" alt=""><img src="avatars/jennyhoyos.jpg" alt=""><img src="avatars/infographicsshow.jpg" alt=""><img src="avatars/rebeccazamolo.jpg" alt=""><img src="avatars/lindsaynikole.jpg" alt=""><img src="avatars/afterskool.jpg" alt=""><img src="avatars/haydenhilliersmith.jpg" alt=""></div>
+    <p class="cap">&hellip;and <b>247,318</b><span class="star">*</span> humans, so far.</p>
+    <div class="card">
+      <p class="lead">AI is progressing faster than our ability to control it.<sup>1</sup> Add your name to the chorus of experts<sup>2,3</sup> calling for a global slowdown.</p>
+      <div class="f"></div><div class="f"></div>
+      <div class="btn">COUNT ME IN</div>
+    </div>
+    <p class="lit">How many creators have to be <em>buried under AI slop</em>?</p>
+  </div>
+</div>
+<div class="row">
+  <div class="meta"><div class="swatch" style="background:#9c3a26"></div>
+    <div><div class="name">Brick</div><div class="hex">#9c3a26</div><div class="note">Clearly redder and earthier. Reads printed, closer to the engraving stock.</div></div></div>
+  <div class="stage p-brick">
+    <h1>Join the movement to keep<br><em>humans in control</em> of AI.</h1>
+    <div class="kicker">Led by your favorite creators</div>
+    <div class="faces"><img src="avatars/matthewbeem.jpg" alt=""><img src="avatars/jennyhoyos.jpg" alt=""><img src="avatars/infographicsshow.jpg" alt=""><img src="avatars/rebeccazamolo.jpg" alt=""><img src="avatars/lindsaynikole.jpg" alt=""><img src="avatars/afterskool.jpg" alt=""><img src="avatars/haydenhilliersmith.jpg" alt=""></div>
+    <p class="cap">&hellip;and <b>247,318</b><span class="star">*</span> humans, so far.</p>
+    <div class="card">
+      <p class="lead">AI is progressing faster than our ability to control it.<sup>1</sup> Add your name to the chorus of experts<sup>2,3</sup> calling for a global slowdown.</p>
+      <div class="f"></div><div class="f"></div>
+      <div class="btn">COUNT ME IN</div>
+    </div>
+    <p class="lit">How many creators have to be <em>buried under AI slop</em>?</p>
+  </div>
+</div>
+<div class="row">
+  <div class="meta"><div class="swatch" style="background:#8a2f36"></div>
+    <div><div class="name">Oxblood</div><div class="hex">#8a2f36</div><div class="note">Protest-poster serious. Furthest from any AI-lab palette.</div></div></div>
+  <div class="stage p-oxblood">
+    <h1>Join the movement to keep<br><em>humans in control</em> of AI.</h1>
+    <div class="kicker">Led by your favorite creators</div>
+    <div class="faces"><img src="avatars/matthewbeem.jpg" alt=""><img src="avatars/jennyhoyos.jpg" alt=""><img src="avatars/infographicsshow.jpg" alt=""><img src="avatars/rebeccazamolo.jpg" alt=""><img src="avatars/lindsaynikole.jpg" alt=""><img src="avatars/afterskool.jpg" alt=""><img src="avatars/haydenhilliersmith.jpg" alt=""></div>
+    <p class="cap">&hellip;and <b>247,318</b><span class="star">*</span> humans, so far.</p>
+    <div class="card">
+      <p class="lead">AI is progressing faster than our ability to control it.<sup>1</sup> Add your name to the chorus of experts<sup>2,3</sup> calling for a global slowdown.</p>
+      <div class="f"></div><div class="f"></div>
+      <div class="btn">COUNT ME IN</div>
+    </div>
+    <p class="lit">How many creators have to be <em>buried under AI slop</em>?</p>
+  </div>
+</div>
+<div class="row">
+  <div class="meta"><div class="swatch" style="background:#c0392b"></div>
+    <div><div class="name">Poster red</div><div class="hex">#c0392b</div><div class="note">Urgent and activist. The loudest option here.</div></div></div>
+  <div class="stage p-poster">
+    <h1>Join the movement to keep<br><em>humans in control</em> of AI.</h1>
+    <div class="kicker">Led by your favorite creators</div>
+    <div class="faces"><img src="avatars/matthewbeem.jpg" alt=""><img src="avatars/jennyhoyos.jpg" alt=""><img src="avatars/infographicsshow.jpg" alt=""><img src="avatars/rebeccazamolo.jpg" alt=""><img src="avatars/lindsaynikole.jpg" alt=""><img src="avatars/afterskool.jpg" alt=""><img src="avatars/haydenhilliersmith.jpg" alt=""></div>
+    <p class="cap">&hellip;and <b>247,318</b><span class="star">*</span> humans, so far.</p>
+    <div class="card">
+      <p class="lead">AI is progressing faster than our ability to control it.<sup>1</sup> Add your name to the chorus of experts<sup>2,3</sup> calling for a global slowdown.</p>
+      <div class="f"></div><div class="f"></div>
+      <div class="btn">COUNT ME IN</div>
+    </div>
+    <p class="lit">How many creators have to be <em>buried under AI slop</em>?</p>
+  </div>
+</div>
+<div class="row">
+  <div class="meta"><div class="swatch" style="background:#16635e"></div>
+    <div><div class="name">Deep teal</div><div class="hex">#16635e</div><div class="note">Completely different lane: calm, trustworthy, no orange association at all.</div></div></div>
+  <div class="stage p-teal">
+    <h1>Join the movement to keep<br><em>humans in control</em> of AI.</h1>
+    <div class="kicker">Led by your favorite creators</div>
+    <div class="faces"><img src="avatars/matthewbeem.jpg" alt=""><img src="avatars/jennyhoyos.jpg" alt=""><img src="avatars/infographicsshow.jpg" alt=""><img src="avatars/rebeccazamolo.jpg" alt=""><img src="avatars/lindsaynikole.jpg" alt=""><img src="avatars/afterskool.jpg" alt=""><img src="avatars/haydenhilliersmith.jpg" alt=""></div>
+    <p class="cap">&hellip;and <b>247,318</b><span class="star">*</span> humans, so far.</p>
+    <div class="card">
+      <p class="lead">AI is progressing faster than our ability to control it.<sup>1</sup> Add your name to the chorus of experts<sup>2,3</sup> calling for a global slowdown.</p>
+      <div class="f"></div><div class="f"></div>
+      <div class="btn">COUNT ME IN</div>
+    </div>
+    <p class="lit">How many creators have to be <em>buried under AI slop</em>?</p>
+  </div>
+</div>
+<div class="row">
+  <div class="meta"><div class="swatch" style="background:#2f5137"></div>
+    <div><div class="name">Forest</div><div class="hex">#2f5137</div><div class="note">Already in Tyler’s brand book as a secondary. Quietest of the non-oranges.</div></div></div>
+  <div class="stage p-forest">
+    <h1>Join the movement to keep<br><em>humans in control</em> of AI.</h1>
+    <div class="kicker">Led by your favorite creators</div>
+    <div class="faces"><img src="avatars/matthewbeem.jpg" alt=""><img src="avatars/jennyhoyos.jpg" alt=""><img src="avatars/infographicsshow.jpg" alt=""><img src="avatars/rebeccazamolo.jpg" alt=""><img src="avatars/lindsaynikole.jpg" alt=""><img src="avatars/afterskool.jpg" alt=""><img src="avatars/haydenhilliersmith.jpg" alt=""></div>
+    <p class="cap">&hellip;and <b>247,318</b><span class="star">*</span> humans, so far.</p>
+    <div class="card">
+      <p class="lead">AI is progressing faster than our ability to control it.<sup>1</sup> Add your name to the chorus of experts<sup>2,3</sup> calling for a global slowdown.</p>
+      <div class="f"></div><div class="f"></div>
+      <div class="btn">COUNT ME IN</div>
+    </div>
+    <p class="lit">How many creators have to be <em>buried under AI slop</em>?</p>
+  </div>
+</div>
+<div class="row">
+  <div class="meta"><div class="swatch" style="background:#2b3a67"></div>
+    <div><div class="name">Ink blue</div><div class="hex">#2b3a67</div><div class="note">Civic and ballot-like. Highest contrast of the set.</div></div></div>
+  <div class="stage p-ink">
+    <h1>Join the movement to keep<br><em>humans in control</em> of AI.</h1>
+    <div class="kicker">Led by your favorite creators</div>
+    <div class="faces"><img src="avatars/matthewbeem.jpg" alt=""><img src="avatars/jennyhoyos.jpg" alt=""><img src="avatars/infographicsshow.jpg" alt=""><img src="avatars/rebeccazamolo.jpg" alt=""><img src="avatars/lindsaynikole.jpg" alt=""><img src="avatars/afterskool.jpg" alt=""><img src="avatars/haydenhilliersmith.jpg" alt=""></div>
+    <p class="cap">&hellip;and <b>247,318</b><span class="star">*</span> humans, so far.</p>
+    <div class="card">
+      <p class="lead">AI is progressing faster than our ability to control it.<sup>1</sup> Add your name to the chorus of experts<sup>2,3</sup> calling for a global slowdown.</p>
+      <div class="f"></div><div class="f"></div>
+      <div class="btn">COUNT ME IN</div>
+    </div>
+    <p class="lit">How many creators have to be <em>buried under AI slop</em>?</p>
+  </div>
+</div>
+</body></html>
