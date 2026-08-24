@@ -200,7 +200,8 @@
   .pledge-fine a:hover, .disclaimer a:hover { color: var(--terracotta); }
   .disclaimer + .disclaimer { margin-top: 8px; }
   .creator-link {
-    background: none; border: none; padding: 0; margin-top: 14px;
+    display: inline-block; background: none; border: none; padding: 0; margin-top: 14px;
+    text-decoration: none;
     font: inherit; font-size: .84rem; font-weight: 600; color: var(--walnut);
     cursor: pointer; transition: color .2s;
   }
@@ -237,7 +238,7 @@
     background: rgba(203,185,157,.22); border: 1px solid rgba(94,70,48,.12);
     border-radius: 10px; padding: 14px 16px; margin-top: 10px; text-align: left;
   }
-  #signedState:not([hidden]), #creatorPanel:not([hidden]) { animation: popIn .5s cubic-bezier(.34,1.56,.64,1); }
+  #signedState:not([hidden]) { animation: popIn .5s cubic-bezier(.34,1.56,.64,1); }
   @keyframes popIn { 0% { transform: scale(.92); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
 
   /* creator step-by-step (inside pledge card) */
@@ -712,7 +713,7 @@
         <button type="submit" class="btn">Count Me In</button>
         <p class="pledge-fine">This November, the <a href="https://safe.ai/" target="_blank" rel="noopener">Center for AI Safety</a> will hand-deliver every signature to hundreds of lawmakers in Washington and Brussels.</p>
         <p class="pledge-fine pledge-fine-tight">No spam, ever. We’ll only email you when it’s time to act, together.</p>
-        <button type="button" class="creator-link" id="tabCreator">Are you a creator? →</button>
+        <a class="creator-link" href="invite/">Are you a creator? →</a>
       </form>
 
       <div id="signedState" hidden>
@@ -722,16 +723,6 @@
       </div>
 
       <!-- NOTE: Creator-guide copy below is placeholder pending team approval. -->
-      <div id="creatorPanel" hidden>
-        <div class="pledge-title serif">CREATORS: HERE’S THE PLAY</div>
-        <ol class="steps" role="list">
-          <li><strong>Join first.</strong> Add your name like everyone else. <button type="button" class="txt-btn" id="stepToPledge">Sign here →</button></li>
-          <li><strong>Tell your audience.</strong> A video, a short, a post: say why you signed, in your own words. Your voice reaches further than any ad.</li>
-          <li><strong>Recruit three creators.</strong> Send this page to three friends with an audience. That’s how this becomes a movement.</li>
-        </ol>
-        <p class="pledge-fine">This November, the <a href="https://safe.ai/" target="_blank" rel="noopener">Center for AI Safety</a> will hand-deliver every signature to hundreds of lawmakers in Washington and Brussels. Creator toolkit (assets, talking points, #TeamHuman profile images) coming soon.</p>
-        <button type="button" class="creator-link" id="tabHuman">← Back</button>
-      </div>
 
     </div>
     <a class="learn-more" href="#problem">Learn more<span class="lm-arrow">↓</span></a>
@@ -809,8 +800,8 @@
           <rect x="4.6" y="7" width="1.1" height="2.4" fill="#5e4630"/>
         </svg>
       </div>
-      <p>All four leading AI companies agree things may be going too fast. They say they would slow down if the others did. Recently, more than 1,000 of their own employees <a class="txt-link" href="https://www.pacingthefrontier.com/" target="_blank" rel="noopener">signed an open letter</a> calling on the government to help make a slowdown possible. But none of them can stop unilaterally. <strong>That’s what governments are for.</strong> And governments won’t act without public pressure.</p>
-      <p class="pressure-line">That’s where we come in.<br><em>We are the pressure.</em></p>
+      <p>All four leading AI companies agree things may be going too fast. They say they would slow down if the others did. Recently, more than 1,000 of their own employees <a class="txt-link" href="https://www.pacingthefrontier.com/" target="_blank" rel="noopener">signed an open letter</a> calling on the government to help make a slowdown possible. But none of them can stop unilaterally. <strong>That’s what governments are for.</strong> And governments won’t act without seeing how much the public cares.</p>
+      <p class="pressure-line">That’s where we come in.</p>
     </div>
   </div>
 </section>
@@ -890,7 +881,6 @@
     </div>
     <div style="text-align:right;">
       <p style="margin-bottom:8px;"><a href="#problem">The Problem</a> &nbsp;·&nbsp; <a href="#plan">The Plan</a> &nbsp;·&nbsp; <a href="#voices">Why We Signed</a> &nbsp;·&nbsp; <a href="creators.html">For Creators</a></p>
-      <p>© 2026 TeamHuman. We are the pressure.</p>
     </div>
   </div>
   <div class="foot-cloud"><img loading="lazy" width="1200" height="800" src="brand/cloud-corner.png" alt=""></div>
@@ -1067,27 +1057,6 @@
   });
   document.getElementById('reopenThanks').addEventListener('click', pledgeThanks);
 
-  // Human / Creator tabs: swap the pledge card's contents in place
-  const tabHuman = document.getElementById('tabHuman');
-  const tabCreator = document.getElementById('tabCreator');
-  const creatorPanel = document.getElementById('creatorPanel');
-  const signedState = document.getElementById('signedState');
-  function showTab(creator) {
-    creatorPanel.hidden = !creator;
-    if (creator) {
-      form.style.display = 'none';
-      signedState.hidden = true;
-    } else {
-      form.style.display = submitted ? 'none' : '';
-      signedState.hidden = !submitted;
-    }
-  }
-  tabHuman.addEventListener('click', () => showTab(false));
-  tabCreator.addEventListener('click', () => showTab(true));
-  document.getElementById('stepToPledge').addEventListener('click', () => {
-    showTab(false);
-    if (!submitted) document.getElementById('firstName').focus();
-  });
   document.getElementById('thanksClose').addEventListener('click', closeThanks);
   // Only dismiss when the press STARTED on the veil; otherwise selecting text
   // in the modal and releasing outside would fire a click on the veil and close it.
