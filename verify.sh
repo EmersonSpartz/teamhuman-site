@@ -10,6 +10,17 @@ check() { # check <label> <condition-exit-code>
   if [ "$2" -eq 0 ]; then echo "  PASS  $1"; else echo "  FAIL  $1"; FAIL=1; fi
 }
 
+# HTTP status with retries: a single CDN blip during a fresh deploy used to fail the run
+code() { # code <url>
+  local url="$1" c=""
+  for _ in 1 2 3; do
+    c=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 "$url")
+    [ "$c" = "200" ] && break
+    sleep 2
+  done
+  echo "$c"
+}
+
 echo "== TeamHuman verify =="
 
 # 1. Live page reachable and serving current copy
@@ -39,7 +50,7 @@ if [ "$SRC" != "local" ]; then
   IMGS=$(echo "$HTML" | grep -oE 'src="[^"]+\.(jpg|png)"' | sed 's/src="//;s/"//' | sort -u)
   BAD=0
   for img in $IMGS; do
-    code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 "${LIVE}${img}")
+    code=$(code "${LIVE}${img}")
     [ "$code" != "200" ] && BAD=1 && echo "         missing: $img ($code)"
   done
   check "all $(echo "$IMGS" | wc -l | tr -d ' ') referenced images return 200" $BAD
@@ -69,12 +80,12 @@ if [ "$SRC" != "local" ]; then
   if echo "$JOIN" | grep -q "—"; then echo "  FAIL  em dash on /invite"; FAIL=1; else echo "  PASS  no em dashes on /invite"; fi
   JBAD=0
   for img in $(echo "$JOIN" | grep -oE 'src="\.\./[^"]+\.(jpg|png)"' | sed 's/src="\.\.\///;s/"//' | sort -u); do
-    code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 "${LIVE}${img}")
+    code=$(code "${LIVE}${img}")
     [ "$code" != "200" ] && JBAD=1 && echo "         missing on /invite: $img ($code)"
   done
   check "/invite assets resolve" $JBAD
   echo "$HTML" | grep -q 'class="creator-link" href="invite/"' ; check "creator link points at /invite" $?
-  RD=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 "${LIVE}join/")
+  RD=$(code "${LIVE}join/")
   [ "$RD" = "200" ] ; check "old /join URL still resolves (redirects to /invite)" $?
 fi
 
