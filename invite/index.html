@@ -62,21 +62,6 @@
   h1 em { font-style: italic; color: var(--terracotta); }
   .lede { font-size: 1.08rem; color: #4c443a; max-width: 540px; margin: 16px auto 0; }
 
-  .steps { list-style: none; counter-reset: step; text-align: left; max-width: 620px; margin: 0 auto 34px; }
-  .steps li {
-    counter-increment: step; position: relative;
-    padding: 14px 0 14px 46px; font-size: .98rem; color: #4c443a;
-    border-bottom: 1px solid var(--line);
-  }
-  .steps li:last-child { border-bottom: none; }
-  .steps li::before {
-    content: counter(step); position: absolute; left: 0; top: 14px;
-    width: 30px; height: 30px; border-radius: 50%;
-    background: var(--terracotta); color: var(--cream);
-    font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-size: 1rem;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .steps li strong { color: var(--charcoal); }
   .form-lead {
     max-width: 620px; margin: 0 auto 16px; text-align: center;
     font-size: .9rem; font-weight: 700; letter-spacing: .18em;
@@ -123,14 +108,8 @@
       <img class="ornament" src="../brand/handprint.png" alt="">
       <div class="kicker">For creators</div>
       <h1>You get us <em>over the finish line</em>.</h1>
-      <p class="lede">Three steps, and we handle the rest.</p>
     </div>
 
-    <ol class="steps" role="list">
-      <li><strong>Add your name.</strong> Sign the same way everyone else does, at <a href="../index.html">teamhuman.org</a>.</li>
-      <li><strong>Tell your audience.</strong> A video, a short, a post: say why you signed, in your own words. Your voice reaches further than any ad we could buy.</li>
-      <li><strong>Bring three creators.</strong> Send this page to three friends with an audience. That is how this becomes a movement.</li>
-    </ol>
     <p class="form-lead">Tell us where to send your toolkit</p>
     <div class="form-card">
       <iframe
