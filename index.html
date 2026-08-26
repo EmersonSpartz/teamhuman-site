@@ -104,6 +104,22 @@
   @media (max-width: 700px) { .hero-cloud img { opacity: .3; } }
 
   /* partner credit: black CAIS logomark inline with the name */
+  .roster { max-width: 940px; margin: 52px auto 0; }
+  .roster-head {
+    text-align: center; font-size: .72rem; font-weight: 700; letter-spacing: .24em;
+    text-transform: uppercase; color: var(--walnut); margin-bottom: 18px;
+  }
+  .roster-list {
+    list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+  }
+  .roster-list li {
+    display: inline-flex; align-items: baseline; gap: 7px;
+    background: var(--parchment); border: 1px solid rgba(94,70,48,.16);
+    border-radius: 999px; padding: 7px 14px;
+  }
+  .rn { font-weight: 600; font-size: .88rem; color: var(--charcoal); }
+  .rs { font-size: .74rem; color: var(--terracotta); font-weight: 700; letter-spacing: .02em; }
+  @media (max-width: 640px) { .roster-list { gap: 6px; } .roster-list li { padding: 6px 11px; } .rn { font-size: .82rem; } }
   #voices h2 em { font-style: italic; color: var(--terracotta); }
   .lit-link { color: inherit; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
   .lit-link:hover { color: var(--terracotta-dark); }
@@ -857,15 +873,61 @@
         <div class="qsigned">Signed</div>
       </div>
       <div class="qcard reveal">
-        <div class="qhead"><span class="qmono" aria-hidden="true">M</span><div class="qname">Mario Joos</div></div>
+        <div class="qhead"><img loading="lazy" width="52" height="52" src="avatars/mariojoos.jpg" alt="Mario Joos"><div class="qname">Mario Joos</div></div>
         <blockquote>&ldquo;I signed because I care about preserving human creativity and making sure my kids can experience it the way we all have.&rdquo;</blockquote>
         <div class="qsigned">Signed</div>
       </div>
       <div class="qcard reveal">
-        <div class="qhead"><span class="qmono" aria-hidden="true">O</span><div class="qname">Oliver Gilpin</div></div>
+        <div class="qhead"><img loading="lazy" width="52" height="52" src="avatars/olivergilpin.jpg" alt="Oliver Gilpin"><div class="qname">Oliver Gilpin</div></div>
         <blockquote>&ldquo;I signed because AI will impact the life of every viewer I have. That can be a positive impact, but only if we control the AI arms race with international agreements.&rdquo;</blockquote>
         <div class="qsigned">Signed</div>
       </div>
+    </div>
+    <div class="roster reveal">
+      <div class="roster-head">Creators who have signed on</div>
+      <ul class="roster-list">
+      <li><span class="rn">Kurzgesagt</span><span class="rs">25M</span></li>
+      <li><span class="rn">Rebecca Zamolo</span><span class="rs">22.9M</span></li>
+      <li><span class="rn">Preston</span><span class="rs">17.7M</span></li>
+      <li><span class="rn">The Infographics Show</span><span class="rs">15.5M</span></li>
+      <li><span class="rn">Fun Squad</span><span class="rs">13M</span></li>
+      <li><span class="rn">Jenny Hoyos</span><span class="rs">12.4M</span></li>
+      <li><span class="rn">Aburob</span><span class="rs">11M</span></li>
+      <li><span class="rn">Simon Squibb</span><span class="rs">10M</span></li>
+      <li><span class="rn">Matt Slays</span><span class="rs">8.8M</span></li>
+      <li><span class="rn">Matthew Beem</span><span class="rs">8.2M</span></li>
+      <li><span class="rn">Jeremy Ethier</span><span class="rs">7.9M</span></li>
+      <li><span class="rn">Joseph&#x27;s Machines</span><span class="rs">7.7M</span></li>
+      <li><span class="rn">Rob Landes</span><span class="rs">4.5M</span></li>
+      <li><span class="rn">After Skool</span><span class="rs">3.8M</span></li>
+      <li><span class="rn">SimplyChris</span><span class="rs">3.3M</span></li>
+      <li><span class="rn">Rebecca Rogers</span><span class="rs">2.5M</span></li>
+      <li><span class="rn">Scott Christian Sava</span><span class="rs">2.4M</span></li>
+      <li><span class="rn">SolarBalls</span><span class="rs">2.2M</span></li>
+      <li><span class="rn">MrSpherical</span><span class="rs">2M</span></li>
+      <li><span class="rn">Lindsay Nikole</span><span class="rs">2M</span></li>
+      <li><span class="rn">Charles Berthoud</span><span class="rs">2M</span></li>
+      <li><span class="rn">Fenitas</span><span class="rs">1.8M</span></li>
+      <li><span class="rn">Moon</span><span class="rs">1.7M</span></li>
+      <li><span class="rn">Rudan Brothers</span><span class="rs">1.6M</span></li>
+      <li><span class="rn">Sciencephile</span><span class="rs">1.1M</span></li>
+      <li><span class="rn">Popcorned Planet</span><span class="rs">1M</span></li>
+      <li><span class="rn">BlackBeltBarrister</span><span class="rs">1M</span></li>
+      <li><span class="rn">General Knowledge</span><span class="rs">938K</span></li>
+      <li><span class="rn">IAmCrusty</span><span class="rs">850K</span></li>
+      <li><span class="rn">Louis Weisz</span><span class="rs">742K</span></li>
+      <li><span class="rn">Kraut</span><span class="rs">603K</span></li>
+      <li><span class="rn">Digital Engine</span><span class="rs">584K</span></li>
+      <li><span class="rn">Hayden Hillier-Smith</span><span class="rs">400K</span></li>
+      <li><span class="rn">Atrium</span><span class="rs">400K</span></li>
+      <li><span class="rn">InsideAI</span><span class="rs">389K</span></li>
+      <li><span class="rn">Human Buddy</span><span class="rs">362K</span></li>
+      <li><span class="rn">Eli</span><span class="rs">310K</span></li>
+      <li><span class="rn">Drumev</span><span class="rs">300K</span></li>
+      <li><span class="rn">Liv Boeree</span><span class="rs">250K</span></li>
+      <li><span class="rn">Auralis</span><span class="rs">127K</span></li>
+      <li><span class="rn">NoahGlennCarter</span><span class="rs">79K</span></li>
+      </ul>
     </div>
   </div>
 </section>
