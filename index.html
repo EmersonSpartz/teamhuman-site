@@ -104,11 +104,7 @@
   @media (max-width: 700px) { .hero-cloud img { opacity: .3; } }
 
   /* partner credit: black CAIS logomark inline with the name */
-  .roster { max-width: 940px; margin: 52px auto 0; }
-  .roster-head {
-    text-align: center; font-size: .72rem; font-weight: 700; letter-spacing: .24em;
-    text-transform: uppercase; color: var(--walnut); margin-bottom: 18px;
-  }
+  .roster { max-width: 940px; margin: 46px auto 0; padding-top: 34px; border-top: 1px solid var(--line); }
   .roster-list {
     list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
   }
@@ -116,6 +112,11 @@
     display: inline-flex; align-items: baseline; gap: 7px;
     background: var(--parchment); border: 1px solid rgba(94,70,48,.16);
     border-radius: 999px; padding: 7px 14px;
+  }
+  .roster-list li.rmore {
+    background: none; border: 1px dashed rgba(94,70,48,.3);
+    color: var(--walnut); font-style: italic; font-size: .84rem;
+    font-family: 'Fraunces', Georgia, serif;
   }
   .rn { font-weight: 600; font-size: .88rem; color: var(--charcoal); }
   .rs { font-size: .74rem; color: var(--terracotta); font-weight: 700; letter-spacing: .02em; }
@@ -884,7 +885,8 @@
       </div>
     </div>
     <div class="roster reveal">
-      <div class="roster-head">Creators who have signed on</div>
+      <!-- Excluded by Emerson as too small to add proof: Auralis (127K), NoahGlennCarter (79K).
+           Regenerating from the tracker must keep them out. -->
       <ul class="roster-list">
       <li><span class="rn">Kurzgesagt</span><span class="rs">25M</span></li>
       <li><span class="rn">Rebecca Zamolo</span><span class="rs">22.9M</span></li>
@@ -925,8 +927,7 @@
       <li><span class="rn">Eli</span><span class="rs">310K</span></li>
       <li><span class="rn">Drumev</span><span class="rs">300K</span></li>
       <li><span class="rn">Liv Boeree</span><span class="rs">250K</span></li>
-      <li><span class="rn">Auralis</span><span class="rs">127K</span></li>
-      <li><span class="rn">NoahGlennCarter</span><span class="rs">79K</span></li>
+      <li class="rmore">and more, every week</li>
       </ul>
     </div>
   </div>
