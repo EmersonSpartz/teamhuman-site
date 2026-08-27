@@ -55,6 +55,8 @@
   }
   .out button:hover { background: var(--terracotta-dark); }
   .fine { font-size: .78rem; color: #8a7c66; margin-top: 12px; }
+  .crosslink { margin-top: 26px; font-size: .86rem; color: #8a7c66; }
+  .crosslink a { color: var(--terracotta); font-weight: 600; }
 </style>
 <script>if(!localStorage.getItem('th_gate'))document.documentElement.classList.add('locked')</script>
 <style>html.locked{overflow:hidden}html.locked body>*{visibility:hidden}</style>
@@ -71,6 +73,7 @@
     <button id="copyBtn" type="button">Copy password</button>
     <div class="fine" id="copied">&nbsp;</div>
   </div>
+  <p class="crosslink">Adding a creator to the site instead? <a href="creators-admin.html">Add a creator</a></p>
 </div>
 <script>
   // The password is the creator's name, exactly as typed.
