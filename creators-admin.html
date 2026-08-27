@@ -151,39 +151,65 @@
             .replace(/\b\w/g, function (c) { return c.toUpperCase(); }).trim();
   }
 
+  // A handle is only trustworthy once its picture has actually come back. Track the
+  // verdict per handle so that editing the name or follower count never revives a
+  // stale one, and so the seconds spent waiting on the network are not a window in
+  // which the operator can copy an unchecked row.
+  var okHandle = '', badHandle = '', requestedUrl = '';
+  var btn = document.getElementById('copyBtn');
+
+  function setState(state, msg) { // 'ok' | 'bad' | 'checking' | 'empty'
+    pvFace.classList.toggle('missing', state === 'bad');
+    warn.className = state === 'bad' ? 'warn bad' : 'warn';
+    warn.textContent = state === 'bad' ? msg : '';
+    btn.disabled = state !== 'ok';
+    btn.textContent = state === 'ok' ? 'Copy row'
+      : state === 'bad' ? 'Check the handle first'
+      : state === 'checking' ? 'Checking the channel...'
+      : 'Copy row';
+  }
+  function badMsg(h) {
+    return 'No YouTube channel found for @' + h + '. Check the spelling: do not add this row until a face shows up.';
+  }
+
   function refresh() {
     var h = handleOf(yt.value);
     if (h) {
       // fallback=false makes unavatar answer 404 for a handle that does not exist,
       // instead of 200 with a generic placeholder face. That 404 fires 'error' below,
       // which is the only reliable way to catch a typo before it reaches the site.
-      pvFace.src = 'https://unavatar.io/youtube/' + encodeURIComponent(h) + '?fallback=false';
+      var url = 'https://unavatar.io/youtube/' + encodeURIComponent(h) + '?fallback=false';
+      if (h === okHandle) setState('ok');
+      else if (h === badHandle) setState('bad', badMsg(h));
+      else setState('checking');
+      // only re-request when the handle actually changed, so typing a name or a
+      // follower count does not re-hit unavatar on every keystroke
+      if (requestedUrl !== url) { requestedUrl = url; pvFace.src = url; }
       if (!nm.value) nm.placeholder = titleFromHandle(h);
     } else {
       pvFace.removeAttribute('src');
-      setBlocked(false);
-      document.getElementById('copyBtn').disabled = true;
+      requestedUrl = '';
+      setState('empty');
     }
     var name = nm.value.trim() || (h ? titleFromHandle(h) : 'Name');
     pvName.textContent = name;
     pvSubs.textContent = prettyFollowers(fc.value);
     rowOut.textContent = [h ? '@' + h : '', name, prettyFollowers(fc.value), feat.checked ? 'yes' : ''].join('\t');
   }
-  function setBlocked(on, msg) {
-    pvFace.classList.toggle('missing', on);
-    warn.className = on ? 'warn bad' : 'warn';
-    warn.textContent = on ? msg : '';
-    // A row with no verified face must not be easy to paste into the sheet.
-    var btn = document.getElementById('copyBtn');
-    btn.disabled = on;
-    btn.textContent = on ? 'Check the handle first' : 'Copy row';
-  }
-  pvFace.addEventListener('load', function () { setBlocked(false); });
+
+  pvFace.addEventListener('load', function () {
+    var h = handleOf(yt.value);
+    if (!h) return;
+    okHandle = h; badHandle = '';
+    setState('ok');
+  });
   pvFace.addEventListener('error', function () {
     var h = handleOf(yt.value);
     // drop the src so the browser stops drawing its broken-image glyph
     pvFace.removeAttribute('src');
-    setBlocked(!!h, 'No YouTube channel found for @' + h + '. Check the spelling: do not add this row until a face shows up.');
+    if (!h) { setState('empty'); return; }
+    badHandle = h; okHandle = '';
+    setState('bad', badMsg(h));
   });
   [yt, nm, fc].forEach(function (el) { el.addEventListener('input', refresh); });
   feat.addEventListener('change', refresh);

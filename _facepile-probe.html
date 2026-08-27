@@ -1,0 +1,27 @@
+<!DOCTYPE html><meta name=viewport content="width=device-width,initial-scale=1">
+<style>
+  .faces { display:flex; }
+  .faces img, .face-more { width:56px;height:56px;border-radius:50%;object-fit:cover;
+    border:2px solid #f6efe3;box-shadow:0 0 0 1px #5e4630;margin-left:-14px; }
+  .faces img:first-child { margin-left:0; }
+  @media (max-width:640px){ .faces img,.face-more{width:42px;height:42px;margin-left:-11px} }
+  .face-more{display:flex;align-items:center;justify-content:center;background:#fbf6ec;color:#5e4630;font-weight:700}
+  @media (max-width:480px){ .faces img:nth-child(n+7){display:none} }
+</style>
+<span class="faces">
+<img alt="" title="Preston"><img alt="" title="Kurzgesagt"><img alt="" title="Jenny Hoyos"><img alt="" title="Simon Squibb"><img alt="" title="Infographics"><img alt="" title="Lindsay Nikole"><span class="face-more">+</span>
+</span>
+<pre id=out></pre>
+<script>
+// mimic index.html exactly: insertBefore(img, plus)
+var faces=document.querySelector('.faces'), plus=document.querySelector('.face-more');
+['NewFeatured1','NewFeatured2'].forEach(function(n){
+  var img=document.createElement('img'); img.alt=''; img.title=n; img.width=56; img.height=56;
+  faces.insertBefore(img, plus);
+});
+window.report=function(){
+  return [...faces.querySelectorAll('img')].map(i=>i.title+' => '+getComputedStyle(i).display).join('\n')
+    + '\ninnerWidth='+window.innerWidth;
+};
+document.getElementById('out').textContent=report();
+</script>
