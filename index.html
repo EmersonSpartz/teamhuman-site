@@ -1036,6 +1036,73 @@
 
 <script>
   document.body.classList.add('js');
+  // Creator roster: baked-in list plus anything the team adds to the published sheet.
+  // Sheet columns: youtube | name | followers | featured. Failure is silent by design,
+  // so a sheet outage leaves the baked list on the page rather than an empty section.
+  const CREATOR_SHEET = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQEFEVKGNPMp2h7vp11m4ztf5MKT45josJPGI2VdeceyoHQGWrpudm1jWi4Eurh5o2lzlkAQVS5X5A1/pub?output=csv';
+  function subsToNumber(t) {
+    const m = String(t || '').trim().replace(/,/g, '').match(/^([\d.]+)\s*([KMkm]?)/);
+    if (!m) return 0;
+    const v = parseFloat(m[1]), u = m[2].toUpperCase();
+    return u === 'M' ? v * 1e6 : u === 'K' ? v * 1e3 : v;
+  }
+  function parseCsv(text) {
+    return text.trim().split(/\r?\n/).slice(1).map(line => {
+      const cells = []; let cur = '', q = false;
+      for (const ch of line) {
+        if (ch === '"') q = !q;
+        else if (ch === ',' && !q) { cells.push(cur); cur = ''; }
+        else cur += ch;
+      }
+      cells.push(cur);
+      return cells.map(c => c.trim());
+    }).filter(c => c[1]);
+  }
+  (async function loadCreators() {
+    const list = document.querySelector('.roster-list');
+    if (!list) return;
+    let rows;
+    try {
+      const res = await fetch(CREATOR_SHEET, { cache: 'no-store' });
+      if (!res.ok) return;
+      rows = parseCsv(await res.text());
+    } catch (e) { return; }
+    if (!rows.length) return;
+
+    const existing = new Set([...list.querySelectorAll('.rn')].map(n => n.textContent.trim().toLowerCase()));
+    const more = list.querySelector('.rmore');
+    rows.forEach(([handle, name, followers]) => {
+      if (existing.has(name.toLowerCase())) return;
+      const li = document.createElement('li');
+      const n = document.createElement('span'); n.className = 'rn'; n.textContent = name;
+      li.appendChild(n);
+      if (followers) { const f = document.createElement('span'); f.className = 'rs'; f.textContent = followers; li.appendChild(f); }
+      list.insertBefore(li, more);
+      existing.add(name.toLowerCase());
+    });
+    // keep the wall ordered by reach, with the "and more" chip last
+    const chips = [...list.querySelectorAll('li:not(.rmore)')]
+      .sort((a, b) => subsToNumber(b.querySelector('.rs')?.textContent) - subsToNumber(a.querySelector('.rs')?.textContent));
+    chips.forEach(c => list.insertBefore(c, more));
+
+    // featured creators join the row of faces at the top
+    const faces = document.querySelector('.faces'), plus = document.querySelector('.face-more');
+    if (faces && plus) {
+      const shown = new Set([...faces.querySelectorAll('img')].map(i => (i.title || '').toLowerCase()));
+      rows.forEach(([handle, name, followers, featured]) => {
+        if (!/^y/i.test(featured || '') || !handle || shown.has(name.toLowerCase())) return;
+        const img = document.createElement('img');
+        // fallback=false: a mistyped handle 404s and the face is dropped below,
+        // rather than resolving to a generic placeholder that looks like a real creator.
+        img.src = 'https://unavatar.io/youtube/' + encodeURIComponent(handle.replace(/^@/, '')) + '?fallback=false';
+        img.alt = ''; img.title = name; img.width = 56; img.height = 56;
+        img.addEventListener('error', () => img.remove());
+        faces.insertBefore(img, plus);
+        shown.add(name.toLowerCase());
+      });
+    }
+  })();
+
   // Launch countdown. Change LAUNCH to move the date; the bar hides itself once it passes.
   const LAUNCH = new Date('2026-10-03T00:00:00-07:00');
   const cd = { d: document.getElementById('cd-d'), h: document.getElementById('cd-h'),

@@ -87,6 +87,26 @@ if [ "$SRC" != "local" ]; then
   echo "$HTML" | grep -q 'class="creator-link" href="invite/"' ; check "creator link points at /invite" $?
   RD=$(code "${LIVE}join/")
   [ "$RD" = "200" ] ; check "old /join URL still resolves (redirects to /invite)" $?
+
+  # 6. Creator admin: the team adds creators through this page + a published sheet.
+  ADM=$(code "${LIVE}creators-admin.html")
+  [ "$ADM" = "200" ] ; check "/creators-admin.html reachable" $?
+  echo "$HTML" | grep -q "output=csv" ; check "site reads the creator sheet" $?
+  SHEET_CSV=$(echo "$HTML" | grep -oE "https://docs.google.com/spreadsheets/d/e/[^']+pub\?output=csv" | head -1)
+  if [ -n "$SHEET_CSV" ]; then
+    CSVHEAD=$(curl -sfL --max-time 20 "$SHEET_CSV" 2>/dev/null | head -1 | tr -d '\r')
+    echo "$CSVHEAD" | grep -q "youtube,name,followers,featured" ; check "creator sheet published and serving expected columns" $?
+  else
+    echo "  FAIL  could not find the published sheet URL in the page"; FAIL=1
+  fi
+  # The sheet supplements the roster; it must never be the only source, or a sheet
+  # outage would empty the wall of creators.
+  BAKED=$(echo "$HTML" | grep -c 'class="rn"')
+  [ "$BAKED" -ge 35 ] ; check "roster still baked into the HTML ($BAKED chips, sheet is additive)" $?
+  # unavatar must be asked for a hard 404 on a bad handle, not a generic placeholder face
+  if echo "$HTML" | grep -q "unavatar.io"; then
+    echo "$HTML" | grep -q "fallback=false" ; check "avatar lookups use fallback=false (no placeholder faces)" $?
+  fi
 fi
 
 echo "======================"
