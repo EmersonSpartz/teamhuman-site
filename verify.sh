@@ -91,6 +91,11 @@ if [ "$SRC" != "local" ]; then
   # 6. Creator admin: the team adds creators through this page + a published sheet.
   ADM=$(code "${LIVE}creators-admin.html")
   [ "$ADM" = "200" ] ; check "/creators-admin.html reachable" $?
+  # The copy button must stay blocked while a handle is unverified, not just after a
+  # failed lookup: an in-flight or hung avatar request is exactly when a bad row slips out.
+  ADMHTML=$(curl -sfL --max-time 20 "${LIVE}creators-admin.html" 2>/dev/null)
+  echo "$ADMHTML" | grep -q "Checking the channel" ; check "admin blocks copying while a handle is still unverified" $?
+  echo "$ADMHTML" | grep -q "Check the handle first" ; check "admin blocks copying on a failed handle lookup" $?
   echo "$HTML" | grep -q "output=csv" ; check "site reads the creator sheet" $?
   SHEET_CSV=$(echo "$HTML" | grep -oE "https://docs.google.com/spreadsheets/d/e/[^']+pub\?output=csv" | head -1)
   if [ -n "$SHEET_CSV" ]; then
