@@ -1069,16 +1069,19 @@
     } catch (e) { return; }
     if (!rows.length) return;
 
-    const existing = new Set([...list.querySelectorAll('.rn')].map(n => n.textContent.trim().toLowerCase()));
+    // Match names loosely so a sheet row typed "JennyHoyos" does not render a
+    // second chip next to the baked-in "Jenny Hoyos".
+    const nameKey = t => (t || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    const existing = new Set([...list.querySelectorAll('.rn')].map(n => nameKey(n.textContent)));
     const more = list.querySelector('.rmore');
     rows.forEach(([handle, name, followers]) => {
-      if (existing.has(name.toLowerCase())) return;
+      if (existing.has(nameKey(name))) return;
       const li = document.createElement('li');
       const n = document.createElement('span'); n.className = 'rn'; n.textContent = name;
       li.appendChild(n);
       if (followers) { const f = document.createElement('span'); f.className = 'rs'; f.textContent = followers; li.appendChild(f); }
       list.insertBefore(li, more);
-      existing.add(name.toLowerCase());
+      existing.add(nameKey(name));
     });
     // keep the wall ordered by reach, with the "and more" chip last
     const chips = [...list.querySelectorAll('li:not(.rmore)')]
@@ -1088,9 +1091,9 @@
     // featured creators join the row of faces at the top
     const faces = document.querySelector('.faces'), plus = document.querySelector('.face-more');
     if (faces && plus) {
-      const shown = new Set([...faces.querySelectorAll('img')].map(i => (i.title || '').toLowerCase()));
+      const shown = new Set([...faces.querySelectorAll('img')].map(i => nameKey(i.title)));
       rows.forEach(([handle, name, followers, featured]) => {
-        if (!/^y/i.test(featured || '') || !handle || shown.has(name.toLowerCase())) return;
+        if (!/^y/i.test(featured || '') || !handle || shown.has(nameKey(name))) return;
         const img = document.createElement('img');
         // fallback=false: a mistyped handle 404s and the face is dropped below,
         // rather than resolving to a generic placeholder that looks like a real creator.
@@ -1098,7 +1101,7 @@
         img.alt = ''; img.title = name; img.width = 56; img.height = 56;
         img.addEventListener('error', () => img.remove());
         faces.insertBefore(img, plus);
-        shown.add(name.toLowerCase());
+        shown.add(nameKey(name));
       });
     }
   })();
