@@ -52,15 +52,52 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
   }
   .progress {
-    position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    position: fixed; top: 56px; left: 0; height: 3px; width: 0;
     background: var(--terracotta); z-index: 120;
   }
   .wrap { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
   .serif { font-family: 'Fraunces', Georgia, serif; }
 
   /* ---------- NAV ---------- */
+  /* launch countdown bar */
+  .announce {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--charcoal); color: var(--cream);
+  }
+  .announce-inner {
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+    height: 56px; flex-wrap: nowrap;
+  }
+  .ann-pill {
+    background: var(--terracotta); color: var(--cream); border-radius: 999px;
+    padding: 5px 14px; font-size: .68rem; font-weight: 700;
+    letter-spacing: .18em; text-transform: uppercase; white-space: nowrap;
+  }
+  .ann-text { font-size: .88rem; color: rgba(251,246,236,.82); white-space: nowrap; }
+  .ann-clock { display: flex; align-items: center; gap: 6px; }
+  .cu {
+    display: flex; flex-direction: column; align-items: center;
+    background: rgba(251,246,236,.08); border: 1px solid rgba(251,246,236,.16);
+    border-radius: 7px; padding: 4px 9px 3px; min-width: 46px;
+  }
+  .cu b {
+    font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-size: 1rem;
+    line-height: 1.05; font-variant-numeric: tabular-nums;
+  }
+  .cu i {
+    font-style: normal; font-size: .52rem; letter-spacing: .14em;
+    text-transform: uppercase; color: rgba(251,246,236,.6);
+  }
+  .cs { color: rgba(251,246,236,.35); font-weight: 700; }
+  @media (max-width: 700px) {
+    .announce-inner { height: 50px; gap: 10px; }
+    .ann-text { display: none; }
+    .ann-pill { font-size: .6rem; padding: 4px 10px; letter-spacing: .14em; }
+    .cu { min-width: 38px; padding: 3px 6px 2px; }
+    .cu b { font-size: .86rem; }
+  }
   nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 90;
+    position: fixed; top: 56px; left: 0; right: 0; z-index: 90;
     background: rgba(246,239,227,.92);
     backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--line);
@@ -96,7 +133,7 @@
   /* ---------- HERO ---------- */
   header {
     position: relative; overflow: hidden;
-    padding: 150px 0 72px;
+    padding: 200px 0 72px;
     background: var(--parchment);
   }
   .hero-cloud { position: absolute; left: 0; right: 0; bottom: -2px; pointer-events: none; z-index: 0; mix-blend-mode: multiply; }
@@ -218,12 +255,15 @@
   .pledge-fine a:hover, .disclaimer a:hover { color: var(--terracotta); }
   .disclaimer + .disclaimer { margin-top: 8px; }
   .creator-link {
-    display: inline-block; background: none; border: none; padding: 0; margin-top: 14px;
-    text-decoration: none;
-    font: inherit; font-size: .84rem; font-weight: 600; color: var(--walnut);
-    cursor: pointer; transition: color .2s;
+    display: inline-block; margin-top: 18px; text-decoration: none;
+    background: rgba(156,58,38,.06); border: 1.5px solid rgba(156,58,38,.35);
+    border-radius: 999px; padding: 11px 24px;
+    font: inherit; font-size: .95rem; font-weight: 700; color: var(--terracotta);
+    cursor: pointer; transition: background .2s, border-color .2s, transform .15s;
   }
-  .creator-link:hover { color: var(--terracotta); }
+  .creator-link:hover {
+    background: rgba(156,58,38,.12); border-color: var(--terracotta); transform: translateY(-1px);
+  }
   .toggle {
     display: flex; background: var(--parchment); border: 1px solid var(--line);
     border-radius: 10px; padding: 4px; margin-bottom: 20px;
@@ -363,7 +403,7 @@
   .pledge-fine { font-size: .74rem; color: #8a7c66; margin-top: 12px; }
 
   /* ---------- SECTIONS ---------- */
-  section { padding: 96px 0; scroll-margin-top: 66px; position: relative; }
+  section { padding: 96px 0; scroll-margin-top: 124px; position: relative; }
   .ornament { text-align: center; margin-bottom: 34px; }
   .ornament img { width: 30px; opacity: .4; mix-blend-mode: multiply; }
   .kicker {
@@ -426,7 +466,7 @@
   }
   .split p { color: #4c443a; margin-bottom: 15px; font-size: .98rem; }
   .split p strong { color: var(--charcoal); }
-  #demand { scroll-margin-top: 90px; }
+  #demand { scroll-margin-top: 148px; }
   .demand-lead {
     font-size: clamp(2rem, 4.8vw, 3.4rem); font-weight: 600; line-height: 1.15;
     letter-spacing: -.01em; color: var(--charcoal); max-width: 800px;
@@ -678,9 +718,11 @@
   }
 
   @media (max-width: 700px) {
+    nav { top: 50px; }
+    .progress { top: 50px; }
     .nav-links a:not(.btn) { display: none; }
     section { padding: 64px 0; }
-    header { padding-top: 120px; }
+    header { padding-top: 155px; }
     .fields { grid-template-columns: 1fr; }
   }
 </style>
@@ -693,6 +735,21 @@
 <a class="skip-link" href="#pledge">Skip to the pledge</a>
 <div class="progress" id="progressBar" aria-hidden="true"></div>
 
+<div class="announce" id="announce">
+  <div class="wrap announce-inner">
+    <span class="ann-pill">Coming soon</span>
+    <span class="ann-text">Launching October 3rd</span>
+    <div class="ann-clock" id="clock" aria-label="Time until launch">
+      <span class="cu"><b id="cd-d">00</b><i>days</i></span>
+      <span class="cs">:</span>
+      <span class="cu"><b id="cd-h">00</b><i>hrs</i></span>
+      <span class="cs">:</span>
+      <span class="cu"><b id="cd-m">00</b><i>min</i></span>
+      <span class="cs">:</span>
+      <span class="cu"><b id="cd-s">00</b><i>sec</i></span>
+    </div>
+  </div>
+</div>
 <nav>
   <div class="wrap nav-inner">
     <a class="lockup" href="#top" aria-label="Team Human home"><img src="brand/wordmark.png" alt="Team Human"></a>
@@ -979,6 +1036,28 @@
 
 <script>
   document.body.classList.add('js');
+  // Launch countdown. Change LAUNCH to move the date; the bar hides itself once it passes.
+  const LAUNCH = new Date('2026-10-03T00:00:00-07:00');
+  const cd = { d: document.getElementById('cd-d'), h: document.getElementById('cd-h'),
+               m: document.getElementById('cd-m'), s: document.getElementById('cd-s') };
+  const announce = document.getElementById('announce');
+  function tickClock() {
+    const left = LAUNCH - new Date();
+    if (left <= 0) {
+      announce.style.display = 'none';
+      document.documentElement.style.setProperty('--ann-h', '0px');
+      return false;
+    }
+    const sec = Math.floor(left / 1000);
+    const pad = n => String(n).padStart(2, '0');
+    cd.d.textContent = pad(Math.floor(sec / 86400));
+    cd.h.textContent = pad(Math.floor(sec % 86400 / 3600));
+    cd.m.textContent = pad(Math.floor(sec % 3600 / 60));
+    cd.s.textContent = pad(sec % 60);
+    return true;
+  }
+  if (tickClock()) setInterval(tickClock, 1000);
+
   const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // Scroll: nav shadow, progress bar, hero hands parallax (drift toward each other)
