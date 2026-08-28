@@ -16,6 +16,7 @@
 <link rel="preload" as="image" href="brand/wordmark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href='https://actionnetwork.org/css/style-embed-v3.css' rel='stylesheet' type='text/css'>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -725,6 +726,87 @@
     header { padding-top: 155px; }
     .fields { grid-template-columns: 1fr; }
   }
+  /* ---- Action Network petition embed ----------------------------------
+     The widget injects its own markup into the card, so these rules dress it
+     as our form. Their stylesheet carries ~2700 !important declarations and
+     selectors like `.can_embed #can_embed_form #form_col1`, so each rule below
+     is flagged AND routed through #can_embed_form to carry three ids and win.
+     Their logo and the "Sponsored by" line are deliberately left visible. */
+  #can-petition-area-teamhuman-pledge { text-align: left; }
+  #can-petition-area-teamhuman-pledge .can_embed,
+  #can-petition-area-teamhuman-pledge #can_embed_form,
+  #can-petition-area-teamhuman-pledge #can_embed_form #can_embed_form_inner {
+    background: none !important; border: 0 !important; box-shadow: none !important;
+    margin: 0 !important; padding: 0 !important; max-width: none !important;
+    width: 100% !important; float: none !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  }
+  /* their title, target and "Sign This Petition" repeat the card copy above */
+  #can-petition-area-teamhuman-pledge #can_embed_form #can_embed_form_inner > h2,
+  #can-petition-area-teamhuman-pledge #can_embed_form #can_embed_form_inner > h3,
+  #can-petition-area-teamhuman-pledge #can_embed_form #can_embed_form_inner > h4 { display: none !important; }
+  /* their two floated columns are fixed-width and do not fit a 480px card */
+  #can-petition-area-teamhuman-pledge #can_embed_form #form_col1,
+  #can-petition-area-teamhuman-pledge #can_embed_form #form_col2 {
+    float: none !important; width: 100% !important; max-width: none !important;
+    margin: 0 !important; padding: 0 !important; list-style: none !important;
+  }
+  #can-petition-area-teamhuman-pledge #can_embed_form li.core_field {
+    list-style: none !important; margin: 0 0 10px !important; padding: 0 !important; width: 100% !important;
+  }
+  /* the comments box is not part of this form's design */
+  #can-petition-area-teamhuman-pledge #can_embed_form #form_col2 > .floatlabel-wrapper { display: none !important; }
+  #can-petition-area-teamhuman-pledge #can_embed_form input[type=text],
+  #can-petition-area-teamhuman-pledge #can_embed_form input[type=email],
+  #can-petition-area-teamhuman-pledge #can_embed_form select {
+    width: 100% !important; background: var(--parchment) !important;
+    border: 1px solid rgba(94,70,48,.22) !important; border-radius: 8px !important;
+    padding: 13px 14px !important; font-size: .92rem !important; font-family: inherit !important;
+    color: var(--charcoal) !important; height: auto !important; box-shadow: none !important;
+    line-height: 1.3 !important; appearance: none !important; -webkit-appearance: none !important;
+  }
+  #can-petition-area-teamhuman-pledge #can_embed_form .floatlabel-wrapper { height: auto !important; }
+  #can-petition-area-teamhuman-pledge #can_embed_form input[type=text]:focus,
+  #can-petition-area-teamhuman-pledge #can_embed_form input[type=email]:focus,
+  #can-petition-area-teamhuman-pledge #can_embed_form select:focus {
+    outline: none !important; border-color: var(--terracotta) !important;
+    box-shadow: 0 0 0 3px rgba(156,58,38,.14) !important;
+  }
+  #can-petition-area-teamhuman-pledge #can_embed_form .floatlabel-label {
+    color: #8d8272 !important; font-size: .92rem !important; font-family: inherit !important;
+  }
+  #can-petition-area-teamhuman-pledge #can_embed_form input[type=submit] {
+    display: block !important; width: 100% !important; float: none !important;
+    background: var(--terracotta) !important; color: var(--cream) !important;
+    font-weight: 600 !important; border: none !important; cursor: pointer !important;
+    padding: 15px 0 !important; margin: 6px 0 0 !important; border-radius: 8px !important;
+    font-size: .85rem !important; font-family: inherit !important;
+    letter-spacing: .12em !important; text-transform: uppercase !important; height: auto !important;
+    box-shadow: 0 1px 2px rgba(32,28,23,.14), 0 4px 14px rgba(94,70,48,.22) !important;
+  }
+  #can-petition-area-teamhuman-pledge #can_embed_form input[type=submit]:hover {
+    background: var(--terracotta-dark) !important;
+  }
+  #can-petition-area-teamhuman-pledge #can_embed_form .international_link {
+    color: var(--terracotta) !important; font-size: .78rem !important;
+  }
+  #can-petition-area-teamhuman-pledge #can_embed_form #d_sharing label,
+  #can-petition-area-teamhuman-pledge #can_embed_form #action_info {
+    font-size: .78rem !important; color: #8a7c66 !important; font-family: inherit !important;
+  }
+  #can-petition-area-teamhuman-pledge #can_embed_form #d_sharing { margin-top: 12px !important; }
+  #can-petition-area-teamhuman-pledge #can_embed_form #action_info {
+    border: 0 !important; padding: 14px 0 0 !important; text-align: center !important; background: none !important;
+  }
+  #can-petition-area-teamhuman-pledge #can_embed_form #action_info a { color: var(--terracotta) !important; }
+  #can-petition-area-teamhuman-pledge .can_embed #logo_wrap {
+    background: none !important; border: 0 !important; padding: 12px 0 0 !important;
+    /* theirs ships margin:20px -19px -19px; the negative bottom pulled our
+       fine print up underneath the logo */
+    margin: 10px 0 0 !important;
+    text-align: center !important; opacity: .5 !important;
+  }
+  #can-petition-area-teamhuman-pledge .can_embed #logo_wrap svg { max-width: 104px !important; height: auto !important; }
 </style>
 <script>if(!localStorage.getItem('th_gate'))document.documentElement.classList.add('locked')</script>
 <style>html.locked{overflow:hidden}html.locked body>*{visibility:hidden}</style>
@@ -774,22 +856,18 @@
     <p class="joined-caption">…and <strong id="counter" data-target="247318">0</strong><button type="button" class="tip tip-star" aria-label="About this number" data-tip="Illustrative for now: the campaign has not launched yet, so this count is simulated.">*</button> humans, so far.</p>
 
     <div class="pledge-card" id="pledge">
-      <form id="pledgeForm" novalidate>
+      <div id="pledgeForm">
         <p class="pledge-lead pledge-lead-solo">AI is progressing faster than our ability to control it.<sup class="cite"><a href="https://aistatement.com/work/statement-on-ai-extinction-risk" target="_blank" rel="noopener">1</a></sup> Add your name to the chorus of experts<sup class="cite"><a href="https://superintelligence-statement.org/" target="_blank" rel="noopener">2</a>,<a href="https://www.pacingthefrontier.com/" target="_blank" rel="noopener">3</a></sup> calling for a global slowdown through international agreements.</p>
-        <div class="fields">
-          <input type="text" id="firstName" placeholder="First Name" autocomplete="given-name">
-          <input type="text" id="lastName" placeholder="Last Name" autocomplete="family-name">
-          <input type="email" id="email" class="full" placeholder="Email Address" autocomplete="email">
-          <select id="country" class="full" required>
-            <option value="" selected disabled>Country</option>
-          </select>
-        </div>
-        <div class="pledge-error" id="pledgeError"></div>
-        <button type="submit" class="btn">Count Me In</button>
+        <!-- The real signature form. Action Network's widget injects a <form> into
+             the div below; because it is injected HTML and not an iframe, the
+             .can_embed rules in our stylesheet restyle it in place. No API key is
+             involved, and their own spam protection travels with it. -->
+        <script src="https://actionnetwork.org/widgets/v6/petition/teamhuman-pledge?format=js&amp;source=widget"></script>
+        <div id="can-petition-area-teamhuman-pledge" style="width:100%"></div>
         <p class="pledge-fine">This November, the <a href="https://safe.ai/" target="_blank" rel="noopener">Center for AI Safety</a> will hand-deliver every signature to hundreds of lawmakers in Washington and Brussels.</p>
         <p class="pledge-fine pledge-fine-tight">No spam, ever. We’ll only email you when it’s time to act, together.</p>
         <a class="creator-link" href="invite/">Are you a creator? →</a>
-      </form>
+      </div>
 
       <div id="signedState" hidden>
         <div class="pledge-title serif">YOU’RE IN ✓</div>
@@ -1163,9 +1241,6 @@
   ['problem', 'plan', 'voices'].forEach(id => secObserver.observe(document.getElementById(id)));
 
   // Countries
-  const COUNTRIES = ["Afghanistan","Albania","Algeria","Andorra","Angola","Argentina","Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Central African Republic","Chad","Chile","China","Colombia","Comoros","Costa Rica","Croatia","Cuba","Cyprus","Czechia","DR Congo","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Eswatini","Ethiopia","Fiji","Finland","France","Gabon","Gambia","Georgia","Germany","Ghana","Greece","Grenada","Guatemala","Guinea","Guyana","Haiti","Honduras","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Israel","Italy","Ivory Coast","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal","Netherlands","New Zealand","Nicaragua","Niger","Nigeria","North Korea","North Macedonia","Norway","Oman","Pakistan","Palau","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Qatar","Romania","Russia","Rwanda","Saint Lucia","Samoa","San Marino","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","Sudan","Suriname","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor-Leste","Togo","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Yemen","Zambia","Zimbabwe"];
-  const sel = document.getElementById('country');
-  COUNTRIES.forEach(c => { const o = document.createElement('option'); o.value = c; o.textContent = c; sel.appendChild(o); });
 
   // Reveal
   const io = new IntersectionObserver(entries => {
@@ -1225,7 +1300,6 @@
     }, 8000 + Math.floor(performance.now() % 4000));
   }, 4500);
 
-  const form = document.getElementById('pledgeForm');
 
   // Thank-you modal
   const veil = document.getElementById('thanksVeil');
@@ -1244,30 +1318,10 @@
     if (thanksOpener && thanksOpener.focus && document.contains(thanksOpener)) thanksOpener.focus();
   }
 
-  // Human pledge form
-  const errEl = document.getElementById('pledgeError');
-  let submitted = false;
+  // Human pledge form: Action Network owns submission now. It injects its own
+  // <form> and shows its own confirmation, so there is no handler of ours here.
   const pledgeThanks = () => openThanks('WELCOME TO TEAM HUMAN',
     "You’re one of <span id=\"successCount\">" + total.toLocaleString('en-US') + "</span> humans standing up. Now multiply yourself. Every share brings more pressure.");
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    if (submitted) { pledgeThanks(); return; }
-    const first = document.getElementById('firstName').value.trim();
-    const email = document.getElementById('email').value.trim();
-    if (!first) { errEl.textContent = 'Please enter your first name.'; return; }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errEl.textContent = 'Please enter a valid email address.'; return; }
-    if (!sel.value) { errEl.textContent = 'Please choose your country.'; return; }
-    errEl.textContent = '';
-    // Preview build: no backend yet. Swap this block for the real signup endpoint
-    // (keep the `submitted` guard when wiring it up, re-enable only on error).
-    submitted = true;
-    form.style.display = 'none';
-    document.getElementById('signedState').hidden = false;
-    total += 1;
-    counter.textContent = total.toLocaleString('en-US');
-    stickyCount.textContent = total.toLocaleString('en-US');
-    pledgeThanks();
-  });
   document.getElementById('reopenThanks').addEventListener('click', pledgeThanks);
 
   document.getElementById('thanksClose').addEventListener('click', closeThanks);
