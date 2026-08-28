@@ -88,7 +88,19 @@ if [ "$SRC" != "local" ]; then
   RD=$(code "${LIVE}join/")
   [ "$RD" = "200" ] ; check "old /join URL still resolves (redirects to /invite)" $?
 
-  # 6. Creator admin: the team adds creators through this page + a published sheet.
+  # 6. The signature form must be the real Action Network embed, not the old
+  #    simulated one, which accepted input and stored nothing.
+  echo "$HTML" | grep -q "widgets/v6/petition/teamhuman-pledge" ; check "hero form loads the Action Network widget" $?
+  echo "$HTML" | grep -q "can-petition-area-teamhuman-pledge" ; check "widget has its target container" $?
+  WCODE=$(code "https://actionnetwork.org/widgets/v6/petition/teamhuman-pledge?format=js&source=widget")
+  [ "$WCODE" = "200" ] ; check "Action Network widget reachable (got $WCODE)" $?
+  if echo "$HTML" | grep -qE 'id="firstName"|const COUNTRIES'; then
+    echo "  FAIL  the simulated signup form is back (it stores nothing)"; FAIL=1
+  else
+    echo "  PASS  simulated signup form is gone"
+  fi
+
+  # 7. Creator admin: the team adds creators through this page + a published sheet.
   ADM=$(code "${LIVE}creators-admin.html")
   [ "$ADM" = "200" ] ; check "/creators-admin.html reachable" $?
   # The copy button must stay blocked while a handle is unverified, not just after a
