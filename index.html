@@ -826,12 +826,13 @@
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8'><path d='M1 1l5 5 5-5' stroke='%235e4630' stroke-width='1.6' fill='none' stroke-linecap='round'/></svg>") !important;
     background-repeat: no-repeat !important; background-position: right 14px center !important;
   }
-  /* the opt-in stays visible on purpose: it is the visitor's consent to be
-     emailed, and hiding a pre-ticked box would subscribe people silently */
-  #can-petition-area-teamhuman-pledge #can_embed_form #d_sharing {
-    margin-top: 14px !important; text-align: center !important;
-    border: 0 !important; border-top: 0 !important; padding-top: 0 !important;
-  }
+  /* The email opt-in is hidden at Emerson's direction: the fine print under the
+     form already states people will be emailed ("No spam, ever. We'll only email
+     you when it's time to act, together."). The box stays checked and in the DOM,
+     so the subscription still posts; display:none does not stop a checked box
+     from submitting its value. Declared last so it beats the earlier #d_sharing
+     rules above. */
+  #can-petition-area-teamhuman-pledge #can_embed_form #d_sharing { display: none !important; }
   /* their select ships a white background that reads as a foreign control
      next to our parchment inputs */
   #can-petition-area-teamhuman-pledge #can_embed_form select {
