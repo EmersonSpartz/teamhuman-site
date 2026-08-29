@@ -807,6 +807,40 @@
     text-align: center !important; opacity: .5 !important;
   }
   #can-petition-area-teamhuman-pledge .can_embed #logo_wrap svg { max-width: 104px !important; height: auto !important; }
+  /* Hide the parts of Action Network's form the design never had. Zip is safe to
+     hide: verified by submitting with it empty, which Action Network accepted, so
+     it is marked required in their markup but not enforced on their server. The
+     required flag is stripped in JS below, otherwise the browser refuses to submit
+     a hidden required field. */
+  #can-petition-area-teamhuman-pledge #can_embed_form li.core_field.th-hide-zip,
+  #can-petition-area-teamhuman-pledge #can_embed_form .international_link-wrap,
+  #can-petition-area-teamhuman-pledge #can_embed_form #action_info,
+  #can-petition-area-teamhuman-pledge .can_embed #logo_wrap { display: none !important; }
+  /* their country picker is hidden behind a "Not in US?" link; the original card
+     showed a country dropdown, so show it permanently and dress it like ours */
+  #can-petition-area-teamhuman-pledge #can_embed_form .country_drop_wrap {
+    display: block !important; width: 100% !important; margin: 0 0 10px !important;
+  }
+  #can-petition-area-teamhuman-pledge #can_embed_form .country_drop_wrap span { display: block !important; width: 100% !important; }
+  #can-petition-area-teamhuman-pledge #can_embed_form select {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8'><path d='M1 1l5 5 5-5' stroke='%235e4630' stroke-width='1.6' fill='none' stroke-linecap='round'/></svg>") !important;
+    background-repeat: no-repeat !important; background-position: right 14px center !important;
+  }
+  /* the opt-in stays visible on purpose: it is the visitor's consent to be
+     emailed, and hiding a pre-ticked box would subscribe people silently */
+  #can-petition-area-teamhuman-pledge #can_embed_form #d_sharing {
+    margin-top: 14px !important; text-align: center !important;
+    border: 0 !important; border-top: 0 !important; padding-top: 0 !important;
+  }
+  /* their select ships a white background that reads as a foreign control
+     next to our parchment inputs */
+  #can-petition-area-teamhuman-pledge #can_embed_form select {
+    background-color: var(--parchment) !important; color: var(--charcoal) !important;
+  }
+  #can-petition-area-teamhuman-pledge #can_embed_form .country_drop_wrap select { width: 100% !important; }
+  #can-petition-area-teamhuman-pledge #can_embed_form #d_sharing label {
+    font-size: .76rem !important; color: #8a7c66 !important;
+  }
 </style>
 <script>if(!localStorage.getItem('th_gate'))document.documentElement.classList.add('locked')</script>
 <style>html.locked{overflow:hidden}html.locked body>*{visibility:hidden}</style>
@@ -864,6 +898,31 @@
              involved, and their own spam protection travels with it. -->
         <script src="https://actionnetwork.org/widgets/v6/petition/teamhuman-pledge?format=js&amp;source=widget"></script>
         <div id="can-petition-area-teamhuman-pledge" style="width:100%"></div>
+        <script>
+        // The widget injects its form asynchronously, so wait for it, then bring it
+        // in line with the original card: drop the zip requirement (hidden by CSS;
+        // a hidden *required* field makes Chrome refuse to submit at all), reveal the
+        // country picker, and restore the button label.
+        (function () {
+          var tries = 0;
+          var t = setInterval(function () {
+            var form = document.querySelector('#can_embed_form form#new_signature');
+            if (!form) { if (++tries > 60) clearInterval(t); return; }
+            var zip = form.querySelector('input[name="signature[zip_code]"]');
+            if (zip) {
+              zip.removeAttribute('required');
+              zip.classList.remove('required');
+              zip.value = '';
+              var li = zip.closest('li');
+              if (li) li.classList.add('th-hide-zip');
+            }
+            var drop = form.querySelector('.country_drop_wrap');
+            if (drop) drop.classList.remove('hide');
+            var btn = form.querySelector('input[type=submit]');
+            if (btn) btn.value = 'Count Me In';
+          }, 250);
+        })();
+        </script>
         <p class="pledge-fine">This November, the <a href="https://safe.ai/" target="_blank" rel="noopener">Center for AI Safety</a> will hand-deliver every signature to hundreds of lawmakers in Washington and Brussels.</p>
         <p class="pledge-fine pledge-fine-tight">No spam, ever. We’ll only email you when it’s time to act, together.</p>
         <a class="creator-link" href="invite/">Are you a creator? →</a>
