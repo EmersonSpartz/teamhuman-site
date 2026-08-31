@@ -863,16 +863,16 @@
   #can-petition-area-teamhuman-pledge #can_embed_form #d_sharing label {
     font-size: .76rem !important; color: #8a7c66 !important;
   }
-  /* Points at the full demand 2.6 screens below, so the sentence above reads as
-     the summary it is. Anchors to #demand on the solution card. */
+  /* The full demand sits about 2.6 screens below, past where most people sign.
+     Rather than add a link that competes with the button, the summary phrase
+     itself points at it. Dotted underline reads as "more detail here" rather
+     than "leaving the page". */
   .lead-more {
-    display: inline-block; margin-left: 7px; white-space: nowrap;
-    font-size: .8rem; font-weight: 700; letter-spacing: .02em;
-    color: var(--terracotta); text-decoration: none;
-    border-bottom: 1px solid rgba(156,58,38,.35);
+    color: inherit; text-decoration: none;
+    border-bottom: 1px dotted rgba(94,70,48,.45);
     transition: border-color .2s, color .2s;
   }
-  .lead-more:hover { border-bottom-color: var(--terracotta); color: var(--terracotta-dark); }
+  .lead-more:hover { color: var(--terracotta); border-bottom-color: var(--terracotta); }
 </style>
 <script>if(!localStorage.getItem('th_gate'))document.documentElement.classList.add('locked')</script>
 <style>html.locked{overflow:hidden}html.locked body>*{visibility:hidden}</style>
@@ -923,7 +923,7 @@
 
     <div class="pledge-card" id="pledge">
       <div id="pledgeForm">
-        <p class="pledge-lead pledge-lead-solo">AI is progressing faster than our ability to control it.<sup class="cite"><a href="https://aistatement.com/work/statement-on-ai-extinction-risk" target="_blank" rel="noopener">1</a></sup> Add your name to the chorus of experts<sup class="cite"><a href="https://superintelligence-statement.org/" target="_blank" rel="noopener">2</a>,<a href="https://www.pacingthefrontier.com/" target="_blank" rel="noopener">3</a></sup> calling for a global slowdown through international agreements.<a class="lead-more" href="#demand" title="Read the full demand">More&nbsp;&darr;</a></p>
+        <p class="pledge-lead pledge-lead-solo">AI is progressing faster than our ability to control it.<sup class="cite"><a href="https://aistatement.com/work/statement-on-ai-extinction-risk" target="_blank" rel="noopener">1</a></sup> Add your name to the chorus of experts<sup class="cite"><a href="https://superintelligence-statement.org/" target="_blank" rel="noopener">2</a>,<a href="https://www.pacingthefrontier.com/" target="_blank" rel="noopener">3</a></sup> calling for <a class="lead-more" href="#demand" title="Read the full demand">a global slowdown through international agreements</a>.</p>
         <!-- The real signature form. Action Network's widget injects a <form> into
              the div below; because it is injected HTML and not an iframe, the
              .can_embed rules in our stylesheet restyle it in place. No API key is
