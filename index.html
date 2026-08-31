@@ -873,6 +873,25 @@
     transition: border-color .2s, color .2s;
   }
   .lead-more:hover { color: var(--terracotta); border-bottom-color: var(--terracotta); }
+  /* Expert signatories. Grouped by category on purpose: the breadth is the
+     argument, so it has to be visible at a glance rather than only asserted. */
+  #experts .sig-groups {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 34px 28px; margin-top: 46px; text-align: left;
+  }
+  .sig-group h3 {
+    font-size: .68rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--terracotta); margin-bottom: 14px;
+    padding-bottom: 8px; border-bottom: 1px solid rgba(94,70,48,.16);
+  }
+  .sig-group ul { list-style: none; margin: 0; padding: 0; }
+  .sig-group li { margin-bottom: 13px; }
+  .sn { display: block; font-weight: 600; font-size: .92rem; color: var(--charcoal); line-height: 1.3; }
+  .st { display: block; font-size: .75rem; color: #8a7c66; line-height: 1.38; margin-top: 2px; }
+  .sig-note { margin-top: 42px; text-align: center; font-size: .88rem; color: #8a7c66; }
+  @media (max-width: 1000px) { #experts .sig-groups { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 760px)  { #experts .sig-groups { grid-template-columns: repeat(2, 1fr); gap: 28px 20px; } }
+  @media (max-width: 460px)  { #experts .sig-groups { grid-template-columns: 1fr; } }
 </style>
 <script>if(!localStorage.getItem('th_gate'))document.documentElement.classList.add('locked')</script>
 <style>html.locked{overflow:hidden}html.locked body>*{visibility:hidden}</style>
@@ -1158,6 +1177,97 @@
     </div>
   </div>
 </section>
+
+<section id="experts">
+  <div class="wrap">
+    <div class="ornament reveal"><img loading="lazy" width="40" height="40" src="brand/handprint.png" alt=""></div>
+    <div class="reveal center">
+      <div class="kicker">Who Else Is Asking</div>
+      <h2 class="serif">The people who agree on <em>nothing</em> agree on this.</h2>
+      <p class="lede">Scientists and generals. Left and right. Bishops and rock stars. Every one of them signed the same statement.</p>
+    </div>
+    <div class="sig-groups">
+
+      <div class="sig-group reveal">
+        <h3>The scientists</h3>
+        <ul>
+          <li><span class="sn">Geoffrey Hinton</span><span class="st">Nobel and Turing laureate</span></li>
+          <li><span class="sn">Yoshua Bengio</span><span class="st">Turing laureate, most cited scientist alive</span></li>
+          <li><span class="sn">Daron Acemo&#287;lu</span><span class="st">Nobel laureate in economics, MIT</span></li>
+          <li><span class="sn">Martin Rees</span><span class="st">Astronomer Royal</span></li>
+        </ul>
+      </div>
+
+      <div class="sig-group reveal">
+        <h3>Left and right</h3>
+        <ul>
+          <li><span class="sn">Steve Bannon</span><span class="st">Chief strategist to President Trump</span></li>
+          <li><span class="sn">Glenn Beck</span><span class="st">Founder, Blaze Media</span></li>
+          <li><span class="sn">Susan Rice</span><span class="st">National Security Advisor to President Obama</span></li>
+          <li><span class="sn">Joe Crowley</span><span class="st">Former Congressman (D), New York</span></li>
+          <li><span class="sn">Keith Rothfus</span><span class="st">Former Congressman (R), Pennsylvania</span></li>
+        </ul>
+      </div>
+
+      <div class="sig-group reveal">
+        <h3>National security</h3>
+        <ul>
+          <li><span class="sn">Mike Mullen</span><span class="st">Chairman of the Joint Chiefs under Bush and Obama</span></li>
+          <li><span class="sn">Des Browne</span><span class="st">Former UK Defence Minister</span></li>
+          <li><span class="sn">Mark Beall</span><span class="st">Former Director of AI Policy, US Dept. of Defense</span></li>
+        </ul>
+      </div>
+
+      <div class="sig-group reveal">
+        <h3>Heads of state</h3>
+        <ul>
+          <li><span class="sn">Mary Robinson</span><span class="st">Former President of Ireland, UN High Commissioner</span></li>
+          <li><span class="sn">Kersti Kaljulaid</span><span class="st">Former President of Estonia</span></li>
+        </ul>
+      </div>
+
+      <div class="sig-group reveal">
+        <h3>Faith leaders</h3>
+        <ul>
+          <li><span class="sn">Paolo Benanti</span><span class="st">Papal AI advisor</span></li>
+          <li><span class="sn">Walter Kim</span><span class="st">President, National Association of Evangelicals</span></li>
+          <li><span class="sn">Gabriel Salguero</span><span class="st">President, National Latino Evangelical Coalition</span></li>
+        </ul>
+      </div>
+
+      <div class="sig-group reveal">
+        <h3>In China</h3>
+        <ul>
+          <li><span class="sn">Andrew Yao</span><span class="st">Turing laureate, Tsinghua University</span></li>
+          <li><span class="sn">Ya-Qin Zhang</span><span class="st">Former President, Baidu</span></li>
+          <li><span class="sn">Yi Zeng</span><span class="st">Beijing Institute of AI Safety and Governance</span></li>
+        </ul>
+      </div>
+
+      <div class="sig-group reveal">
+        <h3>The builders</h3>
+        <ul>
+          <li><span class="sn">Steve Wozniak</span><span class="st">Co-founder, Apple</span></li>
+          <li><span class="sn">Jaan Tallinn</span><span class="st">Co-founder, Skype</span></li>
+          <li><span class="sn">Emad Mostaque</span><span class="st">Founder, Stability AI</span></li>
+        </ul>
+      </div>
+
+      <div class="sig-group reveal">
+        <h3>Voices you know</h3>
+        <ul>
+          <li><span class="sn">Prince Harry and Meghan</span><span class="st">The Duke and Duchess of Sussex</span></li>
+          <li><span class="sn">Stephen Fry</span><span class="st">Actor and writer</span></li>
+          <li><span class="sn">Joseph Gordon-Levitt</span><span class="st">Actor and filmmaker</span></li>
+          <li><span class="sn">will.i.am</span><span class="st">Musician and producer</span></li>
+        </ul>
+      </div>
+
+    </div>
+    <p class="sig-note reveal">Every name above signed the <a class="txt-link" href="https://superintelligence-statement.org/" target="_blank" rel="noopener">Statement on Superintelligence</a>, alongside more than 70,000 others.</p>
+  </div>
+</section>
+
 
 <footer>
   <div class="wrap foot-flex">
