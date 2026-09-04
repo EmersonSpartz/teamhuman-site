@@ -895,6 +895,18 @@
   /* Fallback only. If the swap above fails, the signer still must not be shown
      Action Network's share buttons, email-a-friend box or embed code. */
   #can-petition-area-teamhuman-pledge #can_embed_form .can_thank_you-block { display: none !important; }
+  /* The bonus actions used to be checkboxes that recorded nothing and promised an
+     email nobody could send. They are links now: the thing arrives immediately. */
+  .also-act {
+    display: block; text-decoration: none; color: inherit;
+    background: var(--cream); border: 1px solid rgba(94,70,48,.16);
+    border-radius: 10px; padding: 13px 16px; margin-bottom: 9px;
+    transition: border-color .2s, transform .15s;
+  }
+  .also-act:hover { border-color: rgba(156,58,38,.45); transform: translateY(-1px); }
+  .also-act-t { display: block; font-weight: 700; font-size: .92rem; color: var(--terracotta); }
+  .also-act-t::after { content: " \2192"; }
+  .also-act-d { display: block; font-size: .8rem; color: #8a7c66; margin-top: 2px; }
 </style>
 <script>if(!localStorage.getItem('th_gate'))document.documentElement.classList.add('locked')</script>
 <style>html.locked{overflow:hidden}html.locked body>*{visibility:hidden}</style>
@@ -1339,12 +1351,16 @@
     <h3 id="thanksTitle" class="serif">WELCOME TO TEAM HUMAN</h3>
     <p class="body" id="thanksBody">You’re one of <span id="successCount">247,319</span> humans standing up. Now multiply yourself. Every share brings more pressure.</p>
     <div class="also modal-also">
-      <div class="also-label">Optional pledges: I’ll also…</div>
-      <label><input type="checkbox" name="action" value="pfp"><span class="box">✓</span><span class="also-txt">Change my profile picture to #TeamHuman for 30 days<button type="button" class="tip" aria-label="What this involves" data-tip="After you sign, we’ll send you ready-to-use #TeamHuman profile images for any platform. Swap yours for 30 days so the movement is visible everywhere.">i</button></span></label>
-      <label><input type="checkbox" name="action" value="call"><span class="box">✓</span><span class="also-txt">Spend two minutes calling my local representative<button type="button" class="tip" aria-label="What this involves" data-tip="We’ll send you the phone number for your representative and a short script. The call takes about two minutes: you say you’re a constituent and you want humans kept in control of AI.">i</button></span></label>
-      <label><input type="checkbox" name="action" value="vote"><span class="box">✓</span><span class="also-txt">Commit to not voting for politicians who take AI lobby money<button type="button" class="tip" aria-label="What this involves" data-tip="AI companies spend heavily on lobbying. This pledge means checking whether a candidate takes that money, and letting it weigh on your vote. We’ll publish a simple lookup.">i</button></span></label>
+      <div class="also-label">Two things that actually help</div>
+      <a class="also-act" href="act/#pfp">
+        <span class="also-act-t">Wear it for 30 days</span>
+        <span class="also-act-d">Grab a #TeamHuman profile picture. Ten seconds.</span>
+      </a>
+      <a class="also-act" href="act/#call">
+        <span class="also-act-t">Call your representative</span>
+        <span class="also-act-d">Script and number, ready to go. Two minutes.</span>
+      </a>
     </div>
-    <p class="fine">Check anything you’ll commit to. We’ll email you what you need.</p>
     <div class="row">
       <a class="btn" id="shareX" href="#" target="_blank" rel="noopener">Share on X</a>
       <a class="btn btn-ghost" id="shareLI" href="#" target="_blank" rel="noopener">LinkedIn</a>
