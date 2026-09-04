@@ -892,6 +892,9 @@
   @media (max-width: 1000px) { #experts .sig-groups { grid-template-columns: repeat(3, 1fr); } }
   @media (max-width: 760px)  { #experts .sig-groups { grid-template-columns: repeat(2, 1fr); gap: 28px 20px; } }
   @media (max-width: 460px)  { #experts .sig-groups { grid-template-columns: 1fr; } }
+  /* Fallback only. If the swap above fails, the signer still must not be shown
+     Action Network's share buttons, email-a-friend box or embed code. */
+  #can-petition-area-teamhuman-pledge #can_embed_form .can_thank_you-block { display: none !important; }
 </style>
 <script>if(!localStorage.getItem('th_gate'))document.documentElement.classList.add('locked')</script>
 <style>html.locked{overflow:hidden}html.locked body>*{visibility:hidden}</style>
@@ -972,6 +975,34 @@
             var btn = form.querySelector('input[type=submit]');
             if (btn) btn.value = 'Count Me In';
           }, 250);
+
+          // Action Network replaces the form with its own thank-you panel: share
+          // buttons, an email-a-friend box, and the petition's embed code. That is
+          // their dashboard UI, not something a signer should see. Swap in the
+          // site's own confirmation the moment it appears.
+          var swapped = false, sawForm = false;
+          function showOwnThanks() {
+            if (swapped) return;
+            var ty = document.querySelector('#can_embed_form #can_thank_you');
+            var formNow = document.querySelector('#can_embed_form form#new_signature');
+            if (formNow) sawForm = true;
+            // Either their thank-you panel appeared, or the form we were watching
+            // has gone away, which only happens after a successful submission.
+            if (!ty && !(sawForm && !formNow)) return;
+            swapped = true;
+            var body = document.getElementById('pledgeForm');
+            if (body) body.style.display = 'none';
+            var signed = document.getElementById('signedState');
+            if (signed) signed.hidden = false;
+            // pledgeThanks is declared in the main script below; guard in case
+            // this fires before that block has run.
+            try { pledgeThanks(); } catch (e) {}
+          }
+          var host = document.getElementById('can-petition-area-teamhuman-pledge');
+          if (host && window.MutationObserver) {
+            new MutationObserver(showOwnThanks).observe(host, { childList: true, subtree: true });
+          }
+          setInterval(showOwnThanks, 400);
         })();
         </script>
         <p class="pledge-fine">This November, the <a href="https://safe.ai/" target="_blank" rel="noopener">Center for AI Safety</a> will hand-deliver every signature to hundreds of lawmakers in Washington and Brussels.</p>
