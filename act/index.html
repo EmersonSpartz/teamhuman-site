@@ -249,14 +249,18 @@
       document.getElementById(id).hidden = (id !== t.dataset.panel);
     });
   });
-  // deep links from the thank-you popup
-  (function () {
+  // Deep links from the thank-you popup. Also on hashchange: moving between
+  // #comment and #pfp changes only the fragment, so the page never reloads and
+  // this would otherwise run once and leave the wrong tab selected.
+  function openFromHash() {
     var want = { '#call':'p-rep', '#comment':'p-creator', '#pfp':'p-pfp' }[location.hash];
-    if (!want) { renderLoc(); return; }
+    if (!want) return;
     var t = document.querySelector('.tab[data-panel="' + want + '"]');
     if (t) t.click();
-    renderLoc();
-  })();
+  }
+  window.addEventListener('hashchange', openFromHash);
+  openFromHash();
+  renderLoc();
 </script>
 </body>
 </html>
