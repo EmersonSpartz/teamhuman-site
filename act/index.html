@@ -202,20 +202,24 @@
   };
   var SUBJECT = 'Subject: Keeping humans in control of AI';
   function bodyFor(who) {
-    return 'Dear [name],\n\n' +
-      'I am a constituent in [your town], and I am writing to ask you to take AI seriously as a\n' +
-      'safety issue rather than only an economic one.\n\n' +
-      'The people building this technology say themselves that it is moving faster than anyone can\n' +
-      'verify is safe. More than a thousand employees of the leading AI companies have signed an\n' +
-      'open letter asking governments to help make a slowdown possible, because no company can\n' +
-      'stop on its own while its competitors keep going.\n\n' +
-      'I would like you to support an international agreement to slow the development of\n' +
-      'smarter-than-human AI until there is broad scientific agreement that it can be built safely,\n' +
-      'and public support for going ahead. Nobel laureates, former heads of state and former\n' +
-      'chiefs of defence have signed a public statement calling for exactly this.\n\n' +
-      'No single company or country can solve this alone. That is what governments are for.\n\n' +
-      'Thank you for your time.\n\n' +
-      '[your name]\n[your address, so they know you are a constituent]';
+    // No hard wrapping: the box is narrower than these lines, so baked-in breaks
+    // wrap a second time and leave ragged half-lines.
+    return [
+      'Dear [name],',
+      '',
+      'I am a constituent in [your town], and I am writing to ask you to take AI seriously as a safety issue rather than only an economic one.',
+      '',
+      'The people building this technology say themselves that it is moving faster than anyone can verify is safe. More than a thousand employees of the leading AI companies have signed an open letter asking governments to help make a slowdown possible, because no company can stop on its own while its competitors keep going.',
+      '',
+      'I would like you to support an international agreement to slow the development of smarter-than-human AI until there is broad scientific agreement that it can be built safely, and public support for going ahead. Nobel laureates, former heads of state and former chiefs of defence have signed a public statement calling for exactly this.',
+      '',
+      'No single company or country can solve this alone. That is what governments are for.',
+      '',
+      'Thank you for your time.',
+      '',
+      '[your name]',
+      '[your address, so they know you are a constituent]'
+    ].join('\n');
   }
   var current = 'us';
   function renderLoc() {
