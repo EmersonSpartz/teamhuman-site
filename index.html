@@ -1002,12 +1002,13 @@
             // has gone away, which only happens after a successful submission.
             if (!ty && !(sawForm && !formNow)) return;
             swapped = true;
-            // Straight to the page that tells them what to do next. A modal made
-            // people click again to reach the same three things, and the /act hero
-            // already doubles as the confirmation.
             var body = document.getElementById('pledgeForm');
             if (body) body.style.display = 'none';
-            window.location.href = 'act/';
+            var signed = document.getElementById('signedState');
+            if (signed) signed.hidden = false;
+            // pledgeThanks is declared in the main script below; guard in case
+            // this fires before that block has run.
+            try { pledgeThanks(); } catch (e) {}
           }
           var host = document.getElementById('can-petition-area-teamhuman-pledge');
           if (host && window.MutationObserver) {
