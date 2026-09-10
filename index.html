@@ -907,6 +907,13 @@
   .also-act-t { display: block; font-weight: 700; font-size: .92rem; color: var(--terracotta); }
   .also-act-t::after { content: " \2192"; }
   .also-act-d { display: block; font-size: .8rem; color: #8a7c66; margin-top: 2px; }
+  /* At phone widths "humans calling for a slowdown" wrapped to two lines in the
+     sticky bar. Smaller type and tighter tracking keep it on one. Appended last
+     so it outranks the base rule (same specificity, later wins). */
+  @media (max-width: 480px) {
+    .sticky-count { font-size: .68rem; letter-spacing: .08em; white-space: nowrap; }
+    .sticky-count strong { font-size: .92rem; }
+  }
 </style>
 <script>if(!localStorage.getItem('th_gate'))document.documentElement.classList.add('locked')</script>
 <style>html.locked{overflow:hidden}html.locked body>*{visibility:hidden}</style>
