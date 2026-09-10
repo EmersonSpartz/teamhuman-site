@@ -914,6 +914,14 @@
     .sticky-count { font-size: .68rem; letter-spacing: .08em; white-space: nowrap; }
     .sticky-count strong { font-size: .92rem; }
   }
+  /* At 320px the nowrap label overflowed its box by ~35px and pushed the page
+     wider than the viewport. Tighter still below 340px, and the bar can never
+     exceed the viewport regardless of the text. */
+  @media (max-width: 340px) {
+    .sticky-bar { max-width: calc(100vw - 24px); }
+    .sticky-count { font-size: .6rem; letter-spacing: .03em; padding-left: 10px; padding-right: 10px; }
+    .sticky-count strong { font-size: .84rem; }
+  }
 </style>
 <script>if(!localStorage.getItem('th_gate'))document.documentElement.classList.add('locked')</script>
 <style>html.locked{overflow:hidden}html.locked body>*{visibility:hidden}</style>
