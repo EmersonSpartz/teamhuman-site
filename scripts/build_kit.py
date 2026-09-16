@@ -57,8 +57,7 @@ LINES = f'''
   <h2>2. Your reason</h2>
   <ul>
     <li>I joined Team Human because {FILL('your reason')}.</li>
-    <li>Or go rapid-fire, two or three of these: How much of the internet has to be fake? How many creators have to be buried under AI slop? How many artists have to compete with copies of themselves? How many scams and deepfakes? How many elections undermined? How many kids grow up shaped by algorithms no parent chose? How close to surveillance dystopias, AI-designed pandemics, killer robots, human extinction?</li>
-    <li>…then land it: This situation is insane. And we all know it.</li>
+    <li>How much of the internet has to be fake? How many creators have to be buried under AI slop? How many artists have to compete with copies of themselves? How many scams and deepfakes? How many elections undermined? How many kids grow up shaped by algorithms no parent chose? How close to surveillance dystopias, AI-designed pandemics, killer robots, human extinction?</li>
   </ul>
 
   <h2>3. Who agrees</h2>
