@@ -80,25 +80,35 @@ def team_human():
     return num(m.group(1)), "page"
 
 
+FLI_DIRECT_API = "https://superintelligence-statement.org/api/signatureCount?letterName=asi-statement"
+FLI_EKO_API = "https://superintelligence-statement.org/api/open/fli/ASIEkoCount"
+
+
 def statement():
-    """FLI's Superintelligence Statement. Returns (headline_total, direct, eko)."""
-    page = fetch(FLI_PAGE)
-    m = re.search(r'id="__NEXT_DATA__"[^>]*>(.*?)</script>', page, re.S)
-    if not m:
-        raise ValueError("__NEXT_DATA__ missing (site re-platformed?)")
-    direct = find_key(json.loads(m.group(1)), "initialSignatureCount")
-    if not isinstance(direct, int):
-        raise ValueError("initialSignatureCount missing")
-    text = visible_text(page)
-    eko_m = re.search(r"Including\s+([\d,]+)\s+from the same petition by Ek", text)
-    head_m = re.search(r"([\d,]{5,})\s+signatures", text)
-    eko = num(eko_m.group(1)) if eko_m else None
-    headline = num(head_m.group(1)) if head_m else None
-    if eko is None:
-        eko = max(headline - direct, 0) if headline is not None else 0
-    if headline is not None and abs(headline - (direct + eko)) > 50:
-        raise ValueError(f"headline {headline} disagrees with {direct} + {eko}")
-    return (headline if headline is not None else direct + eko), direct, eko
+    """FLI's Superintelligence Statement. Returns (headline_total, direct, eko).
+
+    The homepage HTML is statically prerendered and can lag by hours, so the two
+    JSON endpoints the page itself calls after load are the source of truth; the
+    HTML parse is only a fallback if those endpoints disappear.
+    """
+    try:
+        direct = int(fetch(FLI_DIRECT_API).strip())
+        eko = json.loads(fetch(FLI_EKO_API))["count"]
+        if not isinstance(eko, int):
+            raise ValueError("ASIEkoCount had no integer count")
+        return direct + eko, direct, eko
+    except Exception as api_err:
+        page = fetch(FLI_PAGE)
+        m = re.search(r'id="__NEXT_DATA__"[^>]*>(.*?)</script>', page, re.S)
+        if not m:
+            raise ValueError(f"API failed ({api_err}) and __NEXT_DATA__ missing")
+        direct = find_key(json.loads(m.group(1)), "initialSignatureCount")
+        if not isinstance(direct, int):
+            raise ValueError(f"API failed ({api_err}) and initialSignatureCount missing")
+        text = visible_text(page)
+        eko_m = re.search(r"Including\s+([\d,]+)\s+from the same petition by Ek", text)
+        eko = num(eko_m.group(1)) if eko_m else 0
+        return direct + eko, direct, eko
 
 
 def sane(name, new, prev, lo, hi, max_drop):
