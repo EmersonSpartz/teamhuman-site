@@ -10,12 +10,11 @@ CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 FILL = lambda t: f'<span class="fill">[{t}]</span>'
 
 # ----------------------------------------------------------------- copy ----
-HERO_H1 = 'AI is moving faster than our ability to <em>control</em> it.'
+HERO_H1 = 'It’s <em>easy</em> to participate in Team Human.'
 HERO_LEDE = 'Join creators with 300M+ subscribers calling for a global slowdown until it’s safe.'
 
 PLAN = f'''
-  <h2>It’s easy to participate</h2>
-  <ol>
+  <ol class="first">
     <li>Make a video about AI and share your concerns. Best way to help.</li>
     <li>Or add a 30 to 60 second segment to a video.</li>
     <li>Or make a dedicated Short.</li>
@@ -132,6 +131,7 @@ WEB = f'''<!DOCTYPE html>
   .kicker{{font-size:.78rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--terracotta);margin-bottom:14px}}
   h1{{font-size:clamp(2rem,4.6vw,2.9rem)}}
   .lede{{font-size:1.15rem}}
+  ol.first{{margin-top:22px}}
   .pdf{{display:inline-block;margin:22px 0 6px;background:var(--terracotta);color:var(--cream);text-decoration:none;font-weight:700;font-size:.9rem;letter-spacing:.08em;text-transform:uppercase;padding:13px 22px;border-radius:8px}}
   .pdf:hover{{background:var(--terracotta-dark)}}
   h2{{font-size:1.35rem}}
@@ -194,13 +194,13 @@ def print_html(base):
 {SHARED_CSS}
   @page{{size:Letter;margin:0}}
   html,body{{margin:0;padding:0;background:var(--parchment);color:var(--charcoal);font-family:'Inter',-apple-system,sans-serif;font-size:11.2pt;line-height:1.5;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
-  .page{{width:8.5in;height:11in;padding:.6in .8in .75in;position:relative;page-break-after:always;overflow:hidden;display:flex;flex-direction:column}}
+  .page{{width:8.5in;height:11in;padding:.6in .8in .95in;position:relative;page-break-after:always;overflow:hidden;display:flex;flex-direction:column}}
   .page:last-child{{page-break-after:auto}}
   header{{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}}
   header img{{height:20px}}
   header .kick{{font-size:8.5pt;letter-spacing:.2em;text-transform:uppercase;color:var(--walnut);font-weight:600}}
   h1{{font-size:27pt}}
-  .lede{{font-size:12.5pt;margin-bottom:26px}}
+  .lede{{font-size:12.5pt;margin-bottom:22px}}
   h2{{font-size:14pt}}
   .q{{font-size:10.6pt;line-height:1.45;padding:10px 14px}}
   .bottom{{margin-top:auto}}
