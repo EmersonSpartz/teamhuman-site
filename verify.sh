@@ -169,7 +169,7 @@ echo "$ACT" | grep -q 'twitter.com/intent/tweet' ; check "act page: share row pr
 # 12. Creator kit: /kit is the web version, the PDF sits next to it, and the invite
 # page points at it (the "send your toolkit" line is gone).
 KIT=$(curl -sfL --max-time 20 "${LIVE}kit/" 2>/dev/null)
-echo "$KIT" | grep -q "Lines you can lift" ; check "kit page live with the line bank" $?
+echo "$KIT" | grep -q "Things you can talk about" ; check "kit page live with the talking points" $?
 echo "$KIT" | grep -q 'href="TeamHuman-Creator-Kit.pdf"' ; check "kit page links the PDF" $?
 PDFTYPE=$(curl -sIL --max-time 20 "${LIVE}kit/TeamHuman-Creator-Kit.pdf" 2>/dev/null | grep -i "^content-type" | tail -1)
 echo "$PDFTYPE" | grep -qi "application/pdf" ; check "kit PDF served as PDF" $?
