@@ -932,7 +932,8 @@
   }
   /* The most important paragraph on the site, so it is not one paragraph: three
      short beats, larger type, air between them, and the last one as the payoff. */
-  .pressure-callout .beat { font-size: 1.34rem; line-height: 1.48; max-width: 640px; margin: 0 auto 24px; }
+  .pressure-callout .beat { font-size: 1.34rem; line-height: 1.48; max-width: 640px; margin: 0 auto 24px;
+    text-wrap: balance; /* no one-word last lines on the most important sentence on the site */ }
   .pressure-callout .beat:last-child { margin-bottom: 0; }
   .pressure-callout .beat.payoff { font-size: 1.46rem; line-height: 1.42; margin-top: 34px; }
   @media (max-width: 640px) {
