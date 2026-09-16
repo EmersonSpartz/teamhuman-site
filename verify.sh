@@ -148,5 +148,12 @@ PYEOF
 fi
 [ -f .github/workflows/counts.yml ] && [ -x scripts/update_counts.py ] ; check "hourly counts workflow + script present" $?
 
+# 10. Sign-up guard: Action Network's own failure path posts the form raw into a
+# new tab (their 500 page). Our guard must hold early submits and replace that
+# fallback; both pieces have to be in the live page.
+echo "$HTML" | grep -q "function anWired" ; check "sign-up guard (anWired) present" $?
+echo "$HTML" | grep -q "form.submit = function" ; check "raw-submit fallback overridden" $?
+echo "$HTML" | grep -q "th-fallback" ; check "fallback message styles present" $?
+
 echo "======================"
 if [ $FAIL -eq 0 ]; then echo "VERIFY: PASS"; else echo "VERIFY: FAIL"; exit 1; fi
