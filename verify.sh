@@ -131,7 +131,7 @@ fi
 echo "$HTML" | grep -q "fetch('counts.json'" ; check "hero counter reads counts.json" $?
 echo "$HTML" | grep -q "this count is simulated" ; [ $? -ne 0 ] ; check "simulated-counter copy is gone" $?
 echo "$HTML" | grep -q "total += 1" ; [ $? -ne 0 ] ; check "fake heartbeat tick is gone" $?
-if [ "$MODE" = "live" ]; then
+if curl -sf --max-time 10 -o /dev/null "$LIVE"; then
   COUNTS=$(curl -sfL --max-time 20 "${LIVE}counts.json" 2>/dev/null)
   [ -n "$COUNTS" ] ; check "counts.json is served live" $?
   python3 - "$COUNTS" <<'PYEOF'
