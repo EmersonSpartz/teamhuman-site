@@ -833,6 +833,16 @@
      from submitting its value. Declared last so it beats the earlier #d_sharing
      rules above. */
   #can-petition-area-teamhuman-pledge #can_embed_form #d_sharing { display: none !important; }
+  /* our replacement for their "An error has occured" + raw 500 tab */
+  #can-petition-area-teamhuman-pledge #can_embed_form .th-fallback {
+    margin: 12px 0 0 !important; padding: 12px 14px !important;
+    background: rgba(184,92,56,.08) !important; border: 1px solid rgba(184,92,56,.35) !important; border-radius: 10px !important;
+    font-family: inherit !important; font-size: .9rem !important; line-height: 1.45 !important; color: var(--charcoal) !important; text-align: left !important;
+  }
+  #can-petition-area-teamhuman-pledge #can_embed_form .th-fallback p { margin: 0 0 8px !important; font-size: inherit !important; }
+  #can-petition-area-teamhuman-pledge #can_embed_form .th-fallback a {
+    display: inline-block !important; font-weight: 700 !important; color: var(--terracotta) !important; text-decoration: underline !important;
+  }
   /* their select ships a white background that reads as a foreign control
      next to our parchment inputs */
   #can-petition-area-teamhuman-pledge #can_embed_form select {
@@ -1018,7 +1028,8 @@
             var drop = form.querySelector('.country_drop_wrap');
             if (drop) drop.classList.remove('hide');
             var btn = form.querySelector('input[type=submit]');
-            if (btn) btn.value = 'Count Me In';
+            if (btn && btn.value !== 'One moment…') btn.value = 'Count Me In';
+            thWatch(form);
           }, 250);
 
           // Action Network replaces the form with its own thank-you panel: share
@@ -1026,6 +1037,71 @@
           // their dashboard UI, not something a signer should see. Swap in the
           // site's own confirmation the moment it appears.
           var swapped = false, sawForm = false;
+          // Action Network injects the form HTML before its own jQuery (jq_can)
+          // has loaded, and wires the submit handler only once it has. In that
+          // gap (cold cache, slow network, incognito) a click posts the form raw
+          // to their HTML endpoint in a new tab, which is their 500 page. So:
+          // hold any submission until the handler is bound, then replay it.
+          function anWired(form) {
+            try {
+              var ev = window.jq_can && jq_can._data && jq_can._data(form, 'events');
+              return !!(ev && ev.submit && ev.submit.length);
+            } catch (e) { return false; }
+          }
+          var thPending = null;
+          document.addEventListener('submit', function (e) {
+            var form = e.target;
+            if (!form || form.id !== 'new_signature' || anWired(form)) return;
+            e.preventDefault(); e.stopImmediatePropagation();
+            thPending = form;
+            var btn = form.querySelector('input[type=submit]');
+            if (btn) { btn.value = 'One moment…'; btn.disabled = true; }
+            thWatch(form);
+          }, true);
+          function thWatch(form) {
+            if (form.__thWatched) return;
+            form.__thWatched = true;
+            // Their AJAX failure handler ends with a raw form.submit() into a new
+            // tab (their 500 page). Route that to our own message instead.
+            form.submit = function () {
+              var st = window.__thLastSign;
+              thFallback(form, !st || !st.status ? 'the request never reached Action Network' : 'Action Network replied with error ' + st.status);
+            };
+            var t0 = Date.now();
+            (function tick() {
+              var btn = form.querySelector('input[type=submit]');
+              if (anWired(form)) {
+                if (btn && btn.value === 'One moment…') { btn.disabled = false; btn.value = 'Count Me In'; }
+                if (thPending === form) { thPending = null; jq_can(form).trigger('submit'); }
+                return;
+              }
+              if (Date.now() - t0 > 20000) { if (thPending === form) { thPending = null; thFallback(form, 'their form script never finished loading'); } return; }
+              setTimeout(tick, 100);
+            })();
+          }
+          function thFallback(form, why) {
+            form.querySelectorAll('.ajax_error').forEach(function (el) { el.remove(); });
+            var btn = form.querySelector('input[type=submit]');
+            if (btn) { btn.disabled = false; btn.value = 'Count Me In'; }
+            var box = form.querySelector('.th-fallback');
+            if (!box) {
+              box = document.createElement('div'); box.className = 'th-fallback';
+              if (btn) btn.insertAdjacentElement('afterend', box); else form.appendChild(box);
+            }
+            box.innerHTML = '<p>That didn’t go through (' + why + '). Add your name on Action Network directly instead:</p>' +
+              '<a href="https://actionnetwork.org/petitions/teamhuman-pledge?source=teamhuman-fallback" target="_blank" rel="noopener">Sign on Action Network →</a>';
+          }
+          // Remember the status of their signature request so the fallback can say why.
+          (function () {
+            var open = XMLHttpRequest.prototype.open, send = XMLHttpRequest.prototype.send;
+            XMLHttpRequest.prototype.open = function (m, u) { this.__thUrl = String(u || ''); return open.apply(this, arguments); };
+            XMLHttpRequest.prototype.send = function () {
+              if (/actionnetwork\.org\/petitions\/[^/]+\/signatures/.test(this.__thUrl)) {
+                this.addEventListener('loadend', function () { window.__thLastSign = { status: this.status, at: Date.now() }; });
+              }
+              return send.apply(this, arguments);
+            };
+          })();
           function showOwnThanks() {
             if (swapped) return;
             var ty = document.querySelector('#can_embed_form #can_thank_you');
