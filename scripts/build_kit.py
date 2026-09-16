@@ -33,6 +33,9 @@ PLAN = f'''
 
   <h2>An example, about 45 seconds</h2>
   <p class="q">AI is moving faster than our ability to control it. I make videos about {FILL('your topic')}, and the thing that actually gets me is {FILL('your reason')}. The heads of all four leading AI companies are now publicly calling for a slowdown, and more than 1,300 of their own employees signed an open letter asking government to make that possible, because no one can stop alone. We’re asking for one thing: no smarter-than-human AI until scientists agree it can be built safely, and the public agrees to go ahead. Governments won’t act until they see how much the public cares. Go to teamhuman.org and add your name. AI should serve humanity, not replace it.</p>
+
+  <h2>Example videos</h2>
+  <p class="drive"><a href="https://drive.google.com/drive/folders/1OvHbeVCnDQC8mHJu_nW59i6v7mkF6K0o" target="_blank" rel="noopener">Watch other creators’ segments in the shared Drive folder →</a></p>
 '''
 
 QUESTIONS = '''
@@ -136,6 +139,8 @@ WEB = f'''<!DOCTYPE html>
   .pdf:hover{{color:var(--terracotta)}}
   h2{{font-size:1.35rem}}
   .q{{font-size:1.08rem;line-height:1.55}}
+  .drive a{{font-weight:700;font-size:1.08rem;text-decoration:none;border-bottom:2px solid var(--terracotta)}}
+  .drive a:hover{{color:var(--terracotta-dark)}}
   .lines{{margin-top:64px;padding-top:40px;border-top:1px solid var(--line)}}
   .lines h1{{font-size:clamp(1.7rem,3.6vw,2.3rem)}}
   .lines h2{{font-size:1.2rem;margin-top:26px}}
@@ -210,6 +215,8 @@ def print_html(base):
   .slot h2{{margin:9px 0 4px;font-size:12.5pt}}
   .slot li{{margin-bottom:1px;font-size:9.9pt;line-height:1.35}}
   a{{color:inherit;text-decoration:none}}
+  .drive a{{color:var(--terracotta);font-weight:700;border-bottom:1.5px solid var(--terracotta)}}
+  .drive a::after{{content:" drive.google.com/drive/folders/1OvHbeVCnDQC8mHJu_nW59i6v7mkF6K0o";display:block;font-weight:400;font-size:8.5pt;color:var(--walnut);border:0;margin-top:2px}}
   footer{{position:absolute;left:.8in;right:.8in;bottom:.4in;font-size:8.5pt;color:var(--walnut);display:flex;justify-content:space-between}}
 </style></head><body>
 <section class="page">
