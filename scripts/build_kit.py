@@ -17,7 +17,7 @@ PLAN = f'''
   <ol class="first">
     <li>Make a video about AI and share your concerns. Best way to help.</li>
     <li>Or add a 30 to 60 second segment to a video.</li>
-    <li>Or make a dedicated Short.</li>
+    <li>Or make a dedicated Short, community post or social media posts.</li>
   </ol>
   <p class="after-list">Include #TeamHuman in the title or description so we can find your video.</p>
 
@@ -28,8 +28,8 @@ PLAN = f'''
     <li>Send viewers to <b>teamhuman.org</b> to add their name. Every signature will be hand-delivered to lawmakers in DC and Brussels.</li>
   </ul>
 
-  <h2>Release your video on October 3, 10 or 17.</h2>
-  <p>Any day through October 31 works.</p>
+  <h2>Release date is October 3, the best time to post.</h2>
+  <p>If you can only post later in October, that’s still OK.</p>
 
   <h2>An example, about 45 seconds</h2>
   <p class="q">AI is moving faster than our ability to control it. I make videos about {FILL('your topic')}, and the thing that actually gets me is {FILL('your reason')}. The heads of all four leading AI companies are now publicly calling for a slowdown, and more than 1,300 of their own employees signed an open letter asking government to make that possible, because no one can stop alone. We’re asking for one thing: no smarter-than-human AI until scientists agree it can be built safely, and the public agrees to go ahead. Governments won’t act until they see how much the public cares. Go to teamhuman.org and add your name. AI should serve humanity, not replace it.</p>
@@ -43,49 +43,48 @@ QUESTIONS = '''
   <p><b>Sam Obenchain</b> · <a href="mailto:sam@teamhuman.org">sam@teamhuman.org</a> · WhatsApp +1 931 639 7903 · Discord niceclimbers</p>
 '''
 
-LINES_H1 = 'Lines you can lift.'
-LINES_LEDE = 'Pick one per slot, fill the blanks, end on the ask.'
+LINES_H1 = 'Things you can talk about.'
+LINES_LEDE = ''
 LINES = f'''
   <h2>1. Open</h2>
   <ul>
-    <li>“AI is moving faster than our ability to control it.”</li>
-    <li>“AI could be the best thing that ever happens to humanity. It could also be the last.”</li>
-    <li>“A handful of companies are racing to build the most powerful technology in history with no oversight and, by their own admission, without fully understanding what they’re building.”</li>
+    <li>AI is moving faster than our ability to control it.</li>
+    <li>AI could be the best thing that ever happens to humanity. It could also be the last.</li>
+    <li>A handful of companies are racing to build the most powerful technology in history with no oversight and, by their own admission, without fully understanding what they’re building.</li>
     <li>Quick pause. I make videos about {FILL('your topic')}. I never expected to make one about this.</li>
   </ul>
 
   <h2>2. Your reason</h2>
   <ul>
     <li>I joined Team Human because {FILL('your reason')}.</li>
-    <li>Or go rapid-fire, two or three of these: “How much of the internet has to be fake?” “How many creators have to be buried under AI slop?” “How many artists have to compete with copies of themselves?” “How many scams and deepfakes?” “How many elections undermined?” “How many kids grow up shaped by algorithms no parent chose?” “How close to surveillance dystopias, AI-designed pandemics, killer robots, human extinction?”</li>
-    <li>…then land it: “This situation is insane. And we all know it.”</li>
+    <li>Or go rapid-fire, two or three of these: How much of the internet has to be fake? How many creators have to be buried under AI slop? How many artists have to compete with copies of themselves? How many scams and deepfakes? How many elections undermined? How many kids grow up shaped by algorithms no parent chose? How close to surveillance dystopias, AI-designed pandemics, killer robots, human extinction?</li>
+    <li>…then land it: This situation is insane. And we all know it.</li>
   </ul>
 
   <h2>3. Who agrees</h2>
   <ul>
-    <li>“The heads of all four leading AI companies are now publicly calling for a slowdown.”</li>
-    <li>“More than 1,300 of their own employees signed an open letter asking government to make that possible, because no one can stop alone.”</li>
-    <li>“The people who agree on nothing agree on this. Scientists and generals. Left and right. Bishops and rock stars.”</li>
-    <li>“Hundreds of Nobel Prize winners, AI experts and heads of state have signed the Superintelligence Statement.”</li>
-    <li>“68% of voters back a pause on advanced AI and a ban on superintelligence.”</li>
-    <li>“Creators with over 300 million subscribers have signed on.” Mark Rober. Kurzgesagt. {FILL('a creator your audience knows')}.</li>
+    <li>The heads of all four leading AI companies are now publicly calling for a slowdown.</li>
+    <li>More than 1,300 of their own employees signed an open letter asking government to make that possible, because no one can stop alone.</li>
+    <li>The people who agree on nothing agree on this. Scientists and generals. Left and right. Bishops and rock stars.</li>
+    <li>Hundreds of Nobel Prize winners, AI experts and heads of state have signed the Superintelligence Statement.</li>
+    <li>68% of voters back a pause on advanced AI and a ban on superintelligence.</li>
   </ul>
 
   <h2>4. The fix</h2>
   <ul>
-    <li>Team Human is asking for one thing: “slow down AI.”</li>
-    <li>“No smarter-than-human AI until scientists agree it can be built safely, and the public agrees to go ahead.”</li>
-    <li>“The root cause is the global AI arms race. It punishes anyone who slows down. That’s what governments are for.”</li>
-    <li>“We limited nuclear weapons. We saved the ozone layer. We eradicated smallpox. Every time it took cooperation between countries, and ordinary people who refused to be quiet. It’s time to do it again.”</li>
+    <li>Team Human is asking for one thing: slow down AI.</li>
+    <li>No smarter-than-human AI until scientists agree it can be built safely, and the public agrees to go ahead.</li>
+    <li>The root cause is the global AI arms race. It punishes anyone who slows down. That’s what governments are for.</li>
+    <li>We limited nuclear weapons. We saved the ozone layer. We eradicated smallpox. Every time it took cooperation between countries, and ordinary people who refused to be quiet. It’s time to do it again.</li>
   </ul>
 
   <h2>5. The ask</h2>
   <ul>
-    <li>“Governments won’t act without seeing how much the public cares. With Team Human, we’re going to show them.”</li>
-    <li>“Go to teamhuman.org and add your name. It takes ten seconds.”</li>
-    <li>“In November, every signature gets hand-delivered to hundreds of lawmakers in Washington and Brussels.”</li>
-    <li>“Join the movement to keep humans in control of AI.”</li>
-    <li>“AI should serve humanity, not replace it.”</li>
+    <li>Governments won’t act without seeing how much the public cares. With Team Human, we’re going to show them.</li>
+    <li>Go to teamhuman.org and add your name. It takes ten seconds.</li>
+    <li>In November, every signature gets hand-delivered to hundreds of lawmakers in Washington and Brussels.</li>
+    <li>Join the movement to keep humans in control of AI.</li>
+    <li>AI should serve humanity, not replace it.</li>
   </ul>
 '''
 
@@ -171,7 +170,6 @@ WEB = f'''<!DOCTYPE html>
 {PLAN}
     <div class="lines" id="lines">
       <h1>{LINES_H1}</h1>
-      <p class="lede">{LINES_LEDE}</p>
 {LINES}
     </div>
     <div class="questions">
@@ -233,7 +231,6 @@ def print_html(base):
 <section class="page slot">
   {hdr}
   <h1>{LINES_H1}</h1>
-  <p class="lede">{LINES_LEDE}</p>
 {LINES}
   <footer><span>teamhuman.org/kit</span><span>2 / 2</span></footer>
 </section>
