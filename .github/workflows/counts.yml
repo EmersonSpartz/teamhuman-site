@@ -1,0 +1,43 @@
+name: Refresh signature counts
+
+on:
+  schedule:
+    - cron: "7 * * * *"   # hourly, at :07
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: counts
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch the numbers
+        id: refresh
+        continue-on-error: true
+        env:
+          ACTIONNETWORK_API_KEY: ${{ secrets.ACTIONNETWORK_API_KEY }}
+        run: python3 scripts/update_counts.py
+
+      - name: Commit counts.json if it changed
+        run: |
+          if git diff --quiet -- counts.json; then echo "no change"; exit 0; fi
+          git config user.name "teamhuman-counter"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add counts.json
+          MSG=$(python3 -c 'import json;d=json.load(open("counts.json"));print("counts: %s = %s + %s" % (format(d["total"],","), d["teamhuman"], format(d["statement"],",")))')
+          git commit -m "$MSG"
+          git pull --rebase origin main
+          git push
+
+      - name: Fail the run if a source errored
+        if: steps.refresh.outcome == 'failure'
+        run: |
+          python3 -c "import json;print('\n'.join(json.load(open('counts.json')).get('errors',[])))" || true
+          exit 1
