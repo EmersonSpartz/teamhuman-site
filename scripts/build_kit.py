@@ -11,7 +11,7 @@ FILL = lambda t: f'<span class="fill">[{t}]</span>'
 
 # ----------------------------------------------------------------- copy ----
 HERO_H1 = 'It’s <em>easy</em> to participate in Team Human.'
-HERO_LEDE = 'Join creators with 300M+ subscribers calling for a global slowdown until it’s safe.'
+HERO_LEDE = 'Join creators with 300M+ subscribers calling for a global slowdown through international agreements.'
 
 PLAN = f'''
   <ol class="first">
@@ -24,7 +24,7 @@ PLAN = f'''
   <h2>What to say</h2>
   <ul>
     <li>Your concerns with AI, the ones your audience will relate to. Everyone has their own reasons for joining.</li>
-    <li>Link your reason to the solution: a global slowdown until it’s safe, through international agreements.</li>
+    <li>Link your reason to the solution: a global slowdown through international agreements.</li>
     <li>Send viewers to <b>teamhuman.org</b> to add their name. Every signature will be hand-delivered to lawmakers in DC and Brussels.</li>
   </ul>
 
@@ -32,7 +32,7 @@ PLAN = f'''
   <p>If you can only post later in October, that’s still OK.</p>
 
   <h2>An example, about 45 seconds</h2>
-  <p class="q">AI is moving faster than our ability to control it. I make videos about {FILL('your topic')}, and the thing that actually gets me is {FILL('your reason')}. The heads of all four leading AI companies are now publicly calling for a slowdown, and more than 1,300 of their own employees signed an open letter asking government to make that possible, because no one can stop alone. We’re asking for one thing: a global slowdown of AI until it’s safe. Governments won’t act until they see how much the public cares. Go to teamhuman.org and add your name. AI should serve humanity, not replace it.</p>
+  <p class="q">AI is moving faster than our ability to control it. I make videos about {FILL('your topic')}, and the thing that actually gets me is {FILL('your reason')}. The heads of all four leading AI companies are now publicly calling for a slowdown, and more than 1,300 of their own employees signed an open letter asking government to make that possible, because no one can stop alone. We’re asking for one thing: a global slowdown of AI through international agreements. Governments won’t act until they see how much the public cares. Go to teamhuman.org and add your name. AI should serve humanity, not replace it.</p>
 
   <h2>Example videos</h2>
   <p class="drive"><a href="https://drive.google.com/drive/folders/1OvHbeVCnDQC8mHJu_nW59i6v7mkF6K0o" target="_blank" rel="noopener">Watch other creators’ segments in the shared Drive folder →</a></p>
