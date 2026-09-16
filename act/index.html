@@ -83,45 +83,34 @@
 
 <div class="hero">
   <img src="../brand/handprint.png" alt="">
-  <h1>You signed. Now the part that moves things.</h1>
-  <p>Governments act when they hear from people. Creators act when their viewers ask.</p>
+  <h1>What to do next</h1>
 </div>
 
 <div class="wrap">
 
   <section class="panel" id="pfp">
     <div class="mins">Ten seconds</div>
-    <h2>Wear it for 30 days.</h2>
-    <p>People notice when someone they know has picked a side. It is the cheapest way to make a movement visible.</p>
+    <h2>Change your profile photo to Team Human for 30 days.</h2>
+    <p>It&rsquo;s the best way to make the movement visible.</p>
     <div class="pfps">
       <a href="pfp/teamhuman-pfp-parchment.png" download><img src="pfp/teamhuman-pfp-parchment.png" alt="Handprint on parchment"><span>Parchment</span></a>
       <a href="pfp/teamhuman-pfp-brick.png" download><img src="pfp/teamhuman-pfp-brick.png" alt="Handprint on brick"><span>Brick</span></a>
       <a href="pfp/teamhuman-pfp-charcoal.png" download><img src="pfp/teamhuman-pfp-charcoal.png" alt="Handprint on charcoal"><span>Charcoal</span></a>
       <a href="pfp/teamhuman-pfp-wordmark.png" download><img src="pfp/teamhuman-pfp-wordmark.png" alt="TeamHuman wordmark"><span>Wordmark</span></a>
     </div>
-    <p class="fine">Click to download. Square, sized for every platform.</p>
+    <p class="fine">Tap to download.</p>
   </section>
 
   <section class="panel" id="comment">
     <div class="mins">One minute</div>
-    <h2>Ask a creator you watch.</h2>
-    <p>Creators read their comments. It is how several of the ones already signed first heard about this.</p>
-    <ol class="steps">
-      <li>Pick a creator you actually watch.</li>
-      <li>Say it in your own words. Short beats earnest.</li>
-      <li>Mention teamhuman.org.</li>
-    </ol>
-    <p class="fine" style="margin-bottom:12px">Ones that read like a person, not a campaign:</p>
-    <div class="quote">&ldquo;Unrelated to this video, but you&rsquo;d probably have something worth saying about teamhuman.org. A lot of creators are signing.&rdquo;</div>
-    <div class="quote">&ldquo;Would love your take on the AI slowdown thing. Kurzgesagt and a bunch of others signed at teamhuman.org.&rdquo;</div>
-    <div class="quote">&ldquo;You cover this more thoughtfully than most. teamhuman.org, if you haven&rsquo;t seen it.&rdquo;</div>
-    <div class="warn-note"><strong>No copy button, on purpose.</strong> Twenty identical comments reads as astroturfing, and creators spot it instantly.</div>
+    <h2>Ask your favorite creators.</h2>
+    <p>Drop comments on your favorite creators&rsquo; videos and social media posts telling them to join Team Human.</p>
   </section>
 
   <section class="panel" id="call">
     <div class="mins">Two minutes</div>
     <h2>Contact your representative.</h2>
-    <p>Offices tally what constituents raise, and volume on an unfamiliar subject is what moves it up the list. You are not winning an argument, you are adding one to a count that someone reads.</p>
+    <p>Representatives track how many constituents raise an issue, and it shapes what they prioritize. Over 190 lawmakers in the UK and Canada already back similar campaigns, in part because of messages from people like you.</p>
 
     <div class="draft-label">Where are you?</div>
     <div class="pills" id="locPills">
@@ -142,17 +131,22 @@
 
     <div class="row">
       <a class="btn" id="lookupBtn" href="#" target="_blank" rel="noopener">Find who to send it to</a>
-      <button class="btn ghost" id="togglePhone" type="button">Rather phone?</button>
     </div>
 
-    <div id="phoneBlock" hidden style="margin-top:22px">
-      <p class="fine">Calls count for more than email, and take about two minutes, most of it on hold.</p>
-      <ol class="steps">
-        <li>Say you are a constituent and name your town.</li>
-        <li>Read this, or say it your own way.</li>
-        <li>Say thanks and hang up.</li>
-      </ol>
+    <div id="phoneBlock" style="margin-top:22px">
+      <div class="draft-label">Rather call? Calls count for more than email. Say this:</div>
       <div class="quote">&ldquo;Hi, I&rsquo;m a constituent from [your town]. I&rsquo;m calling because I want humans kept in control of AI. Please support an international agreement to slow down development of smarter-than-human AI until it can be built safely. Thank you.&rdquo;</div>
+    </div>
+  </section>
+
+  <section class="panel" id="share">
+    <div class="mins">Five seconds</div>
+    <h2>Share it.</h2>
+    <div class="row">
+      <a class="btn" href="https://twitter.com/intent/tweet?text=I%20just%20pledged%20to%20keep%20humans%20in%20control%20of%20AI.%20Join%20me.%20%23TeamHuman&amp;url=https%3A%2F%2Fteamhuman.org%2F" target="_blank" rel="noopener">Share on X</a>
+      <a class="btn ghost" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fteamhuman.org%2F" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn ghost" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fteamhuman.org%2F" target="_blank" rel="noopener">Facebook</a>
+      <button class="btn ghost" id="copyLink" type="button">Copy link</button>
     </div>
   </section>
 
@@ -215,10 +209,11 @@
       self.textContent = 'Copied'; setTimeout(function () { self.textContent = 'Copy'; }, 1800);
     }, function () { self.textContent = 'Press Ctrl+C'; });
   });
-  document.getElementById('togglePhone').addEventListener('click', function () {
-    var b = document.getElementById('phoneBlock');
-    b.hidden = !b.hidden;
-    this.textContent = b.hidden ? 'Rather phone?' : 'Hide the phone script';
+  document.getElementById('copyLink').addEventListener('click', function () {
+    var self = this;
+    navigator.clipboard.writeText('https://teamhuman.org/').then(function () {
+      self.textContent = 'Copied'; setTimeout(function () { self.textContent = 'Copy link'; }, 1800);
+    }, function () { self.textContent = 'Press Ctrl+C'; });
   });
   renderLoc();
 </script>

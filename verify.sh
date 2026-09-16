@@ -155,5 +155,16 @@ echo "$HTML" | grep -q "function anWired" ; check "sign-up guard (anWired) prese
 echo "$HTML" | grep -q "form.submit = function" ; check "raw-submit fallback overridden" $?
 echo "$HTML" | grep -q "th-fallback" ; check "fallback message styles present" $?
 
+# 11. After signing, people land on /act directly (no popup). The act page carries
+# the short copy Emerson asked for and the share row that used to live in the modal.
+echo "$HTML" | grep -q "location.assign('act/')" ; check "sign-up success redirects to /act" $?
+echo "$HTML" | grep -q "thanksVeil" ; [ $? -ne 0 ] ; check "post-signup modal is gone" $?
+ACT=$(curl -sfL --max-time 20 "${LIVE}act/" 2>/dev/null)
+echo "$ACT" | grep -q "<h1>What to do next</h1>" ; check "act page: plain 'What to do next' heading" $?
+echo "$ACT" | grep -q "Drop comments on your favorite creators" ; check "act page: one-line creator ask" $?
+echo "$ACT" | grep -q "Change your profile photo to Team Human for 30 days" ; check "act page: one-line profile-photo ask" $?
+echo "$ACT" | grep -q 'id="phoneBlock" style' && ! echo "$ACT" | grep -q 'togglePhone' ; check "act page: phone script shown, not behind a click" $?
+echo "$ACT" | grep -q 'twitter.com/intent/tweet' ; check "act page: share row present" $?
+
 echo "======================"
 if [ $FAIL -eq 0 ]; then echo "VERIFY: PASS"; else echo "VERIFY: FAIL"; exit 1; fi
