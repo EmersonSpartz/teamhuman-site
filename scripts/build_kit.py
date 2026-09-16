@@ -199,15 +199,16 @@ def print_html(base):
 {SHARED_CSS}
   @page{{size:Letter;margin:0}}
   html,body{{margin:0;padding:0;background:var(--parchment);color:var(--charcoal);font-family:'Inter',-apple-system,sans-serif;font-size:11.2pt;line-height:1.5;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
-  .page{{width:8.5in;height:11in;padding:.6in .8in .95in;position:relative;page-break-after:always;overflow:hidden;display:flex;flex-direction:column}}
+  .page{{width:8.5in;height:11in;padding:.5in .8in .9in;position:relative;page-break-after:always;overflow:hidden;display:flex;flex-direction:column}}
   .page:last-child{{page-break-after:auto}}
-  header{{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}}
+  header{{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}}
   header img{{height:20px}}
   header .kick{{font-size:8.5pt;letter-spacing:.2em;text-transform:uppercase;color:var(--walnut);font-weight:600}}
   h1{{font-size:27pt}}
-  .lede{{font-size:12.5pt;margin-bottom:22px}}
-  h2{{font-size:14pt}}
-  .q{{font-size:10.6pt;line-height:1.45;padding:10px 14px}}
+  .lede{{font-size:12pt;margin-bottom:14px}}
+  h2{{font-size:13.5pt;margin:15px 0 4px}}
+  li{{margin-bottom:3px}}
+  .q{{font-size:10.2pt;line-height:1.42;padding:9px 13px}}
   .bottom{{margin-top:auto}}
   .slot header{{margin-bottom:12px}}
   .slot h1{{font-size:21pt;margin-bottom:2px}}
