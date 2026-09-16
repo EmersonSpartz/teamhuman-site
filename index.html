@@ -930,6 +930,15 @@
     .cu { min-width: 32px; padding: 3px 4px 2px; }
     .cu b { font-size: .8rem; }
   }
+  /* The most important paragraph on the site, so it is not one paragraph: three
+     short beats, larger type, air between them, and the last one as the payoff. */
+  .pressure-callout .beat { font-size: 1.34rem; line-height: 1.48; max-width: 640px; margin: 0 auto 24px; }
+  .pressure-callout .beat:last-child { margin-bottom: 0; }
+  .pressure-callout .beat.payoff { font-size: 1.46rem; line-height: 1.42; margin-top: 34px; }
+  @media (max-width: 640px) {
+    .pressure-callout .beat { font-size: 1.12rem; margin-bottom: 18px; }
+    .pressure-callout .beat.payoff { font-size: 1.22rem; margin-top: 26px; }
+  }
 </style>
 <script>if(!localStorage.getItem('th_gate'))document.documentElement.classList.add('locked')</script>
 <style>html.locked{overflow:hidden}html.locked body>*{visibility:hidden}</style>
@@ -1126,7 +1135,9 @@
           <rect x="4.6" y="7" width="1.1" height="2.4" fill="#5e4630"/>
         </svg>
       </div>
-      <p>All four leading AI companies say they would slow down if the others did, and more than 1,000 of their own employees <a class="txt-link" href="https://www.pacingthefrontier.com/" target="_blank" rel="noopener">signed an open letter</a> asking government to make that possible. None can stop alone. That’s what governments are for. Lawmakers are starting to wake up<sup class="cite"><a href="https://controlai.org/statement" target="_blank" rel="noopener">4</a></sup>. Voters are ahead of them: 68% back a pause on advanced AI and a ban on superintelligence.<sup class="cite"><a href="https://www.filesforprogress.org/datasets/2026/9/dfp_ai_development_pause.pdf" target="_blank" rel="noopener">5</a></sup> But <strong>governments won’t act without seeing how much the public cares.</strong> With Team Human, we’re going to show them.</p>
+      <p class="beat">The heads of all four leading AI companies now publicly back a slowdown,<sup class="cite"><a href="https://www.cnbc.com/2026/09/13/china-dilemma-ai-slowdown-anthropic.html" target="_blank" rel="noopener">4</a></sup> and more than 1,000 of their own employees <a class="txt-link" href="https://www.pacingthefrontier.com/" target="_blank" rel="noopener">signed an open letter</a> asking government to make that possible. None can stop alone.</p>
+      <p class="beat">That’s what governments are for. Lawmakers are starting to wake up,<sup class="cite"><a href="https://controlai.org/statement" target="_blank" rel="noopener">5</a></sup> and voters are ahead of them: 68% back a pause on advanced AI and a ban on superintelligence.<sup class="cite"><a href="https://www.filesforprogress.org/datasets/2026/9/dfp_ai_development_pause.pdf" target="_blank" rel="noopener">6</a></sup></p>
+      <p class="beat payoff">But <strong>governments won’t act without seeing how much the public cares.</strong> With Team Human, we’re going to show them.</p>
     </div>
   </div>
 </section>
