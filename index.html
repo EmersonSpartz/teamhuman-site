@@ -986,7 +986,7 @@
         <img src="avatars/preston.jpg" alt="" title="Preston" width="56" height="56"><img src="avatars/kurzgesagt.jpg" alt="" title="Kurzgesagt" width="56" height="56"><img src="avatars/jennyhoyos.jpg" alt="" title="Jenny Hoyos" width="56" height="56"><img src="avatars/markrober.jpg" alt="" title="Mark Rober" width="56" height="56"><img src="avatars/simonsquibb.jpg" alt="" title="Simon Squibb" width="56" height="56"><img src="avatars/infographicsshow.jpg" alt="" title="The Infographics Show" width="56" height="56"><img src="avatars/lindsaynikole.jpg" alt="" title="Lindsay Nikole" width="56" height="56"><span class="face-more">+</span>
       </span>
     </div>
-    <p class="joined-caption">…and <strong id="counter" data-target="247318">0</strong><button type="button" class="tip tip-star" aria-label="About this number" data-tip="Illustrative for now: the campaign has not launched yet, so this count is simulated.">*</button> humans, so far.</p>
+    <p class="joined-caption">…and <strong id="counter" data-target="73935">0</strong><button type="button" class="tip tip-star" aria-label="About this number" data-tip="Live count: people who signed here plus the Superintelligence Statement (which includes Ekō’s mirror petition). Updated hourly.">*</button> humans, so far.</p>
 
     <div class="pledge-card" id="pledge">
       <div id="pledgeForm">
@@ -1218,7 +1218,7 @@
       <li><span class="rn">Joseph&#x27;s Machines</span><span class="rs">7.7M</span></li>
       <li><span class="rn">Rob Landes</span><span class="rs">4.5M</span></li>
       <li><span class="rn">After Skool</span><span class="rs">3.8M</span></li>
-      <li><span class="rn">SimplyChris</span><span class="rs">3.3M</span></li>
+      <li><span class="rn">SimplyChris</span><span class="rs">3.3M</span></li><li><span class="rn">Kyle Hill</span><span class="rs">2.8M</span></li>
       <li><span class="rn">Rebecca Rogers</span><span class="rs">2.5M</span></li>
       <li><span class="rn">Scott Christian Sava</span><span class="rs">2.4M</span></li>
       <li><span class="rn">SolarBalls</span><span class="rs">2.2M</span></li>
@@ -1358,7 +1358,7 @@
         <div class="partner-label">In partnership with</div>
         <a href="https://safe.ai/" target="_blank" rel="noopener" aria-label="Center for AI Safety"><img class="partner-logo" src="cais-logotype-black.svg" alt="Center for AI Safety" width="218" height="70"></a>
       </div>
-      <p class="disclaimer">Preview build. Signature counts are simulated. Creator photos from their own channels.</p>
+      <p class="disclaimer">Preview build. Creator photos from their own channels.</p>
     </div>
     <div style="text-align:right;">
       <p style="margin-bottom:8px;"><a href="#problem">The Problem</a> &nbsp;·&nbsp; <a href="#plan">The Plan</a> &nbsp;·&nbsp; <a href="#voices">Why We Signed</a> &nbsp;·&nbsp; <a href="creators.html">For Creators</a></p>
@@ -1368,7 +1368,7 @@
 </footer>
 
 <div class="sticky-bar" id="stickyBar">
-  <div class="sticky-count"><strong id="stickyCount">247,318</strong><span class="star-mark" title="Illustrative for now: the campaign has not launched yet, so this count is simulated.">*</span> &nbsp;humans calling for a slowdown</div>
+  <div class="sticky-count"><strong id="stickyCount">73,935</strong><span class="star-mark" title="Live count: people who signed here plus the Superintelligence Statement (which includes Ekō’s mirror petition). Updated hourly.">*</span> &nbsp;humans calling for a slowdown</div>
   <a href="#top">↑ &nbsp;Add Your Name</a>
 </div>
 
@@ -1377,7 +1377,7 @@
     <button class="close" id="thanksClose" aria-label="Close">✕</button>
     <img class="stamp" src="brand/handprint.png" alt="" width="52" height="52">
     <h3 id="thanksTitle" class="serif">WELCOME TO TEAM HUMAN</h3>
-    <p class="body" id="thanksBody">You’re one of <span id="successCount">247,319</span> humans standing up. Now multiply yourself. Every share brings more pressure.</p>
+    <p class="body" id="thanksBody">You’re one of <span id="successCount">73,935</span> humans standing up. Now multiply yourself. Every share brings more pressure.</p>
     <div class="also modal-also">
       <div class="also-label">Two things that actually help</div>
       <a class="also-act" href="act/#pfp">
@@ -1551,11 +1551,17 @@
     walkIO.observe(track);
   }
 
-  // Counter
+  // Counter: live total from counts.json (Team Human signers + the
+  // Superintelligence Statement), refreshed hourly by .github/workflows/counts.yml.
+  // data-target is the last baked value, so the number stays real if the fetch fails.
   const counter = document.getElementById('counter');
   const stickyCount = document.getElementById('stickyCount');
   let total = parseInt(counter.dataset.target, 10);
-  let counterStarted = false;
+  let counterStarted = false, counterDone = false;
+  function renderTotal() {
+    counter.textContent = total.toLocaleString('en-US');
+    stickyCount.textContent = total.toLocaleString('en-US');
+  }
   function animateCounter() {
     if (counterStarted) return;
     counterStarted = true;
@@ -1566,29 +1572,21 @@
       const p = Math.min(Math.max((t - t0) / dur, 0), 1);
       const eased = 1 - Math.pow(1 - p, 3);
       counter.textContent = Math.round(total * eased).toLocaleString('en-US');
-      if (p < 1) requestAnimationFrame(tick); else renderTotal();
+      if (p < 1) requestAnimationFrame(tick); else { counterDone = true; renderTotal(); }
     }
     requestAnimationFrame(tick);
   }
   const cio = new IntersectionObserver(es => { if (es[es.length - 1].isIntersecting) animateCounter(); }, { threshold: 0.3 });
   cio.observe(counter);
-
-  // Heartbeat: the count keeps ticking up while you read (simulated, like the rest of the counter)
-  function renderTotal() {
-    counter.textContent = total.toLocaleString('en-US');
-    stickyCount.textContent = total.toLocaleString('en-US');
-  }
-  setTimeout(() => {
-    setInterval(() => {
-      total += 1;
-      renderTotal();
-      if (motionOK) {
-        counter.classList.remove('tick');
-        void counter.offsetWidth;
-        counter.classList.add('tick');
-      }
-    }, 8000 + Math.floor(performance.now() % 4000));
-  }, 4500);
+  fetch('counts.json', { cache: 'no-cache' })
+    .then(r => r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)))
+    .then(d => {
+      if (!d || !Number.isFinite(d.total) || d.total <= 0) throw new Error('counts.json had no usable total');
+      total = d.total;
+      stickyCount.textContent = total.toLocaleString('en-US');
+      if (counterDone) renderTotal();   // otherwise the running count-up lands on the new total
+    })
+    .catch(e => console.warn('Live count unavailable, showing the last baked value:', e));
 
 
   // Thank-you modal

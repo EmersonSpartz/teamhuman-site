@@ -126,5 +126,27 @@ if [ "$SRC" != "local" ]; then
   fi
 fi
 
+# 9. Live signature counter: the hero number must come from counts.json (Team Human
+# + Superintelligence Statement), never from the old simulated counter.
+echo "$HTML" | grep -q "fetch('counts.json'" ; check "hero counter reads counts.json" $?
+echo "$HTML" | grep -q "this count is simulated" ; [ $? -ne 0 ] ; check "simulated-counter copy is gone" $?
+echo "$HTML" | grep -q "total += 1" ; [ $? -ne 0 ] ; check "fake heartbeat tick is gone" $?
+if [ "$MODE" = "live" ]; then
+  COUNTS=$(curl -sfL --max-time 20 "${LIVE}counts.json" 2>/dev/null)
+  [ -n "$COUNTS" ] ; check "counts.json is served live" $?
+  python3 - "$COUNTS" <<'PYEOF'
+import json, sys
+try:
+    d = json.loads(sys.argv[1])
+    ok = isinstance(d.get("total"), int) and d["total"] >= 70000 and isinstance(d.get("teamhuman"), int) and d["teamhuman"] >= 1 and d["total"] == d["teamhuman"] + d["statement"]
+    print(f"  {'ok  ' if ok else 'FAIL'}  counts.json adds up: {d.get('teamhuman')} + {d.get('statement')} = {d.get('total')}")
+    sys.exit(0 if ok else 1)
+except Exception as e:
+    print("  FAIL  counts.json unreadable:", e); sys.exit(1)
+PYEOF
+  [ $? -eq 0 ] || FAIL=1
+fi
+[ -f .github/workflows/counts.yml ] && [ -x scripts/update_counts.py ] ; check "hourly counts workflow + script present" $?
+
 echo "======================"
 if [ $FAIL -eq 0 ]; then echo "VERIFY: PASS"; else echo "VERIFY: FAIL"; exit 1; fi
