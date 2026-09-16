@@ -166,5 +166,16 @@ echo "$ACT" | grep -q "Change your profile photo to Team Human for 30 days" ; ch
 echo "$ACT" | grep -q 'id="phoneBlock" style' && ! echo "$ACT" | grep -q 'togglePhone' ; check "act page: phone script shown, not behind a click" $?
 echo "$ACT" | grep -q 'twitter.com/intent/tweet' ; check "act page: share row present" $?
 
+# 12. Creator kit: /kit is the web version, the PDF sits next to it, and the invite
+# page points at it (the "send your toolkit" line is gone).
+KIT=$(curl -sfL --max-time 20 "${LIVE}kit/" 2>/dev/null)
+echo "$KIT" | grep -q "Lines you can lift" ; check "kit page live with the line bank" $?
+echo "$KIT" | grep -q 'href="TeamHuman-Creator-Kit.pdf"' ; check "kit page links the PDF" $?
+PDFTYPE=$(curl -sIL --max-time 20 "${LIVE}kit/TeamHuman-Creator-Kit.pdf" 2>/dev/null | grep -i "^content-type" | tail -1)
+echo "$PDFTYPE" | grep -qi "application/pdf" ; check "kit PDF served as PDF" $?
+INV=$(curl -sfL --max-time 20 "${LIVE}invite/" 2>/dev/null)
+echo "$INV" | grep -q "send your toolkit" ; [ $? -ne 0 ] ; check "invite: toolkit line removed" $?
+echo "$INV" | grep -q 'href="../kit/"' ; check "invite links to the kit" $?
+
 echo "======================"
 if [ $FAIL -eq 0 ]; then echo "VERIFY: PASS"; else echo "VERIFY: FAIL"; exit 1; fi
