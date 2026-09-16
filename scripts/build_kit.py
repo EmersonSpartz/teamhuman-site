@@ -132,8 +132,8 @@ WEB = f'''<!DOCTYPE html>
   h1{{font-size:clamp(2rem,4.6vw,2.9rem)}}
   .lede{{font-size:1.15rem}}
   ol.first{{margin-top:22px}}
-  .pdf{{display:inline-block;margin:22px 0 6px;background:var(--terracotta);color:var(--cream);text-decoration:none;font-weight:700;font-size:.9rem;letter-spacing:.08em;text-transform:uppercase;padding:13px 22px;border-radius:8px}}
-  .pdf:hover{{background:var(--terracotta-dark)}}
+  .pdf{{display:inline-block;margin:14px 0 0;color:var(--walnut);font-size:.88rem;text-decoration:underline;text-underline-offset:3px}}
+  .pdf:hover{{color:var(--terracotta)}}
   h2{{font-size:1.35rem}}
   .q{{font-size:1.08rem;line-height:1.55}}
   .lines{{margin-top:64px;padding-top:40px;border-top:1px solid var(--line)}}
@@ -146,7 +146,7 @@ WEB = f'''<!DOCTYPE html>
   .foot-inner{{max-width:1140px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-size:.84rem;color:var(--walnut)}}
   .foot-inner a{{color:var(--walnut);text-decoration:none}}
   .foot-inner a:hover{{color:var(--terracotta)}}
-  @media (max-width:480px){{ body{{font-size:.98rem}} .pdf{{display:block;text-align:center}} }}
+  @media (max-width:480px){{ body{{font-size:.98rem}} }}
 </style>
 </head>
 <body>
@@ -162,7 +162,7 @@ WEB = f'''<!DOCTYPE html>
     <div class="kicker">Creator Kit · October 2026</div>
     <h1>{HERO_H1}</h1>
     <p class="lede">{HERO_LEDE}</p>
-    <a class="pdf" href="TeamHuman-Creator-Kit.pdf">Download as PDF</a>
+    <a class="pdf" href="TeamHuman-Creator-Kit.pdf">Download as PDF ↓</a>
 {PLAN}
     <div class="lines" id="lines">
       <h1>{LINES_H1}</h1>
