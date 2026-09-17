@@ -34,13 +34,13 @@ PLAN = f'''
   <h2>An example, about 45 seconds</h2>
   <p class="q">AI is moving faster than our ability to control it. I make videos about {FILL('your topic')}, and the thing that actually gets me is {FILL('your reason')}. The heads of all four leading AI companies are now publicly calling for a slowdown, and more than 1,300 of their own employees signed an open letter asking government to make that possible, because no one can stop alone. We’re asking for one thing: a global slowdown of AI through international agreements. Governments won’t act until they see how much the public cares. Go to teamhuman.org and add your name. AI should serve humanity, not replace it.</p>
 
-  <h2>Example videos</h2>
+  <h2>Resources</h2>
   <p class="drive"><a href="https://drive.google.com/drive/folders/1OvHbeVCnDQC8mHJu_nW59i6v7mkF6K0o" target="_blank" rel="noopener">Watch other creators’ segments in the shared Drive folder →</a></p>
 '''
 
 QUESTIONS = '''
   <h2>Questions</h2>
-  <p><b>Sam Obenchain</b> · <a href="mailto:sam@teamhuman.org">sam@teamhuman.org</a> · WhatsApp +1 931 639 7903 · Discord niceclimbers</p>
+  <p><b>Sam Obenchain</b>, Community Manager · <a href="mailto:sam@teamhuman.org">sam@teamhuman.org</a> · WhatsApp +1 931 639 7903 · Discord niceclimbers</p>
 '''
 
 LINES_H1 = 'Things you can talk about.'
