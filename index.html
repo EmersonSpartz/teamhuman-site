@@ -357,6 +357,9 @@
     cursor: help; position: relative;
   }
   .tip:hover, .tip:focus-visible, .tip.open { border-color: var(--terracotta); color: var(--terracotta); }
+  /* bigger tap targets for the tiny inline controls (padding on inline elements
+     does not change line layout); Lighthouse flags anything under 24px */
+  .cite a, .tip-star { padding: 8px 6px; margin: -8px -6px; }
   .tip-star {
     width: auto; height: auto; margin-left: 2px; border: none; background: none;
     font-family: 'Inter', sans-serif; font-style: normal; font-size: .95em;
@@ -817,6 +820,13 @@
   /* Action Network swaps the real <select> for a custom widget: the element is
      position:absolute;opacity:0 and a span.can_select is what people actually see.
      Styling the select alone changes nothing visible, so dress the span instead. */
+  /* iOS Safari zooms the whole page when a focused field is under 16px, and
+     Action Network ships its inputs at 14.7px. 16px everywhere avoids the jump. */
+  #can-petition-area-teamhuman-pledge #can_embed_form input[type=text],
+  #can-petition-area-teamhuman-pledge #can_embed_form input[type=email],
+  #can-petition-area-teamhuman-pledge #can_embed_form select,
+  #can-petition-area-teamhuman-pledge #can_embed_form .can_select,
+  #can-petition-area-teamhuman-pledge #can_embed_form input[type=submit] { font-size: 16px !important; }
   #can-petition-area-teamhuman-pledge #can_embed_form .can_select {
     display: block !important; width: 100% !important; box-sizing: border-box !important;
     background-color: var(--parchment) !important;
