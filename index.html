@@ -822,6 +822,9 @@
   #can-petition-area-teamhuman-pledge #can_embed_form select,
   #can-petition-area-teamhuman-pledge #can_embed_form .can_select,
   #can-petition-area-teamhuman-pledge #can_embed_form input[type=submit] { font-size: 16px !important; }
+  /* their select rule carries three ids; out-specify it so the real <select> (what iOS focuses) is 16px too */
+  #can-petition-area-teamhuman-pledge #can_embed_form #form_col1 select#form-country,
+  #can-petition-area-teamhuman-pledge #can_embed_form #form_col1 .country_drop_wrap select { font-size: 16px !important; }
   #can-petition-area-teamhuman-pledge #can_embed_form .can_select {
     display: block !important; width: 100% !important; box-sizing: border-box !important;
     background-color: var(--parchment) !important;
