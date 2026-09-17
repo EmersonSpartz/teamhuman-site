@@ -176,6 +176,8 @@ echo "$PDFTYPE" | grep -qi "application/pdf" ; check "kit PDF served as PDF" $?
 INV=$(curl -sfL --max-time 20 "${LIVE}invite/" 2>/dev/null)
 echo "$INV" | grep -q "send your toolkit" ; [ $? -ne 0 ] ; check "invite: toolkit line removed" $?
 echo "$INV" | grep -q 'href="../kit/"' ; check "invite links to the kit" $?
+IV=$(curl -sfL --max-time 20 "${LIVE}invitevideo/" 2>/dev/null)
+echo "$IV" | grep -q "drive.google.com/drive/folders/1ABYVXtB6sZLTl5WjJNr1AwkNAub8ShTx" ; check "/invitevideo forwards to the Drive folder" $?
 
 echo "======================"
 if [ $FAIL -eq 0 ]; then echo "VERIFY: PASS"; else echo "VERIFY: FAIL"; exit 1; fi
