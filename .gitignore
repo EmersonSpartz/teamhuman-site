@@ -2,3 +2,6 @@ test-harness.html
 qa-flow.html
 copy-report.html
 qa-debug.html
+
+# local tooling, never part of the site
+.claude/

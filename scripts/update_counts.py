@@ -111,11 +111,17 @@ def statement():
         return direct + eko, direct, eko
 
 
-def sane(name, new, prev, lo, hi, max_drop):
+def sane(name, new, prev, lo, hi, max_drop, max_jump=None):
+    """Refuse implausible values so a bad upstream page cannot poison the counter.
+    max_jump is (ratio, absolute): the new value may not exceed prev*ratio + absolute
+    in one run. To accept a real jump, edit counts.json by hand; the next run
+    measures against that."""
     if not (lo <= new <= hi):
         raise ValueError(f"{name}={new} is outside {lo}..{hi}")
     if isinstance(prev, int) and new < prev * (1 - max_drop):
         raise ValueError(f"{name} dropped from {prev} to {new}; refusing")
+    if isinstance(prev, int) and max_jump and new > prev * max_jump[0] + max_jump[1]:
+        raise ValueError(f"{name} jumped from {prev} to {new} in one run; refusing")
     return new
 
 
@@ -128,13 +134,13 @@ def main():
         out["teamhuman"] = sane("teamhuman", n, prev.get("teamhuman"), 0, 10**8, 0.5)
         out["teamhuman_source"] = how
     except Exception as e:  # keep last good value, report
-        errors.append(f"teamhuman: {e}")
+        errors.append(f"teamhuman: {str(e)[:120]}")
     try:
         total, direct, eko = statement()
-        out["statement"] = sane("statement", total, prev.get("statement"), 50_000, 10**8, 0.10)
+        out["statement"] = sane("statement", total, prev.get("statement"), 50_000, 10**8, 0.10, max_jump=(1.5, 50_000))
         out["statement_direct"], out["eko"] = direct, eko
     except Exception as e:
-        errors.append(f"statement: {e}")
+        errors.append(f"statement: {str(e)[:120]}")
 
     if not isinstance(out["teamhuman"], int) or not isinstance(out["statement"], int):
         print("no usable numbers and nothing previous to fall back on:", errors, file=sys.stderr)
