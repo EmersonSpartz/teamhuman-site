@@ -90,15 +90,9 @@
 
   <section class="panel" id="pfp">
     <div class="mins">Ten seconds</div>
-    <h2>Change your profile photo to Team Human for 30 days.</h2>
-    <p>It&rsquo;s the best way to make the movement visible.</p>
-    <div class="pfps">
-      <a href="pfp/teamhuman-pfp-parchment.png" download><img src="pfp/teamhuman-pfp-parchment.png" alt="Handprint on parchment"><span>Parchment</span></a>
-      <a href="pfp/teamhuman-pfp-brick.png" download><img src="pfp/teamhuman-pfp-brick.png" alt="Handprint on brick"><span>Brick</span></a>
-      <a href="pfp/teamhuman-pfp-charcoal.png" download><img src="pfp/teamhuman-pfp-charcoal.png" alt="Handprint on charcoal"><span>Charcoal</span></a>
-      <a href="pfp/teamhuman-pfp-wordmark.png" download><img src="pfp/teamhuman-pfp-wordmark.png" alt="TeamHuman wordmark"><span>Wordmark</span></a>
-    </div>
-    <p class="fine">Tap to download.</p>
+    <h2>Put the Team Human frame on your profile photo for 30 days.</h2>
+    <p>Paste your link or upload a photo. It&rsquo;s the best way to make the movement visible.</p>
+    <div id="frameTool"></div>
   </section>
 
   <section class="panel" id="comment">
@@ -217,5 +211,7 @@
   });
   renderLoc();
 </script>
+<script src="../frame.js"></script>
+<script>THFrame.mount(document.getElementById('frameTool'), { sample: '../frame/sample.jpg' });</script>
 </body>
 </html>

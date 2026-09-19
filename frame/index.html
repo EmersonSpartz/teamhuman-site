@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Profile frame | #TeamHuman</title>
+<meta name="description" content="Add the Team Human frame to your profile photo. Paste your link or upload a photo, download, done.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="../brand/handprint.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--parchment:#f6efe3;--cream:#fbf6ec;--charcoal:#201c17;--terracotta:#9c3a26;--terracotta-dark:#83301f;--walnut:#5e4630;--line:rgba(94,70,48,.18)}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--parchment);color:var(--charcoal);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column;font-size:1.02rem}
+  ::selection{background:var(--terracotta);color:var(--cream)}
+  nav{background:rgba(246,239,227,.92);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:66px;max-width:1140px;margin:0 auto;padding:0 24px}
+  .lockup img{height:34px;width:auto;display:block}
+  nav a.back{color:var(--charcoal);text-decoration:none;font-size:.92rem;font-weight:500}
+  nav a.back:hover{color:var(--terracotta)}
+  main{flex:1;padding:52px 0 80px}
+  .wrap{max-width:720px;margin:0 auto;padding:0 24px;width:100%}
+  .kicker{font-size:.78rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--terracotta);margin-bottom:14px}
+  h1{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:clamp(2rem,4.6vw,2.9rem);line-height:1.08;letter-spacing:-.01em;margin:0 0 10px}
+  h1 em{font-style:italic;color:var(--terracotta)}
+  .lede{font-family:'Fraunces',Georgia,serif;font-style:italic;color:var(--walnut);font-size:1.15rem;margin:0 0 26px}
+  .steps{margin:34px 0 0;padding-left:22px;color:var(--walnut)}
+  .steps li{margin-bottom:4px}
+  .steps li::marker{color:var(--terracotta);font-weight:700}
+  footer{border-top:1px solid var(--line);padding:26px 0}
+  .foot-inner{max-width:1140px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-size:.84rem;color:var(--walnut)}
+  .foot-inner a{color:var(--walnut);text-decoration:none}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a class="lockup" href="../" aria-label="Team Human home"><img src="../brand/wordmark.png" alt="Team Human" width="720" height="174"></a>
+    <a class="back" href="../act/">← What to do next</a>
+  </div>
+</nav>
+<main>
+  <div class="wrap">
+    <div class="kicker">Ten seconds</div>
+    <h1>Put the Team Human frame on <em>your</em> photo.</h1>
+    <p class="lede">Paste your profile link or upload a photo. Download. Set it as your picture for 30 days.</p>
+    <div id="frameTool"></div>
+    <ol class="steps">
+      <li>Paste your X, YouTube or TikTok link, or upload any photo.</li>
+      <li>Download the picture (on a phone, press and hold it).</li>
+      <li>Set it as your profile photo wherever your audience is.</li>
+    </ol>
+  </div>
+</main>
+<footer>
+  <div class="foot-inner"><span>© 2026 TeamHuman. We are the pressure.</span><a href="../">teamhuman.org</a></div>
+</footer>
+<script src="../frame.js"></script>
+<script>THFrame.mount(document.getElementById('frameTool'), { sample: 'sample.jpg' });</script>
+</body>
+</html>

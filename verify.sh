@@ -179,5 +179,13 @@ echo "$INV" | grep -q 'href="../kit/"' ; check "invite links to the kit" $?
 IV=$(curl -sfL --max-time 20 "${LIVE}invitevideo/" 2>/dev/null)
 echo "$IV" | grep -q "drive.google.com/drive/folders/1ABYVXtB6sZLTl5WjJNr1AwkNAub8ShTx" ; check "/invitevideo forwards to the Drive folder" $?
 
+# 13. Profile-frame maker: /frame page, the shared script, and the act page embed.
+FR=$(curl -sfL --max-time 20 "${LIVE}frame/" 2>/dev/null)
+echo "$FR" | grep -q 'THFrame.mount' ; check "frame page mounts the tool" $?
+FJS=$(curl -sfL --max-time 20 "${LIVE}frame.js" 2>/dev/null)
+echo "$FJS" | grep -q "SLOW DOWN AI" && echo "$FJS" | grep -q "#TEAMHUMAN" ; check "frame.js live with the ring copy" $?
+echo "$ACT" | grep -q 'id="frameTool"' ; check "act page embeds the frame tool" $?
+echo "$ACT" | grep -q 'teamhuman-pfp-parchment' ; [ $? -ne 0 ] ; check "act page: old handprint tiles gone" $?
+
 echo "======================"
 if [ $FAIL -eq 0 ]; then echo "VERIFY: PASS"; else echo "VERIFY: FAIL"; exit 1; fi
