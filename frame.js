@@ -133,7 +133,7 @@
     return canvas;
   }
 
-  function toBlob(canvas) { return new Promise(res => canvas.toBlob(res, 'image/png')); }
+  function toBlob(canvas) { return new Promise(res => canvas.toBlob(res, 'image/jpeg', 0.92)); }
 
   function mount(root, opts) {
     opts = opts || {};
@@ -150,7 +150,7 @@
         '<img class="thf-preview" alt="Your framed profile photo" width="200" height="200">' +
         '<div>' +
           '<div class="thf-styles"><button type="button" class="thf-btn" data-style="brick" aria-pressed="true">Brick</button><button type="button" class="thf-btn" data-style="charcoal" aria-pressed="false">Charcoal</button></div>' +
-          '<div class="thf-actions"><a class="thf-btn thf-dl" download="teamhuman-profile.png" href="#">Download</a><button type="button" class="thf-btn ghost thf-share" hidden>Share</button></div>' +
+          '<div class="thf-actions"><a class="thf-btn thf-dl" download="teamhuman-profile.jpg" href="#">Download</a><button type="button" class="thf-btn ghost thf-share" hidden>Share</button></div>' +
           '<p class="thf-fine">On a phone, press and hold the picture to save it. Nothing is uploaded, it is made right here on your device.</p>' +
         '</div>' +
       '</div>';
@@ -171,7 +171,7 @@
       if (blobUrl) URL.revokeObjectURL(blobUrl);
       blobUrl = URL.createObjectURL(blob); lastBlob = blob;
       preview.src = blobUrl; dl.href = blobUrl; result.hidden = false;
-      const f = new File([blob], 'teamhuman-profile.png', { type: 'image/png' });
+      const f = new File([blob], 'teamhuman-profile.jpg', { type: 'image/jpeg' });
       share.hidden = !(navigator.canShare && navigator.canShare({ files: [f] }));
       if (opts.onRender) opts.onRender(blob);
     }
@@ -200,7 +200,7 @@
     }));
     share.addEventListener('click', async () => {
       if (!lastBlob) return;
-      try { await navigator.share({ files: [new File([lastBlob], 'teamhuman-profile.png', { type: 'image/png' })], title: 'Team Human' }); } catch (e) { /* user closed the sheet */ }
+      try { await navigator.share({ files: [new File([lastBlob], 'teamhuman-profile.jpg', { type: 'image/jpeg' })], title: 'Team Human' }); } catch (e) { /* user closed the sheet */ }
     });
 
     // A sample so the frame is visible before anyone types: the handprint on parchment.

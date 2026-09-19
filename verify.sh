@@ -162,7 +162,7 @@ echo "$HTML" | grep -q "thanksVeil" ; [ $? -ne 0 ] ; check "post-signup modal is
 ACT=$(curl -sfL --max-time 20 "${LIVE}act/" 2>/dev/null)
 echo "$ACT" | grep -q "<h1>What to do next</h1>" ; check "act page: plain 'What to do next' heading" $?
 echo "$ACT" | grep -q "Drop comments on your favorite creators" ; check "act page: one-line creator ask" $?
-echo "$ACT" | grep -q "Change your profile photo to Team Human for 30 days" ; check "act page: one-line profile-photo ask" $?
+echo "$ACT" | grep -q "Put the Team Human frame on your profile photo" ; check "act page: profile-frame ask" $?
 echo "$ACT" | grep -q 'id="phoneBlock" style' && ! echo "$ACT" | grep -q 'togglePhone' ; check "act page: phone script shown, not behind a click" $?
 echo "$ACT" | grep -q 'twitter.com/intent/tweet' ; check "act page: share row present" $?
 
