@@ -1,10 +1,10 @@
 {
-  "total": 142203,
+  "total": 142251,
   "teamhuman": 45,
-  "statement": 142158,
-  "statement_direct": 69934,
+  "statement": 142206,
+  "statement_direct": 69982,
   "eko": 72224,
-  "updated": "2026-09-21T14:00:07Z",
+  "updated": "2026-09-21T19:20:48Z",
   "teamhuman_source": "page",
   "errors": [],
   "about": "total = Team Human signatures + Superintelligence Statement headline count (which already includes Ekō's mirror petition). Refreshed hourly by GitHub Actions."
