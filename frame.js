@@ -151,7 +151,7 @@
         '<div>' +
           '<div class="thf-styles"><button type="button" class="thf-btn" data-style="brick" aria-pressed="true">Brick</button><button type="button" class="thf-btn" data-style="charcoal" aria-pressed="false">Charcoal</button></div>' +
           '<div class="thf-actions"><a class="thf-btn thf-dl" download="teamhuman-profile.jpg" href="#">Download</a><button type="button" class="thf-btn ghost thf-share" hidden>Share</button></div>' +
-          '<p class="thf-fine">On a phone, press and hold the picture to save it. Nothing is uploaded, it is made right here on your device.</p>' +
+          '<p class="thf-fine">On a phone, press and hold the picture to save it.</p>' +
         '</div>' +
       '</div>';
     const form = root.querySelector('form'), input = root.querySelector('input[type=text]'), file = root.querySelector('input[type=file]');
