@@ -6,9 +6,11 @@
   const SIZE = 1024;
   const TOP = 'SLOW DOWN AI';
   const BOTTOM = '#TEAMHUMAN';
+  // Ring colours run as a diagonal gradient (team asked for it over a flat fill):
+  // brick warms from a lit terracotta to deep brick; charcoal cools from soot to slate.
   const STYLES = {
-    brick:    { ring: '#9c3a26', text: '#fbf6ec', edge: 'rgba(251,246,236,.55)' },
-    charcoal: { ring: '#201c17', text: '#f6efe3', edge: 'rgba(246,239,227,.45)' }
+    brick:    { ringA: '#c24d33', ringB: '#762716', text: '#fbf6ec', edge: 'rgba(251,246,236,.55)' },
+    charcoal: { ringA: '#2e2723', ringB: '#5b7d8f', text: '#f6efe3', edge: 'rgba(246,239,227,.45)' }
   };
   const CSS = `
   .thf{max-width:560px}
@@ -112,7 +114,9 @@
     const c = SIZE / 2, R = SIZE / 2, inner = R * 0.80;
     ctx.clearRect(0, 0, SIZE, SIZE);
     // ring
-    ctx.save(); ctx.beginPath(); ctx.arc(c, c, R, 0, Math.PI * 2); ctx.closePath(); ctx.fillStyle = st.ring; ctx.fill(); ctx.restore();
+    const grad = ctx.createLinearGradient(SIZE * 0.15, 0, SIZE * 0.85, SIZE);
+    grad.addColorStop(0, st.ringA); grad.addColorStop(1, st.ringB);
+    ctx.save(); ctx.beginPath(); ctx.arc(c, c, R, 0, Math.PI * 2); ctx.closePath(); ctx.fillStyle = grad; ctx.fill(); ctx.restore();
     // photo, cover-fitted into the inner circle
     ctx.save(); ctx.beginPath(); ctx.arc(c, c, inner, 0, Math.PI * 2); ctx.closePath(); ctx.clip();
     ctx.fillStyle = '#f6efe3'; ctx.fillRect(0, 0, SIZE, SIZE);
