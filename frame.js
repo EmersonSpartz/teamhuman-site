@@ -112,7 +112,8 @@
     canvas.width = SIZE; canvas.height = SIZE;
     const ctx = canvas.getContext('2d');
     const c = SIZE / 2, R = SIZE / 2, inner = R * 0.80;
-    ctx.clearRect(0, 0, SIZE, SIZE);
+    // JPEG has no transparency, so the corners outside the ring get parchment, not black
+    ctx.fillStyle = '#f6efe3'; ctx.fillRect(0, 0, SIZE, SIZE);
     // ring
     const grad = ctx.createLinearGradient(SIZE * 0.15, 0, SIZE * 0.85, SIZE);
     grad.addColorStop(0, st.ringA); grad.addColorStop(1, st.ringB);
