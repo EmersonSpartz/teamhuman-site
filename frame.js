@@ -61,8 +61,15 @@
         if ((p0 === 'channel' || p0 === 'c' || p0 === 'user') && parts[1]) return { tries: [['youtube', parts[1]]] };
         return { error: 'Use your channel link, the one with @ in it.' };
       }
-      if (/(^|\.)instagram\.com$/.test(host) || /(^|\.)(facebook|linkedin|threads)\.(com|net)$/.test(host)) return { error: 'That site blocks photo lookups. Upload the photo instead, it takes one tap.' };
-      return { error: 'Paste an X, YouTube or TikTok link, or upload a photo.' };
+      if (/(^|\.)(facebook|fb)\.com$/.test(host)) {
+        const id = u.searchParams.get('id');
+        if (parts[0] === 'profile.php' && id) return { tries: [['facebook', id]] };
+        const p0 = (parts[0] || '').replace(/^@/, '');
+        if (p0 && !['people', 'groups', 'events', 'pages', 'watch', 'reel', 'share', 'photo', 'photo.php'].includes(p0)) return { tries: [['facebook', p0]] };
+        return { error: 'Use the link to your Facebook Page. Personal profiles are private, so upload the photo instead.' };
+      }
+      if (/(^|\.)instagram\.com$/.test(host) || /(^|\.)(linkedin|threads)\.(com|net)$/.test(host)) return { error: 'Instagram blocks photo lookups. Upload the photo instead, it takes one tap.' };
+      return { error: 'Paste an X, YouTube, TikTok or Facebook Page link, or upload a photo.' };
     }
     const h = s.replace(/^@/, '');
     if (!/^[\w.\-]{1,60}$/.test(h)) return { error: 'Paste a link, or upload a photo.' };
@@ -83,7 +90,10 @@
     let lastErr;
     for (const [provider, handle] of tries) {
       try {
-        return await loadImage('https://unavatar.io/' + provider + '/' + encodeURIComponent(handle) + '?fallback=false', true);
+        const url = provider === 'facebook'
+          ? 'https://graph.facebook.com/' + encodeURIComponent(handle) + '/picture?width=1024&height=1024'
+          : 'https://unavatar.io/' + provider + '/' + encodeURIComponent(handle) + '?fallback=false';
+        return await loadImage(url, true);
       } catch (e) { lastErr = e; }
     }
     throw lastErr || new Error('no avatar');
@@ -146,7 +156,7 @@
     root.classList.add('thf');
     root.innerHTML =
       '<form class="thf-row" novalidate>' +
-        '<input type="text" inputmode="url" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Paste your X, YouTube or TikTok link" aria-label="Your profile link">' +
+        '<input type="text" inputmode="url" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Paste your X, YouTube, TikTok or Facebook Page link" aria-label="Your profile link">' +
         '<button class="thf-btn" type="submit">Make it</button>' +
       '</form>' +
       '<p class="thf-or">or <label>upload a photo<input type="file" accept="image/*" hidden></label></p>' +
