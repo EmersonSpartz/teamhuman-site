@@ -129,7 +129,7 @@
 
     <div id="phoneBlock" style="margin-top:22px">
       <div class="draft-label">Rather call? Calls count for more than email. Say this:</div>
-      <div class="quote">&ldquo;Hi, I&rsquo;m a constituent from [your town]. I&rsquo;m calling because I want humans kept in control of AI. Please support an international agreement to slow down development of smarter-than-human AI until it can be built safely. Thank you.&rdquo;</div>
+      <div class="quote">&ldquo;Hi, my name is [your name] and I live in [your town]. I&rsquo;m calling about AI. I&rsquo;d like [name] to support an international agreement to slow down development of AI that&rsquo;s smarter than humans until it can be done safely. Can you pass that along? Thanks.&rdquo;</div>
     </div>
   </section>
 
@@ -162,22 +162,24 @@
              url: 'https://www.google.com/search?q=contact+my+national+representative',
              btn: 'Find who represents me' }
   };
-  var SUBJECT = 'Subject: Keeping humans in control of AI';
+  var SUBJECT = 'Subject: Worried about AI, and one thing I hope you will support';
   function bodyFor(who) {
     // No hard wrapping: the box is narrower than these lines, so baked-in breaks
     // wrap a second time and leave ragged half-lines.
+    // Voice: a real person, not a policy memo. Short sentences, the ask up front,
+    // no "I am writing to ask you to", no "rather than only an economic one".
     return [
       'Dear [name],',
       '',
-      'I am a constituent in [your town], and I am writing to ask you to take AI seriously as a safety issue rather than only an economic one.',
+      'My name is [your name] and I live in [your town]. I don’t usually write to politicians. I’m writing because I’m worried about AI and I want to know where you stand.',
       '',
-      'The people building this technology say themselves that it is moving faster than anyone can verify is safe. More than a thousand employees of the leading AI companies have signed an open letter asking governments to help make a slowdown possible, because no company can stop on its own while its competitors keep going.',
+      'The companies building it say they can’t slow down on their own, because their competitors won’t. Over a thousand of their own employees have signed an open letter asking governments to step in. When the people building something are asking to be regulated, that seems like the moment to listen.',
       '',
-      'I would like you to support an international agreement to slow the development of smarter-than-human AI until there is broad scientific agreement that it can be built safely, and public support for going ahead. Nobel laureates, former heads of state and former chiefs of defence have signed a public statement calling for exactly this.',
+      'The specific thing I’d like you to support is an international agreement to slow down the development of AI that is smarter than humans, until scientists broadly agree it can be done safely and the public has had a say. Nobel laureates, former heads of state and former defence chiefs have signed a public statement asking for the same thing.',
       '',
-      'No single company or country can solve this alone. That is what governments are for.',
+      'I know AI mostly gets talked about as jobs and the economy. To me it’s a safety question first. Please treat it as one.',
       '',
-      'Thank you for your time.',
+      'Could you let me know what you think? I’d genuinely like to hear back.',
       '',
       '[your name]',
       '[your address, so they know you are a constituent]'
