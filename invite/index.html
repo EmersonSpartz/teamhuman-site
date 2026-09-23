@@ -77,11 +77,17 @@
     box-shadow: 0 14px 40px rgba(94,70,48,.1);
     padding: 12px 12px 6px; overflow: hidden;
   }
-  .form-card iframe { width: 100%; height: 1480px; border: 0; display: block; border-radius: 10px; background: var(--cream); }
+  /* The embedded Google Form cannot tell us its height, and it grew to seven
+     questions (2,190px at desktop width, 2,760px at phone width, plus ~30px when
+     validation errors show). Heights below carry ~8% headroom; re-measure if the
+     team adds questions, or the Send button falls below the fold again. */
+  .form-card iframe { width: 100%; height: 2360px; border: 0; display: block; border-radius: 10px; background: var(--cream); }
   @media (max-width: 640px) {
     .form-card { padding: 6px 6px 2px; }
-    .form-card iframe { height: 1760px; }
+    .form-card iframe { height: 2560px; }
   }
+  @media (max-width: 440px) { .form-card iframe { height: 2950px; } }
+  @media (max-width: 360px) { .form-card iframe { height: 3200px; } }
   .fallback { text-align: center; font-size: .88rem; color: var(--walnut); margin-top: 18px; }
   .fallback a { color: var(--terracotta); font-weight: 600; }
 
@@ -121,7 +127,7 @@
         loading="lazy">Loading the form…</iframe>
     </div>
     <p class="fine-note">This November, the <a href="https://safe.ai/" target="_blank" rel="noopener">Center for AI Safety</a> will hand-deliver every signature to hundreds of lawmakers in Washington and Brussels.</p>
-    <p class="fallback">Form not loading? <a href="https://forms.gle/QECAmZPVj73jaDSh7" target="_blank" rel="noopener">Open it in a new tab →</a></p>
+    <p class="fallback">Can’t see the Send button, or the form isn’t loading? <a href="https://forms.gle/QECAmZPVj73jaDSh7" target="_blank" rel="noopener">Open it in a new tab →</a></p>
   </div>
 </main>
 
