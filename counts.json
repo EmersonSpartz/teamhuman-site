@@ -1,13 +1,12 @@
 {
-  "total": 144276,
+  "total": 144340,
   "teamhuman": 215,
-  "statement": 144061,
-  "statement_direct": 71774,
+  "statement": 144125,
+  "statement_direct": 71838,
   "eko": 72287,
-  "updated": "2026-10-06T02:54:57Z",
+  "updated": "2026-10-06T17:09:05Z",
   "errors": [
-    "teamhuman: HTTP Error 404: Not Found",
-    "statement: statement dropped from 144061 to 76799; refusing"
+    "teamhuman: HTTP Error 404: Not Found"
   ],
   "about": "total = Team Human signatures + Superintelligence Statement headline count (which already includes Ekō's mirror petition). Refreshed hourly by GitHub Actions."
 }
