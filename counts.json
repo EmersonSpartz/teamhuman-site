@@ -1,10 +1,10 @@
 {
-  "total": 144830,
+  "total": 144841,
   "teamhuman": 215,
-  "statement": 144615,
-  "statement_direct": 72314,
-  "eko": 72301,
-  "updated": "2026-10-11T18:48:35Z",
+  "statement": 144626,
+  "statement_direct": 72324,
+  "eko": 72302,
+  "updated": "2026-10-11T22:49:16Z",
   "errors": [
     "teamhuman: HTTP Error 404: Not Found"
   ],
